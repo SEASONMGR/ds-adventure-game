@@ -156,6 +156,12 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
     /** 当前运行中的事件插件：返回剧情 / 被替换 / 关闭播放器时都要回调它的 onDetach */
     private GamePlugin activePlugin;
     private String activePluginId = "";
+    /** 小游戏路由（来自触发场景的 mg.* 属性） */
+    private String mgMode = "";
+    private String mgOnWin = "";
+    private String mgOnLose = "";
+    private String mgWith = "";
+    private com.studio.plugin.MiniGameResult pendingResult;
     /** 场景自动信号防重入（「场景进入」每次进入只发一次；槽里再跳场景时不重发） */
     private boolean emittingSceneSignal = false;
     private boolean enteredSceneSignals = false;
@@ -423,6 +429,11 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
         if (fireEvent && !suppressSceneEvent && scene.event() != null && !scene.event().isBlank()) {
             String id = scene.event().trim();
             pluginReturnScene = cameFrom != null ? cameFrom : sceneName; // 场景级事件：返回进入前的场景
+            mgMode = sceneProp(scene, "mg.mode");
+            mgOnWin = sceneProp(scene, "mg.onWin");
+            mgOnLose = sceneProp(scene, "mg.onLose");
+            mgWith = sceneProp(scene, "mg.with");
+            pendingResult = null;
             runPlugin(id, "场景事件 [" + sceneName + "]");
         }
         suppressSceneEvent = false;
@@ -1285,6 +1296,9 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
             params.put(GamePlugin.PARAM_HOST_STAGE, stage);
             params.put(GamePlugin.PARAM_BACK_CALLBACK, (Runnable) this::leavePlugin);
             params.put(GamePlugin.PARAM_SAVES, this); // SavePortal：存档管理/读写任意槽位
+            params.put(GamePlugin.PARAM_RESULT_SINK,
+                    (java.util.function.Consumer<com.studio.plugin.MiniGameResult>) this::onMiniGameResult);
+            params.put(GamePlugin.PARAM_FLAGS, miniGameFlags());
 
             Logs.plugin(eventId, "触发来源: " + source);
             plugin.execute(stage, params);
@@ -1334,11 +1348,70 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
         pluginLayer.setVisible(false);
         pluginLayer.setManaged(false);
         pluginContent.setCenter(null);
-        suppressSceneEvent = true; // 防止场景事件再次把玩家拉回插件
         detachActivePlugin("返回剧情");   // 插件从主舞台移除 → 回调 onDetach
+
+        // —— 小游戏结果路由（脚本 @minigame 的 mg.onWin / mg.onLose）——
+        String onWin = mgOnWin;
+        String onLose = mgOnLose;
+        String mode = mgMode;
+        com.studio.plugin.MiniGameResult result = pendingResult;
+        pendingResult = null;
+        mgMode = "";
+        mgOnWin = "";
+        mgOnLose = "";
+        mgWith = "";
+
+        boolean hasRoute = (onWin != null && !onWin.isBlank()) || (onLose != null && !onLose.isBlank());
+        if (hasRoute) {
+            if (result == null) {
+                Logs.plugin(activePluginId, "未回传结果 → 按胜利处理并继续剧情");
+            } else {
+                Logs.plugin(activePluginId, "结果回传: " + result);
+            }
+            if (mode != null && !mode.isBlank() && !"normal".equalsIgnoreCase(mode)) {
+                Logs.plugin(activePluginId, "调度模式 " + mode + " 暂按 normal 处理（retry/ending 待实现）");
+            }
+            boolean win = (result == null) || result.win();
+            String target = win ? onWin : onLose;
+            if (target != null && !target.isBlank() && project.hasScene(target)) {
+                suppressSceneEvent = false;
+                renderScene(target, true, true);
+                return;
+            }
+            if (target != null && !target.isBlank()) {
+                Logs.warn("[Flow] 小游戏结果目标场景不存在: " + target);
+            }
+        }
+
+        suppressSceneEvent = true; // 防止场景事件再次把玩家拉回插件
         if (previousScene != null && project.hasScene(previousScene)) {
             renderScene(previousScene, false, false);
         }
+    }
+
+    /** 读场景自定义属性（mg.* 等；不存在返回空串） */
+    private static String sceneProp(com.studio.model.GameScene s, String key) {
+        if (s == null) return "";
+        String v = s.prop(key);
+        return v == null ? "" : v;
+    }
+
+    /** 组装 {@code @minigame with:} 列出的 flag 当前值，供小游戏做难度/形态 */
+    private java.util.Map<String, String> miniGameFlags() {
+        java.util.Map<String, String> m = new java.util.LinkedHashMap<>();
+        if (mgWith != null) {
+            for (String rawFlag : mgWith.split(",")) {
+                String n = rawFlag.trim();
+                if (!n.isEmpty()) m.put(n, flowVars.get(n, "0"));
+            }
+        }
+        return m;
+    }
+
+    /** 小游戏结果回传口：记录结果，待插件收起时按 mg.onWin / mg.onLose 路由 */
+    private void onMiniGameResult(com.studio.plugin.MiniGameResult result) {
+        pendingResult = result == null ? com.studio.plugin.MiniGameResult.win(0) : result;
+        Logs.plugin(activePluginId, "收到小游戏结果: " + pendingResult);
     }
 
     // =====================================================================

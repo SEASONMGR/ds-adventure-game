@@ -259,6 +259,8 @@ public class PlanePlugin implements GamePlugin {
     private Button overlayButton;
 
     private Runnable backCallback;
+    private java.util.function.Consumer<com.studio.plugin.MiniGameResult> resultSink;
+    private boolean reported;
     private String pluginId = "plane";
 
     private AnimationTimer loop;
@@ -299,6 +301,9 @@ public class PlanePlugin implements GamePlugin {
     public Parent createEmbeddedView(Map<String, Object> params) {
         readPluginId(params);
         this.backCallback = params == null ? null : (Runnable) params.get(PARAM_BACK_CALLBACK);
+        Object sink = params == null ? null : params.get(PARAM_RESULT_SINK);
+        this.resultSink = (sink instanceof java.util.function.Consumer)
+                ? (java.util.function.Consumer<com.studio.plugin.MiniGameResult>) sink : null;
         Logs.plugin(pluginId, "createEmbeddedView：构建嵌入界面"
                 + (backCallback == null ? "（未拿到 back.callback）" : "（已拿到 back.callback）"));
         return buildView();
@@ -614,6 +619,7 @@ public class PlanePlugin implements GamePlugin {
     }
 
     private void restart() {
+        reported = false;
         game.reset(config);
         initStars();
         started = true;
@@ -628,6 +634,10 @@ public class PlanePlugin implements GamePlugin {
 
     /** 结束本局并返回剧情：先停循环收尾，再调引擎回调（CONTRIBUTING §2.6 第 4 条）。 */
     private void leaveToStory() {
+        if (!reported && resultSink != null) {   // 局中主动退出：按需求记为失败
+            reported = true;
+            resultSink.accept(com.studio.plugin.MiniGameResult.lose(game.score()));
+        }
         stopLoop();
         if (backCallback != null) {
             backCallback.run();
@@ -661,6 +671,12 @@ public class PlanePlugin implements GamePlugin {
                         game.tick(STEP_SECONDS);
                     }
                     accumulator -= STEP_SECONDS;
+                }
+                if (started && game.isOver() && !reported && resultSink != null) {
+                    reported = true;
+                    resultSink.accept(game.isWin()
+                            ? com.studio.plugin.MiniGameResult.win(game.score())
+                            : com.studio.plugin.MiniGameResult.lose(game.score()));
                 }
                 updateHud(false);
                 render();

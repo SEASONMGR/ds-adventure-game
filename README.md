@@ -152,7 +152,7 @@ mvnw.cmd -q exec:java "-Dexec.mainClass=com.studio.parser.ParserSelfTest"
 |---|---|---|---|---|
 | F1 剧情引擎 | 脚本解析、文本逐字显示、节点跳转、无效跳转不崩溃 | **部分具备** | `ScriptParser`/`ScriptWriter` + `ReaderView`（打字机、富文本、场景跳转、宽容模式告警） | TODO-05 · IT-2 |
 | F2 选项分支 | 多选项跳转；玩家长时间不决策时执行第三种隐藏默认选项 | **待实现** | 现有 `button` 节点 `action=target` 可做基础跳转；**超时默认选项机制未实现** | TODO-06 · IT-2 |
-| F3 特殊演出调度 | 节点触发小游戏、结束后结果回传、按结果三分支调度（普通叙事 / 强制重试 / 关键结局） | **部分具备** | `GamePlugin` + 嵌入层 + 场景级 `event`（可切入并返回剧情）；**结果回传与三分支路由未实现** | TODO-07 / TODO-04 / TODO-01 · IT-2 |
+| F3 特殊演出调度 | 节点触发小游戏、结束后结果回传、按结果三分支调度（普通叙事 / 强制重试 / 关键结局） | **部分具备** | `GamePlugin` + 嵌入层 + 场景级 `event`；**结果回传与 `normal` 路由已具备**（脚本 `mg.onWin` / `mg.onLose`，插件经 `GamePlugin.PARAM_RESULT_SINK` 回传胜负）；`retry` / `ending` 两种调度待实现 | TODO-07 / TODO-04 / TODO-01 · IT-2 |
 | F4 贪吃蛇 | 10×10、吃豆 97 通关、速度每秒 +0.01、允许 180° 反向 | **已具备** | `com.studio.plugin.demo.snake`（`SnakeConfig` / `SnakeGame` 纯规则 / `SnakePlugin` 嵌入视图）；演示地图 `docs/demo-maps/snake/` | TODO-09 · 已完成（IT-3） |
 | F5 飞机大战 | 击落 20 架通关、3 条命、护盾 3 秒；**键盘操作**（方向键/WASD 移动、空格/J 射击）—— 组内确认不需要虚拟摇杆 | **已具备** | `com.studio.plugin.demo.plane`（`PlaneConfig` / `PlaneGame` 纯规则 / `PlanePlugin` 嵌入视图）；演示地图 `docs/demo-maps/plane/` | TODO-10 · 已完成（IT-4） |
 | F16 主菜单 | 开始 / 继续 / 回忆收藏馆 / 设置 / 退出（覆盖确认、无存档置灰） | **待实现** | 现有 Player 启动即进地图，无五项主菜单 | TODO-02 / TODO-03 · IT-5 |
@@ -365,6 +365,7 @@ public interface GamePlugin {
 4. **信号 / 槽 + 逻辑层**：「打开信号演示地图（信号/槽+逻辑层）…」生成 `maps/demo_signal_lab`；按钮触发信号 → 槽 `call` → `logic/SignalLabLogic` 改变量与样式；按 `F`/`L` 演示场景级与节点级键盘信号。
 5. **双立绘轮流高亮**：`maps/demo_signal_characters` 是纯地图文件夹（脚本 + 素材 + 自带逻辑），点击推进时说话者高亮（opacity 1.0 / scale 1.08），对话走完按 `target` 自动跳转。
 6. **序章地图 `maps/prologue_404`**（PR #6）：15 幕 / 142 节点，**零图片零音频**（渐变底 + emoji 角色卡）即可玩通，演示三选一分支、汇合幕条件变体、计数比较、动态跳转与菜单插件。
+7. **剧情地图 `maps/story`（试验）**：由 `tools/build_story.mjs` 从 `docs/ds-adventrue/剧本/` 编译生成，覆盖 **序章 + 第1章 + 第2章**（134 场景 / 550 节点），使用真实素材（`assets/sprites/**`）：三选一分支、立绘进出场与换表情、`st:` 横幅、章末自动存档、**第1章贪吃蛇 / 第2章飞机大战的结果回传与胜负分支**；未接素材的立绘/背景（`snake_expert`、`sclerk`、3 张背景）自动降级为占位图。把 `config.ini` 的 `map.folder` 改成 `maps/story` 即可游玩。
 
 ---
 

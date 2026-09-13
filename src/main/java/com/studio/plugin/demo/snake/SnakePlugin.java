@@ -75,6 +75,8 @@ public class SnakePlugin implements GamePlugin {
     private long lastNanos;
     private double countdown;
     private Runnable backCallback;
+    private java.util.function.Consumer<com.studio.plugin.MiniGameResult> resultSink;
+    private boolean reported;
 
     // ------------------------------------------------------------------
     // GamePlugin
@@ -84,6 +86,9 @@ public class SnakePlugin implements GamePlugin {
     public void execute(Stage stage, Map<String, Object> params) {
         Object back = params == null ? null : params.get(PARAM_BACK_CALLBACK);
         this.backCallback = (back instanceof Runnable) ? (Runnable) back : null;
+        Object sink = params == null ? null : params.get(PARAM_RESULT_SINK);
+        this.resultSink = (sink instanceof java.util.function.Consumer)
+                ? (java.util.function.Consumer<com.studio.plugin.MiniGameResult>) sink : null;
         // 嵌入模式：不创建任何窗口，界面由 createEmbeddedView 提供
     }
 
@@ -239,6 +244,7 @@ public class SnakePlugin implements GamePlugin {
     }
 
     private void restartGame() {
+        reported = false;
         game.reset();
         countdown = config.getCountdownSeconds();
         updateHud();
@@ -247,10 +253,25 @@ public class SnakePlugin implements GamePlugin {
     }
 
     private void requestBack() {
+        if (!reported && resultSink != null) {   // 局中主动退出：按需求记为失败
+            reported = true;
+            resultSink.accept(com.studio.plugin.MiniGameResult.lose(game == null ? 0 : game.getScore()));
+        }
         stopLoop();
         if (backCallback != null) {
             backCallback.run();
         }
+    }
+
+    /** 本局结束即回传胜负（每局只回传一次） */
+    private void reportIfFinished() {
+        if (reported || game == null || !game.isOver() || resultSink == null) {
+            return;
+        }
+        reported = true;
+        resultSink.accept(game.isWin()
+                ? com.studio.plugin.MiniGameResult.win(game.getScore())
+                : com.studio.plugin.MiniGameResult.lose(game.getScore()));
     }
 
     // ------------------------------------------------------------------
@@ -302,6 +323,7 @@ public class SnakePlugin implements GamePlugin {
         if (!game.isOver()) {
             game.step(dt);
         }
+        reportIfFinished();
         render();
         updateHud();
         updateOverlay();

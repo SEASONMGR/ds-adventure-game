@@ -1,4 +1,21 @@
 # 更新日志 (Changelog)
+## [v1.12] 剧情编译器 + 小游戏结果契约（试验：序章 / 第1章 / 第2章）
+
+### Added
+- `tools/build_story.mjs`：剧本 DSL → `scenario.txt` 编译器。一个「拍点」= 一个场景，用 `dialog` 的 `target` 串联推进；立绘换表情复用同一节点 id（不叠图）；`@flag`/`@save`/`goto` 编译为「逻辑拍点」（`slot = 场景进入 | …` 后自动 goto）；`*choice` 编译为按钮 + 每选项一个逻辑拍点；`@minigame` 编译为 `event = <id>` + `mg.*` 场景属性。未编译章节的 `goto` 统一导向「本章待实现」占位场景
+- `maps/story/scenario.txt`（生成产物）：序章 + 第1章 + 第2章，134 场景 / 550 节点 / 0 解析警告；BFS 走查全部场景可达
+- `com.studio.plugin.MiniGameResult`：小游戏结果（胜负 + 分数）
+- `GamePlugin.PARAM_RESULT_SINK`（结果回传口）与 `PARAM_FLAGS`（承接 `@minigame with:` 列出的 flag 当前值）
+
+### Changed
+- `FxAssets.loadRooted`：地图内找不到图片时**回退 classpath**（共享素材 `assets/sprites/**`），避免把几十 MB 素材复制进每张地图
+- `ReaderView`：场景事件不再无条件「回到进入前场景」，而是读取触发场景的 `mg.onWin` / `mg.onLose`，按插件回传的胜负路由（未回传结果按胜利处理；`retry` / `ending` 暂按 `normal` 并记日志）
+- `SnakePlugin` / `PlanePlugin`：接入结果回传（本局结束回传胜负；局中主动退出按需求记为失败；重开局重置）
+- 素材归档：`archive_assets.py` 新增 `official_*` 批次规则（新角色进 `<cid>/<expr>.png`，已有主套的角色进 `<cid>/official/<expr>.png` 不覆盖），已归档 reimu / bugs / miku / amiya / paimon / pikachu / creeper / sai / gelili 等
+
+### Notes
+- 仍缺素材（工作区也没有）：`snake_expert`（第1章守鳞人）、`sclerk`（序章司秤吏）、背景 `star_rift` / `server_pipe` / `hakurei_shrine`（`server_hall` 由 `bg_tech_serverroom` 顶替）——均先走占位图
+
 ## [v1.11] 合并 PR #10（飞机大战 F5）
 
 ### Added

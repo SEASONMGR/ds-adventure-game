@@ -36,6 +36,16 @@ public interface GamePlugin {
     String PARAM_HOST_STAGE = "host.stage";
     /** 存档门户（com.studio.saves.SavePortal）：含 GameSaveManager，可读写 地图/saves/ 任意槽位 */
     String PARAM_SAVES = "saves";
+    /**
+     * 结果回传口（{@code java.util.function.Consumer<MiniGameResult>}）：小游戏结束时回传胜负与分数，
+     * 引擎据此路由到 {@code mg.onWin} / {@code mg.onLose} 指定的场景。未回传时引擎按胜利处理。
+     */
+    String PARAM_RESULT_SINK = "result.sink";
+    /**
+     * 剧情传入的状态参数（{@code Map<String,String>}）：来自脚本
+     * {@code @minigame <id> with:heat,focus,chaos} 列出的 flag 当前值，供难度/形态使用。缺省为空表。
+     */
+    String PARAM_FLAGS = "flags";
 
     /** 场景事件要求定义的标准入口：execute(舞台, 参数) */
     void execute(Stage stage, Map<String, Object> params);

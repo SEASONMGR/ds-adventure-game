@@ -46,6 +46,21 @@ public final class FxAssets {
                 Logs.warn("读取图片失败 " + relPath + ": " + e.getMessage());
             }
         }
+        // 地图内没有 → 回退 classpath（共享素材，如 assets/sprites/** 由 resources 根提供）
+        if ((img == null || img.isError()) && relPath != null && !relPath.isBlank()) {
+            try {
+                java.net.URL url = FxAssets.class.getClassLoader()
+                        .getResource(relPath.replace('\\', '/'));
+                if (url != null) {
+                    Image cp = new Image(url.toExternalForm());
+                    if (!cp.isError()) {
+                        img = cp;
+                    }
+                }
+            } catch (RuntimeException e) {
+                Logs.warn("classpath 读取图片失败 " + relPath + ": " + e.getMessage());
+            }
+        }
         if (img == null || img.isError()) {
             String hint = (label == null || label.isBlank())
                     ? (relPath == null ? "无素材" : "缺图:" + relPath)
