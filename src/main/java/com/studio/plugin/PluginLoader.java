@@ -47,6 +47,12 @@ public class PluginLoader {
         BUILTIN.put("minesweeper", "com.studio.plugin.demo.MinesweeperPlugin");
         BUILTIN.put("2048", "com.studio.plugin.demo.Game2048Plugin");
         BUILTIN.put("savepanel", "com.studio.plugin.demo.SavePanelPlugin");
+        // 仓库内的小游戏（plugins.ini 里通常也注册了；这里作为注册表缺失时的兜底，
+        // 保证打包好的 exe 只带 jar 也能按 id 解析到插件）
+        BUILTIN.put("breakout", "com.studio.plugin.demo.breakout.BreakoutPlugin");
+        BUILTIN.put("memory", "com.studio.plugin.demo.memory.MemoryPlugin");
+        BUILTIN.put("snake", "com.studio.plugin.demo.snake.SnakePlugin");
+        BUILTIN.put("plane", "com.studio.plugin.demo.plane.PlanePlugin");
     }
 
     private final File pluginDir;      // 插件根目录

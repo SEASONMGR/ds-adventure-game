@@ -38,13 +38,16 @@ if exist "%APP%" rmdir /s /q "%APP%"
 "%JP%" --type app-image --name ds-adventure --input "%STAGE%" --main-jar ds-adventure.jar --main-class com.studio.launcher.MainApp --java-options "-Dfile.encoding=UTF-8" --java-options "-Dapp.mode=player" --java-options "-Dstudio.map=$ROOTDIR\\maps\\story" --dest "%DIST%"
 if errorlevel 1 goto fail
 
-echo [5/5] copying maps + config next to the exe ...
+echo [5/5] copying maps + plugins + config next to the exe ...
 xcopy /E /I /Y "maps" "%APP%\\maps" >nul
+rem plugins.ini must ship next to the exe: without it event plugins (minigames) cannot be resolved by id
+xcopy /E /I /Y "plugins" "%APP%\\plugins" >nul
 copy /y "config.ini" "%APP%\\" >nul
 
 echo.
 echo ============================================================
 echo  DONE: %APP%\\ds-adventure.exe
+echo  (bundled: runtime + assets + maps + plugins)
 echo  Double-click to play. No JDK needed on the target machine.
 echo  You can zip and share the whole %APP% folder.
 echo ============================================================
