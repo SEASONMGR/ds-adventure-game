@@ -419,7 +419,12 @@ for (const b of beats) {
     out.push("{", "type = dialog", "x = " + DIALOG_BOX.x, "y = " + DIALOG_BOX.y,
       "width = " + DIALOG_BOX.w, "height = " + DIALOG_BOX.h);
     out.push("text = <<<");
-    for (const t of b.dialog) out.push(t);
+    // 每行台词 = 一个独立段落（引擎按独立一行 --- 分段，点击逐段推进）；
+    // 若整段堆在一起，引擎会一次性渲染全部行 → 必然溢出对话框。
+    b.dialog.forEach((t, i) => {
+      if (i > 0) out.push("---");
+      out.push(t);
+    });
     out.push("<<<");
     if (b.target) out.push(`target = ${b.target}`);
     out.push("}");

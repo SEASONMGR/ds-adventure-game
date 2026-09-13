@@ -162,9 +162,13 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
     private String mgOnLose = "";
     private String mgWith = "";
     private com.studio.plugin.MiniGameResult pendingResult;
-    /** 场景自动信号防重入（「场景进入」每次进入只发一次；槽里再跳场景时不重发） */
-    private boolean emittingSceneSignal = false;
-    private boolean enteredSceneSignals = false;
+    /**
+     * 场景自动信号嵌套深度：槽里 {@code goto} 会同步递归进入下一幕并再次发「场景进入」——
+     * 这是<b>链式逻辑拍点</b>（如「自动存档 → goto 下一幕」）赖以推进的正常行为，必须放行。
+     * 只用深度上限兜住真正的自环/互环死循环。
+     */
+    private static final int MAX_AUTO_SIGNAL_DEPTH = 64;
+    private int autoSignalDepth = 0;
     private boolean suppressSceneEvent;  // 从插件返回时避免重复触发场景事件
 
     // ---- 存档 ----
@@ -386,7 +390,7 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
         }
         this.sceneName = name;
         this.scene = target;
-        this.enteredSceneSignals = false;   // 本次进入还没发过「场景进入」
+        // 注：自动信号「场景进入」在本幕渲染完成后发送一次（见下方 emitAutoSignal）
 
         board.getChildren().clear();
         nodeViews.clear();
@@ -470,18 +474,12 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
      */
     private void emitAutoSignal(AutoSignals.Def def, LinkedHashMap<String, Object> params, String note) {
         if (signalBus == null || def == null) return;
-        if (def == AutoSignals.ENTER) {
-            if (enteredSceneSignals) {
-                Logs.info("[Flow] 场景信号防重入：跳过「" + def.name() + "」（" + params.get("scene") + "）");
-                return;
-            }
-            enteredSceneSignals = true;
-        }
-        if (emittingSceneSignal) {
-            Logs.info("[Flow] 场景信号防重入：跳过「" + def.name() + "」（" + params.get("scene") + "）");
+        if (autoSignalDepth >= MAX_AUTO_SIGNAL_DEPTH) {
+            Logs.warn("[Flow] 自动信号嵌套过深（" + autoSignalDepth + " 层），跳过「" + def.name()
+                    + "」（" + params.get("scene") + "）——请检查脚本里是否有场景互相 goto 成环");
             return;
         }
-        emittingSceneSignal = true;
+        autoSignalDepth++;
         try {
             // 规范名 + 别名一起发：地图里写「上一幕离开」这种别名也能收到
             LinkedHashMap<String, Object> copy = new LinkedHashMap<>(params);
@@ -493,7 +491,7 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
         } catch (RuntimeException e) {
             Logs.warn("[Flow] 场景信号「" + def.name() + "」执行出错：" + e.getMessage());
         } finally {
-            emittingSceneSignal = false;
+            autoSignalDepth--;
         }
     }
 
