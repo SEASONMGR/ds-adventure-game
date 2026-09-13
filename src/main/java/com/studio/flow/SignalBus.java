@@ -55,6 +55,13 @@ public class SignalBus {
     /** 节点发信号：附带该信号定义上的静态参数 */
     public void emitFromNode(StoryNode source, String signalName, Map<String, Object> ctxParams) {
         if (source == null || signalName == null || signalName.isBlank()) return;
+        // 信号总开关：这个节点的信号被关掉后，它的信号（鼠标/键盘/按钮，以及槽里以它名义 emit 的）
+        // 都不再发出去 —— 场景级信号不受影响
+        if (!source.isSignalsEnabled()) {
+            Logs.info("[Flow] 节点「" + source.getId() + "」的信号已被关闭（signalsEnabled=false），"
+                    + "忽略信号「" + signalName + "」");
+            return;
+        }
         LinkedHashMap<String, Object> params = new LinkedHashMap<>();
         if (ctxParams != null) params.putAll(ctxParams);
         SignalDef def = findNodeSignal(source, signalName);
@@ -108,6 +115,18 @@ public class SignalBus {
         List<SlotTarget> slots = new ArrayList<>();
         for (SlotDef slot : scene.slots()) slots.add(new SlotTarget(slot, null));
         for (StoryNode node : scene.nodes()) {
+            // 节点的「槽总开关」关掉时，挂在自己身上的槽不再执行（场景级槽不受影响）
+            if (!node.isSlotsEnabled()) {
+                boolean hasMatch = false;
+                for (SlotDef slot : node.slots()) {
+                    if (matches(slot.getSignal(), event.signal())) hasMatch = true;
+                }
+                if (hasMatch) {
+                    Logs.info("[Flow] 节点「" + node.getId() + "」的槽已被关闭（slotsEnabled=false），跳过 "
+                            + countMatching(node, event) + " 条槽（信号 " + event.signal() + "）");
+                }
+                continue;
+            }
             for (SlotDef slot : node.slots()) slots.add(new SlotTarget(slot, node));
         }
         int matched = 0;
@@ -121,6 +140,14 @@ public class SignalBus {
         if (matched == 0 && notified == 0) {
             Logs.info("[Flow] 信号 " + event.signal() + " 没有匹配的槽（来源 " + event.sourceKind() + "）");
         }
+    }
+
+    private static int countMatching(StoryNode node, SignalEvent event) {
+        int n = 0;
+        for (SlotDef slot : node.slots()) {
+            if (matches(slot.getSignal(), event.signal())) n++;
+        }
+        return n;
     }
 
     private static boolean matches(String slotSignal, String eventSignal) {
@@ -199,7 +226,6 @@ public class SignalBus {
             case "text": return n.getText();
             case "path": return n.getPath();
             case "video": return n.getVideo();
-            case "audio": return n.getAudio();
             case "style": return n.getStyle();
             case "visible": return n.isVisible() ? "true" : "false";
             case "opacity": return StoryNode.trimDouble(n.getOpacity());
@@ -356,6 +382,15 @@ public class SignalBus {
     /**
      * set 槽取值：{@code value=字面值/表达式}；{@code valueVar=变量名}；
      * 都没有则空串。都支持 {@code @var/@double/@node} 表达式。
+     *
+     * <p>修过一个坑：{@code valueVar=} 后面<b>直接写变量名</b>（例如 {@code valueVar=显示文本}）
+     * 以前不会去变量表取值，而是被当成普通字面量 —— 结果节点文本被写成“显示文本”四个字本身
+     * （编辑器/文档里写的都是“变量名”，所以很容易踩）。现在：</p>
+     * <ul>
+     *   <li>{@code valueVar=@var(x)} / {@code valueVar=@int(@var(x))} 等表达式照旧；</li>
+     *   <li>{@code valueVar=x} 且变量 x 存在 → 取 x 的值；</li>
+     *   <li>{@code valueVar=x} 但变量 x 不存在 → 退回按字面量处理并写一条告警（不静默清空）。</li>
+     * </ul>
      */
     private String resolveValue(Map<String, Object> params, Expr.Scope scope) {
         String literal = str(params.get("value"));
@@ -364,6 +399,15 @@ public class SignalBus {
         if (!varName.isEmpty()) {
             String plain = Expr.varRefName(varName);
             if (!plain.isEmpty()) return host.variables().get(plain, "");
+            // valueVar 后面直接写了个变量名（不带 @var(...)）：按变量取；取不到才当字面量
+            if (varName.indexOf('@') < 0) {
+                String name = varName.trim();
+                if (host.variables() != null && host.variables().has(name)) {
+                    return host.variables().get(name, "");
+                }
+                Logs.warn("[Flow] valueVar=" + name + " 既不是表达式、也没有这个存档变量，已按字面量处理");
+                return name;
+            }
             return Expr.resolve(varName, scope);
         }
         return "";

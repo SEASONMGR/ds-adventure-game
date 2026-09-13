@@ -210,6 +210,15 @@ public class ControlPlugin extends BuiltinPlugin {
     // 定时器实现（JavaFX Timeline；onDetach 时统一清理）
     // =====================================================================
 
+    /**
+     * 起一个定时器。
+     *
+     * @param times 重复次数：<b>0 = 无限</b>（{@code every} 不写次数时的默认值）、1 = 只发一次（{@code after}）、n = n 次
+     *
+     * <p>修过一个真 bug：以前这里是 {@code if (times <= 1) setCycleCount(1)}，
+     * 把「0 = 无限」也判成了只发一次 —— 于是 {@code @plugin(every) | 1 | 每秒} 只响一下，
+     * 定时器/倒计时看着像坏的（日志却写着“无限”，更容易让人以为是地图写错了）。</p>
+     */
     private void schedule(PluginContext ctx, double seconds, String signal, String target, int times) {
         final String key = target + "|" + signal;
         Runnable create = () -> {
@@ -220,7 +229,7 @@ public class ControlPlugin extends BuiltinPlugin {
                 ctx.emit(target, signal, new LinkedHashMap<>());
                 if (times > 0 && --left[0] <= 0) stopTimer(key);
             }));
-            if (times <= 1) tl.setCycleCount(1);
+            if (times == 1) tl.setCycleCount(1);
             else if (times > 1) tl.setCycleCount(times);
             else tl.setCycleCount(Timeline.INDEFINITE);
             TIMERS.put(key, tl);

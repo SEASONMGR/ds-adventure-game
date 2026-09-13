@@ -56,15 +56,19 @@ final class EditorPanels {
         /** 上一次真正激活过的树项（用于“点同一个也能再激活”） */
         private TreeItem<String> lastActivated;
 
-        /** 激活一个树项：场景 → 切换当前场景；节点 → 切到它所在场景并选中它 */
+        /** 激活一个树项：场景 → 切换当前场景并<b>清掉节点选中</b>；节点 → 切到它所在场景并选中它 */
         private void activate(TreeItem<String> sel) {
             Object owner = itemOwner.get(sel);
             if (owner instanceof GameScene scene) {
-                hub.switchScene(scene.getName());
-                hub.selectNode(null);
+                // 已经在这一幕里就不要再“切”一次：switchScene 会整棵重建层级树 + 重画画布，
+                // 重建会让选中行先消失再出现（看起来就是那一行闪了一下）。
+                if (scene != hub.scene()) hub.switchScene(scene.getName());
+                if (hub.selectedNode() != null) hub.selectNode(null);   // 选场景 = 取消节点选中
+                // 场景那一行要一直亮着（syncSelection(null) 会把选中行切到当前场景行）
+                syncSelection(null);
             } else if (owner instanceof StoryNode node) {
                 GameScene owning = findSceneOf(node);
-                if (owning != null) hub.switchScene(owning.getName());
+                if (owning != null && owning != hub.scene()) hub.switchScene(owning.getName());
                 hub.selectNode(node);
             }
         }
@@ -110,6 +114,32 @@ final class EditorPanels {
 
             tree.setShowRoot(true);
             VBox.setVgrow(tree, Priority.ALWAYS);
+
+            // 给每一行按“是场景还是节点”打上样式类：这样选中场景行与选中节点行可以是两种颜色
+            //（用户一眼能分清“当前在哪一幕”和“选中了哪个节点”）
+            tree.setCellFactory(tv -> new javafx.scene.control.TreeCell<>() {
+                @Override protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    getStyleClass().removeAll("tree-scene", "tree-node", "tree-root");
+                    if (empty || item == null) {
+                        setText(null);
+                        return;
+                    }
+                    setText(item);
+                    // 用“行号 → 树项”的权威映射判断这一行是什么。单元格自己缓存的 treeItem
+                    // 在滚动回收 / 整棵重建的那一帧可能还是旧值（JavaFX 先 updateIndex 再换 treeItem），
+                    // 拿它去查 owner 会短暂挂错样式 —— 用户看到的就是“某个无关节点闪了一下”。
+                    TreeItem<String> rowItem = getIndex() >= 0 ? tv.getTreeItem(getIndex()) : null;
+                    if (rowItem == null) return;                 // 查不到就不打类名，绝不冒充根行
+                    if (rowItem == root) {
+                        getStyleClass().add("tree-root");
+                        return;
+                    }
+                    Object owner = itemOwner.get(rowItem);
+                    if (owner instanceof GameScene) getStyleClass().add("tree-scene");
+                    else if (owner instanceof StoryNode) getStyleClass().add("tree-node");
+                }
+            });
 
             tree.getSelectionModel().selectedItemProperty().addListener((o, old, sel) -> {
                 if (sel == null || selectingInternally) return;
@@ -194,7 +224,14 @@ final class EditorPanels {
                 }
                 root = newRoot;
                 tree.setRoot(root);
-                if (currentScene != null) {
+                // 重建后把“当前选中”恢复出来：优先选中当前节点（这样画布上选中的节点，
+                // 左侧栏那一行也会亮着），没有选中节点时才退回到选中当前场景那一行。
+                StoryNode sel = hub.selectedNode();
+                boolean done = false;
+                if (sel != null && currentScene != null && currentScene.contains(sel)) {
+                    done = selectItemFor(sel);
+                }
+                if (!done && currentScene != null) {
                     for (TreeItem<String> sceneItem : root.getChildren()) {
                         if (itemOwner.get(sceneItem) == currentScene) {
                             tree.getSelectionModel().select(sceneItem);
@@ -205,6 +242,77 @@ final class EditorPanels {
             } finally {
                 selectingInternally = false;
             }
+        }
+
+        /**
+         * 让左侧栏那一行跟着“当前选中的节点”走：<b>画布上选中的节点，左侧对应行也要变样式</b>。
+         * <p>画布点击、右键菜单、撤销/重做、结构变化后的重建，最终都会走到 {@code hub.selectNode(...)}，
+         * 由那里调用本方法；程序化选中期间用 {@link #selectingInternally} 抑制监听，避免和 {@code activate} 打架。</p>
+         */
+        void syncSelection(StoryNode node) {
+            boolean wasInternal = selectingInternally;
+            selectingInternally = true;
+            try {
+                if (node == null) {
+                    // 没有选中节点时，选中行落在“当前场景”那一行（而不是清空选中）——
+                    // 这样点场景行、或在画布空白处点击取消选中，左侧栏都能明确显示“当前在哪一幕”。
+                    selectSceneRow();
+                    return;
+                }
+                selectItemFor(node);
+            } finally {
+                selectingInternally = wasInternal;
+            }
+        }
+
+        /** 选中“当前场景”对应的那一行（找不到就退回到根行） */
+        private void selectSceneRow() {
+            GameScene cur = hub.scene();
+            if (root == null) return;
+            for (TreeItem<String> item : root.getChildren()) {
+                if (itemOwner.get(item) == cur) {
+                    tree.getSelectionModel().select(item);
+                    lastActivated = item;
+                    return;
+                }
+            }
+            tree.getSelectionModel().select(root);
+            lastActivated = null;
+        }
+
+        /** 选中某个节点对应的树项（必要时展开父项并滚动到可见位置）；成功返回 true */
+        private boolean selectItemFor(StoryNode node) {
+            for (Map.Entry<TreeItem<String>, Object> e : itemOwner.entrySet()) {
+                if (e.getValue() != node) continue;
+                TreeItem<String> item = e.getKey();
+                for (TreeItem<String> p = item.getParent(); p != null; p = p.getParent()) {
+                    p.setExpanded(true);
+                }
+                tree.getSelectionModel().select(item);
+                int row = tree.getRow(item);
+                // 只有“这一行本来就没完整露出来”才滚动 —— 否则每点一次节点，
+                // 左侧栏都会把那一行猛地拉到顶端（用户会觉得界面在跳）。
+                if (row >= 0 && !isRowFullyVisible(row)) tree.scrollTo(Math.max(0, row - 2));
+                lastActivated = item;
+                return true;
+            }
+            return false;
+        }
+
+        /** 第 row 行是不是完整落在层级树的可视范围里 */
+        private boolean isRowFullyVisible(int row) {
+            javafx.scene.Node cell = null;
+            for (javafx.scene.Node n : tree.lookupAll(".tree-cell")) {
+                if (n instanceof javafx.scene.control.TreeCell<?> c && !c.isEmpty() && c.getIndex() == row) {
+                    cell = c;
+                    break;
+                }
+            }
+            if (cell == null) return false;
+            javafx.geometry.Bounds cb = cell.localToScene(cell.getBoundsInLocal());
+            javafx.geometry.Bounds tb = tree.localToScene(tree.getBoundsInLocal());
+            if (cb == null || tb == null) return false;
+            return cb.getMinY() >= tb.getMinY() - 1 && cb.getMaxY() <= tb.getMaxY() + 1;
         }
 
         private GameScene findSceneOf(StoryNode node) {
@@ -474,17 +582,7 @@ final class EditorPanels {
             HBox.setHgrow(path, Priority.ALWAYS);
             body.getChildren().add(row("图片 path", pathRow));
 
-            TextField audio = new TextField(node.getAudio());
-            bind(audio, v -> { node.setAudio(v); refreshView.run(); });
-            Button pickA = new Button("…");
-            pickA.setOnAction(e -> {
-                String rel = AssetImport.pickAndImport(getScene().getWindow(),
-                        hub.project(), node, true);
-                if (rel != null) audio.setText(rel);
-            });
-            HBox audioRow = new HBox(6, audio, pickA);
-            HBox.setHgrow(audio, Priority.ALWAYS);
-            body.getChildren().add(row("音频 audio", audioRow));
+            // 音频属性已废除（音频走 @plugin(audio)），这里不再提供输入框
 
             // 视频 video：非空时读取器用视频播放器渲染该节点（背景节点＝会动的背景图），空则用图片
             TextField video = new TextField(node.getVideo());

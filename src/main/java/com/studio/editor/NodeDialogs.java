@@ -171,15 +171,7 @@ final class NodeDialogs {
         addRow(grid, 7, "视频 (video)", new VBox(4, new HBox(6, videoField, videoPick), videoHint),
                 "视频相对地图根目录（如 resources/video/opening.mp4）；自动复制进地图 resources/video");
 
-        // 音频
-        TextField audioField = new TextField(node.getAudio());
-        audioField.textProperty().addListener((o, a, b) -> { node.setAudio(b); refresh.run(); });
-        Button audioPick = new Button("…选择音频");
-        audioPick.setOnAction(e -> {
-            String rel = AssetImport.pickAndImport(dialog.getOwner(), project, node, true);
-            if (rel != null) audioField.setText(rel);
-        });
-        addRow(grid, 8, "音频 (audio)", new HBox(6, audioField, audioPick), "音乐轨/音效文件");
+        // 音频属性已废除：音频统一走 @plugin(audio) 通道，这里不再提供输入框
 
         // 文字（可多段：独立一行的 --- 分隔，播放时点击对话自动切到下一段）
         TextArea textArea = new TextArea(node.getText());
@@ -244,20 +236,38 @@ final class NodeDialogs {
         addRow(grid, 12, "动作 (action)", actionBox,
                 "target=跳场景; save/load=存档文件名; event=运行插件；"
                         + "注：skip/speed 已移除，读取器不再支持这两个动作（旧地图里残留会走默认分支）");
-        Label actionNote = makeLabel("⚠ skip（跳过台词）/ speed（加速）已从读取器移除，"
-                + "需要类似效果请改用信号/槽或逻辑层。");
-        actionNote.getStyleClass().add("hint-text");
         addRow(grid, 13, targetLabel.getText(), targetBox,
                 "动作=target 填场景名；save/load 填存档文件名（留空=slot1.txt）；"
                         + "对话节点：此处填“对话结束后的下一个场景”（点击对话走完即跳转）");
         targetBox.setDisable(!needTarget);
-        grid.add(actionNote, 0, 25, 2, 1);
 
         // 可见/字号/对齐/透明度
         CheckBox visibleBox = new CheckBox("可见");
         visibleBox.setSelected(node.isVisible());
         visibleBox.selectedProperty().addListener((o, a, b) -> { node.setVisible(b); refresh.run(); });
         addRow(grid, 14, "显示 (visible)", visibleBox, null);
+
+        // 信号 / 槽总开关（默认都开）：运行时可用 @plugin(switch) | off | 节点id | signals|slots|all 改
+        CheckBox signalsBox = new CheckBox("启用信号");
+        signalsBox.setSelected(node.isSignalsEnabled());
+        signalsBox.setTooltip(new Tooltip("关掉后：本节点的鼠标点击/键盘/按钮信号都不再触发\n"
+                + "（按钮自带的 action 动作不受影响）。运行时也能改：\n"
+                + "@plugin(switch) | off | 节点id | signals"));
+        signalsBox.selectedProperty().addListener((o, a, b) -> { node.setSignalsEnabled(b); refresh.run(); });
+        CheckBox slotsBox = new CheckBox("启用槽");
+        slotsBox.setSelected(node.isSlotsEnabled());
+        slotsBox.setTooltip(new Tooltip("关掉后：挂在本节点上的槽不再执行（场景级槽不受影响）。运行时也能改：\n"
+                + "@plugin(switch) | off | 节点id | slots"));
+        slotsBox.selectedProperty().addListener((o, a, b) -> { node.setSlotsEnabled(b); refresh.run(); });
+        Label switchHint = new Label("关闭后写成 signalsEnabled = false / slotsEnabled = false；"
+                + "演出期间锁住交互、选项只能点一次，都用它。");
+        switchHint.setWrapText(true);
+        switchHint.getStyleClass().add("hint-text");
+        // 注意：GridPane 的行号必须唯一 —— 本窗口的行号是：0~17、18=逐字显示、19=信号、20=槽、
+        // 21=过渡、22=层级、23=多行、24=绑定变量，所以开关这一行用 25（写 18 会和「逐字显示」叠在一起，
+        // 早先误用 18 时表现为「透明度/开关」的控件叠在同一个格子里）。
+        addRow(grid, 25, "信号 / 槽开关", new VBox(4, new HBox(12, signalsBox, slotsBox), switchHint),
+                "运行时：@plugin(switch) | on|off|toggle | 节点id | signals|slots|all");
 
         TextField fsField = numField(node.getFontSize() > 0 ? node.getFontSize() : 0);
         fsField.textProperty().addListener((o, a, b) -> {
@@ -514,9 +524,9 @@ final class NodeDialogs {
         Button tplPlugin = slotTemplate("＋插件槽", "点击 | @plugin(add) | @var(num1) | @double(1.05) | @var(num2)",
                 node, slotRows, slotSync, refresh);
         tplPlugin.setTooltip(new Tooltip("调用自带插件。可用插件 ID：\n"
-                + "算术 add / sub / mul / div / mod / pow / min / max / abs / round / floor / ceil / neg / set / inc / dec\n"
+                + "算术 add / 减法（或 minus）/ mul / div / mod / pow / min / max / abs / round / floor / ceil / neg / set / inc / dec\n"
                 + "逻辑 and / or / xor / not；比较 gt / lt / ge / le / eq / ne\n"
-                + "音频 audio；视频 video（切换某节点的视频）\n"
+                + "音频 audio（bgm/se 通道）；视频 video（切换某节点的视频）\n"
                 + "系统 quit 退出游戏 / open 打开文件 / pick 选择文件 / reveal 打开所在目录\n"
                 + "示例含义：把 num1 + 1.05 的结果写回 num2"));
         Button tplSystem = slotTemplate("＋系统槽", "退出游戏 | @plugin(quit)", node, slotRows, slotSync, refresh);
@@ -644,7 +654,7 @@ final class NodeDialogs {
         node.setId(snapshot.getId());
         node.setX(snapshot.getX()); node.setY(snapshot.getY());
         node.setWidth(snapshot.getWidth()); node.setHeight(snapshot.getHeight());
-        node.setPath(snapshot.getPath()); node.setAudio(snapshot.getAudio());
+        node.setPath(snapshot.getPath());
         node.setVideo(snapshot.getVideo());   // 视频也要还原，否则【取消】后会残留
         node.setText(snapshot.getText()); node.setStyle(snapshot.getStyle());
         node.setEvent(snapshot.getEvent()); node.setAction(snapshot.getAction());
@@ -657,6 +667,8 @@ final class NodeDialogs {
         node.setIndex(snapshot.getIndex());
         node.setMultiline(snapshot.isMultiline());
         node.setBind(snapshot.getBind());
+        node.setSignalsEnabled(snapshot.isSignalsEnabled());
+        node.setSlotsEnabled(snapshot.isSlotsEnabled());
         node.signals().clear();
         node.signals().addAll(snapshot.signals());
         node.slots().clear();
@@ -728,6 +740,7 @@ final class NodeDialogs {
      */
     static com.studio.plugin.builtin.PluginInfo pickedPlugin(
             javafx.scene.control.ComboBox<com.studio.plugin.builtin.PluginInfo> picker) {
+
         if (picker == null) return null;
         com.studio.plugin.builtin.PluginInfo sel = picker.getValue();
         if (sel != null) return sel;

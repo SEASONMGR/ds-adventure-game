@@ -74,19 +74,28 @@ public final class PluginCatalog {
         // ---------- 2) 注册表 ----------
         PluginRuntime rt = new PluginRuntime(projectDir, mapDir);
         Map<String, String> registry = readRegistry(projectDir, mapDir);
+        int skipped = 0;
         for (Map.Entry<String, String> e : registry.entrySet()) {
             String id = e.getKey();
             String className = e.getValue();
             if (id == null || id.isBlank() || seen.contains(id.toLowerCase(java.util.Locale.ROOT))) continue;
+            // 探测用“安静模式”：注册表里通常还登记着事件插件（GamePlugin，不能用于 @plugin 槽），
+            // 以前每次扫描都会为它们喷一段带全部自带插件 ID 的长告警 —— 控制台全是那个。
             SlotPlugin p = tryLoad(rt, id);
             if (p == null) {
                 // 注册了但加载不了：可能是只实现了 GamePlugin（事件插件），不能用在槽里
                 cat.problems().add("注册项「" + id + " → " + className
                         + "」不能用于 @plugin 槽（加载失败或不是 SlotPlugin；事件插件请用节点/场景的 event 属性）");
+                skipped++;
                 continue;
             }
             cat.items().add(external(id, className, p, "注册表"));
             seen.add(id.toLowerCase(java.util.Locale.ROOT));
+        }
+        if (skipped > 0) {
+            // 只说一次、说清楚：明细在 problems 里（下拉框的提示气泡与「关于」会显示）
+            Logs.info("[PluginCatalog] 有 " + skipped + " 个注册项不是槽插件（事件插件请用 event 属性），"
+                    + "已从「插入插件槽」列表排除；明细见插件下拉框的提示");
         }
 
         // ---------- 3) 已编译但可能没登记的类 ----------
@@ -118,10 +127,10 @@ public final class PluginCatalog {
 
     private static String safe(String s) { return s == null ? "" : s.trim(); }
 
-    /** 用运行时真加载一次；拿不到实例返回 null */
+    /** 用运行时真加载一次（安静模式：探测失败不喷长告警）；拿不到实例返回 null */
     private static SlotPlugin tryLoad(PluginRuntime rt, String id) {
         try {
-            return rt.plugin(id);
+            return rt.plugin(id, true);
         } catch (Throwable t) {
             Logs.warn("[PluginCatalog] 加载插件失败 " + id + "：" + t.getMessage());
             return null;

@@ -199,6 +199,7 @@ public final class MapBrowserDialog {
             {"logicgate", "逻辑门（两个开关控制三盏灯）"},
             {"vardemo", "存档变量 / 表达式 / @plugin"},
             {"saveroom", "存档实验室（3 槽存档台）"},
+            {"clock", "倒计时时钟（场景自动信号 + 定时器 + 到点自动跳幕）"},
             {"breakout", "打砖块（breakout 插件）"},
     };
 

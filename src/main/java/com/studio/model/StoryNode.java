@@ -18,8 +18,9 @@ public class StoryNode {
     /** 规范键：写文件时输出的固定顺序 */
     public static final String[] SCRIPT_ORDER = {
             "type", "id", "index", "x", "y", "width", "height",
-            "path", "video", "audio", "text", "multiline", "bind", "style", "event", "action", "target",
-            "visible", "fontSize", "align", "opacity"
+            "path", "video", "text", "multiline", "bind", "style", "event", "action", "target",
+            "visible", "fontSize", "align", "opacity",
+            "signalsEnabled", "slotsEnabled"
     };
 
     /** 中文/英文别名 → 规范键（解析器容错用） */
@@ -33,8 +34,8 @@ public class StoryNode {
         KEY_ALIAS.put("width", "width");  KEY_ALIAS.put("宽度", "width");  KEY_ALIAS.put("宽", "width");
         KEY_ALIAS.put("height", "height");KEY_ALIAS.put("高度", "height"); KEY_ALIAS.put("高", "height");
         KEY_ALIAS.put("path", "path");    KEY_ALIAS.put("图片", "path");   KEY_ALIAS.put("立绘路径", "path"); KEY_ALIAS.put("路径", "path");
-        KEY_ALIAS.put("audio", "audio");  KEY_ALIAS.put("音频", "audio");  KEY_ALIAS.put("音乐", "audio");  KEY_ALIAS.put("音效", "audio");
-        // 视频素材：设了就由读取器用视频播放器渲染该节点（可当“会动的背景图”用）
+        // 说明：节点的 audio 属性（音效/BGM）已废除 —— 音频统一走 @plugin(audio) 通道；
+        // 旧地图里残留的 audio 键会被 parser 放进 extras 原样保留（不会再被播放），并在加载时提示迁移。
         KEY_ALIAS.put("video", "video"); KEY_ALIAS.put("视频", "video"); KEY_ALIAS.put("影片", "video");
         KEY_ALIAS.put("text", "text");    KEY_ALIAS.put("文本", "text");   KEY_ALIAS.put("文字", "text");   KEY_ALIAS.put("内容", "text");
         KEY_ALIAS.put("style", "style");  KEY_ALIAS.put("样式", "style");  KEY_ALIAS.put("内联样式", "style");
@@ -42,6 +43,14 @@ public class StoryNode {
         KEY_ALIAS.put("action", "action");KEY_ALIAS.put("动作", "action"); KEY_ALIAS.put("行为", "action");
         KEY_ALIAS.put("target", "target");KEY_ALIAS.put("目标", "target"); KEY_ALIAS.put("目标场景", "target");
         KEY_ALIAS.put("visible", "visible"); KEY_ALIAS.put("可见", "visible"); KEY_ALIAS.put("显示", "visible");
+        // 节点的信号 / 槽总开关（默认都开）：关掉后该节点不再发信号 / 不再执行自己的槽
+        // 运行时可随时改：@plugin(switch) | off | 节点id | signals|slots|all
+        KEY_ALIAS.put("signalsEnabled", "signalsEnabled"); KEY_ALIAS.put("信号开关", "signalsEnabled");
+        KEY_ALIAS.put("启用信号", "signalsEnabled"); KEY_ALIAS.put("信号启用", "signalsEnabled");
+        KEY_ALIAS.put("signals", "signalsEnabled"); KEY_ALIAS.put("signalsOn", "signalsEnabled");
+        KEY_ALIAS.put("slotsEnabled", "slotsEnabled"); KEY_ALIAS.put("槽开关", "slotsEnabled");
+        KEY_ALIAS.put("启用槽", "slotsEnabled"); KEY_ALIAS.put("槽启用", "slotsEnabled");
+        KEY_ALIAS.put("slots", "slotsEnabled"); KEY_ALIAS.put("slotsOn", "slotsEnabled");
         KEY_ALIAS.put("fontSize", "fontSize"); KEY_ALIAS.put("字号", "fontSize");
         KEY_ALIAS.put("align", "align");  KEY_ALIAS.put("对齐", "align");
         KEY_ALIAS.put("opacity", "opacity"); KEY_ALIAS.put("透明度", "opacity");
@@ -74,7 +83,6 @@ public class StoryNode {
     private double x, y, width, height;
     private String path = "";    // 图片/立绘相对路径（相对地图根目录）
     private String video = "";   // 视频相对路径（设了就代替图片渲染该节点，可循环播放）
-    private String audio = "";   // 音效/背景音乐路径
     private String text = "";    // 显示文字（支持富文本标记）
     private String style = "";   // 内联 CSS 样式（JavaFX -fx-* 属性）
     private String event = "";   // 该节点触发时运行的插件 ID
@@ -95,6 +103,15 @@ public class StoryNode {
 
     /** 文本框专用：绑定的存档变量名（输入内容实时写入该变量，留空表示不绑定） */
     private String bind = "";
+
+    /** 系统提示节点默认摆放时离屏幕边的边距（逻辑像素）——只是新建节点时的落点，不是节点属性 */
+    public static final double TOAST_MARGIN = 24.0;
+
+    /** 信号总开关：false = 该节点的信号不触发（含鼠标/键盘/按钮信号），默认 true */
+    private boolean signalsEnabled = true;
+
+    /** 槽总开关：false = 挂在“本节点上”的槽不执行（场景级槽不受影响），默认 true */
+    private boolean slotsEnabled = true;
 
     /** 本节点可发出的信号（鼠标点击/释放、按键等） */
     private final java.util.ArrayList<SignalDef> signals = new java.util.ArrayList<>();
@@ -122,7 +139,7 @@ public class StoryNode {
     public StoryNode copy() {
         StoryNode c = new StoryNode();
         c.type = type; c.id = id; c.x = x; c.y = y; c.width = width; c.height = height;
-        c.path = path; c.video = video; c.audio = audio; c.text = text; c.style = style; c.event = event;
+        c.path = path; c.video = video; c.text = text; c.style = style; c.event = event;
         c.action = action; c.target = target; c.visible = visible;
         c.fontSize = fontSize; c.align = align; c.opacity = opacity;
         c.typewriter = typewriter;
@@ -130,6 +147,8 @@ public class StoryNode {
         c.index = index;
         c.multiline = multiline;
         c.bind = bind;
+        c.signalsEnabled = signalsEnabled;
+        c.slotsEnabled = slotsEnabled;
         for (SignalDef s : signals) c.signals.add(s.copy());
         for (SlotDef s : slots) c.slots.add(s.copy());
         c.extras.putAll(extras);
@@ -164,9 +183,6 @@ public class StoryNode {
     public String getVideo() { return video; }
 
     public void setVideo(String video) { this.video = video == null ? "" : video.trim(); }
-
-    public String getAudio() { return audio; }
-    public void setAudio(String audio) { this.audio = audio == null ? "" : audio; }
 
     public String getText() { return text; }
     public void setText(String text) { this.text = text == null ? "" : text; }
@@ -236,11 +252,16 @@ public class StoryNode {
 
     // ---------------- 便捷查询 ----------------
 
-    /** 是否为纯音频轨（不占画面） */
-    public boolean isMusicOnly() { return type == NodeType.MUSIC; }
+    /** 信号总开关：false = 本节点的信号不触发（默认 true） */
+    public boolean isSignalsEnabled() { return signalsEnabled; }
+    public void setSignalsEnabled(boolean enabled) { this.signalsEnabled = enabled; }
+
+    /** 槽总开关：false = 挂在本节点上的槽不执行（默认 true；场景级槽不受影响） */
+    public boolean isSlotsEnabled() { return slotsEnabled; }
+    public void setSlotsEnabled(boolean enabled) { this.slotsEnabled = enabled; }
 
     /** 是否拥有需要画面的控件 */
-    public boolean needsVisual() { return type != NodeType.MUSIC; }
+    public boolean needsVisual() { return true; }
 
     /** 按规范键设置属性（解析器使用，遇未知键存入 extras） */
     public void setScriptProperty(String canonicalKey, String value) {
@@ -253,7 +274,6 @@ public class StoryNode {
             case "height"   -> setHeight(parseDoubleSafe(value, defaultByType2()));
             case "path"     -> setPath(value);
             case "video"    -> setVideo(value);
-            case "audio"    -> setAudio(value);
             case "text"     -> setText(value);
             case "style"    -> setStyle(value);
             case "event"    -> setEvent(value);
@@ -268,6 +288,8 @@ public class StoryNode {
             case "index"    -> setIndex((int) parseDoubleSafe(value, 0));
             case "multiline" -> setMultiline(parseBoolSafe(value, false));
             case "bind"     -> setBind(value);
+            case "signalsEnabled" -> setSignalsEnabled(parseBoolSafe(value, true));
+            case "slotsEnabled"   -> setSlotsEnabled(parseBoolSafe(value, true));
             default         -> extras.put(canonicalKey, value);
         }
     }
@@ -285,7 +307,6 @@ public class StoryNode {
         if (height > 0 && height != type.defaultHeight()) m.put("height", trimDouble(height));
         if (!path.isEmpty()) m.put("path", path);
         if (!video.isEmpty()) m.put("video", video);
-        if (!audio.isEmpty()) m.put("audio", audio);
         if (!text.isEmpty()) m.put("text", text);
         if (multiline) m.put("multiline", "true");
         if (!bind.isEmpty()) m.put("bind", bind);
@@ -299,6 +320,8 @@ public class StoryNode {
         if (opacity < 1.0) m.put("opacity", trimDouble(opacity));
         if (typewriter != null) m.put("typewriter", typewriter ? "true" : "false");
         if (!transition.isEmpty()) m.put("transition", transition);
+        if (!signalsEnabled) m.put("signalsEnabled", "false");
+        if (!slotsEnabled) m.put("slotsEnabled", "false");
         // 未知键按原顺序补在尾部
         m.putAll(extras);
         return m;

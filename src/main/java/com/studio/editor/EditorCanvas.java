@@ -59,6 +59,10 @@ public class EditorCanvas extends StackPane {
     private final VBox palette = new VBox(6);              // 常驻工具箱（可经 视图→显示工具箱 开关）
     private boolean toolboxVisible = true;
     private ContextMenu openMenu;                          // 正在显示的右键菜单（空白点击自动收起）
+    /** 最近一次选中的节点：缩放/适应窗口变化后要保证它仍然在可视区里 */
+    private StoryNode keepVisible;
+    /** 本次选中是“在画布上直接点的”，这一轮不允许自动挪画面（见 selectFromCanvas） */
+    private StoryNode suppressScrollOnce;
 
     // ---- 工具箱拖放状态 ----
     private boolean ghostActive = false;
@@ -178,7 +182,7 @@ public class EditorCanvas extends StackPane {
             final double y = Math.max(0, Math.min(CH, p.getY()));
 
             StoryNode hit = hitTestNode(p.getX(), p.getY());
-            if (hit != null) hub.selectNode(hit);
+            if (hit != null) selectFromCanvas(hit);   // 右键点的节点也在眼皮底下，同样不挪画面
             final StoryNode sel = hit != null ? hit : hub.selectedNode();
 
             ContextMenu menu = new ContextMenu();
@@ -363,6 +367,9 @@ public class EditorCanvas extends StackPane {
             }
         }
         refreshBackground();
+        // 重建包装会丢掉高亮：如果当前选中节点就在这一幕，顺手补回来
+        StoryNode sel = hub.selectedNode();
+        if (sel != null && scene != null && scene.contains(sel)) select(sel);
     }
 
     /** 结构变化（增删/换序）后整体重建视图 */
@@ -383,6 +390,10 @@ public class EditorCanvas extends StackPane {
         Pane w = createWrapper(node);
         board.getChildren().add(w);
         wrapperMap.put(node, w);
+        // 注意：这里刻意<b>不</b>监听 layoutBounds 去“自动再对齐一次” ——
+        // 布局什么时候变是不确定的（改属性、换文本、缩放），而每次对齐都会挪动画布，
+        // 用户看到的就是“明明没动它，画面自己跳”。滚进可视区只由选中那一刻的
+        // select() + ensureVisibleSoon() 负责，且有固定的收敛条件。
     }
 
     /** 单节点属性变化 → 刷新外观与几何（保留选中态与拖动绑定） */
@@ -408,12 +419,134 @@ public class EditorCanvas extends StackPane {
         }
     }
 
+    /**
+     * 选中某个节点：画布上给出<b>看得见的高亮圈</b>，并把它滚进可视区。
+     *
+     * <p>两点都是给“在左侧层级树里点节点”用的：① 只给 wrapper 加 {@code .selected} 边框是不够的 ——
+     * 内容层铺满整个 wrapper，会把边框盖住（选中了却看不出来）；所以高亮用单独一层
+     * {@code selection-ring} 画在内容上面。② 画布放大/平移过时节点可能在可视区外，
+     * 这里用最小平移量把它滚进来。</p>
+     */
     public void select(StoryNode node) {
         for (Map.Entry<StoryNode, Pane> e : wrapperMap.entrySet()) {
             boolean sel = e.getKey() == node;
             if (sel) e.getValue().getStyleClass().add("selected");
             else e.getValue().getStyleClass().remove("selected");
+            // 高亮圈：只有选中那个显示（放在内容之上，任何节点类型都看得见）
+            for (javafx.scene.Node child : e.getValue().getChildren()) {
+                if (child.getStyleClass().contains("selection-ring")) child.setVisible(sel);
+            }
         }
+        // 在画布上直接点中的节点<b>不</b>自动挪画面 —— 它本来就在眼皮底下，
+        // 再去“对齐”只会把用户脚下的画面拖走（点一下画面就跳，像在抖）。
+        if (node != null && node != suppressScrollOnce) {
+            ensureVisible(node);
+            // 刚换场景/刚重建视图时节点视图还没走布局，此刻算出来的矩形不准
+            // （宽度接近 0 或还是旧尺寸），于是“滚进可视区”会误判成“不用动”。
+            // 所以布局跑完后再对齐，并且没对上就再试几帧 —— 在左侧栏点节点时，
+            // 无论画布放大/平移成什么样，节点最终都会真的出现在眼前。
+            ensureVisibleSoon(node, 6);
+        }
+        keepVisible = node;   // 缩放/适应窗口变化后再对齐一次，保证点树里的节点总能看见
+    }
+
+    /**
+     * 画布上点选节点：节点已经在可视区里（鼠标点的就是它），所以这一轮不允许自动对齐。
+     *
+     * <p>{@code hub.selectNode} 里会同步回调 {@link #select(StoryNode)}，所以这个标记只在
+     * 这次调用期间有效，不依赖时间窗口。</p>
+     */
+    private void selectFromCanvas(StoryNode node) {
+        suppressScrollOnce = node;
+        try {
+            hub.selectNode(node);
+        } finally {
+            suppressScrollOnce = null;
+        }
+    }
+
+    /** 分几帧把节点滚进可视区（布局尺寸/缩放还会变，单次对齐不一定算得准） */
+    private void ensureVisibleSoon(StoryNode node, int attemptsLeft) {
+        javafx.application.Platform.runLater(() -> {
+            if (hub.selectedNode() != node || node == suppressScrollOnce) return;   // 期间又选了别的，就别抢了
+            double beforeX = panX;
+            double beforeY = panY;
+            ensureVisible(node);
+            boolean moved = Math.abs(panX - beforeX) > 0.01 || Math.abs(panY - beforeY) > 0.01;
+            // 只有“这一帧真的还在动”才继续追：一旦对齐到位（平移量不再变化）就立刻收手。
+            // 否则像幕布这种比可视区还大的节点会被反复对齐，看起来就是画面在抖。
+            if (moved && attemptsLeft > 1) {
+                javafx.animation.PauseTransition wait =
+                        new javafx.animation.PauseTransition(javafx.util.Duration.millis(60));
+                wait.setOnFinished(e -> ensureVisibleSoon(node, attemptsLeft - 1));
+                wait.play();
+            }
+        });
+    }
+
+    /**
+     * 用最小的平移量把节点滚进当前可视区（已经是可见的就什么都不做）。
+     *
+     * <p><b>必须是不动点</b>：同一个节点连续调用两次，第二次不能再动 —— 否则“每帧对齐一次”
+     * 就会变成来回拉锯（节点比可视区大时，先对齐左边、再对齐右边、再对齐左边…），
+     * 用户看到的就是屏幕在抖。所以单轴上“装不下”时只对齐左边/上边，不再看右边/下边。</p>
+     */
+    public void ensureVisible(StoryNode node) {
+        javafx.geometry.Bounds box = nodeSceneBounds(node);
+        javafx.geometry.Bounds view = viewportSceneBounds();
+        if (box == null || view == null) return;
+        double pad = 24;                                   // 留一点边，别贴着边线
+        double dx = axisDelta(box.getMinX(), box.getMaxX(), view.getMinX(), view.getMaxX(), pad);
+        double dy = axisDelta(box.getMinY(), box.getMaxY(), view.getMinY(), view.getMaxY(), pad);
+        if (dx == 0 && dy == 0) return;
+        panX += dx;                                        // translate 在缩放之外，单位就是屏幕像素
+        panY += dy;
+        // 这里刻意不走 clampPan()：那个夹取是给“鼠标拖动”留余地的（不许把地图拖太远），
+        // 而“把节点滚进可视区”必须真的能做到 —— 放大后节点在画布角落时，
+        // 需要的平移量会比拖动允许的上限更大。ensureVisible 只平移“最小的一步”，
+        // 且目标节点本来就在画布内，所以不会把地图甩出屏幕。
+        applyPan();
+    }
+
+    /**
+     * 单轴上的对齐量（不动点）。{@code bMin..bMax} 是目标矩形，{@code vMin..vMax} 是可视区。
+     *
+     * <p>目标比可视区还大（减去两边留白也装不下）时，只能“尽量看见”，此时统一对齐左边/上边：
+     * 这样反复调用的结果一致，不会出现“这次靠左、下次靠右”的拉锯。</p>
+     */
+    private static double axisDelta(double bMin, double bMax, double vMin, double vMax, double pad) {
+        double usable = (vMax - vMin) - pad * 2;
+        double size = bMax - bMin;
+        if (size >= usable) {
+            // 装不下：如果它已经把可视区盖住了，那它已经是“尽量看得见”，不要再动；
+            // 否则把左边/上边对齐进来。两种情况下反复调用结果都一致（不会左右拉锯）。
+            if (bMin <= vMin + pad && bMax >= vMax - pad) return 0;
+            return (vMin + pad) - bMin;
+        }
+        if (bMin < vMin + pad) return (vMin + pad) - bMin;
+        if (bMax > vMax - pad) return (vMax - pad) - bMax;
+        return 0;
+    }
+
+    /** 节点在屏幕坐标里的矩形（含缩放与平移）；不在当前场景里返回 null */
+    public javafx.geometry.Bounds nodeSceneBounds(StoryNode node) {
+        Pane w = wrapperMap.get(node);
+        if (w == null) return null;
+        return w.localToScene(w.getBoundsInLocal());
+    }
+
+    /** 可视区在屏幕坐标里的矩形（画布区域，含缩放后的实际可见范围） */
+    public javafx.geometry.Bounds viewportSceneBounds() {
+        return localToScene(getBoundsInLocal());
+    }
+
+    /** 这个节点现在是不是完整落在可视区里（探针/状态栏用） */
+    public boolean isNodeFullyVisible(StoryNode node) {
+        javafx.geometry.Bounds box = nodeSceneBounds(node);
+        javafx.geometry.Bounds view = viewportSceneBounds();
+        if (box == null || view == null) return false;
+        return box.getMinX() >= view.getMinX() - 1 && box.getMaxX() <= view.getMaxX() + 1
+                && box.getMinY() >= view.getMinY() - 1 && box.getMaxY() <= view.getMaxY() + 1;
     }
 
     public void refreshBackground() {
@@ -438,6 +571,14 @@ public class EditorCanvas extends StackPane {
     /** 复位平移（不清缩放）；视图菜单「复位视窗」用 */
     public void resetPan() { panX = 0; panY = 0; applyPan(); }
 
+    /** 按屏幕像素平移视窗（供键盘/探针/后续快捷键使用，带夹取） */
+    public void panBy(double dx, double dy) {
+        panX += dx;
+        panY += dy;
+        clampPan();
+        applyPan();
+    }
+
     private void setZoomManual(double z) {
         autoFit = false;
         zoom = Math.max(0.2, Math.min(4.0, z));
@@ -453,6 +594,10 @@ public class EditorCanvas extends StackPane {
         if (w <= 0 || h <= 0) return;
         zoom = Math.max(0.15, Math.min(1.2, Math.min(w / CW, h / CH)));
         applyZoom();
+        // 适应窗口会让缩放变化，之前选中的节点可能又跑到可视区外 —— 再对齐一次。
+        // 注意要延后一帧：刚改完缩放时节点的 localToScene 还是旧缩放下算出来的矩形，
+        // 拿它去对齐会算出一个离谱的平移量（画面会莫名其妙跳一下）。
+        if (keepVisible != null) ensureVisibleSoon(keepVisible, 3);
     }
 
     private void applyZoom() {
@@ -548,8 +693,36 @@ public class EditorCanvas extends StackPane {
         content.setPickOnBounds(false);
         wrapper.getChildren().add(content);
 
+        // 选中圈：单独一层、放在内容<b>之后</b>（也就是画在内容上面）。
+        // 以前选中样式只是给 wrapper 加 .selected 边框，而内容层铺满整个 wrapper，
+        // 会把那 2px 边框整个盖住 —— 于是“点左侧栏选中了节点，画布上却看不出任何变化”。
+        // 这里用一层鼠标穿透的描边方框，任何节点类型、任何底色都能看见；
+        // 样式写在内联 CSS 里，不依赖 studio.css 是否加载。
+        Region ring = new Region();
+        ring.getStyleClass().add("selection-ring");
+        ring.setMouseTransparent(true);
+        ring.setPrefSize(w, h);
+        ring.setMinSize(w, h);
+        ring.setMaxSize(w, h);
+        ring.setVisible(false);
+        ring.setStyle("-fx-background-color: rgba(255,207,92,0.10);"
+                + "-fx-border-color: #ffcf5c; -fx-border-width: 2; -fx-border-radius: 6;");
+        wrapper.getChildren().add(ring);
+
         attachInteractions(wrapper, node);
         return wrapper;
+    }
+
+    /** 节点在画布上是不是“看得见地选中了”：高亮圈必须显示、且必须是最后画的那一层（在内容之上） */
+    public boolean isNodeHighlighted(StoryNode node) {
+        Pane w = wrapperMap.get(node);
+        if (w == null) return false;
+        java.util.List<javafx.scene.Node> children = w.getChildren();
+        for (int i = 0; i < children.size(); i++) {
+            if (!children.get(i).getStyleClass().contains("selection-ring")) continue;
+            return children.get(i).isVisible() && i == children.size() - 1;
+        }
+        return false;
     }
 
     /** 本次拖动是否已经记录过撤销快照（避免拖动过程中压入几十步） */
@@ -560,7 +733,7 @@ public class EditorCanvas extends StackPane {
             hideOpenMenu();
             dragUndoPushed = false;
             if (e.getButton() != MouseButton.PRIMARY) return;
-            hub.selectNode(node);
+            selectFromCanvas(node);
         });
         wrapper.setOnMouseDragged(e -> {
             if (e.getButton() != MouseButton.PRIMARY) return;
@@ -625,7 +798,7 @@ public class EditorCanvas extends StackPane {
         title.getStyleClass().add("palette-title");
         palette.getChildren().add(title);
         for (NodeType t : new NodeType[]{NodeType.TEXT, NodeType.CHARACTER, NodeType.BUTTON,
-                NodeType.BACKGROUND, NodeType.NAME, NodeType.DIALOG, NodeType.MUSIC,NodeType.TEXTBOX}) {
+                NodeType.BACKGROUND, NodeType.NAME, NodeType.DIALOG, NodeType.TOAST, NodeType.TEXTBOX}) {
             palette.getChildren().add(makePaletteItem(t));
         }
     }

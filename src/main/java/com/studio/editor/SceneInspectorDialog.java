@@ -61,7 +61,7 @@ final class SceneInspectorDialog {
         dialog.setHeaderText("🧩 场景[" + scene.getName() + "]：属性 / 节点列表 / 信号与槽");
         dialog.getDialogPane().getButtonTypes().add(new ButtonType("关闭", ButtonBar.ButtonData.CANCEL_CLOSE));
         dialog.setResizable(true);
-        dialog.getDialogPane().setPrefSize(920, 640);
+        dialog.getDialogPane().setPrefSize(920, 900);
 
         Runnable mark = () -> {
             hub.setDirty();
@@ -396,6 +396,17 @@ final class SceneInspectorDialog {
         HBox sigBar = new HBox(8, sigAdd, sigApply, sigDel);
         sigBar.setAlignment(Pos.CENTER_LEFT);
 
+        // ---------- 快捷信号：常用鼠标/键盘信号一键加（和节点属性窗口里那排一样） ----------
+        javafx.scene.layout.FlowPane sigTpl = new javafx.scene.layout.FlowPane(6, 4,
+                sigAdd, sigApply, sigDel,
+                signalTemplate("＋鼠标点击", "场景点击 | mouse | click", scene, sigRows, sigTable, sigText, mark, hub),
+                signalTemplate("＋鼠标释放", "场景松开 | mouse | release", scene, sigRows, sigTable, sigText, mark, hub),
+                signalTemplate("＋按键 F", "场景按键F | key | F | press", scene, sigRows, sigTable, sigText, mark, hub),
+                signalTemplate("＋空格键", "场景空格 | key | SPACE | press", scene, sigRows, sigTable, sigText, mark, hub),
+                signalTemplate("＋方向键 ↑", "场景上键 | key | UP | press", scene, sigRows, sigTable, sigText, mark, hub),
+                signalTemplate("＋方向键 ↓", "场景下键 | key | DOWN | press", scene, sigRows, sigTable, sigText, mark, hub));
+        sigTpl.setAlignment(Pos.CENTER_LEFT);
+
         // ---- 槽 ----
         ObservableList<SlotDef> slotRows = FXCollections.observableArrayList(scene.slots());
         TableView<SlotDef> slotTable = new TableView<>(slotRows);
@@ -472,6 +483,44 @@ final class SceneInspectorDialog {
         HBox slotBar = new HBox(8, slotAdd, slotApply, slotDel);
         slotBar.setAlignment(Pos.CENTER_LEFT);
 
+        // ---------- 快捷槽模板：点一下直接多一条槽（发信号 / 定时器 / 循环 / 停表 / 改属性 / 逻辑 / 跳场景） ----------
+        javafx.scene.layout.FlowPane slotTpl = new javafx.scene.layout.FlowPane(6, 4,
+                slotAdd, slotApply, slotDel,
+                slotTemplate("＋发信号槽", "刷新 | emit |  | 我发出的信号", scene, slotRows, slotTable, mark, hub),
+                slotTemplate("＋定时槽(after)", "场景进入 | @plugin(after) | 3 | 定时到", scene, slotRows, slotTable, mark, hub),
+                slotTemplate("＋循环槽(every)", "场景进入 | @plugin(every) | 1 | 每秒", scene, slotRows, slotTable, mark, hub),
+                slotTemplate("＋停定时槽", "停止 | @plugin(stoptimer) | 每秒", scene, slotRows, slotTable, mark, hub),
+                slotTemplate("＋改属性槽", "刷新 | set | 节点id | text | value=新文本", scene, slotRows, slotTable, mark, hub),
+                slotTemplate("＋逻辑槽(call)", "刷新 | call |  | logic层id | 说明=转给逻辑层", scene, slotRows, slotTable, mark, hub),
+                slotTemplate("＋跳场景槽(goto)", "下一幕 | goto | 场景名", scene, slotRows, slotTable, mark, hub),
+                slotTemplate("＋日志槽(log)", "刷新 | log |  | 消息", scene, slotRows, slotTable, mark, hub));
+        slotTpl.setAlignment(Pos.CENTER_LEFT);
+
+        // ---------- 引擎自动信号：一键订阅（进/离场景时自动发出，不用自己声明） ----------
+        javafx.scene.layout.FlowPane autoBar = new javafx.scene.layout.FlowPane(6, 4);
+        autoBar.setAlignment(Pos.CENTER_LEFT);
+        Label autoTip = new Label("引擎自动信号（不用声明，进/离场景时自动发；点一下 = 加一条订阅它的槽）");
+        autoTip.getStyleClass().add("hint-text");
+        autoBar.getChildren().add(autoTip);
+        for (com.studio.flow.AutoSignals.Def def : com.studio.flow.AutoSignals.ALL) {
+            Button b = new Button("🔔 " + def.name());
+            b.getStyleClass().add("tool-button");
+            b.setTooltip(new javafx.scene.control.Tooltip(
+                    def.name() + "（别名 " + String.join(" / ", def.aliases()) + "）\n"
+                            + "什么时候发：" + def.when() + "\n"
+                            + "参数：" + def.params() + "\n"
+                            + "用途：" + def.hint() + "\n"
+                            + "（点一下 = 加一条订阅它的 log 槽，改成自己的逻辑即可）"));
+            b.setOnAction(e -> {
+                scene.slots().add(subscribeAuto(def));
+                slotRows.setAll(scene.slots());
+                slotTable.getSelectionModel().selectLast();
+                mark.run();
+                hub.notify("已订阅自动信号：" + def.name() + "（" + def.hint() + "）");
+            });
+            autoBar.getChildren().add(b);
+        }
+
         // 插件选择器：自带 + 外部（注册表登记 / classes / jar 里编译好的），可输入关键字筛选
         javafx.scene.control.ComboBox<com.studio.plugin.builtin.PluginInfo> pluginPicker =
                 PluginPickerField.create(hub, 280);
@@ -506,19 +555,102 @@ final class SceneInspectorDialog {
         Label tip = new Label("提示：这些是**场景级**信号与槽（写在 [场景名] 段里），"
                 + "节点自己的信号/槽在「节点」页双击进入节点属性窗口里改。"
                 + "槽按信号名全场景订阅：同一场景里同名信号的所有槽都会一起触发。"
-                + "另外「场景进入」/「场景离开」是引擎自动发的信号：直接写 slot = 场景进入 | … 即可自动执行，"
-                + "不需要在信号表里声明。");
+                + "「场景进入」/「场景离开」/「上一个场景离开」是引擎自动发的信号（见上面那排 🔔 按钮），"
+                + "不用在信号表里声明；定时器可以用 @plugin(after)（N 秒后发一个信号）与 @plugin(every)（每 N 秒发一次）。");
         tip.getStyleClass().add("hint-text");
         tip.setWrapText(true);
 
-        VBox sigBox = new VBox(6, new Label("场景信号（键盘全局监听器按名称分发）"), sigTable, sigText, sigBar);
-        VBox slotBox = new VBox(6, new Label("场景槽（订阅信号后由引擎执行）"), slotTable, slotText, slotBar, pluginBar);
+        VBox sigBox = new VBox(6, new Label("场景信号（键盘全局监听器按名称分发）"), sigTable, sigText, sigTpl);
+        VBox slotBox = new VBox(6, new Label("场景槽（订阅信号后由引擎执行）"), slotTable, slotText, slotTpl,
+                autoBar, pluginBar);
         VBox box = new VBox(12, sigBox, slotBox, tip);
         box.setPadding(new Insets(12));
         VBox.setVgrow(sigTable, Priority.ALWAYS);
         VBox.setVgrow(slotTable, Priority.ALWAYS);
         return new Tab("🔗 信号 / 槽（" + sigRows.size() + " / " + slotRows.size() + "）", box);
     }
+
+    // =====================================================================
+    // 快捷按钮（与节点属性窗口里的那排模板按钮同一套用法）
+    // =====================================================================
+
+    /** 快捷信号按钮：把一行式信号追加进场景信号表，并载入输入框方便继续改 */
+    private static Button signalTemplate(String label, String line, GameScene scene,
+                                         ObservableList<SignalDef> rows, TableView<SignalDef> table,
+                                         TextField lineField, Runnable mark, EditorHub hub) {
+        Button b = new Button(label);
+        b.getStyleClass().add("tool-button");
+        b.setTooltip(new javafx.scene.control.Tooltip("点一下加一条场景信号：" + line + "\n（同名会自动加序号）"));
+        b.setOnAction(e -> {
+            java.util.List<String> warns = new ArrayList<>();
+            SignalDef def = SignalCodec.decodeSignal(line, warns);
+            if (def == null) {
+                Ui.warn(null, "模板无法解析", String.join("\n", warns));
+                return;
+            }
+            def.setName(freeSignalName(scene, def.getName()));
+            scene.signals().add(def);
+            rows.setAll(scene.signals());
+            table.getSelectionModel().selectLast();
+            lineField.setText(SignalCodec.encode(def));
+            mark.run();
+            hub.notify("已新增场景信号：" + def.getName());
+        });
+        return b;
+    }
+
+    /** 快捷槽按钮：把一行式槽追加进场景槽表（点一下列表里就多一行） */
+    private static Button slotTemplate(String label, String line, GameScene scene,
+                                       ObservableList<SlotDef> rows, TableView<SlotDef> table,
+                                       Runnable mark, EditorHub hub) {
+        Button b = new Button(label);
+        b.getStyleClass().add("tool-button");
+        b.setTooltip(new javafx.scene.control.Tooltip("点一下加一条场景槽：" + line));
+        b.setOnAction(e -> {
+            java.util.List<String> warns = new ArrayList<>();
+            SlotDef def = SignalCodec.decodeSlot(line, warns);
+            if (def == null) {
+                Ui.warn(null, "模板无法解析", String.join("\n", warns));
+                return;
+            }
+            scene.slots().add(def);
+            rows.setAll(scene.slots());
+            table.getSelectionModel().selectLast();
+            mark.run();
+            hub.notify("已新增场景槽：" + def.getSignal() + " | " + def.getAction());
+        });
+        return b;
+    }
+
+    /** 自动信号按钮用的“起步槽”：先写一条 log，工程师改成自己的逻辑即可 */
+    private static SlotDef subscribeAuto(com.studio.flow.AutoSignals.Def def) {
+        String msg;
+        if (def == com.studio.flow.AutoSignals.ENTER) {
+            msg = "进入场景 @param(scene)（来自 @param(from)）";
+        } else if (def == com.studio.flow.AutoSignals.LEAVE) {
+            msg = "离开场景 @param(scene) → @param(to)";
+        } else {
+            msg = "上一幕 @param(scene) 已离开 → 本幕 @param(to)";
+        }
+        return new SlotDef(def.name(), "log", "", msg);
+    }
+
+    /** 场景信号重名时自动加序号，避免两个信号同名（同名会一起触发，容易踩坑） */
+    private static String freeSignalName(GameScene scene, String want) {
+        String base = want == null || want.isBlank() ? "新信号" : want.trim();
+        String name = base;
+        int n = 2;
+        while (hasSignal(scene, name)) name = base + "_" + (n++);
+        return name;
+    }
+
+    private static boolean hasSignal(GameScene scene, String name) {
+        for (SignalDef s : scene.signals()) {
+            if (s.getName().equals(name)) return true;
+        }
+        return false;
+    }
+
 
     /** 供 Inspector 上的按钮/菜单使用：把当前场景的属性窗口打开 */
     static Map<String, String> snapshot(GameScene scene) {
