@@ -27,7 +27,8 @@ public final class MainApp {
     public static void main(String[] args) {
         Class<? extends Application> app;
         List<String> rest = new java.util.ArrayList<>();
-        boolean player = false;
+        // 默认模式：双击打包好的 exe 时没有参数，用 -Dapp.mode=player|editor 决定（默认编辑器）
+        boolean player = "player".equalsIgnoreCase(System.getProperty("app.mode", "editor"));
         for (String a : args) {
             if (a.equalsIgnoreCase("player") || a.equals("--player") || a.equals("-player")) player = true;
             else if (a.equalsIgnoreCase("studio") || a.equals("--studio") || a.equals("-studio")) player = false;

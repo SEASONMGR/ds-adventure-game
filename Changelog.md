@@ -1,4 +1,19 @@
 # 更新日志 (Changelog)
+## [v1.13] 双击即玩：启动器与免安装 exe
+
+### Added
+- 根目录三个启动器（纯 ASCII 批处理，避免 cmd.exe 对非 ASCII 字节的串行解析）：`启动游戏.bat`（剧情版）、`启动编辑器.bat`（Studio）、`打包EXE.bat`（jpackage 免安装 exe）
+- `tools/launcher-hints-zh.txt`：中文上手提示（UTF-8，由批处理用 `type` 打印）
+- 启动器首次运行自动 `package` + `dependency:copy-dependencies` 到 `target/lib`，之后直接以 `java -cp target/ds-adventure.jar;target/lib/*` 启动，无需每次走 Maven
+
+### Changed
+- `MainApp` 支持 `-Dapp.mode=player|editor`：双击打包后的 exe（无命令行参数）时决定进游戏还是进编辑器（默认编辑器）
+- `.gitignore` 增加 `dist/`、`build/`：打包产物（约 400 MB）不入库
+
+### Verified
+- `启动游戏.bat` 实测：自动构建 → 启动 → 剧情推进（[Player] 对话结束→跳转场景）+ 自动信号 + **章末自动存档写入 `maps/story/saves/slot_ch0_depart.txt`（项目数=7）**
+- `打包EXE.bat` 实测：生成 `dist/ds-adventure/ds-adventure.exe`（304 文件 / 406.7 MB）；双击启动后进程存活、窗口标题 `剧情播放器 — story`、存档目录自动生成
+
 ## [v1.12] 剧情编译器 + 小游戏结果契约（试验：序章 / 第1章 / 第2章）
 
 ### Added
