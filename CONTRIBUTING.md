@@ -206,7 +206,7 @@ private void stopLoop() {                      // 必须幂等（onDetach 与兜
 | 事件 ID | 小游戏 | 需求编号 | 优先级 |
 |---|---|---|---|
 | `snake` ✅ 已接入 | 贪吃蛇 | F4 | **P0** |
-| `plane` | 飞机大战 | F5 | **P0** |
+| `plane` ✅ 已接入 | 飞机大战 | F5 | **P0** |
 | `2048` ✅ 已接入 | 2048 | — | P1 |
 | `minesweeper` ✅ 已接入 | 扫雷 | — | P1 |
 | `breakout` ✅ 已接入 | 打砖块 | — | P1 |
@@ -217,7 +217,8 @@ private void stopLoop() {                      // 必须幂等（onDetach 与兜
 
 > ID 一旦被地图引用就不要改名，否则已写好的 `event = xxx` 会失效。
 
-> **已接入**：`snake`、`breakout`、`memory`（另有 `minesweeper` / `2048` / `savepanel` 三个内置 demo）。
+> **已接入**：`snake`、`plane`、`breakout`、`memory`（另有 `minesweeper` / `2048` / `savepanel` 三个内置 demo）。
+> 其中 `plane` 为**键盘操作**（方向键/WASD 移动、空格/J 射击）——组内已确认不需要虚拟摇杆。
 > 其中 `snake` 的实现可作为范例：`SnakeGame` 为纯规则（零 JavaFX 依赖）+ `SnakeGameTest` 单元测试 + `docs/demo-maps/snake/` 演示地图。
 
 ### 2.8 一个游戏一个包，别互相踩

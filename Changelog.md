@@ -1,4 +1,16 @@
 # 更新日志 (Changelog)
+## [v1.11] 合并 PR #10（飞机大战 F5）
+
+### Added
+- 合并 PR #10：飞机大战插件 `com.studio.plugin.demo.plane`（`PlaneConfig` / `PlaneGame` 纯规则 / `PlanePlugin` 嵌入视图），事件 ID `plane`
+- 演示地图 `docs/demo-maps/plane/scenario.txt`（场景级 `event` 与按钮级触发两种写法）
+- 单元测试 `PlaneGameTest`（17 项）；测试总数 60
+
+### Changed
+- F5 数值对齐需求：3 条命、击落 20 架通关、每架 10 分、护盾 3 秒、敌机生成间隔 3 秒起每秒递减 0.1 秒（下限 0.5 秒）
+- 操作形态确定为**键盘**（方向键 / WASD 移动，空格 / J 射击）—— 组内确认不需要虚拟摇杆；README 需求对照与 CONTRIBUTING 事件 ID 表同步
+- 同时合并 PR #9（其自带条目为 v1.9 / v1.10）；本条目只补充 PR #10 的内容
+
 ## [v1.10] 场景自动信号三件套 + 节点信号/槽开关 + 倒计时时钟示例 + 若干修复
 
 ### Added
