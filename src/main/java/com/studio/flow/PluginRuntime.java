@@ -118,6 +118,11 @@ public class PluginRuntime {
             final String op = id;
             BUILTIN.put(op, () -> new com.studio.plugin.builtin.TimePlugin(op));
         }
+        // 节点信号/槽总开关（信号被关掉就不触发、槽被关掉就不执行）
+        for (String id : com.studio.plugin.builtin.SwitchPlugin.ids()) {
+            final String op = id;
+            BUILTIN.put(op, () -> com.studio.plugin.builtin.SwitchPlugin.of(op));
+        }
     }
 
     /** 自带插件的 id 列表（编辑器/文档使用） */
@@ -158,6 +163,18 @@ public class PluginRuntime {
 
     /** 按 id 或全限定类名取插件实例（失败返回 null，并记日志） */
     public SlotPlugin plugin(String idOrClass) {
+        return plugin(idOrClass, false);
+    }
+
+    /**
+     * 按 id 或全限定类名取插件实例。
+     *
+     * @param quiet true = <b>探测用</b>：找不到时只记一条 info，不打印那条“找不到槽插件（附带全部自带插件 ID）”
+     *              的长告警。编辑器扫描注册表时（{@code PluginCatalog}）会拿一堆<br>
+     *              “只实现了 GamePlugin 的事件插件”来试，用安静模式问一句就行 ——
+     *              以前每次扫描都会为每个事件插件喷一段几百字的告警，控制台全是它。
+     */
+    public SlotPlugin plugin(String idOrClass, boolean quiet) {
         if (idOrClass == null || idOrClass.isBlank()) return null;
         String key = idOrClass.trim();
         lock.lock();
@@ -176,11 +193,13 @@ public class PluginRuntime {
                 }
             }
             String className = registry.getOrDefault(key, registry.getOrDefault(id, key));
-            SlotPlugin p = instantiate(className);
+            SlotPlugin p = instantiate(className, quiet);
             if (p == null) {
-                Logs.warn("[Plugin] 找不到槽插件: " + key
-                        + "（自带插件: " + String.join("/", BUILTIN.keySet())
-                        + "；自定义插件请编译到 plugins/classes 并在 plugins/varplugins.ini 注册）");
+                if (!quiet) {
+                    Logs.warn("[Plugin] 找不到槽插件: " + key
+                            + "（自带插件: " + String.join("/", BUILTIN.keySet())
+                            + "；自定义插件请编译到 plugins/classes 并在 plugins/varplugins.ini 注册）");
+                }
                 return null;
             }
             instances.put(key, p);
@@ -192,11 +211,23 @@ public class PluginRuntime {
     }
 
     private SlotPlugin instantiate(String className) {
+        return instantiate(className, false);
+    }
+
+    /**
+     * 实例化插件类。
+     *
+     * @param quiet 探测模式：类存在但不是 {@link SlotPlugin}（例如只实现了 GamePlugin 的事件插件）时
+     *              不打印警告 —— 编辑器扫注册表时这类项是“正常现象”，由 {@code PluginCatalog} 汇总成一句话
+     */
+    private SlotPlugin instantiate(String className, boolean quiet) {
         if (className == null || className.isBlank()) return null;
         Class<?> clazz = loadClass(className);
         if (clazz == null) return null;
         if (!SlotPlugin.class.isAssignableFrom(clazz)) {
-            Logs.warn("[Plugin] 类 " + className + " 未实现 " + SlotPlugin.class.getName());
+            if (!quiet) {
+                Logs.warn("[Plugin] 类 " + className + " 未实现 " + SlotPlugin.class.getName());
+            }
             return null;
         }
         try {

@@ -201,8 +201,34 @@
     -fx-padding: 2 0 4 2;
 }
 .tree-view, .tree-cell { -fx-background-color: transparent; }
-.tree-cell { -fx-text-fill: #d6d8ea; -fx-padding: 3 0 3 0; }
-.tree-cell:selected { -fx-background-color: #3d4060; -fx-background-radius: 6; }
+.tree-cell { -fx-text-fill: #d6d8ea; -fx-padding: 3 6 3 4; }
+/* 悬停：淡淡一层，看得出“鼠标停在这一行” */
+.tree-cell:filled:hover { -fx-background-color: rgba(205, 214, 255, 0.14); -fx-background-radius: 6; }
+/*
+ * 选中的那一行：背景变淡、字色变深，一眼看得出选了哪一行。
+ * focus 与否都写一遍 —— JavaFX 默认在控件失焦时会把选中行画成很淡的灰蓝，
+ * 点完节点后焦点跑到画布上，那一行就几乎看不出被选中了。
+ *
+ * 「场景行」与「节点行」用<b>两种颜色</b>区分：
+ *   场景行 = 偏青的亮蓝（#8fe3ff）+ 深字，且平时就是加粗；
+ *   节点行 = 淡蓝（#cdd6ff）+ 深字、选中时加粗。
+ */
+.tree-cell:filled:selected,
+.tree-view:focused .tree-cell:filled:selected {
+    -fx-background-color: #cdd6ff;
+    -fx-background-radius: 6;
+    -fx-text-fill: #171b2e;
+    -fx-font-weight: bold;
+}
+.tree-cell.tree-scene { -fx-font-weight: bold; -fx-text-fill: #a9d8ff; }
+.tree-cell.tree-scene:filled:selected,
+.tree-view:focused .tree-cell.tree-scene:filled:selected {
+    -fx-background-color: #8fe3ff;
+    -fx-background-radius: 6;
+    -fx-text-fill: #0d2233;
+    -fx-font-weight: bold;
+}
+.tree-cell.tree-root { -fx-text-fill: #c9cbe4; -fx-font-weight: bold; }
 
 /* 字段名：原来 #9fa3c6 在深色底上偏暗，调亮一档 */
 .field-label { -fx-text-fill: #c6cbec; -fx-font-size: 12px; }

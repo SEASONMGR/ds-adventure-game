@@ -19,7 +19,8 @@ public class StoryNode {
     public static final String[] SCRIPT_ORDER = {
             "type", "id", "index", "x", "y", "width", "height",
             "path", "video", "text", "multiline", "bind", "style", "event", "action", "target",
-            "visible", "fontSize", "align", "opacity"
+            "visible", "fontSize", "align", "opacity",
+            "signalsEnabled", "slotsEnabled"
     };
 
     /** 中文/英文别名 → 规范键（解析器容错用） */
@@ -42,6 +43,14 @@ public class StoryNode {
         KEY_ALIAS.put("action", "action");KEY_ALIAS.put("动作", "action"); KEY_ALIAS.put("行为", "action");
         KEY_ALIAS.put("target", "target");KEY_ALIAS.put("目标", "target"); KEY_ALIAS.put("目标场景", "target");
         KEY_ALIAS.put("visible", "visible"); KEY_ALIAS.put("可见", "visible"); KEY_ALIAS.put("显示", "visible");
+        // 节点的信号 / 槽总开关（默认都开）：关掉后该节点不再发信号 / 不再执行自己的槽
+        // 运行时可随时改：@plugin(switch) | off | 节点id | signals|slots|all
+        KEY_ALIAS.put("signalsEnabled", "signalsEnabled"); KEY_ALIAS.put("信号开关", "signalsEnabled");
+        KEY_ALIAS.put("启用信号", "signalsEnabled"); KEY_ALIAS.put("信号启用", "signalsEnabled");
+        KEY_ALIAS.put("signals", "signalsEnabled"); KEY_ALIAS.put("signalsOn", "signalsEnabled");
+        KEY_ALIAS.put("slotsEnabled", "slotsEnabled"); KEY_ALIAS.put("槽开关", "slotsEnabled");
+        KEY_ALIAS.put("启用槽", "slotsEnabled"); KEY_ALIAS.put("槽启用", "slotsEnabled");
+        KEY_ALIAS.put("slots", "slotsEnabled"); KEY_ALIAS.put("slotsOn", "slotsEnabled");
         KEY_ALIAS.put("fontSize", "fontSize"); KEY_ALIAS.put("字号", "fontSize");
         KEY_ALIAS.put("align", "align");  KEY_ALIAS.put("对齐", "align");
         KEY_ALIAS.put("opacity", "opacity"); KEY_ALIAS.put("透明度", "opacity");
@@ -98,6 +107,12 @@ public class StoryNode {
     /** 系统提示节点默认摆放时离屏幕边的边距（逻辑像素）——只是新建节点时的落点，不是节点属性 */
     public static final double TOAST_MARGIN = 24.0;
 
+    /** 信号总开关：false = 该节点的信号不触发（含鼠标/键盘/按钮信号），默认 true */
+    private boolean signalsEnabled = true;
+
+    /** 槽总开关：false = 挂在“本节点上”的槽不执行（场景级槽不受影响），默认 true */
+    private boolean slotsEnabled = true;
+
     /** 本节点可发出的信号（鼠标点击/释放、按键等） */
     private final java.util.ArrayList<SignalDef> signals = new java.util.ArrayList<>();
     /** 本节点订阅的槽（收到信号时执行的动作 / 转交逻辑层） */
@@ -132,6 +147,8 @@ public class StoryNode {
         c.index = index;
         c.multiline = multiline;
         c.bind = bind;
+        c.signalsEnabled = signalsEnabled;
+        c.slotsEnabled = slotsEnabled;
         for (SignalDef s : signals) c.signals.add(s.copy());
         for (SlotDef s : slots) c.slots.add(s.copy());
         c.extras.putAll(extras);
@@ -235,6 +252,14 @@ public class StoryNode {
 
     // ---------------- 便捷查询 ----------------
 
+    /** 信号总开关：false = 本节点的信号不触发（默认 true） */
+    public boolean isSignalsEnabled() { return signalsEnabled; }
+    public void setSignalsEnabled(boolean enabled) { this.signalsEnabled = enabled; }
+
+    /** 槽总开关：false = 挂在本节点上的槽不执行（默认 true；场景级槽不受影响） */
+    public boolean isSlotsEnabled() { return slotsEnabled; }
+    public void setSlotsEnabled(boolean enabled) { this.slotsEnabled = enabled; }
+
     /** 是否拥有需要画面的控件 */
     public boolean needsVisual() { return true; }
 
@@ -263,6 +288,8 @@ public class StoryNode {
             case "index"    -> setIndex((int) parseDoubleSafe(value, 0));
             case "multiline" -> setMultiline(parseBoolSafe(value, false));
             case "bind"     -> setBind(value);
+            case "signalsEnabled" -> setSignalsEnabled(parseBoolSafe(value, true));
+            case "slotsEnabled"   -> setSlotsEnabled(parseBoolSafe(value, true));
             default         -> extras.put(canonicalKey, value);
         }
     }
@@ -293,6 +320,8 @@ public class StoryNode {
         if (opacity < 1.0) m.put("opacity", trimDouble(opacity));
         if (typewriter != null) m.put("typewriter", typewriter ? "true" : "false");
         if (!transition.isEmpty()) m.put("transition", transition);
+        if (!signalsEnabled) m.put("signalsEnabled", "false");
+        if (!slotsEnabled) m.put("slotsEnabled", "false");
         // 未知键按原顺序补在尾部
         m.putAll(extras);
         return m;

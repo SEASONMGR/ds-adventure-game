@@ -573,6 +573,9 @@ public class EditorPane extends BorderPane implements EditorHub {
     @Override public GameScene scene() { return currentScene; }
     @Override public StoryNode selectedNode() { return selectedNode; }
 
+    /** 画布对象（状态栏 / 探针用来查缩放、平移、节点是否在可视区） */
+    public EditorCanvas canvas() { return canvas; }
+
     @Override
     public void notify(String message) {
         statusMsg.setText(message);
@@ -617,6 +620,8 @@ public class EditorPane extends BorderPane implements EditorHub {
             }
         }
         canvas.select(node);
+        // 左侧栏那一行跟着走：画布上点选节点时，树里对应的行也会亮起来（反过来在树里点也一样）
+        treePanel.syncSelection(node);
         refreshInspector();
         if (node != null) notify("已选中 " + node.getType().display() + " @" + node.getId());
     }
@@ -934,10 +939,70 @@ public class EditorPane extends BorderPane implements EditorHub {
         return pluginCatalogDetailed().items();
     }
 
+    /** 目录缓存（键含注册表/插件目录的最后修改时间，改了 ini 或放进新插件会自动失效） */
+    private PluginCatalog.Catalog cachedPluginCatalog;
+    private String cachedPluginCatalogKey;
+
+    /**
+     * 插件总目录。
+     *
+     * <p>这里做了缓存：扫描一次要真加载每个注册项与每个 {@code plugins/classes} 里的类，
+     * 而插件下拉框（建一次 + 提示气泡一次）、「关于」窗口、帮助手册都会来取 ——
+     * 以前每取一次就重扫一遍，控制台里那串“找不到槽插件”也会跟着重复刷。
+     * 缓存键带上注册表与插件目录的修改时间，所以改了 {@code varplugins.ini} / 放了新 jar 会立刻重扫。</p>
+     */
     @Override
     public PluginCatalog.Catalog pluginCatalogDetailed() {
         File projectDir = new File(System.getProperty("user.dir"));
-        return PluginCatalog.load(projectDir, currentMapDir());
+        File mapDir = currentMapDir();
+        String key = pluginCatalogCacheKey(projectDir, mapDir);
+        if (cachedPluginCatalog != null && key.equals(cachedPluginCatalogKey)) return cachedPluginCatalog;
+        PluginCatalog.Catalog fresh = PluginCatalog.load(projectDir, mapDir);
+        cachedPluginCatalog = fresh;
+        cachedPluginCatalogKey = key;
+        return fresh;
+    }
+
+    /** 缓存键：工程根 + 地图目录 + 两处 plugins 目录里 ini 与 classes/jar 的最后修改时间 */
+    private static String pluginCatalogCacheKey(File projectDir, File mapDir) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(projectDir == null ? "" : projectDir.getAbsolutePath())
+                .append('|').append(mapDir == null ? "" : mapDir.getAbsolutePath());
+        for (File base : new File[]{projectDir, mapDir}) {
+            if (base == null) continue;
+            for (String rel : new String[]{"plugins/varplugins.ini", "plugins/plugins.ini"}) {
+                sb.append('|').append(rel).append('=').append(new File(base, rel).lastModified());
+            }
+            sb.append('|').append(newestStamp(new File(base, "plugins/classes")));
+            File plugins = new File(base, "plugins");
+            File[] jars = plugins.listFiles((d, n) -> n.toLowerCase(java.util.Locale.ROOT).endsWith(".jar"));
+            if (jars != null) {
+                for (File jar : jars) sb.append('|').append(jar.getName()).append('=').append(jar.lastModified());
+            }
+        }
+        return sb.toString();
+    }
+
+    /** 目录里“文件数 + 最新修改时间”（递归一层足够；用来判断 classes 有没有变） */
+    private static String newestStamp(File dir) {
+        if (dir == null || !dir.isDirectory()) return "none";
+        long newest = 0;
+        int count = 0;
+        File[] files = dir.listFiles();
+        if (files == null) return "none";
+        java.util.ArrayDeque<File> queue = new java.util.ArrayDeque<>();
+        for (File f : files) queue.add(f);
+        while (!queue.isEmpty()) {
+            File f = queue.poll();
+            if (f.isDirectory()) {
+                File[] sub = f.listFiles();
+                if (sub != null) for (File s : sub) queue.add(s);
+            } else {
+                count++;
+                newest = Math.max(newest, f.lastModified());
+            }
+        }
+        return count + "@" + newest;
     }
 
     // =====================================================================
@@ -1158,6 +1223,7 @@ public class EditorPane extends BorderPane implements EditorHub {
             case "logicgate" -> openLogicGateDemoMap();
             case "vardemo" -> openVarDemoMap();
             case "saveroom" -> openSaveRoomDemoMap();
+            case "clock" -> openClockDemoMap();
             case "breakout" -> openBreakoutDemoMap();
             default -> notify("未知的演示地图：" + key);
         }
@@ -1326,6 +1392,21 @@ public class EditorPane extends BorderPane implements EditorHub {
             if (!new File(dir, "scenario.txt").isFile()) {
                 com.studio.util.VarDemoMapFactory.createMap(dir);
                 notify("已生成存档变量演示地图: " + dir.getAbsolutePath());
+            }
+            openMap(dir);
+        } catch (IOException e) {
+            Ui.error(stage, "生成示例失败", e.getMessage(), e);
+        }
+    }
+
+    /** 生成并打开“倒计时时钟”示例地图（场景自动信号 + 槽里定时器发信号 + 到点自动跳幕） */
+    private void openClockDemoMap() {
+        try {
+            File dir = new File(System.getProperty("user.dir"),
+                    com.studio.util.ClockMapFactory.DEFAULT_FOLDER);
+            if (!new File(dir, "scenario.txt").isFile()) {
+                com.studio.util.ClockMapFactory.createMap(dir);
+                notify("已生成倒计时时钟示例地图: " + dir.getAbsolutePath());
             }
             openMap(dir);
         } catch (IOException e) {

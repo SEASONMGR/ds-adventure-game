@@ -236,20 +236,38 @@ final class NodeDialogs {
         addRow(grid, 12, "动作 (action)", actionBox,
                 "target=跳场景; save/load=存档文件名; event=运行插件；"
                         + "注：skip/speed 已移除，读取器不再支持这两个动作（旧地图里残留会走默认分支）");
-        Label actionNote = makeLabel("⚠ skip（跳过台词）/ speed（加速）已从读取器移除，"
-                + "需要类似效果请改用信号/槽或逻辑层。");
-        actionNote.getStyleClass().add("hint-text");
         addRow(grid, 13, targetLabel.getText(), targetBox,
                 "动作=target 填场景名；save/load 填存档文件名（留空=slot1.txt）；"
                         + "对话节点：此处填“对话结束后的下一个场景”（点击对话走完即跳转）");
         targetBox.setDisable(!needTarget);
-        grid.add(actionNote, 0, 25, 2, 1);
 
         // 可见/字号/对齐/透明度
         CheckBox visibleBox = new CheckBox("可见");
         visibleBox.setSelected(node.isVisible());
         visibleBox.selectedProperty().addListener((o, a, b) -> { node.setVisible(b); refresh.run(); });
         addRow(grid, 14, "显示 (visible)", visibleBox, null);
+
+        // 信号 / 槽总开关（默认都开）：运行时可用 @plugin(switch) | off | 节点id | signals|slots|all 改
+        CheckBox signalsBox = new CheckBox("启用信号");
+        signalsBox.setSelected(node.isSignalsEnabled());
+        signalsBox.setTooltip(new Tooltip("关掉后：本节点的鼠标点击/键盘/按钮信号都不再触发\n"
+                + "（按钮自带的 action 动作不受影响）。运行时也能改：\n"
+                + "@plugin(switch) | off | 节点id | signals"));
+        signalsBox.selectedProperty().addListener((o, a, b) -> { node.setSignalsEnabled(b); refresh.run(); });
+        CheckBox slotsBox = new CheckBox("启用槽");
+        slotsBox.setSelected(node.isSlotsEnabled());
+        slotsBox.setTooltip(new Tooltip("关掉后：挂在本节点上的槽不再执行（场景级槽不受影响）。运行时也能改：\n"
+                + "@plugin(switch) | off | 节点id | slots"));
+        slotsBox.selectedProperty().addListener((o, a, b) -> { node.setSlotsEnabled(b); refresh.run(); });
+        Label switchHint = new Label("关闭后写成 signalsEnabled = false / slotsEnabled = false；"
+                + "演出期间锁住交互、选项只能点一次，都用它。");
+        switchHint.setWrapText(true);
+        switchHint.getStyleClass().add("hint-text");
+        // 注意：GridPane 的行号必须唯一 —— 本窗口的行号是：0~17、18=逐字显示、19=信号、20=槽、
+        // 21=过渡、22=层级、23=多行、24=绑定变量，所以开关这一行用 25（写 18 会和「逐字显示」叠在一起，
+        // 早先误用 18 时表现为「透明度/开关」的控件叠在同一个格子里）。
+        addRow(grid, 25, "信号 / 槽开关", new VBox(4, new HBox(12, signalsBox, slotsBox), switchHint),
+                "运行时：@plugin(switch) | on|off|toggle | 节点id | signals|slots|all");
 
         TextField fsField = numField(node.getFontSize() > 0 ? node.getFontSize() : 0);
         fsField.textProperty().addListener((o, a, b) -> {
@@ -649,6 +667,8 @@ final class NodeDialogs {
         node.setIndex(snapshot.getIndex());
         node.setMultiline(snapshot.isMultiline());
         node.setBind(snapshot.getBind());
+        node.setSignalsEnabled(snapshot.isSignalsEnabled());
+        node.setSlotsEnabled(snapshot.isSlotsEnabled());
         node.signals().clear();
         node.signals().addAll(snapshot.signals());
         node.slots().clear();

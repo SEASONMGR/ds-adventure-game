@@ -1,5 +1,6 @@
 package com.studio.reader;
 
+import com.studio.flow.AutoSignals;
 import com.studio.flow.Expr;
 import com.studio.flow.FlowHost;
 import com.studio.flow.FlowVariables;
@@ -369,9 +370,13 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
         }
         // 记录“渲染前所在场景”——场景级插件触发时，返回按钮应回到这里
         String cameFrom = this.sceneName;
-        // 离开旧场景：先发「场景离开」信号（此时旧场景的节点还在，槽仍能改它们）
-        if (cameFrom != null && !cameFrom.isBlank() && !cameFrom.equals(name)) {
-            emitSceneSignal("场景离开", cameFrom);
+        boolean switched = cameFrom != null && !cameFrom.isBlank() && !cameFrom.equals(name);
+        // ① 离开旧场景：先发「场景离开」（此时旧场景的节点还在，槽仍能改它们；参数带 to=即将进入的场景）
+        if (switched) {
+            LinkedHashMap<String, Object> p = new LinkedHashMap<>();
+            p.put("scene", cameFrom);
+            p.put("to", name);
+            emitAutoSignal(AutoSignals.LEAVE, p, "旧场景 " + cameFrom + " → " + name);
         }
         this.sceneName = name;
         this.scene = target;
@@ -422,44 +427,60 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
         }
         suppressSceneEvent = false;
 
-        // 进入新场景：发「场景进入」信号（节点已经建好，槽可以立刻改它们的属性）
-        emitSceneSignal("场景进入", name);
+        // ② 进入新场景：发「场景进入」信号（节点已经建好，槽可以立刻改它们的属性；参数带 from=上一幕）
+        LinkedHashMap<String, Object> enterParams = new LinkedHashMap<>();
+        enterParams.put("scene", name);
+        enterParams.put("from", switched ? cameFrom : "");
+        emitAutoSignal(AutoSignals.ENTER, enterParams, "进入 " + name
+                + (switched ? "（来自 " + cameFrom + "）" : ""));
+
+        // ③ 把“离开”也告诉新的一幕：新场景的槽可以订阅「上一个场景离开」对刚走的那一幕做反应
+        if (switched) {
+            LinkedHashMap<String, Object> prev = new LinkedHashMap<>();
+            prev.put("scene", cameFrom);
+            prev.put("to", name);
+            emitAutoSignal(AutoSignals.PREV_LEAVE, prev, cameFrom + " 已离开（本幕 " + name + " 收到）");
+        }
     }
 
     /**
-     * 发送引擎自动信号（目前是「场景进入」/「场景离开」）。
+     * 发送引擎自动信号（{@link AutoSignals}：场景进入 / 场景离开 / 上一个场景离开）。
      *
      * <p>地图里不用声明 {@code signal = ...}，直接在场景头写
      * {@code slot = 场景进入 | …} 就能在进入这一场景时自动跑一段逻辑 ——
-     * 这是“条件内容 / 自动演出 / 自动存档”最常用的挂载点。</p>
+     * 这是“条件内容 / 自动演出 / 自动存档 / 起定时器”最常用的挂载点。</p>
      *
      * <p>防重入：槽里如果再 {@code goto} 别的场景，会递归走到这里，
      * 这种情况下不再重复发出自动信号（避免无限循环），只记一条日志。</p>
      *
-     * @param signal 信号名（「场景进入」或「场景离开」）
-     * @param scene  对应的场景名（作为参数 {@code scene} 传给槽，可用 {@code @param(scene)} 取）
+     * @param def    自动信号定义（规范名 + 别名）
+     * @param params 传给槽的参数（{@code scene} / {@code from} / {@code to}…，槽里用 {@code @param(名)} 取）
+     * @param note   日志里的一句说明
      */
-    private void emitSceneSignal(String signal, String scene) {
-        if (signalBus == null || scene == null || scene.isBlank()) return;
-        if ("场景进入".equals(signal)) {
+    private void emitAutoSignal(AutoSignals.Def def, LinkedHashMap<String, Object> params, String note) {
+        if (signalBus == null || def == null) return;
+        if (def == AutoSignals.ENTER) {
             if (enteredSceneSignals) {
-                Logs.info("[Flow] 场景信号防重入：跳过「场景进入」（" + scene + "）");
+                Logs.info("[Flow] 场景信号防重入：跳过「" + def.name() + "」（" + params.get("scene") + "）");
                 return;
             }
             enteredSceneSignals = true;
         }
         if (emittingSceneSignal) {
-            Logs.info("[Flow] 场景信号防重入：跳过「" + signal + "」（" + scene + "）");
+            Logs.info("[Flow] 场景信号防重入：跳过「" + def.name() + "」（" + params.get("scene") + "）");
             return;
         }
         emittingSceneSignal = true;
         try {
-            LinkedHashMap<String, Object> p = new LinkedHashMap<>();
-            p.put("scene", scene);
-            signalBus.emitFromScene(signal, p);
-            Logs.info("[Flow] 场景信号「" + signal + "」→ " + scene);
+            // 规范名 + 别名一起发：地图里写「上一幕离开」这种别名也能收到
+            LinkedHashMap<String, Object> copy = new LinkedHashMap<>(params);
+            signalBus.emitFromScene(def.name(), copy);
+            for (String alias : def.aliases()) {
+                signalBus.emitFromScene(alias, new LinkedHashMap<>(params));
+            }
+            Logs.info("[Flow] 场景信号「" + def.name() + "」" + (note == null || note.isBlank() ? "" : "： " + note));
         } catch (RuntimeException e) {
-            Logs.warn("[Flow] 场景信号「" + signal + "」执行出错：" + e.getMessage());
+            Logs.warn("[Flow] 场景信号「" + def.name() + "」执行出错：" + e.getMessage());
         } finally {
             emittingSceneSignal = false;
         }
@@ -1347,8 +1368,9 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
             if (!def.getKeyPhase().equalsIgnoreCase(phase)) continue;
             signalBus.emitFromScene(def.getName(), new LinkedHashMap<>(params));
         }
-        // 节点级键盘信号
+        // 节点级键盘信号（信号被关掉的节点不参与）
         for (StoryNode n : scene.nodes()) {
+            if (!n.isSignalsEnabled()) continue;
             for (SignalDef def : n.signals()) {
                 if (def.getKind() != SignalDef.Kind.KEY) continue;
                 if (!def.getKey().equalsIgnoreCase(code)) continue;
@@ -1362,6 +1384,10 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
      *  使用事件过滤器：即使控件（如 Button）在冒泡阶段 consume 了事件也能收到。 */
     private void installMouseSignals(Node view, StoryNode node) {
         if (node.signals().isEmpty()) return;
+        if (!node.isSignalsEnabled()) {   // 信号总开关关着：不挂任何鼠标信号
+            Logs.info("[Flow] 节点「" + node.getId() + "」的信号已被关闭（signalsEnabled=false），跳过安装鼠标信号");
+            return;
+        }
         for (SignalDef def : node.signals()) {
             if (def.getKind() != SignalDef.Kind.MOUSE) continue;
             if ("release".equalsIgnoreCase(def.getMouse())) {
@@ -1400,6 +1426,8 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
             case "path" -> n.setPath(value);
             case "video" -> n.setVideo(value);
             case "visible" -> n.setVisible(StoryNode.parseBoolSafe(value, true));
+            case "signalsEnabled" -> n.setSignalsEnabled(StoryNode.parseBoolSafe(value, true));
+            case "slotsEnabled" -> n.setSlotsEnabled(StoryNode.parseBoolSafe(value, true));
             case "opacity" -> n.setOpacity(StoryNode.parseDoubleSafe(value, 1.0));
             case "x" -> n.setX(StoryNode.parseDoubleSafe(value, n.getX()));
             case "y" -> n.setY(StoryNode.parseDoubleSafe(value, n.getY()));
@@ -1463,6 +1491,8 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
             case "videovolume" -> videoProp(nodeId, "videovolume", String.valueOf(masterVolume()));
             case "videopause" -> videoProp(nodeId, "videopause", "false");
             case "visible" -> String.valueOf(n.isVisible());
+            case "signalsEnabled" -> String.valueOf(n.isSignalsEnabled());
+            case "slotsEnabled" -> String.valueOf(n.isSlotsEnabled());
             case "opacity" -> StoryNode.trimDouble(n.getOpacity());
             case "x" -> StoryNode.trimDouble(n.getX());
             case "y" -> StoryNode.trimDouble(n.getY());

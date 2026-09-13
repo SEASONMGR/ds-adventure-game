@@ -46,7 +46,28 @@ final class EditorNodeViews {
         if (node.getVideo() != null && !node.getVideo().isBlank()) {
             addVideoBadge(view);
         }
+        // 信号/槽被关掉的节点：左上角给个角标，一眼看出“这个节点点了不会有反应”
+        if (!node.isSignalsEnabled() || !node.isSlotsEnabled()) {
+            addSwitchBadge(view, node.isSignalsEnabled(), node.isSlotsEnabled());
+        }
         return view;
+    }
+
+    /** 在预览左上角叠一个「🔇 信号关 / ⛔ 槽关」角标（关掉哪些就写哪些） */
+    private static void addSwitchBadge(Region view, boolean signalsOn, boolean slotsOn) {
+        if (!(view instanceof StackPane)) return;
+        StringBuilder sb = new StringBuilder();
+        if (!signalsOn) sb.append("🔇 信号关");
+        if (!slotsOn) {
+            if (sb.length() > 0) sb.append(' ');
+            sb.append("⛔ 槽关");
+        }
+        Label badge = new Label(sb.toString());
+        badge.setStyle("-fx-background-color: rgba(255,120,120,0.9); -fx-text-fill: white;"
+                + "-fx-font-size: 10px; -fx-padding: 1 6 1 6; -fx-background-radius: 8;");
+        badge.setMouseTransparent(true);
+        StackPane.setAlignment(badge, Pos.TOP_LEFT);
+        ((StackPane) view).getChildren().add(badge);
     }
 
     /** 在节点预览右上角叠一个「🎬 视频」角标（写法与文本框的「→ 变量名」角标一致） */

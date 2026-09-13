@@ -120,6 +120,7 @@ public final class BuiltinCatalog {
         out.addAll(DesktopPlugin.catalog());
         out.addAll(NetPlugin.catalog());
         out.addAll(TimePlugin.catalog());
+        out.addAll(SwitchPlugin.catalog());
         out.addAll(DebugPlugin.catalog());
         return out;
     }
