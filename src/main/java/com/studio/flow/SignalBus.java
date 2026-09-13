@@ -199,7 +199,6 @@ public class SignalBus {
             case "text": return n.getText();
             case "path": return n.getPath();
             case "video": return n.getVideo();
-            case "audio": return n.getAudio();
             case "style": return n.getStyle();
             case "visible": return n.isVisible() ? "true" : "false";
             case "opacity": return StoryNode.trimDouble(n.getOpacity());

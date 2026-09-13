@@ -39,7 +39,7 @@ final class EditorNodeViews {
             case TEXT -> richPanel(node, w, h, fs, "#cfd2e6", false);
             case TEXTBOX -> textBox(node, w, h, fs);
             case BUTTON -> button(node, w, h);
-            case MUSIC -> musicChip(node);
+            case TOAST -> toast(node, w, h, fs);
         };
         // 带视频的节点：在预览右上角叠一个角标（各类型都适用；BACKGROUND 仍照旧显示图片，
         // 读取器会用视频顶上——角标只是让人一眼看出这节点带视频）
@@ -151,14 +151,28 @@ final class EditorNodeViews {
         return wrap(box, w, h);
     }
 
-    private static Region musicChip(StoryNode n) {
-        Label chip = new Label("🎵 " + (n.getAudio().isBlank() ? "音乐(空)" : n.getAudio()));
-        chip.setTextFill(Color.rgb(255, 215, 106));
-        chip.setStyle("-fx-background-color: rgba(40,42,64,0.9); -fx-background-radius: 10;"
-                + "-fx-padding: 2 10 2 10;");
-        StackPane box = new StackPane(chip);
+    /**
+     * 系统提示节点预览：画布上就按“阅读器里的样子”画出来 —— 深色圆角条 + 白字（自带默认样式）。
+     */
+    private static Region toast(StoryNode n, double w, double h, double fs) {
+        String msg = n.getText() == null || n.getText().isBlank() ? "（提示内容）" : n.getText();
+        Label text = new Label(msg);
+        text.setTextFill(Color.WHITE);
+        text.setFont(Font.font(fs));
+        text.setWrapText(true);
+        text.setMaxWidth(Math.max(30, w - 26));
+
+        StackPane box = new StackPane(text);
         box.setAlignment(Pos.CENTER_LEFT);
-        return wrap(box, 230, 26);
+        box.setStyle("-fx-background-color: rgba(14,18,32,0.88);"
+                + "-fx-background-radius: 12;"
+                + "-fx-border-color: rgba(120,170,255,0.45); -fx-border-radius: 12; -fx-border-width: 1;"
+                + "-fx-padding: 9 18 9 18;"
+                + (n.getStyle() == null ? "" : n.getStyle()));
+
+        StackPane holder = new StackPane(box);
+        holder.setAlignment(Pos.CENTER);
+        return wrap(holder, w, h);
     }
 
     private static StackPane wrap(Node inner, double w, double h) {

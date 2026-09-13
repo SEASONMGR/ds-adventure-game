@@ -474,17 +474,7 @@ final class EditorPanels {
             HBox.setHgrow(path, Priority.ALWAYS);
             body.getChildren().add(row("图片 path", pathRow));
 
-            TextField audio = new TextField(node.getAudio());
-            bind(audio, v -> { node.setAudio(v); refreshView.run(); });
-            Button pickA = new Button("…");
-            pickA.setOnAction(e -> {
-                String rel = AssetImport.pickAndImport(getScene().getWindow(),
-                        hub.project(), node, true);
-                if (rel != null) audio.setText(rel);
-            });
-            HBox audioRow = new HBox(6, audio, pickA);
-            HBox.setHgrow(audio, Priority.ALWAYS);
-            body.getChildren().add(row("音频 audio", audioRow));
+            // 音频属性已废除（音频走 @plugin(audio)），这里不再提供输入框
 
             // 视频 video：非空时读取器用视频播放器渲染该节点（背景节点＝会动的背景图），空则用图片
             TextField video = new TextField(node.getVideo());
