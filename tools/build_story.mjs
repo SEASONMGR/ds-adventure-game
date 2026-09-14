@@ -63,7 +63,8 @@ const problems = { missingTargets: new Set(), unknownGames: new Set(), unknownEn
 const SPRITES = path.join(ROOT, "src", "main", "resources", "assets", "sprites");
 
 // ---- 剧本 id → 素材目录 / 表情别名（依据《剧情素材需求总表》与 archive_assets 归档结果）----
-const ROLE_DIR = { qianwen: "qwen", 灯官: "dengguan", 契官: "qiguan", 戏官: "xiguan", 怪力: "gelili", 皮卡丘: "pikachu" };
+const ROLE_DIR = { qianwen: "qwen", 灯官: "dengguan", 契官: "qiguan", 戏官: "xiguan", 怪力: "gelili",
+  皮卡丘: "pikachu", 秤主: "scale" };   // 秤主：素材目录名是 scale（5 个表情与剧本一致）
 const EXPR_ALIAS = { cute: "happy", cry: "sad", whale_cute: "defect_happy", whale_cry: "defect_sad" };
 // 背景临时顶替表（仅当同场景 id 的背景图尚未出图时兜底；素材到位后自动改用真图）
 const BG_ALIAS = { server_room: "bg_tech_serverroom" };

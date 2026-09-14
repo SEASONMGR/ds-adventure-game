@@ -58068,7 +58068,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 1.0
 }
 {
@@ -58173,7 +58173,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 0.5
 }
 {
@@ -58278,7 +58278,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 1.0
 }
 {
@@ -58383,7 +58383,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 0.5
 }
 {
@@ -58488,7 +58488,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 1.0
 }
 {
@@ -58593,7 +58593,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 0.5
 }
 {
@@ -58698,7 +58698,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 0.5
 }
 {
@@ -58803,7 +58803,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 1.0
 }
 {
@@ -58909,7 +58909,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 0.5
 }
 {
@@ -59014,7 +59014,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 1.0
 }
 {
@@ -59118,7 +59118,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 1.0
 }
 {
@@ -59213,7 +59213,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/polite.png
+path = assets/sprites/scale/polite.png
 opacity = 1.0
 }
 {
@@ -59318,7 +59318,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/polite.png
+path = assets/sprites/scale/polite.png
 opacity = 1.0
 }
 {
@@ -59435,7 +59435,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/polite.png
+path = assets/sprites/scale/polite.png
 opacity = 1.0
 }
 slot = 场景进入 | goto | | ch9_stable
@@ -59520,7 +59520,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/polite.png
+path = assets/sprites/scale/polite.png
 opacity = 1.0
 }
 slot = 场景进入 | goto | | ch9_risky
@@ -59605,7 +59605,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/polite.png
+path = assets/sprites/scale/polite.png
 opacity = 1.0
 }
 slot = 场景进入 | goto | | ch9_chaos
@@ -59689,7 +59689,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/polite.png
+path = assets/sprites/scale/polite.png
 opacity = 1.0
 }
 {
@@ -59784,7 +59784,7 @@ x = 240
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/polite.png
+path = assets/sprites/scale/polite.png
 opacity = 0.5
 }
 {
@@ -59889,7 +59889,7 @@ x = 240
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/polite.png
+path = assets/sprites/scale/polite.png
 opacity = 1.0
 }
 slot = 场景进入 | goto | | ch9_table
@@ -59973,7 +59973,7 @@ x = 240
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/polite.png
+path = assets/sprites/scale/polite.png
 opacity = 1.0
 }
 {
@@ -60068,7 +60068,7 @@ x = 240
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/polite.png
+path = assets/sprites/scale/polite.png
 opacity = 0.5
 }
 {
@@ -60173,7 +60173,7 @@ x = 240
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/polite.png
+path = assets/sprites/scale/polite.png
 opacity = 1.0
 }
 slot = 场景进入 | goto | | ch9_table
@@ -60257,7 +60257,7 @@ x = 240
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/polite.png
+path = assets/sprites/scale/polite.png
 opacity = 1.0
 }
 {
@@ -60352,7 +60352,7 @@ x = 240
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/surprised.png
+path = assets/sprites/scale/surprised.png
 opacity = 1.0
 }
 {
@@ -60457,7 +60457,7 @@ x = 240
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/surprised.png
+path = assets/sprites/scale/surprised.png
 opacity = 0.5
 }
 {
@@ -60562,7 +60562,7 @@ x = 240
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/surprised.png
+path = assets/sprites/scale/surprised.png
 opacity = 1.0
 }
 slot = 场景进入 | goto | | ch9_table
@@ -60647,7 +60647,7 @@ x = 240
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/surprised.png
+path = assets/sprites/scale/surprised.png
 opacity = 1.0
 }
 slot = 场景进入 | goto | | @var(__flow_next)
@@ -60732,7 +60732,7 @@ x = 240
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/surprised.png
+path = assets/sprites/scale/surprised.png
 opacity = 1.0
 }
 slot = 场景进入 | goto | | @var(__flow_next)
@@ -60817,7 +60817,7 @@ x = 240
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/surprised.png
+path = assets/sprites/scale/surprised.png
 opacity = 1.0
 }
 slot = 场景进入 | goto | | @var(__flow_next)
@@ -60901,7 +60901,7 @@ x = 240
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/surprised.png
+path = assets/sprites/scale/surprised.png
 opacity = 1.0
 }
 {
@@ -60996,7 +60996,7 @@ x = 240
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/surprised.png
+path = assets/sprites/scale/surprised.png
 opacity = 0.5
 }
 {
@@ -61103,7 +61103,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/surprised.png
+path = assets/sprites/scale/surprised.png
 opacity = 0.5
 }
 {
@@ -61215,7 +61215,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/surprised.png
+path = assets/sprites/scale/surprised.png
 opacity = 1.0
 }
 
@@ -61307,7 +61307,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 1.0
 }
 {
@@ -61412,7 +61412,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 0.5
 }
 {
@@ -61517,7 +61517,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 1.0
 }
 slot = 场景进入 | goto | | ch9_duel
@@ -61601,7 +61601,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 1.0
 }
 {
@@ -61706,7 +61706,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 1.0
 }
 {
@@ -61801,7 +61801,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 0.5
 }
 {
@@ -61906,7 +61906,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 1.0
 }
 slot = 场景进入 | goto | | ch9_duel
@@ -61990,7 +61990,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 1.0
 }
 {
@@ -62095,7 +62095,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 1.0
 }
 {
@@ -62190,7 +62190,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 0.5
 }
 {
@@ -62295,7 +62295,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 0.5
 }
 {
@@ -62400,7 +62400,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 1.0
 }
 slot = 场景进入 | goto | | ch9_duel
@@ -62484,7 +62484,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 1.0
 }
 {
@@ -62581,7 +62581,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 0.5
 }
 {
@@ -62686,7 +62686,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 1.0
 }
 {
@@ -62781,7 +62781,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 0.5
 }
 {
@@ -62886,7 +62886,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 1.0
 }
 {
@@ -62981,7 +62981,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/surprised.png
+path = assets/sprites/scale/surprised.png
 opacity = 1.0
 }
 {
@@ -63079,7 +63079,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/surprised.png
+path = assets/sprites/scale/surprised.png
 opacity = 1.0
 }
 slot = 场景进入 | goto | | ch9_win__8
@@ -63164,7 +63164,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/surprised.png
+path = assets/sprites/scale/surprised.png
 opacity = 1.0
 }
 {
@@ -63268,7 +63268,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/surprised.png
+path = assets/sprites/scale/surprised.png
 opacity = 1.0
 }
 {
@@ -63363,7 +63363,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/surprised.png
+path = assets/sprites/scale/surprised.png
 opacity = 1.0
 }
 slot = 场景进入 | goto | | ch9_after
@@ -63447,7 +63447,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/surprised.png
+path = assets/sprites/scale/surprised.png
 opacity = 1.0
 }
 {
@@ -63542,7 +63542,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/surprised.png
+path = assets/sprites/scale/surprised.png
 opacity = 1.0
 }
 {
@@ -63647,7 +63647,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/surprised.png
+path = assets/sprites/scale/surprised.png
 opacity = 1.0
 }
 {
@@ -63744,7 +63744,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/defeated.png
+path = assets/sprites/scale/defeated.png
 opacity = 1.0
 }
 {
@@ -63850,7 +63850,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/defeated.png
+path = assets/sprites/scale/defeated.png
 opacity = 1.0
 }
 slot = 场景进入 | goto | | ch9_after
@@ -63934,7 +63934,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/defeated.png
+path = assets/sprites/scale/defeated.png
 opacity = 1.0
 }
 {
@@ -64031,7 +64031,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/defeated.png
+path = assets/sprites/scale/defeated.png
 opacity = 0.5
 }
 {
@@ -64155,7 +64155,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/defeated.png
+path = assets/sprites/scale/defeated.png
 opacity = 0.5
 }
 {
@@ -64260,7 +64260,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/defeated.png
+path = assets/sprites/scale/defeated.png
 opacity = 1.0
 }
 {
@@ -64365,7 +64365,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/defeated.png
+path = assets/sprites/scale/defeated.png
 opacity = 1.0
 }
 {
@@ -64461,7 +64461,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/defeated.png
+path = assets/sprites/scale/defeated.png
 opacity = 1.0
 }
 slot = 场景进入 | goto | | ch9_after__7
@@ -64545,7 +64545,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/defeated.png
+path = assets/sprites/scale/defeated.png
 opacity = 1.0
 }
 slot = 场景进入 | goto | | finale_start
@@ -64628,7 +64628,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/defeated.png
+path = assets/sprites/scale/defeated.png
 opacity = 1.0
 }
 {
@@ -64727,7 +64727,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/defeated.png
+path = assets/sprites/scale/defeated.png
 opacity = 0.5
 }
 {
@@ -64832,7 +64832,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/defeated.png
+path = assets/sprites/scale/defeated.png
 opacity = 1.0
 }
 {
@@ -64928,7 +64928,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/defeated.png
+path = assets/sprites/scale/defeated.png
 opacity = 0.5
 }
 {
@@ -65033,7 +65033,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/defeated.png
+path = assets/sprites/scale/defeated.png
 opacity = 1.0
 }
 {
@@ -65128,7 +65128,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/defeated.png
+path = assets/sprites/scale/defeated.png
 opacity = 0.5
 }
 {
@@ -65245,7 +65245,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/defeated.png
+path = assets/sprites/scale/defeated.png
 opacity = 1.0
 }
 {
@@ -65349,7 +65349,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/defeated.png
+path = assets/sprites/scale/defeated.png
 opacity = 0.5
 }
 {
@@ -65457,7 +65457,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/defeated.png
+path = assets/sprites/scale/defeated.png
 opacity = 1.0
 }
 {
@@ -65552,7 +65552,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/defeated.png
+path = assets/sprites/scale/defeated.png
 opacity = 1.0
 }
 {
@@ -65656,7 +65656,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/defeated.png
+path = assets/sprites/scale/defeated.png
 opacity = 1.0
 }
 {
@@ -65751,7 +65751,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/defeated.png
+path = assets/sprites/scale/defeated.png
 opacity = 0.5
 }
 {
@@ -65856,7 +65856,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/defeated.png
+path = assets/sprites/scale/defeated.png
 opacity = 1.0
 }
 {
@@ -65973,7 +65973,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/defeated.png
+path = assets/sprites/scale/defeated.png
 opacity = 1.0
 }
 slot = 场景进入 | goto | | wancheng
@@ -66058,7 +66058,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/defeated.png
+path = assets/sprites/scale/defeated.png
 opacity = 1.0
 }
 slot = 场景进入 | goto | | wancheng
@@ -66143,7 +66143,7 @@ x = 600
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/defeated.png
+path = assets/sprites/scale/defeated.png
 opacity = 1.0
 }
 slot = 场景进入 | goto | | wancheng
@@ -66226,7 +66226,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 1.0
 }
 {
@@ -66353,7 +66353,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 0.5
 }
 {
@@ -66498,7 +66498,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 0.5
 }
 {
@@ -66643,7 +66643,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 0.5
 }
 {
@@ -66788,7 +66788,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 0.5
 }
 {
@@ -66933,7 +66933,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 1.0
 }
 {
@@ -67068,7 +67068,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 1.0
 }
 {
@@ -67213,7 +67213,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 0.5
 }
 {
@@ -67358,7 +67358,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/polite.png
+path = assets/sprites/scale/polite.png
 opacity = 1.0
 }
 {
@@ -67503,7 +67503,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/polite.png
+path = assets/sprites/scale/polite.png
 opacity = 0.5
 }
 {
@@ -67648,7 +67648,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/polite.png
+path = assets/sprites/scale/polite.png
 opacity = 1.0
 }
 {
@@ -67783,7 +67783,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/polite.png
+path = assets/sprites/scale/polite.png
 opacity = 0.5
 }
 {
@@ -67928,7 +67928,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 1.0
 }
 {
@@ -68073,7 +68073,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 0.5
 }
 {
@@ -68218,7 +68218,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 1.0
 }
 {
@@ -68363,7 +68363,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 0.5
 }
 {
@@ -68508,7 +68508,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 1.0
 }
 {
@@ -68643,7 +68643,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 0.5
 }
 {
@@ -68788,7 +68788,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 1.0
 }
 {
@@ -68925,7 +68925,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 0.5
 }
 {
@@ -69071,7 +69071,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 1.0
 }
 {
@@ -69195,7 +69195,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 1.0
 }
 {
@@ -69341,7 +69341,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 1.0
 }
 {
@@ -69466,7 +69466,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 1.0
 }
 {
@@ -69595,7 +69595,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 1.0
 }
 {
@@ -69728,7 +69728,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 1.0
 }
 {
@@ -69865,7 +69865,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 1.0
 }
 {
@@ -70002,7 +70002,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 1.0
 }
 {
@@ -70146,7 +70146,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 1.0
 }
 {
@@ -70284,7 +70284,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 1.0
 }
 {
@@ -70451,7 +70451,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 1.0
 }
 {
@@ -70588,7 +70588,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/smug.png
+path = assets/sprites/scale/smug.png
 opacity = 1.0
 }
 {
@@ -70732,7 +70732,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/surprised.png
+path = assets/sprites/scale/surprised.png
 opacity = 1.0
 }
 {
@@ -70877,7 +70877,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/surprised.png
+path = assets/sprites/scale/surprised.png
 opacity = 0.5
 }
 {
@@ -71022,7 +71022,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/surprised.png
+path = assets/sprites/scale/surprised.png
 opacity = 1.0
 }
 {
@@ -71157,7 +71157,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 1.0
 }
 {
@@ -71303,7 +71303,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 1.0
 }
 {
@@ -71428,7 +71428,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 1.0
 }
 {
@@ -71552,7 +71552,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 1.0
 }
 {
@@ -71685,7 +71685,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 1.0
 }
 {
@@ -71820,7 +71820,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 0.5
 }
 {
@@ -71965,7 +71965,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 0.5
 }
 {
@@ -72110,7 +72110,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 0.5
 }
 {
@@ -72255,7 +72255,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 0.5
 }
 {
@@ -72400,7 +72400,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 0.5
 }
 {
@@ -72545,7 +72545,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 0.5
 }
 {
@@ -72690,7 +72690,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 1.0
 }
 {
@@ -72828,7 +72828,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 1.0
 }
 {
@@ -72995,7 +72995,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 1.0
 }
 {
@@ -73134,7 +73134,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 0.5
 }
 {
@@ -73279,7 +73279,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 0.5
 }
 {
@@ -73424,7 +73424,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 0.5
 }
 {
@@ -73569,7 +73569,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 0.5
 }
 {
@@ -73714,7 +73714,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 1.0
 }
 {
@@ -73849,7 +73849,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 0.5
 }
 {
@@ -73996,7 +73996,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 1.0
 }
 {
@@ -74133,7 +74133,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 0.5
 }
 {
@@ -74278,7 +74278,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 1.0
 }
 {
@@ -74416,7 +74416,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 1.0
 }
 {
@@ -74582,7 +74582,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 1.0
 }
 {
@@ -74717,7 +74717,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 0.5
 }
 {
@@ -74862,7 +74862,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 1.0
 }
 {
@@ -75007,7 +75007,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 0.5
 }
 {
@@ -75153,7 +75153,7 @@ x = 660
 y = 150
 width = 320
 height = 520
-path = assets/sprites/秤主/weary.png
+path = assets/sprites/scale/weary.png
 opacity = 1.0
 }
 {
