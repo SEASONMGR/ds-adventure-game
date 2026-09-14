@@ -93,6 +93,15 @@ public class LinkPlugin implements GamePlugin {
     @Override
     public void onDetach() {
         stopLoop();
+        // 局中退出（插件自己的返回键、或引擎外框的"返回剧情"）且尚未回传 → 按失败回传，
+        // 否则引擎会把"没结果"当成胜利，玩家中途退出反而算赢。
+        if (!reported) {
+            reported = true;
+            if (resultSink != null) {
+                resultSink.accept(MiniGameResult.lose(
+                        Math.max(0, config.totalTiles() - game.remainingTiles())));
+            }
+        }
     }
 
     // =====================================================================
@@ -361,13 +370,8 @@ public class LinkPlugin implements GamePlugin {
     }
 
     private void leaveToStory() {
-        if (!reported && started) {
-            reported = true;
-            if (resultSink != null) {
-                resultSink.accept(MiniGameResult.lose(config.totalTiles() - game.remainingTiles()));
-            }
-        }
         stopLoop();
+        // 回传交给 onDetach（无论从哪个入口退出，都只回传一次、且都算失败）
         if (backCallback != null) {
             backCallback.run();
         }

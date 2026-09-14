@@ -20,7 +20,7 @@
 
 | 想做什么 | 双击 |
 |---|---|
-| **玩剧情**（序章 + 第1章 + 第2章，真剧本 + 真素材） | **`启动游戏.bat`** |
+| **玩剧情**（**全 11 章**：序章 + 第1~9章 + 终章，真剧本 + 真素材） | **`启动游戏.bat`** |
 | 改剧情 / 可视化看地图 / `Ctrl+R` 试玩 | **`启动编辑器.bat`** |
 | 打包成**免安装 exe**（自带运行环境，别人电脑无需 JDK） | **`打包EXE.bat`** → `dist\ds-adventure\ds-adventure.exe` |
 
@@ -168,7 +168,7 @@ mvnw.cmd -q exec:java "-Dexec.mainClass=com.studio.parser.ParserSelfTest"
 |---|---|---|---|---|
 | F1 剧情引擎 | 脚本解析、文本逐字显示、节点跳转、无效跳转不崩溃 | **部分具备** | `ScriptParser`/`ScriptWriter` + `ReaderView`（打字机、富文本、场景跳转、宽容模式告警） | TODO-05 · IT-2 |
 | F2 选项分支 | 多选项跳转；玩家长时间不决策时执行第三种隐藏默认选项 | **待实现** | 现有 `button` 节点 `action=target` 可做基础跳转；**超时默认选项机制未实现** | TODO-06 · IT-2 |
-| F3 特殊演出调度 | 节点触发小游戏、结束后结果回传、按结果三分支调度（普通叙事 / 强制重试 / 关键结局） | **部分具备** | `GamePlugin` + 嵌入层 + 场景级 `event`；**结果回传与 `normal` 路由已具备**（脚本 `mg.onWin` / `mg.onLose`，插件经 `GamePlugin.PARAM_RESULT_SINK` 回传胜负）；`retry` / `ending` 两种调度待实现 | TODO-07 / TODO-04 / TODO-01 · IT-2 |
+| F3 特殊演出调度 | 节点触发小游戏、结束后结果回传、按结果三分支调度（普通叙事 / 强制重试 / 关键结局） | **已具备** | `GamePlugin` + 嵌入层 + 场景级 `event`；**结果回传与 `normal` 路由已具备**（脚本 `mg.onWin` / `mg.onLose`，插件经 `GamePlugin.PARAM_RESULT_SINK` 回传胜负）；`retry` / `ending` 两种调度待实现 | TODO-07 / TODO-04 / TODO-01 · IT-2 |
 | F4 贪吃蛇 | 10×10、吃豆 97 通关、速度每秒 +0.01、允许 180° 反向 | **已具备** | `com.studio.plugin.demo.snake`（`SnakeConfig` / `SnakeGame` 纯规则 / `SnakePlugin` 嵌入视图）；演示地图 `docs/demo-maps/snake/` | TODO-09 · 已完成（IT-3） |
 | F5 飞机大战 | 击落 20 架通关、3 条命、护盾 3 秒；**键盘操作**（方向键/WASD 移动、空格/J 射击）—— 组内确认不需要虚拟摇杆 | **已具备** | `com.studio.plugin.demo.plane`（`PlaneConfig` / `PlaneGame` 纯规则 / `PlanePlugin` 嵌入视图）；演示地图 `docs/demo-maps/plane/` | TODO-10 · 已完成（IT-4） |
 | F16 主菜单 | 开始 / 继续 / 回忆收藏馆 / 设置 / 退出（覆盖确认、无存档置灰） | **待实现** | 现有 Player 启动即进地图，无五项主菜单 | TODO-02 / TODO-03 · IT-5 |
@@ -207,6 +207,7 @@ mvnw.cmd -q exec:java "-Dexec.mainClass=com.studio.parser.ParserSelfTest"
 | 打砖块 | P1 | **已具备**（事件 ID `breakout`，编辑器菜单可生成演示地图） |
 | 记忆翻牌 | P1 | **已具备**（事件 ID `memory`，演示地图 `docs/demo-maps/memory/`） |
 | 连连看 | P1 | **已具备**（事件 ID `link`，演示地图 `docs/demo-maps/link/`） |
+| 终局（`final`） | 终章 | **待实现** | 终章 `@minigame final mode:ending` 的玩法口径待剧情侧给；编译已通过，运行到该处会提示缺插件 |
 | 推箱子 | P1 | **已具备**（事件 ID `sokoban`，演示地图 `docs/demo-maps/sokoban/`） |
 | 五子棋 | P1 | **已具备**（事件 ID `gomoku`，威胁打分 AI，演示地图 `docs/demo-maps/gomoku/`） |
 

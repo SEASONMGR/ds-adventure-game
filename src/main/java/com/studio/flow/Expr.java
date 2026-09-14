@@ -19,6 +19,8 @@ import com.studio.util.Logs;
  *   <tr><td>{@code @node(节点id, 属性名)}</td><td>取指定节点的属性</td></tr>
  *   <tr><td>{@code @param(参数名)}</td><td>取信号事件附带的参数</td></tr>
  *   <tr><td>{@code @plugin(插件名)}</td><td>仅作为槽动作使用，见 {@link SlotPlugin}</td></tr>
+ *   <tr><td>{@code @eq(a,b)} {@code @ne(a,b)} {@code @gt(a,b)} {@code @ge(a,b)} {@code @lt(a,b)} {@code @le(a,b)}</td>
+ *       <td><b>比较谓词</b>：返回 {@code "true"}/{@code "false"}，供 {@code @plugin(select)} 做条件跳转</td></tr>
  * </table>
  *
  * <p>整个字段是一个表达式时按表达式求值；字段里夹杂文字时按“模板”替换，
@@ -183,6 +185,14 @@ public final class Expr {
                 case "bool":   case "boolean": return VarType.BOOL.cast(resolve(inner, scope));
                 case "str":    case "string":  return resolve(inner, scope);
                 case "plugin": return inner;      // 作为值使用时就是插件名
+                // 比较谓词（返回 "true"/"false"，配合 @plugin(select) 做条件跳转）：
+                //   @ge(a,b) @gt(a,b) @le(a,b) @lt(a,b) @eq(a,b) @ne(a,b)
+                case "eq": case "ne": case "gt": case "ge": case "lt": case "le": {
+                    String[] args = splitArgs(inner);
+                    if (args.length < 2) return "false";
+                    return compare(f, resolve(args[0], scope), resolve(args[1], scope))
+                            ? "true" : "false";
+                }
                 default:
                     Logs.warn("[Expr] 未知表达式 @" + f + "(" + inner + ")，按原样返回");
                     return expr;
@@ -190,6 +200,39 @@ public final class Expr {
         } catch (RuntimeException e) {
             Logs.warn("[Expr] 表达式求值失败 " + expr + "：" + e.getMessage());
             return "";
+        }
+    }
+
+    /**
+     * 比较谓词：两边都能当数看时按<b>数值</b>比较，否则按<b>字符串</b>比较。
+     *
+     * <p>缺省口径与 {@code @int} 一致（绝不报错）：<b>空串按 0</b>，这样未赋值的变量
+     * {@code @ge(@var(chaos), 1)} 会得到 false、{@code @ge(@var(chaos), 0)} 得到 true。</p>
+     */
+    private static boolean compare(String op, String a, String b) {
+        String sa = a == null ? "" : a.trim();
+        String sb = b == null ? "" : b.trim();
+        Double na = numOrZero(sa);
+        Double nb = numOrZero(sb);
+        int cmp = (na != null && nb != null) ? Double.compare(na, nb) : sa.compareTo(sb);
+        return switch (op) {
+            case "eq" -> cmp == 0;
+            case "ne" -> cmp != 0;
+            case "gt" -> cmp > 0;
+            case "ge" -> cmp >= 0;
+            case "lt" -> cmp < 0;
+            case "le" -> cmp <= 0;
+            default -> false;
+        };
+    }
+
+    /** 能解析为数就返回该数；空串按 0；非数值返回 null（退化字符串比较） */
+    private static Double numOrZero(String s) {
+        if (s.isEmpty()) return 0.0;
+        try {
+            return Double.valueOf(s);
+        } catch (NumberFormatException e) {
+            return null;
         }
     }
 

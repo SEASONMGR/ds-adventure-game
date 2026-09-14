@@ -161,6 +161,9 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
     private String mgOnWin = "";
     private String mgOnLose = "";
     private String mgWith = "";
+    private String mgLoop = "";
+    /** 当前场景是否是一个结局场景（{@code ending = <id>}）；结局后停止推进对话 */
+    private boolean endingReached;
     private com.studio.plugin.MiniGameResult pendingResult;
     /**
      * 上一拍的「舞台」节点（背景 / 立绘）与其签名。
@@ -540,10 +543,19 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
             mgOnWin = sceneProp(scene, "mg.onWin");
             mgOnLose = sceneProp(scene, "mg.onLose");
             mgWith = sceneProp(scene, "mg.with");
+        mgLoop = sceneProp(scene, "mg.loop");
             pendingResult = null;
             runPlugin(id, "场景事件 [" + sceneName + "]");
         }
         suppressSceneEvent = false;
+
+        // @ending：结局场景停住推进（与 event 无关，任何场景都可标结局）
+        String ending = sceneProp(scene, "ending");
+        endingReached = ending != null && !ending.isBlank();
+        if (endingReached) {
+            Logs.info("[Flow] 抵达结局：" + ending);
+            toast("已抵达结局：" + ending);
+        }
 
         // ② 进入新场景：发「场景进入」信号（节点已经建好，槽可以立刻改它们的属性；参数带 from=上一幕）
         LinkedHashMap<String, Object> enterParams = new LinkedHashMap<>();
@@ -1077,6 +1089,7 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
     }
 
     private void onDialogClicked(DialogParagraph st) {
+        if (endingReached) return;   // 结局场景：不再推进
         playUiSound("se_click");
         if (st.busy) {
             finishParagraph(st);
@@ -1633,12 +1646,14 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
         String onWin = mgOnWin;
         String onLose = mgOnLose;
         String mode = mgMode;
+        String loop = mgLoop;
         com.studio.plugin.MiniGameResult result = pendingResult;
         pendingResult = null;
         mgMode = "";
         mgOnWin = "";
         mgOnLose = "";
         mgWith = "";
+        mgLoop = "";
 
         boolean hasRoute = (onWin != null && !onWin.isBlank()) || (onLose != null && !onLose.isBlank());
         if (hasRoute) {
@@ -1647,10 +1662,25 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
             } else {
                 Logs.plugin(activePluginId, "结果回传: " + result);
             }
-            if (mode != null && !mode.isBlank() && !"normal".equalsIgnoreCase(mode)) {
-                Logs.plugin(activePluginId, "调度模式 " + mode + " 暂按 normal 处理（retry/ending 待实现）");
-            }
             boolean win = (result == null) || result.win();
+
+            // mode:retry —— 失败重入 loop: 标签，并自增 retry_count（引擎侧自增，保证"重试不丢剧情进度"）
+            if (!win && "retry".equalsIgnoreCase(mode) && loop != null && !loop.isBlank()) {
+                int retries = flowVars.getInt("retry_count", 0) + 1;
+                flowVars.set("retry_count", String.valueOf(retries));
+                Logs.plugin(activePluginId, "调度模式 retry：第 " + retries + " 次重试 → 重入 " + loop);
+                if (project.hasScene(loop)) {
+                    suppressSceneEvent = false;
+                    renderScene(loop, true, true);
+                    return;
+                }
+                Logs.warn("[Flow] retry 的重入场景不存在：" + loop);
+            }
+            if (!win && "ending".equalsIgnoreCase(mode)) {
+                // 结局模式：失败即走 onLose 的 Bad End 段（段末有 @ending 会停住），不提供重试
+                Logs.plugin(activePluginId, "调度模式 ending：失败进入结局段 → " + onLose);
+            }
+
             String target = win ? onWin : onLose;
             if (target != null && !target.isBlank() && project.hasScene(target)) {
                 suppressSceneEvent = false;

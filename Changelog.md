@@ -1,4 +1,34 @@
 # 更新日志 (Changelog)
+## [v1.18] 编译器支持 @if / @ending / mode:retry|ending —— 全篇 11 章可编译
+
+### Added
+- **`Expr` 比较谓词**：`@eq/@ne/@gt/@ge/@lt/@le`（数值优先、空串按 0、非数值退化字符串比较，绝不报错）；
+  这是剧本 `@if <名> >= <值> goto <label>` 的编译落点
+- **编译器 `@if`**：单行平坦谓词，编译为「`@plugin(select)` 写链路变量 `__flow_next` → `goto @var(__flow_next)`」两个槽；
+  假分支＝顺延到下一拍（等价于剧本"落到下一行"）；目标标签缺失时**编译期报错**（不静默）
+- **编译器 `@ending <id>`**：产出独立结局场景（场景级 `ending = <id>` + 结局卡 + 退出按钮），
+  id 限 `true / local / temp / busy / bad_collapse`，未知 id 编译期报错
+- **引擎 `mode:retry`**：失败重入 `mg.loop` 场景并**自增 `retry_count`**（引擎侧自增，保证"重试不丢剧情进度"）
+- **引擎 `mode:ending`**：失败按 `onLose` 进入 Bad End 段，不提供重试
+- **引擎 `@ending` 停住**：场景带 `ending` 属性时置 `endingReached`，**阻断对话推进**（不阻断按钮/退出）
+- 编译器扩到**全篇 11 章**：853 场景 / 7065 节点 / 75k 行 / 0 解析警告 / 解析 204ms；
+  事件别名 `brick→breakout`、`minesweep→minesweeper`（剧本不改，编译期映射；未实现的游戏会在编译末尾列出）
+
+### Fixed
+- **选项没写 `goto` 时错落到 `__待续`**（第6章点歌、终章三选一原本会死路）：改为顺延到选择之后的下一拍
+- **局中小游戏退出未回传结果会被判为胜利**：`LinkPlugin.onDetach()` 统一收口为"未回传即失败"
+  （引擎外框「返回剧情」与插件自身返回键都覆盖）
+- 结局读取曾误放在 `scene.event()` 分支内（只有小游戏场景才走到）→ 移出，任何场景都可标结局
+
+### Verified
+- `mvnw clean test` → **137/137**（新增 `ExprPredicateTest` 8 项）
+- 实机（临时地图 + 探针驱动，按日志断言）：`@if` 真分支 `MARK-IF=TRUE` / 假分支 `MARK-IF=FALSE`；
+  `mode:retry` 重入 `mg.loop` 且 `retry_count` **1 → 2** 递增；`@ending` 打印「抵达结局：true」且连续点击**不再推进**
+- 8 张地图（story / prologue_404 / 6 张 demo）解析 **0 警告**
+
+### Known gaps
+- 终章的 `@minigame final` **尚无插件实现**（全篇第 10 个游戏，玩法口径待剧情侧给）
+
 ## [v1.17] 新增连连看插件（link）—— 9 个小游戏齐备
 
 ### Added

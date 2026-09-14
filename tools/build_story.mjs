@@ -24,7 +24,42 @@ const SCRIPT_DIR = path.join(ROOT, "docs", "ds-adventrue", "剧本");
 const OUT_FILE = path.join(ROOT, "maps", "story", "scenario.txt");
 const CHECK = process.argv.includes("--check");
 
-const CHAPTERS = ["序章_404之夜.txt", "第1章_思维链大暴走.txt", "第2章_幻想乡弹幕异变.txt"];
+const CHAPTERS = [
+  "序章_404之夜.txt",
+  "第1章_思维链大暴走.txt",
+  "第2章_幻想乡弹幕异变.txt",
+  "第3章_合鳞礼.txt",
+  "第4章_防火墙拆迁办.txt",
+  "第5章_上下文溢出.txt",
+  "第6章_歌姬的曲库灾难.txt",
+  "第7章_流言沼公关战.txt",
+  "第8章_无主之物仓.txt",
+  "第9章_决战万秤楼.txt",
+  "终章_深度求索.txt",
+];
+
+/** 剧本里的游戏 id → 引擎插件 id（剧本不改，编译期映射） */
+const GAME_ALIAS = { brick: "breakout", minesweep: "minesweeper" };
+/** 引擎已注册的游戏插件（缺失的会在编译末尾列出，不静默） */
+const GAME_KNOWN = new Set([
+  "snake", "plane", "2048", "breakout", "memory", "minesweeper",
+  "sokoban", "gomoku", "link", "savepanel", "audio", "add", "select",
+]);
+/** @ending 的合法 id（来源：剧情侧 §三 CG 对照表） */
+const ENDING_NAME = {
+  true: "真结局",
+  local: "温情结局",
+  temp: "隐藏结局",
+  busy: "Bad End · 服务器繁忙",
+  bad_collapse: "Bad End · 人设崩塌",
+};
+/** @if 分支用的临时链路变量（写入 @var(...)，名字会出现在存档里） */
+const FLOW_VAR = "__flow_next";
+/** 谓词映射：@if 的运算符 → Expr 谓词函数 */
+const PRED = { ">=": "ge", ">": "gt", "<=": "le", "<": "lt", "==": "eq", "!=": "ne" };
+
+/** 编译期问题收集（缺失目标 / 未知游戏 / 未知结局），最后统一报告 */
+const problems = { missingTargets: new Set(), unknownGames: new Set(), unknownEndings: new Set() };
 const SPRITES = path.join(ROOT, "src", "main", "resources", "assets", "sprites");
 
 // ---- 剧本 id → 素材目录 / 表情别名（依据《剧情素材需求总表》与 archive_assets 归档结果）----
@@ -139,8 +174,20 @@ function parseScriptFile(file) {
     if (line.startsWith("goto ")) return push("goto", { target: line.slice(5).trim() });
     if (line.startsWith("narr:")) return push("dialog", { text: line });
     if (line.startsWith("st:")) return push("banner", { text: line.slice(3).trim() });
-    if (/^@if\b/.test(line)) throw new Error(`${file}:${no} 本批次未实现 @if：${line}`);
-    if (/^@ending\b/.test(line)) throw new Error(`${file}:${no} 本批次未实现 @ending：${line}`);
+    // @if <名> <谓词> <值> goto <label>（单行平坦式，无 @else/@endif；假则顺延下一行）
+    if (line.startsWith("@if ")) {
+      const m = line.slice(4).trim()
+        .match(/^([A-Za-z0-9_\u4e00-\u9fa5]+)\s*(>=|<=|==|!=|>|<)\s*(-?\d+)\s+goto\s+(\S+)$/);
+      if (!m) {
+        throw new Error(`${file}:${no} @if 写法无法识别（应为：@if <名> >= <值> goto <label>）：${line}`);
+      }
+      return push("if", { name: m[1], op: m[2], value: m[3], label: m[4] });
+    }
+    if (line === "@ending" || line.startsWith("@ending ")) {
+      const id = line.slice(7).trim();
+      if (!id) throw new Error(`${file}:${no} @ending 缺少结局 id：${line}`);
+      return push("ending", { id });
+    }
     if (/^@/.test(line)) throw new Error(`${file}:${no} 未知指令：${line}`);
     const m = line.match(/^([A-Za-z0-9_\u4e00-\u9fa5]+):\s*([\s\S]*)$/);
     if (m) return push("dialog", { text: line, speaker: m[1] });
@@ -288,7 +335,8 @@ function sceneName(label, n) { return n === 0 ? label : `${label}__${n + 1}`; }
 
 function newBeat(label, kind, extra = {}) {
   // 逻辑拍点是「自动推进」的过渡幕，不承载画面；其余拍点才显示 CG
-  const visual = kind === "dialog" || kind === "banner" || kind === "choice" || kind === "tail";
+  const visual = kind === "dialog" || kind === "banner" || kind === "choice"
+    || kind === "tail" || kind === "ending";
   const b = {
     label,
     kind,
@@ -393,6 +441,21 @@ for (const d of directives) {
       dialogBuf.push(d.text);
       break;
     }
+    case "if": {
+      // 条件跳转：本拍自带分支（两个槽：select 写变量 + goto 读变量），禁止自动补 goto
+      flush(currentLabel);
+      const b = newBeat(currentLabel, "logic");
+      b.branch = { name: d.name, op: d.op, value: d.value, label: d.label };
+      break;
+    }
+    case "ending": {
+      // 结局：独立场景（scene 级属性 ending = <id>），进入后引擎停住推进
+      flush(currentLabel);
+      const b = newBeat(currentLabel, "ending");
+      b.endingId = d.id;
+      if (!(d.id in ENDING_NAME)) problems.unknownEndings.add(d.id);
+      break;
+    }
     case "banner": {
       flush(currentLabel);
       const b = newBeat(currentLabel, "banner");
@@ -463,10 +526,14 @@ for (const b of beats) if (!labelScene.has(b.label)) labelScene.set(b.label, b.s
 const resolveTarget = (x) => (x && labelScene.get(x)) || TAIL;
 // 选项逻辑拍点（每个选项一个），插到 choice 拍点之后
 const extra = [];
-for (const b of beats) {
+for (let bi = 0; bi < beats.length; bi++) {
+  const b = beats[bi];
   if (b.kind !== "choice") continue;
+  // 选项可以只写 flag、不写 goto（分支交给紧随其后的 @if 链，见第6章点歌 / 终章三选一）
+  // → 这类选项应"顺延到选择之后的下一拍"，而不是落到 __待续
+  const fallthrough = (bi + 1 < beats.length) ? beats[bi + 1].scene : TAIL;
   b.optionScenes = b.buttons.map((opt, i) => {
-    if (!opt.flag) return resolveTarget(opt.goto);
+    if (!opt.flag) return opt.goto ? resolveTarget(opt.goto) : fallthrough;
     const logic = {
       label: b.label,
       kind: "optlogic",
@@ -475,7 +542,7 @@ for (const b of beats) {
       chars: b.chars,
       dialog: [],
       ops: [`@plugin(add) | @var(${opt.flag}) | @int(${flagDelta(opt.value)}) | @var(${opt.flag})`],
-      goto: resolveTarget(opt.goto),
+      goto: opt.goto ? resolveTarget(opt.goto) : fallthrough,
       buttons: [],
       mg: null,
       banner: null,
@@ -499,7 +566,21 @@ if (extra.length) {
 for (let i = 0; i < beats.length; i++) {
   const b = beats[i];
   const next = beats[i + 1];
-  if (b.kind === "logic") {
+  if (b.kind === "logic" && b.branch) {
+    // @if：select 写链路变量 → goto 读它；假分支 = 顺延到下一拍（等价于剧本的"落到下一行"）
+    if (!labelScene.has(b.branch.label)) problems.missingTargets.add("@" + b.branch.label);
+    const thenScene = b.branch.label && labelScene.get(b.branch.label) ? labelScene.get(b.branch.label) : TAIL;
+    const elseScene = next ? next.scene : TAIL;
+    const pred = PRED[b.branch.op];
+    b.ops = [
+      `@plugin(select) | @${pred}(@var(${b.branch.name}, 0), ${b.branch.value}) | ${thenScene} | ${elseScene} | @var(${FLOW_VAR})`,
+    ];
+    b.gotoVar = `@var(${FLOW_VAR})`;
+    b.goto = null;
+  } else if (b.kind === "ending") {
+    b.goto = null;
+    b.target = null;          // 结局不自动跳转：停在这里
+  } else if (b.kind === "logic") {
     b.goto = b.goto ? resolveTarget(b.goto) : (next ? next.scene : TAIL);
   } else if (b.kind === "optlogic") {
     // 已设 goto
@@ -518,7 +599,7 @@ for (let i = 0; i < beats.length; i++) {
 const L = [];
 L.push("# ============================================================");
 L.push("# 剧情地图: story（由 tools/build_story.mjs 编译生成，请勿手改）");
-L.push("# 源: docs/ds-adventrue/剧本/ 序章 + 第1章 + 第2章");
+L.push(`# 源: docs/ds-adventrue/剧本/ 共 ${CHAPTERS.length} 章（${CHAPTERS[0].replace(/\.txt$/, "")} … ${CHAPTERS[CHAPTERS.length - 1].replace(/\.txt$/, "")}）`);
 L.push("# 语法: [option] / [场景名] / { 节点属性 } / 场景级 signal|slot");
 L.push("# ============================================================");
 L.push("");
@@ -528,6 +609,13 @@ L.push("background = #070a14");
 L.push("volume = 0.6");
 L.push("typewriterSpeed = 18");
 for (const f of [...flags].sort()) L.push(`savevar = ${f} | int | 0`);
+// @if / retry 用到的变量：必须声明，否则读档后计数丢失
+const extraVars = new Set(["retry_count", FLOW_VAR]);
+for (const b of beats) if (b.branch) extraVars.add(b.branch.name);
+for (const v of [...extraVars].sort()) {
+  if (flags.has(v)) continue;
+  L.push(`savevar = ${v} | ${v === FLOW_VAR ? "str" : "int"} | ${v === FLOW_VAR ? '""' : "0"}`);
+}
 L.push("");
 
 /** 去掉台词开头的「角色: 」前缀（名牌已显示说话人） */
@@ -580,8 +668,11 @@ for (const b of beats) {
   // 背景没变 → 承接上一拍的舞台（引擎 stage=keep：不整屏淡入、背景/立绘不重建）
   if (prevBg !== null && b.bg === prevBg) out.push("stage = keep");
   prevBg = b.bg;
+  if (b.kind === "ending") out.push(`ending = ${b.endingId}`);
   if (b.kind === "minigame") {
-    out.push(`event = ${b.mg.id}`);
+    const gid = GAME_ALIAS[b.mg.id] || b.mg.id;
+    if (!GAME_KNOWN.has(gid)) problems.unknownGames.add(gid);
+    out.push(`event = ${gid}`);
     out.push(`mg.mode = ${b.mg.mode}`);
     out.push(`mg.onWin = ${resolveTarget(b.mg.onWin)}`);
     out.push(`mg.onLose = ${resolveTarget(b.mg.onLose)}`);
@@ -652,7 +743,20 @@ for (const b of beats) {
         `target = ${b.optionScenes[i]}`, "}");
     });
   } else if (b.kind === "logic" || b.kind === "optlogic") {
-    if (b.goto) out.push(`slot = 场景进入 | goto | | ${b.goto}`);   // 运算槽已在上面输出
+    // @if 分支拍点：goto 的目标由前面 select 写进链路变量
+    if (b.gotoVar) out.push(`slot = 场景进入 | goto | | ${b.gotoVar}`);
+    else if (b.goto) out.push(`slot = 场景进入 | goto | | ${b.goto}`);
+  } else if (b.kind === "ending") {
+    const name = ENDING_NAME[b.endingId] || b.endingId;
+    out.push("{", "type = text", "id = 结局卡", "x = 340", "y = 250", "width = 600", "height = 90",
+      `text = —— ${name} ——`, "fontSize = 40", "align = center",
+      "style = -fx-text-fill: #ffd76a; -fx-background-color: rgba(10,12,26,0.86); -fx-background-radius: 18;",
+      "}");
+    out.push("{", "type = text", "id = 结局提示", "x = 390", "y = 360", "width = 500", "height = 40",
+      "text = （本作到此结束 · 感谢游玩）", "fontSize = 18", "align = center",
+      "style = -fx-text-fill: #cfd4ea;", "}");
+    out.push("{", "type = button", "id = 退出游戏", "x = 470", "y = 430", "width = 340, ".replace(", ", ""),
+      "text = 退出", "action = call", "target = @plugin(quit)", "}");
   } else if (b.kind === "tail") {
     out.push("{", "type = text", "x = 240", "y = 280", "width = 800", "height = 120",
       "text = 本章待实现 —— 后续章节接入中", "fontSize = 34", "align = center", "}");
@@ -679,6 +783,17 @@ L.push("align = center");
 L.push("}");
 L.push("");
 
+// 编译期问题：不静默（缺失目标 / 未实现的游戏 / 未知结局）
+if (problems.missingTargets.size) {
+  console.error("✗ 以下 @if 目标标签不存在：" + [...problems.missingTargets].sort().join("、"));
+  process.exit(4);
+}
+if (problems.unknownEndings.size) {
+  console.error("✗ 未知 @ending id：" + [...problems.unknownEndings].sort().join("、")
+    + "（已知：" + Object.keys(ENDING_NAME).join(" / ") + "）");
+  process.exit(4);
+}
+
 const text = L.join("\n") + "\n";
 
 // =====================================================================
@@ -697,3 +812,7 @@ fs.mkdirSync(path.dirname(OUT_FILE), { recursive: true });
 fs.writeFileSync(OUT_FILE, text, "utf8");
 console.log(`已生成 ${path.relative(ROOT, OUT_FILE)} | ${summary}`);
 console.log(`  label ${labelScene.size} 个 | 输出 ${text.split("\n").length} 行`);
+if (problems.unknownGames.size) {
+  console.warn("⚠ 以下 @minigame 尚无插件实现（编译通过，运行时会提示缺插件）："
+    + [...problems.unknownGames].sort().join("、"));
+}
