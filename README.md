@@ -177,7 +177,7 @@ mvnw.cmd -q exec:java "-Dexec.mainClass=com.studio.parser.ParserSelfTest"
 
 | 需求 | 优先级 | 当前状态 | 现有落点 |
 |---|---|---|---|
-| 2048 小游戏 | P1 | **已具备（demo）** | `com.studio.plugin.demo.Game2048Plugin` |
+| 2048 小游戏 | P1 | **已具备（demo）** | `com.studio.plugin.demo.Game2048Plugin`；含**历史最高分**显示 |
 | 扫雷小游戏 | P1 | **已具备（demo）** | `com.studio.plugin.demo.MinesweeperPlugin`；含**用时显示**（首击计时 / 胜负停表） |
 | 存档系统 | P1 | **部分具备** | `saves/` 三槽存档 + `SavePortal` + `FlowVariables`；「进入小游戏前自动存档」「跨周目全局记录」待补 | 
 | 打砖块小游戏 | P1 | **已具备（demo）** | `com.studio.plugin.demo.breakout`；编辑器菜单可生成演示地图 |
@@ -202,7 +202,7 @@ mvnw.cmd -q exec:java "-Dexec.mainClass=com.studio.parser.ParserSelfTest"
 |---|---|---|
 | 贪吃蛇 | **P0** | **已具备**（事件 ID `snake`，演示地图 `docs/demo-maps/snake/`） |
 | 飞机大战 | **P0** | **已具备**（事件 ID `plane`，键盘操作，演示地图 `docs/demo-maps/plane/`） |
-| 2048 | P1 | 已具备（demo 插件，事件 ID `2048`） |
+| 2048 | P1 | 已具备（demo 插件，事件 ID `2048`，含历史最高分） |
 | 扫雷 | P1 | 已具备（demo 插件，事件 ID `minesweeper`） |
 | 打砖块 | P1 | **已具备**（事件 ID `breakout`，编辑器菜单可生成演示地图） |
 | 记忆翻牌 | P1 | **已具备**（事件 ID `memory`，演示地图 `docs/demo-maps/memory/`） |

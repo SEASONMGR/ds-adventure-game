@@ -1,4 +1,17 @@
 # 更新日志 (Changelog)
+## [v1.15] 移植 PR #14 的 2048 历史最高分
+
+### Added
+- 2048 新增**历史最高分**显示（移植自 PR #14 的 `Main.java`）：顶栏改为「分数 X　·　最高 Y」；
+  最高分用 static 保存，剧情里重新进入小游戏仍保留纪录
+- 新增纯函数 `Game2048Plugin.nextBest(best, score)` 与 `Game2048BestScoreTest`（5 项）
+- 小游戏相关测试总数 → **111**
+
+### Closed
+- PR #14（独立 JavaFX 2048 应用）**关闭**：仅移植其中独有的「历史最高分」进现有 `Game2048Plugin`。
+  原因与 PR #12 相同：未实现 `GamePlugin` / 无 `createEmbeddedView`（剧情 `event` 调不起来）、
+  与仓库已有的 `2048` 插件重复、且改动了 `pom.xml`（新增 `game2048` profile）
+
 ## [v1.14] 合并推箱子 / 五子棋插件 + 移植 PR #12 的扫雷用时
 
 ### Added
