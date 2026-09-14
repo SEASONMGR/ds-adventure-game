@@ -1234,10 +1234,17 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
         }
         final int total = RichText.visibleLength(para);
         final int[] revealed = {0};
+        // 标点停顿：句读（，、；：）停约 80ms、句末（。！？…—）停约 160ms —— 打字节奏更接近"有人在说话"
+        final String plainPara = RichText.plain(para);
+        final int[] pauseTicks = {0};
         st.busy = true;
         st.timer = new Timeline(new KeyFrame(Duration.millis(40), e -> {
             if (!st.busy) {
                 if (st.timer != null) st.timer.stop();
+                return;
+            }
+            if (pauseTicks[0] > 0) {
+                pauseTicks[0]--;
                 return;
             }
             double ms = (turbo ? Math.max(1.2, typeSpeed * 0.12) : typeSpeed);
@@ -1248,6 +1255,15 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
                 st.busy = false;
                 st.timer.stop();
                 st.timer = null;
+                return;
+            }
+            if (!turbo && revealed[0] > 0 && revealed[0] <= plainPara.length()) {
+                char just = plainPara.charAt(revealed[0] - 1);
+                if ("，、；：".indexOf(just) >= 0) {
+                    pauseTicks[0] = 2;
+                } else if ("。！？…—".indexOf(just) >= 0) {
+                    pauseTicks[0] = 4;
+                }
             }
         }));
         st.timer.setCycleCount(Timeline.INDEFINITE);
