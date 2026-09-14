@@ -44,6 +44,11 @@ public class Game2048Plugin implements GamePlugin {
     // ---- 游戏状态 ----
     private final int[][] cells = new int[N][N];
     private long score = 0;
+    /**
+     * 历史最高分（本项移植自 PR #14 的 Main.java）。
+     * <p>用 static 保存：同一局运行内重新进入小游戏（剧情来回切）也保留纪录。</p>
+     */
+    private static long bestScore = 0;
     private boolean gameOver = false;
     private boolean winShown = false;
     private boolean continueAfterWin = false;
@@ -315,7 +320,13 @@ public class Game2048Plugin implements GamePlugin {
                 board.add(cell, c, r);
             }
         }
-        scoreLabel.setText("分数 " + score);
+        bestScore = nextBest(bestScore, score);
+        scoreLabel.setText("分数 " + score + "　·　最高 " + bestScore);
+    }
+
+    /** 历史最高分推进（纯函数，便于单测） */
+    static long nextBest(long best, long score) {
+        return Math.max(best, score);
     }
 
     private static String tileStyle(int v) {
