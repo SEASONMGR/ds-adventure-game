@@ -107,6 +107,10 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
     private boolean turbo = false;          // 逐字显示加速分支（“加速”按钮动作已移除，恒为 false）
     private double typeSpeed = 14;          // ms/字符
     private double volume = 0.8;
+    /** 全局音量倍率（标题页设置项）：乘在地图 [option] volume 之上 */
+    private double volumeScale = 1.0;
+    /** ESC 回调（标题页/宿主用来弹"回到标题"菜单） */
+    private Runnable escHandler;
 
     // ---- 视图 ----
     private final StackPane mainStack = new StackPane();
@@ -1739,6 +1743,11 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
     private void dispatchKey(KeyEvent e, String phase) {
         if (project == null || scene == null || pluginMode()) return;
         String code = e.getCode() == null ? "" : e.getCode().name();
+        // ESC：交给宿主弹「继续 / 回到标题 / 退出」菜单（优先于剧本里的键盘信号）
+        if ("ESCAPE".equals(code) && "press".equals(phase) && escHandler != null) {
+            escHandler.run();
+            return;
+        }
         LinkedHashMap<String, Object> params = new LinkedHashMap<>();
         params.put("key", code);
         params.put("keyText", e.getText());
@@ -2150,10 +2159,52 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
     }
 
     /** 当前已加载的地图文件夹（解析后的工程根即地图目录）；未知返回 null */
-    /** 主音量：取 [option] volume（插件播放音频/视频时作为默认音量） */
+    /** 主音量：地图 [option] volume × 全局倍率（插件播放音频/视频时作为默认音量） */
     @Override
     public double masterVolume() {
-        return project == null ? 0.8 : project.option().volume();
+        double base = project == null ? 0.8 : project.option().volume();
+        return clamp(base * volumeScale, 0, 1);
+    }
+
+    /** 设置全局音量倍率（标题页设置）；立即作用到正在播放的音频通道 */
+    public void setMasterVolumeScale(double scale) {
+        this.volumeScale = clamp(scale, 0, 1);
+        double v = masterVolume();
+        for (MediaPlayer p : audioChannels.values()) {
+            try {
+                p.setVolume(v);
+            } catch (RuntimeException ignored) {
+                // 单通道失败不影响其它
+            }
+        }
+        Logs.info("[Audio] 全局音量倍率 = " + String.format("%.2f", volumeScale)
+                + "（实际 " + String.format("%.2f", v) + "）");
+    }
+
+    /** 当前全局音量倍率 */
+    public double masterVolumeScale() { return volumeScale; }
+
+    /** 设置打字机速度（毫秒/字符，越小越快）；下一段台词生效 */
+    public void setTypewriterSpeed(double msPerChar) {
+        this.typeSpeed = Math.max(1.0, msPerChar);
+    }
+
+    /** 当前打字机速度（毫秒/字符） */
+    public double typewriterSpeed() { return typeSpeed; }
+
+    /** 注册 ESC 回调（标题页"回到标题"菜单用） */
+    public void setOnEscape(Runnable handler) { this.escHandler = handler; }
+
+    /** 回到标题前清理：停打字机、停音频、摘掉正在嵌入的小游戏 */
+    public void disposeForTitle() {
+        for (DialogParagraph d : dialogs) {
+            if (d.timer != null) d.timer.stop();
+            d.timer = null;
+            d.busy = false;
+        }
+        stopAllAudio();
+        detachActivePlugin("回到标题");
+        escHandler = null;   // 回到标题后旧实例不再响应 ESC（键盘过滤器仍挂在 Scene 上）
     }
 
     // ---------- FlowHost 的音频通道（插件用；实现见下方 playAudioChannel 等） ----------
