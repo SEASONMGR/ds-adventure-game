@@ -1036,7 +1036,48 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
     }
 
     /** 点击对话框：逐字中=显示全文；否则切下一段；已是最后一段 → 跳转“下一个场景” */
+    // =====================================================================
+    // UI 全局音（由播放器硬编码，不写进剧本；见《素材交接-剧情侧答复》§二）
+    //   se_click  = 点击推进对话 / se_hover = 选项悬停 / se_select = 选项确认
+    // 短音效用 AudioClip（低延迟、可并发），素材缺失一律静默跳过。
+    // =====================================================================
+    private final java.util.Map<String, javafx.scene.media.AudioClip> uiClips = new java.util.HashMap<>();
+    private final java.util.Set<String> uiSoundMissing = new java.util.HashSet<>();
+    private long lastHoverSoundAt = 0;
+
+    /** 播放 UI 全局音；首次成功加载时记一条日志（便于实测核对） */
+    private void playUiSound(String id) {
+        if (uiSoundMissing.contains(id)) return;
+        try {
+            javafx.scene.media.AudioClip clip = uiClips.get(id);
+            if (clip == null) {
+                File f = resolveAsset("assets/sounds/" + id + ".wav");
+                if (f == null || !f.isFile()) {
+                    uiSoundMissing.add(id);
+                    Logs.info("[Audio] UI 音效未就位，跳过: " + id);
+                    return;
+                }
+                clip = new javafx.scene.media.AudioClip(f.toURI().toString());
+                uiClips.put(id, clip);
+                Logs.info("[Audio] UI 音效已就绪: " + id);
+            }
+            clip.play(clamp(masterVolume(), 0, 1));
+        } catch (RuntimeException e) {
+            uiSoundMissing.add(id);
+            Logs.warn("[Audio] UI 音效不可用 " + id + "：" + e.getMessage());
+        }
+    }
+
+    /** 悬停音限流：鼠标划过一串选项时不要连发 */
+    private void playHoverSound() {
+        long now = System.currentTimeMillis();
+        if (now - lastHoverSoundAt < 60) return;
+        lastHoverSoundAt = now;
+        playUiSound("se_hover");
+    }
+
     private void onDialogClicked(DialogParagraph st) {
+        playUiSound("se_click");
         if (st.busy) {
             finishParagraph(st);
             return;
@@ -1069,7 +1110,11 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
         btn.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
         btn.getStyleClass().add("story-btn");
         applyStyle(btn, node.getStyle());
-        btn.setOnAction(e -> onStoryAction(node));
+        btn.setOnAction(e -> {
+            playUiSound("se_select");
+            onStoryAction(node);
+        });
+        btn.setOnMouseEntered(e -> playHoverSound());
         FxAnim.makeInteractive(btn);
         return btn;
     }

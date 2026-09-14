@@ -1,4 +1,30 @@
 # 更新日志 (Changelog)
+## [v1.16] 接入剧情侧演出指令（@cg/@se/@bgm）+ 横幅图片 + UI 全局音
+
+### Added
+- 编译器支持剧情侧新增的三条指令：`@cg <id> [flash|hold|clear]`（CG 作为舞台层，背景之上、立绘之下）、
+  `@se <id> [vol:x]`（编译为音频插件槽，**每个 SE 独立通道 → 多路并发互不打断**）、
+  `@bgm <bgmid> [loop|stop|fade]`（场景中途换曲）
+- `st:` 横幅按剧情侧 §五 映射表改贴**图片横幅**（`sys_busy` / `sys_scale_break` …，含第 4 章变体规则），
+  未映射文案回退文字横幅；图片横幅用整屏透明按钮承载推进，不再重复对话框文字
+- **UI 全局音**（播放器硬编码，不写进剧本）：`se_click` 点击推进 / `se_hover` 选项悬停（带限流）/ `se_select` 选项确认
+- 入库素材：20 个 SE + 14 条系统横幅 + 前两章引用的 4 张 CG（共 7.5 MB）
+
+### Changed
+- 任何拍点都能带「进入即执行」的槽（此前只有逻辑拍点能带，SE 就靠这个挂载）
+- CG 路径 **JPEG 优先**（美术侧约定 CG 走 JPEG，两种都在时自动用 JPEG）
+
+### Fixed
+- 音频 `resolveAsset` 只查地图目录、无 classpath 回退 → `assets/sounds/*.wav` 报「找不到音频」；
+  现增加 classpath 回退，并把 jar 内资源释放为临时文件（`Media` 不能直接播 `jar:`）
+- 音频缺失会弹 toast 打断剧情 → 改为**静默**（只记日志）
+- 一次性音效未释放 → 播完/出错即 `dispose` 并移出通道表（SE 并发不再累积 MediaPlayer）
+
+### Verified
+- `mvnw.cmd clean test` → **111/111**；重编译 **207 场景 / 978 节点 / 0 解析警告**
+- 实机：`[Audio] 播放一次 assets/sounds/se_abacus.wav`；`UI 音效已就绪: se_click / se_hover / se_select`
+- 截图核对：CG 场景（立绘正确压在 CG 之上）、横幅场景（图片横幅、无重复对话框）
+
 ## [v1.15] 移植 PR #14 的 2048 历史最高分
 
 ### Added
