@@ -451,6 +451,9 @@ public class MyLogic implements com.studio.flow.LogicHandler {
 - **提交信息**：遵循 `feat:` / `fix:` / `docs:` / `chore:` / `refactor:` 前缀，中文描述可读。
 - **`.gitignore` 要点**：`target/`、`maps/`（运行时地图）、`plugins/classes/`、`plugins/*.jar`、`logic/classes/`、`logic/*.jar`、`.idea/`、`.out-*/`，以及本地文档目录 `docs/私人/`（**不进入版本库**）。
 - **素材**：美术资源放 `src/main/resources/assets/`（`sprites/`、`sounds/`），地图内使用 `resources/…` 相对路径引用。
+- **CG 素材**：`assets/cg/*.png` 是**游戏分辨率**（22 张，全量入库，剧情 `@cg` 用它们）；
+  `assets/cg/hires/*.jpg` 是**高清版**（22 张 / 约 25 MB，JPEG q88~90、**4:4:4 无色度渗色**）。
+  hires 的**原始 PNG 不入库**（127 MB，已在 `.gitignore` 忽略）——素材管线里 PNG 是源、JPEG 是交付形态。
 
 ---
 
