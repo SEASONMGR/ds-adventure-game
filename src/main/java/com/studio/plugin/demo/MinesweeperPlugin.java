@@ -125,8 +125,11 @@ public class MinesweeperPlugin implements GamePlugin {
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
 
-        HBox header = new HBox(10, mineCountLabel, timerLabel, spacer, restart, statusLabel);
+        // 信息条分两行：上行「剩余 / 用时 / 重新开局」，下行操作提示
+        // （挤在一行时标签会被省略号截断，加用时后尤其明显）
+        HBox header = new HBox(12, mineCountLabel, timerLabel, spacer, restart);
         header.setAlignment(Pos.CENTER_LEFT);
+        VBox topBar = new VBox(6, header, statusLabel);
 
         // ---- 棋盘区 ----
         area = new StackPane();
@@ -138,10 +141,11 @@ public class MinesweeperPlugin implements GamePlugin {
 
         BorderPane root = new BorderPane();
         root.getStyleClass().add("mine-root");
-        root.setTop(header);
-        BorderPane.setMargin(header, new Insets(0, 0, 12, 0));
+        root.setTop(topBar);
+        BorderPane.setMargin(topBar, new Insets(0, 0, 12, 0));
         root.setCenter(area);
-        root.setPrefWidth(cols * 40.0 + 28);
+        // 略放宽，保证两行信息条 + 棋盘都不被截断
+        root.setPrefWidth(Math.max(cols * 40.0 + 28, 420));
 
         buildBoard();
         overlay.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
