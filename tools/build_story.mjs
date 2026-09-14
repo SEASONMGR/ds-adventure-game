@@ -36,6 +36,15 @@ const POS = { left: { x: 60, y: 150 }, center: { x: 480, y: 150 }, right: { x: 9
 const CHAR_W = 320, CHAR_H = 520;
 const DIALOG_BOX = { x: 70, y: 516, w: 1140, h: 178 };
 const BANNER = { x: 240, y: 250, w: 800, h: 160 };
+const NAME = { x: 90, y: 462, w: 340, h: 44 };
+
+/** 角色 id → 名牌显示名（剧本里只有 id，这里给玩家看的名字） */
+const DISPLAY_NAME = {
+  ds: "ds娘", glm: "GLM娘", qianwen: "千问酱", kimi: "Kimi娘", "灯官": "灯官",
+  "契官": "契官", "戏官": "戏官", sclerk: "司秤吏", snake_expert: "守鳞人",
+  reimu: "博丽灵梦", bugs: "报幕虫", miku: "初音未来", amiya: "阿米娅",
+  paimon: "派蒙", pikachu: "皮卡丘", creeper: "苦力怕", sai: "藤原佐为", "怪力": "怪力"
+};
 
 // =====================================================================
 // 1) 解析 DSL
@@ -191,13 +200,16 @@ function flushDialog(label) {
 }
 
 let dialogBuf = [];
+let dialogSpeaker = "";
 let currentLabel = null;
 
 function flush(label) {
   if (!dialogBuf.length) return;
   const b = newBeat(label, "dialog");
   b.dialog = dialogBuf.slice();
+  b.speaker = dialogSpeaker;
   dialogBuf = [];
+  dialogSpeaker = "";
   return b;
 }
 
@@ -234,9 +246,14 @@ for (const d of directives) {
       flush(currentLabel);
       stage.chars.delete(d.role);
       break;
-    case "dialog":
+    case "dialog": {
+      // 说话人变了就拆成一拍：这样名牌与「说话者高亮」能精确到句
+      const sp = d.speaker || "narr";
+      if (dialogBuf.length && dialogSpeaker && dialogSpeaker !== sp) flush(currentLabel);
+      dialogSpeaker = sp;
       dialogBuf.push(d.text);
       break;
+    }
     case "banner": {
       flush(currentLabel);
       const b = newBeat(currentLabel, "banner");
@@ -373,10 +390,16 @@ L.push("typewriterSpeed = 18");
 for (const f of [...flags].sort()) L.push(`savevar = ${f} | int | 0`);
 L.push("");
 
+/** 去掉台词开头的「角色: 」前缀（名牌已显示说话人） */
+function stripSpeaker(text) {
+  return String(text).replace(/^[A-Za-z0-9_\u4e00-\u9fa5]+:\s*/, "");
+}
+
 const emitStage = (b, out) => {
   // 背景
   if (b.bg) {
-    out.push("{", "type = bg", "x = 0", "y = 0", "width = 1280", "height = 720",
+    // 背景必须带固定 id：引擎的 stage=keep 复用是按 id + 签名匹配的（无 id 会被每拍重建）
+    out.push("{", "type = bg", "id = 背景", "x = 0", "y = 0", "width = 1280", "height = 720",
       `path = ${bgPath(b.bg)}`);
     if (b.title) out.push(`# 幕题: ${b.title}`);
     out.push("}");
@@ -391,8 +414,12 @@ const emitStage = (b, out) => {
       x += (k % 2 === 1 ? -1 : 1) * (120 * Math.ceil(k / 2));
     }
     used.set(c.pos, (used.get(c.pos) || 0) + 1);
+    // 说话者高亮：说话人 1.0，其他立绘压暗到 0.5；旁白拍不压暗
+    const speaker = b.speaker && b.speaker !== "narr" ? b.speaker : "";
+    const op = !speaker || c.role === speaker ? "1.0" : "0.5";
     out.push("{", "type = char", `id = char_${c.role}`, `x = ${x}`, `y = ${p.y}`,
-      `width = ${CHAR_W}`, `height = ${CHAR_H}`, `path = ${spritePath(c.role, c.expr)}`, "}");
+      `width = ${CHAR_W}`, `height = ${CHAR_H}`, `path = ${spritePath(c.role, c.expr)}`,
+      `opacity = ${op}`, "}");
   }
 };
 
@@ -401,9 +428,13 @@ const labelOfSpeaker = (text) => {
   return m ? m[1] : "";
 };
 
+let prevBg = null;
 for (const b of beats) {
   const out = [];
   out.push(`[${b.scene}]`);
+  // 背景没变 → 承接上一拍的舞台（引擎 stage=keep：不整屏淡入、背景/立绘不重建）
+  if (prevBg !== null && b.bg === prevBg) out.push("stage = keep");
+  prevBg = b.bg;
   if (b.kind === "minigame") {
     out.push(`event = ${b.mg.id}`);
     out.push(`mg.mode = ${b.mg.mode}`);
@@ -416,24 +447,30 @@ for (const b of beats) {
   emitStage(b, out);
 
   if (b.kind === "dialog") {
-    out.push("{", "type = dialog", "x = " + DIALOG_BOX.x, "y = " + DIALOG_BOX.y,
+    if (b.speaker && b.speaker !== "narr") {
+      out.push("{", "type = name", "id = 名牌", "x = " + NAME.x, "y = " + NAME.y,
+        "width = " + NAME.w, "height = " + NAME.h,
+        "text = " + (DISPLAY_NAME[b.speaker] || b.speaker), "fontSize = 22", "}");
+    }
+    out.push("{", "type = dialog", "id = 对话框", "x = " + DIALOG_BOX.x, "y = " + DIALOG_BOX.y,
       "width = " + DIALOG_BOX.w, "height = " + DIALOG_BOX.h);
     out.push("text = <<<");
     // 每行台词 = 一个独立段落（引擎按独立一行 --- 分段，点击逐段推进）；
     // 若整段堆在一起，引擎会一次性渲染全部行 → 必然溢出对话框。
+    // 说话人由上面的名牌节点承担，所以这里去掉「角色: 」前缀。
     b.dialog.forEach((t, i) => {
       if (i > 0) out.push("---");
-      out.push(t);
+      out.push(stripSpeaker(t));
     });
     out.push("<<<");
     if (b.target) out.push(`target = ${b.target}`);
     out.push("}");
   } else if (b.kind === "banner") {
-    out.push("{", "type = text", "x = " + BANNER.x, "y = " + BANNER.y,
+    out.push("{", "type = text", "id = 横幅", "x = " + BANNER.x, "y = " + BANNER.y,
       "width = " + BANNER.w, "height = " + BANNER.h, `text = ${b.banner}`,
       "fontSize = 40", "align = center",
       "style = -fx-text-fill: #ffd76a; -fx-background-color: rgba(10,12,26,0.86); -fx-background-radius: 18; -fx-border-color: #ffd76a; -fx-border-radius: 18;", "}");
-    out.push("{", "type = dialog", "x = " + DIALOG_BOX.x, "y = " + DIALOG_BOX.y,
+    out.push("{", "type = dialog", "id = 对话框", "x = " + DIALOG_BOX.x, "y = " + DIALOG_BOX.y,
       "width = " + DIALOG_BOX.w, "height = " + DIALOG_BOX.h);
     out.push("text = <<<");
     out.push(b.banner);

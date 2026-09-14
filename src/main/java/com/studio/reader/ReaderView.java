@@ -163,6 +163,21 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
     private String mgWith = "";
     private com.studio.plugin.MiniGameResult pendingResult;
     /**
+     * 上一拍的「舞台」节点（背景 / 立绘）与其签名。
+     * <p>场景写 {@code stage = keep} 时（编译器给同一幕的连续拍点标注），下一拍只重建
+     * 内容节点（对话 / 名牌 / 按钮），舞台节点按签名复用 —— 同 id 同签名直接沿用同一个视图，
+     * 不重建也不重播入场动画，因此<b>点一句台词不会再整屏闪一次</b>。</p>
+     */
+    private final java.util.LinkedHashMap<String, Node> stageViews = new java.util.LinkedHashMap<>();
+    private final java.util.LinkedHashMap<String, String> stageSignatures = new java.util.LinkedHashMap<>();
+    private final java.util.LinkedHashMap<String, StoryNode> stageNodes = new java.util.LinkedHashMap<>();
+    /**
+     * 本拍的内容节点（对话 / 名牌 / 按钮 / 横幅 / 文本）。
+     * <p>{@code stage = keep} 时按这个列表精确移除上一拍的内容 —— 不能只按 {@code nodeViews}（那个按 id 索引，
+     * 而内容节点常常没有 id），否则上一拍的对话框会留在板上，越叠越多（表现为台词叠字）。</p>
+     */
+    private final java.util.ArrayList<Node> contentViews = new java.util.ArrayList<>();
+    /**
      * 场景自动信号嵌套深度：槽里 {@code goto} 会同步递归进入下一幕并再次发「场景进入」——
      * 这是<b>链式逻辑拍点</b>（如「自动存档 → goto 下一幕」）赖以推进的正常行为，必须放行。
      * 只用深度上限兜住真正的自环/互环死循环。
@@ -392,10 +407,33 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
         this.scene = target;
         // 注：自动信号「场景进入」在本幕渲染完成后发送一次（见下方 emitAutoSignal）
 
-        board.getChildren().clear();
-        nodeViews.clear();
-        disposeAllVideos();
-        FxAssets.clearCache();
+        // 本幕是否承接上一幕的舞台（脚本写 stage = keep）：有上一拍舞台时才谈得上复用
+        boolean keepStage = "keep".equalsIgnoreCase(sceneProp(target, "stage")) && !stageViews.isEmpty();
+
+        java.util.LinkedHashMap<String, Node> nextStageViews = new java.util.LinkedHashMap<>();
+        java.util.LinkedHashMap<String, String> nextStageSignatures = new java.util.LinkedHashMap<>();
+        java.util.LinkedHashMap<String, StoryNode> nextStageNodes = new java.util.LinkedHashMap<>();
+
+        if (!keepStage) {
+            board.getChildren().clear();
+            nodeViews.clear();
+            contentViews.clear();
+            disposeAllVideos();
+            FxAssets.clearCache();
+            stageViews.clear();
+            stageSignatures.clear();
+            stageNodes.clear();
+        } else {
+            // 精确移除上一拍的「内容节点」（含没有 id 的），舞台节点先留在板上复用或走退场
+            for (Node gone : new java.util.ArrayList<>(contentViews)) {
+                board.getChildren().remove(gone);
+            }
+            contentViews.clear();
+            for (String id : new java.util.ArrayList<>(nodeViews.keySet())) {
+                if (!stageViews.containsKey(id)) nodeViews.remove(id);
+            }
+            FxAssets.clearCache();
+        }
 
         // 背景底色来自 [option]
         String bg = project.option().background();
@@ -406,6 +444,32 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
         int index = 0;
         for (StoryNode node : scene.nodes()) {
             applyStoredOverrides(node); // 读档/上次逻辑改动过的属性优先生效
+            String nid = node.getId();
+            boolean stageNode = isStageNode(node);
+            String sig = stageSignature(node);
+
+            // 舞台节点且签名完全一致 → 直接复用上一拍的视图：不重建、不重播入场
+            if (keepStage && stageNode && !nid.isBlank() && stageViews.containsKey(nid)
+                    && sig.equals(stageSignatures.get(nid))) {
+                Node kept = stageViews.get(nid);
+                if (kept != null) {
+                    // 复用视图本身，只平滑更新不影响复用的属性（说话者高亮 = 不透明度变化）
+                    double want = clamp(node.getOpacity(), 0.05, 1.0);
+                    if (Math.abs(kept.getOpacity() - want) > 0.01) {
+                        FadeTransition hi = new FadeTransition(Duration.millis(180), kept);
+                        hi.setToValue(want);
+                        hi.play();
+                    }
+                    kept.setVisible(node.isVisible());
+                    nodeViews.put(nid, kept);
+                    nextStageViews.put(nid, kept);
+                    nextStageSignatures.put(nid, sig);
+                    nextStageNodes.put(nid, node);
+                    index++;
+                    continue;
+                }
+            }
+
             Node view = buildNode(node);
             if (view == null) continue;
             view.setLayoutX(node.getX());
@@ -413,16 +477,55 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
             view.setOpacity(clamp(node.getOpacity(), 0.05, 1.0));
             view.setVisible(node.isVisible());
             board.getChildren().add(view);
-            if (!node.getId().isBlank()) nodeViews.put(node.getId(), view);
+            if (!nid.isBlank()) nodeViews.put(nid, view);
             installMouseSignals(view, node);
             applyViewProps(view, node);
-            if (animate && node.needsVisual()) {
+
+            if (stageNode && !nid.isBlank()) {
+                nextStageViews.put(nid, view);
+                nextStageSignatures.put(nid, sig);
+                nextStageNodes.put(nid, node);
+                Node old = keepStage ? stageViews.get(nid) : null;
+                if (old != null && old != view) {
+                    crossFadeOut(old, 220);            // 同 id 换图（例如换表情）：旧图淡出
+                } else if (keepStage && animate && node.needsVisual()) {
+                    // 本拍新登场的立绘：按站位从左/右滑入、居中淡入（含轻微放大）
+                    stageEntrance(view, node, 40);
+                }
+            }
+
+            if (!stageNode) {
+                contentViews.add(view);
+            }
+            if (!keepStage && animate && node.needsVisual()) {
                 FxAnim.entrance(view, 60 + index * 70, 380);
             }
             index++;
         }
 
-        if (animate) {
+        // 本拍不再出现的舞台节点：播退场动画后移除（不阻塞本拍内容）
+        if (keepStage) {
+            for (java.util.Map.Entry<String, Node> e : new java.util.ArrayList<>(stageViews.entrySet())) {
+                if (nextStageViews.containsKey(e.getKey())) continue;
+                Node gone = e.getValue();
+                if (gone != null) stageExit(gone, stageNodes.get(e.getKey()));
+            }
+            // 舞台节点层级归位：背景在下、立绘依次在上，内容节点保持最上
+            int layer = 0;
+            for (Node kept : nextStageViews.values()) {
+                board.getChildren().remove(kept);
+                board.getChildren().add(layer++, kept);
+            }
+        }
+        stageViews.clear();
+        stageViews.putAll(nextStageViews);
+        stageSignatures.clear();
+        stageSignatures.putAll(nextStageSignatures);
+        stageNodes.clear();
+        stageNodes.putAll(nextStageNodes);
+
+        // 承接上一幕时不整屏淡入（否则每点一句全屏闪一次）；换幕/开场仍保留整屏淡入
+        if (animate && !keepStage) {
             board.setOpacity(0);
             FadeTransition ft = new FadeTransition(Duration.millis(280), board);
             ft.setToValue(1.0);
@@ -456,6 +559,87 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
             prev.put("to", name);
             emitAutoSignal(AutoSignals.PREV_LEAVE, prev, cameFrom + " 已离开（本幕 " + name + " 收到）");
         }
+    }
+
+    /** 舞台节点 = 背景 / 立绘（{@code stage = keep} 时被复用的那类节点） */
+    private static boolean isStageNode(StoryNode node) {
+        return node != null && (node.getType() == NodeType.BACKGROUND || node.getType() == NodeType.CHARACTER);
+    }
+
+    /**
+     * 舞台签名：这些属性都没变就可以沿用同一个视图。
+     * <p>刻意<b>不含</b> {@code opacity} / {@code visible} —— 说话者高亮只改不透明度，
+     * 若把它们算进签名，每换一次说话人就会重建立绘（反而闪）；把它们排除后，
+     * 复用的视图会平滑淡到新不透明度（见下面的复用分支）。</p>
+     */
+    private static String stageSignature(StoryNode node) {
+        return node.getType() + "|" + node.getPath() + "|" + node.getX() + "|" + node.getY() + "|"
+                + node.getWidth() + "|" + node.getHeight() + "|" + node.getStyle();
+    }
+
+    /** 旧视图淡出后移除（换表情/换图时叠一层交叉淡变） */
+    private void crossFadeOut(Node oldView, int ms) {
+        if (oldView == null) return;
+        FadeTransition out = new FadeTransition(Duration.millis(ms), oldView);
+        out.setToValue(0);
+        out.setOnFinished(e -> board.getChildren().remove(oldView));
+        out.play();
+    }
+
+    /**
+     * 立绘/背景入场：立绘按站位从左/右滑入（居中则淡入 + 轻微放大），背景统一淡入。
+     * 时长与缓动与整体演出节奏对齐（约 260ms，EASE_OUT）。
+     */
+    private void stageEntrance(Node view, StoryNode node, int delayMs) {
+        double dx = 0;
+        if (node.getType() == NodeType.CHARACTER) {
+            if (node.getX() < 420) dx = -70;
+            else if (node.getX() > 700) dx = 70;
+        }
+        double targetOpacity = clamp(node.getOpacity(), 0.05, 1.0);
+        view.setOpacity(0);
+        javafx.animation.ParallelTransition anim = new javafx.animation.ParallelTransition();
+        FadeTransition fade = new FadeTransition(Duration.millis(260), view);
+        fade.setToValue(targetOpacity);
+        anim.getChildren().add(fade);
+        if (dx != 0) {
+            view.setTranslateX(dx);
+            TranslateTransition slide = new TranslateTransition(Duration.millis(260), view);
+            slide.setToX(0);
+            slide.setInterpolator(javafx.animation.Interpolator.EASE_OUT);
+            anim.getChildren().add(slide);
+        } else if (node.getType() == NodeType.CHARACTER) {
+            view.setScaleX(0.96);
+            view.setScaleY(0.96);
+            ScaleTransition pop = new ScaleTransition(Duration.millis(260), view);
+            pop.setToX(1.0);
+            pop.setToY(1.0);
+            pop.setInterpolator(javafx.animation.Interpolator.EASE_OUT);
+            anim.getChildren().add(pop);
+        }
+        anim.setDelay(Duration.millis(Math.max(0, delayMs)));
+        anim.play();
+    }
+
+    /** 立绘/背景退场：淡出并按站位方向滑走，然后从板上移除 */
+    private void stageExit(Node view, StoryNode node) {
+        if (view == null) return;
+        double dx = 0;
+        if (node != null && node.getType() == NodeType.CHARACTER) {
+            if (node.getX() < 420) dx = -60;
+            else if (node.getX() > 700) dx = 60;
+        }
+        javafx.animation.ParallelTransition anim = new javafx.animation.ParallelTransition();
+        FadeTransition fade = new FadeTransition(Duration.millis(220), view);
+        fade.setToValue(0);
+        anim.getChildren().add(fade);
+        if (dx != 0) {
+            TranslateTransition slide = new TranslateTransition(Duration.millis(220), view);
+            slide.setToX(dx);
+            anim.getChildren().add(slide);
+        }
+        anim.setOnFinished(e -> board.getChildren().remove(view));
+        anim.play();
     }
 
     /**
