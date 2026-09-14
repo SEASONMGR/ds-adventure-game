@@ -178,11 +178,13 @@ mvnw.cmd -q exec:java "-Dexec.mainClass=com.studio.parser.ParserSelfTest"
 | 需求 | 优先级 | 当前状态 | 现有落点 |
 |---|---|---|---|
 | 2048 小游戏 | P1 | **已具备（demo）** | `com.studio.plugin.demo.Game2048Plugin` |
-| 扫雷小游戏 | P1 | **已具备（demo）** | `com.studio.plugin.demo.MinesweeperPlugin` |
+| 扫雷小游戏 | P1 | **已具备（demo）** | `com.studio.plugin.demo.MinesweeperPlugin`；含**用时显示**（首击计时 / 胜负停表） |
 | 存档系统 | P1 | **部分具备** | `saves/` 三槽存档 + `SavePortal` + `FlowVariables`；「进入小游戏前自动存档」「跨周目全局记录」待补 | 
 | 打砖块小游戏 | P1 | **已具备（demo）** | `com.studio.plugin.demo.breakout`；编辑器菜单可生成演示地图 |
 | 记忆翻牌小游戏 | P1 | **已具备（demo）** | `com.studio.plugin.demo.memory`；演示地图 `docs/demo-maps/memory/` |
-| 连连看 / 推箱子 / 五子棋 | P1 | 待实现 | 玩法说明见 `docs/ds-adventrue/*.md` |
+| 推箱子小游戏 | P1 | **已具备** | `com.studio.plugin.demo.sokoban`；3 关 + 撤销 + BFS 穷举验证每关可解；演示地图 `docs/demo-maps/sokoban/` |
+| 五子棋小游戏 | P1 | **已具备** | `com.studio.plugin.demo.gomoku`；15×15 + 威胁打分 AI；演示地图 `docs/demo-maps/gomoku/` |
+| 连连看小游戏 | P1 | 待实现 | 玩法说明见 `docs/ds-adventrue/连连看.md` |
 | 回忆收藏馆 / 结局收集 | P1 | 待实现 | — |
 | 音频（BGM / 音效 / 静音） | P2 | 已具备 | `@plugin(audio)`：多通道（bgm/se）循环与一次性播放、停/暂停/继续/音量；节点 `audio` 属性与 `music` 节点类型已废除 |
 | 系统提示条（toast） | P2 | 已具备 | `type = toast` 节点（由原音乐节点更名）：自带默认样式的提示条，如右上角显示「存档中…」；显隐用现成的 `visible` 槽动作 |
@@ -205,8 +207,8 @@ mvnw.cmd -q exec:java "-Dexec.mainClass=com.studio.parser.ParserSelfTest"
 | 打砖块 | P1 | **已具备**（事件 ID `breakout`，编辑器菜单可生成演示地图） |
 | 记忆翻牌 | P1 | **已具备**（事件 ID `memory`，演示地图 `docs/demo-maps/memory/`） |
 | 连连看 | P1 | 待实现 |
-| 推箱子 | P1 | 待实现 |
-| 五子棋 | P1 | 待实现 |
+| 推箱子 | P1 | **已具备**（事件 ID `sokoban`，演示地图 `docs/demo-maps/sokoban/`） |
+| 五子棋 | P1 | **已具备**（事件 ID `gomoku`，威胁打分 AI，演示地图 `docs/demo-maps/gomoku/`） |
 
 统一接入约定：小游戏实现 `com.studio.plugin.GamePlugin`，返回的 `Parent` 会被嵌入 Player 主舞台中央，
 顶部自动生成「🎮 插件名 … ← 返回剧情」标题栏；外部插件开发流程与内置插件手册见 [`plugins/README.md`](plugins/README.md)。

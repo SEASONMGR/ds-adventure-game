@@ -1,4 +1,24 @@
 # 更新日志 (Changelog)
+## [v1.14] 合并推箱子 / 五子棋插件 + 移植 PR #12 的扫雷用时
+
+### Added
+- 合并 PR #13：**推箱子**插件 `com.studio.plugin.demo.sokoban`（3 关 + Z 撤销 + R 重玩，测试内含 BFS 穷举验证每关必定可解，19 项单测）；事件 ID `sokoban`；演示地图 `docs/demo-maps/sokoban/`
+- 合并 PR #11：**五子棋**插件 `com.studio.plugin.demo.gomoku`（15×15 + 威胁打分 AI，22 项单测）；事件 ID `gomoku`；演示地图 `docs/demo-maps/gomoku/`
+- 扫雷新增**用时显示**（移植自 PR #12 的 `Main.java`）：首击开始计时、胜负结算停表、重新开局归零；`onDetach()` 停表避免 Timeline 残留；新增 `MinesweeperTimerTest`（5 项）
+- 小游戏相关测试总数 60 → **106**
+
+### Changed
+- `plugins/plugins.ini` 注册 `sokoban` / `gomoku`（合并冲突解决为保留两行，共 9 条注册）
+- 扫雷顶部信息条改为**两行**（加入用时后单行会被省略号截断）
+- README 小游戏池与 CONTRIBUTING 事件 ID 表同步：推箱子 / 五子棋 → **已具备**
+
+### Fixed
+- `plugins/plugins.ini` 中文注释在解决合并冲突时被 ASCII 重写破坏 → 已从原始版本恢复
+
+### Closed
+- PR #12（独立 JavaFX 扫雷应用）**关闭**：仅把其中独有的 UI 细节（计时器）移植进现有 `MinesweeperPlugin`。
+  原因：未实现 `GamePlugin` / 无 `createEmbeddedView`（剧情 `event` 调不起来）、与仓库已有的 `minesweeper` 插件重复、且改动了 `pom.xml`
+
 ## [v1.13] 双击即玩：启动器与免安装 exe
 
 ### Added

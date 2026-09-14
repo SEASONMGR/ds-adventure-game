@@ -212,12 +212,12 @@ private void stopLoop() {                      // 必须幂等（onDetach 与兜
 | `breakout` ✅ 已接入 | 打砖块 | — | P1 |
 | `memory` ✅ 已接入 | 记忆翻牌 | — | P1 |
 | `linkgame` | 连连看 | — | P1 |
-| `sokoban` | 推箱子 | — | P1 |
-| `gomoku` | 五子棋 | — | P1 |
+| `sokoban` ✅ 已接入 | 推箱子 | — | P1 |
+| `gomoku` ✅ 已接入 | 五子棋 | — | P1 |
 
 > ID 一旦被地图引用就不要改名，否则已写好的 `event = xxx` 会失效。
 
-> **已接入**：`snake`、`plane`、`breakout`、`memory`（另有 `minesweeper` / `2048` / `savepanel` 三个内置 demo）。
+> **已接入**：`snake`、`plane`、`breakout`、`memory`、`sokoban`、`gomoku`（另有 `minesweeper` / `2048` / `savepanel` 三个内置 demo）。
 > 其中 `plane` 为**键盘操作**（方向键/WASD 移动、空格/J 射击）——组内已确认不需要虚拟摇杆。
 > 其中 `snake` 的实现可作为范例：`SnakeGame` 为纯规则（零 JavaFX 依赖）+ `SnakeGameTest` 单元测试 + `docs/demo-maps/snake/` 演示地图。
 
