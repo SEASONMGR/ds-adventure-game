@@ -1,6 +1,8 @@
 package com.studio.plugin.demo;
 
 import com.studio.plugin.GamePlugin;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -16,6 +18,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.util.Map;
 import java.util.Random;
@@ -50,6 +53,10 @@ public class MinesweeperPlugin implements GamePlugin {
     private Button[][] cells;
     private Label mineCountLabel;
     private Label statusLabel;
+    /** 用时显示：首击开始计时、胜负即停表（本项 UI 细节移植自 PR #12 的 Main.java） */
+    private Label timerLabel;
+    private Timeline timer;
+    private int elapsedSeconds;
     private StackPane area;
     private StackPane overlay;
     private final Random random = new Random();
@@ -111,10 +118,14 @@ public class MinesweeperPlugin implements GamePlugin {
         statusLabel = new Label("左键翻开 · 右键插旗");
         statusLabel.getStyleClass().add("mine-hint");
 
+        timerLabel = new Label("⏱ 00:00");
+        timerLabel.getStyleClass().add("mine-timer");
+        updateTimerLabel();
+
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
 
-        HBox header = new HBox(10, mineCountLabel, spacer, restart, statusLabel);
+        HBox header = new HBox(10, mineCountLabel, timerLabel, spacer, restart, statusLabel);
         header.setAlignment(Pos.CENTER_LEFT);
 
         // ---- 棋盘区 ----
@@ -183,6 +194,9 @@ public class MinesweeperPlugin implements GamePlugin {
     // =====================================================================
 
     private void restartGame() {
+        stopTimer();
+        elapsedSeconds = 0;
+        updateTimerLabel();
         buildBoard();
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < cols; c++) {
@@ -233,6 +247,7 @@ public class MinesweeperPlugin implements GamePlugin {
     private void open(int r, int c) {
         if (revealed[r][c] || flagged[r][c]) return;
         ensureMines(r, c);
+        startTimer();   // 首击开始计时（幂等）
         if (grid[r][c] == -1) {
             gameOver(false);
             return;
@@ -311,6 +326,7 @@ public class MinesweeperPlugin implements GamePlugin {
 
     private void gameOver(boolean win) {
         over = true;
+        stopTimer();
         if (win) {
             // 胜利：未插旗处自动补旗，展示完美棋盘
             for (int r = 0; r < rows; r++) {
@@ -338,6 +354,47 @@ public class MinesweeperPlugin implements GamePlugin {
             }
             showOverlay("💥 踩到地雷啦！", "点击“再来一局”挑战，或点上方【返回】退出小游戏。");
         }
+    }
+
+    // =====================================================================
+    // 用时（移植自 PR #12 的 Main.java —— 原实现只有独立应用版，这里并入插件形态）
+    // =====================================================================
+
+    /** 首击开始计时（幂等；已结束或已在计时则不重复起表） */
+    private void startTimer() {
+        if (timer != null || over) return;
+        timer = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+            elapsedSeconds++;
+            updateTimerLabel();
+        }));
+        timer.setCycleCount(Timeline.INDEFINITE);
+        timer.play();
+    }
+
+    /** 停表（胜负结算、重开、插件被摘除时都要调） */
+    private void stopTimer() {
+        if (timer != null) {
+            timer.stop();
+            timer = null;
+        }
+    }
+
+    private void updateTimerLabel() {
+        if (timerLabel != null) {
+            timerLabel.setText("⏱ " + formatElapsed(elapsedSeconds));
+        }
+    }
+
+    /** 秒 → {@code mm:ss}（包内可见，便于单测） */
+    static String formatElapsed(int seconds) {
+        int s = Math.max(0, seconds);
+        return String.format("%02d:%02d", s / 60, s % 60);
+    }
+
+    /** 插件被读取器摘除时停表，避免 Timeline 在返回剧情后继续跑 */
+    @Override
+    public void onDetach() {
+        stopTimer();
     }
 
     private void showOverlay(String title, String desc) {

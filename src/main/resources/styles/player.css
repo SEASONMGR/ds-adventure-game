@@ -73,6 +73,7 @@
 .mine-root { -fx-background-color: #101322; -fx-padding: 18; }
 .mine-title { -fx-text-fill: #ffd76a; -fx-font-size: 17px; -fx-font-weight: bold; }
 .mine-hint { -fx-text-fill: #9aa0c8; -fx-font-size: 12px; }
+.mine-timer { -fx-text-fill: #ffd76a; -fx-font-size: 15px; -fx-font-weight: bold; }
 .mine-cell {
     -fx-background-color: linear-gradient(to bottom, #4a4f74, #34384f);
     -fx-background-radius: 4;
