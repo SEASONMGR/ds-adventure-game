@@ -30,7 +30,8 @@ const SPRITES = path.join(ROOT, "src", "main", "resources", "assets", "sprites")
 // ---- 剧本 id → 素材目录 / 表情别名（依据《剧情素材需求总表》与 archive_assets 归档结果）----
 const ROLE_DIR = { qianwen: "qwen", 灯官: "dengguan", 契官: "qiguan", 戏官: "xiguan", 怪力: "gelili", 皮卡丘: "pikachu" };
 const EXPR_ALIAS = { cute: "happy", cry: "sad", whale_cute: "defect_happy", whale_cry: "defect_sad" };
-const BG_ALIAS = { server_hall: "bg_tech_serverroom", server_room: "bg_tech_serverroom" };
+// 背景临时顶替表（仅当同场景 id 的背景图尚未出图时兜底；素材到位后自动改用真图）
+const BG_ALIAS = { server_room: "bg_tech_serverroom" };
 
 const POS = { left: { x: 60, y: 150 }, center: { x: 480, y: 150 }, right: { x: 900, y: 150 } };
 const CHAR_W = 320, CHAR_H = 520;
@@ -160,8 +161,15 @@ function spritePath(role, expr) {
 }
 
 function bgPath(sceneId) {
-  const name = BG_ALIAS[sceneId] || `bg_${sceneId}`;
-  return `assets/sprites/backgrounds/${name}.png`;
+  // 优先用与场景 id 同名的真实背景（素材到位后自动生效）；
+  // 只有该场景图还没出时，才退回 BG_ALIAS 里的临时顶替图
+  const exact = `bg_${sceneId}`;
+  if (exists(path.join(SPRITES, "backgrounds", `${exact}.png`))) {
+    return `assets/sprites/backgrounds/${exact}.png`;
+  }
+  const alias = BG_ALIAS[sceneId];
+  if (alias) return `assets/sprites/backgrounds/${alias}.png`;
+  return `assets/sprites/backgrounds/${exact}.png`;
 }
 
 // =====================================================================
