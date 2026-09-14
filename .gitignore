@@ -4,6 +4,10 @@ build/
 .out-core/
 *.class
 .idea/
+# 防止把「下载的仓库副本」整份提交进来（PR #15 的教训：
+# 解压 GitHub ZIP 得到的 ds-adventure-game-main/ 被 git add -A 一起提交，265 文件 / 5 万行）
+/ds-adventure-game-main/
+/ds-adventure-game-*/
 *.iml
 .vscode/
 .DS_Store
