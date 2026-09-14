@@ -211,7 +211,8 @@ private void stopLoop() {                      // 必须幂等（onDetach 与兜
 | `minesweeper` ✅ 已接入 | 扫雷 | — | P1 |
 | `breakout` ✅ 已接入 | 打砖块 | — | P1 |
 | `memory` ✅ 已接入 | 记忆翻牌 | — | P1 |
-| `linkgame` | 连连看 | — | P1 |
+| `link` ✅ 已接入 | 连连看 | — | P1 |
+| ~~`linkgame`~~ | 连连看旧写法（**已统一为 `link`**，剧本第 6 章用的就是 `link`；为兼容仍注册为别名） | — | — |
 | `sokoban` ✅ 已接入 | 推箱子 | — | P1 |
 | `gomoku` ✅ 已接入 | 五子棋 | — | P1 |
 

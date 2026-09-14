@@ -56,6 +56,7 @@ public class PluginLoader {
         BUILTIN.put("link", "com.studio.plugin.demo.link.LinkPlugin");
         BUILTIN.put("sokoban", "com.studio.plugin.demo.sokoban.SokobanPlugin");
         BUILTIN.put("gomoku", "com.studio.plugin.demo.gomoku.GomokuPlugin");
+        BUILTIN.put("linkgame", "com.studio.plugin.demo.link.LinkPlugin");   // 旧写法别名
     }
 
     private final File pluginDir;      // 插件根目录
