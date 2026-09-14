@@ -44,6 +44,7 @@ narr: 没人接话。怪力掖了掖毛巾，转身往山根走，脚步在窄�
 narr: 窄路尽头，最底下那只箱子的签被灯光照得发黄，字迹一行行认得清清楚楚。
 narr: 箱子上贴着签：「全人类的聊天记录」「三十亿张没人署名的猫图」「没人写完的歌词」。
 @enter 怪力 moved right
+@cg cg_ch08_warehouse
 怪力: 【#21】
 @enter ds panic center
 ds: 【#22】
@@ -71,6 +72,7 @@ goto ch8_push
 皮卡丘: 【#30】
 narr: 它先一步蹲到坡底，四脚抓地，摆好垫背的架势。
 @label ch8_push
+@se se_box_push
 @minigame sokoban mode:normal onWin:ch8_win onLose:ch8_lose
 @label ch8_win
 narr: 最后一只箱子稳稳落上黄签。箱山让出一条缝，缝底亮着微光——V4 鳞端端正正躺在那里，像刚淬过水的月亮。
@@ -84,6 +86,7 @@ narr: 皮卡丘绕着箱缝转了两圈，电光把鳞照得透亮，像替它�
 st: 【无主之物仓 · 清点：少一件，多一个认领人】
 goto ch8_after
 @label ch8_lose
+@se se_busy
 st: 【服务器繁忙，请稍后再试】
 narr: 话音未落，斜坡上的箱子滑了半寸——整面箱山塌了下来，灰扬起一人多高，黄签飞得漫天都是。
 narr: 电光照出漫天翻飞的签纸，像一场倒着下的雨。守库鼠的鼾声停了一拍，又接着睡。

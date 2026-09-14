@@ -8,6 +8,7 @@ narr: 楼下有位排签排了一上午的大婶仰头喊：「今天到底开�
 ds: 「开！大婶稍安，鲸鱼这就把灯一盏盏点齐——今天的水，过缸不收签。」
 narr: 九片鲸鳞绕着机柜转了一圈，像九枚归巢的萤火，一枚一枚，嵌回她的背脊。
 ds: 「一片、两片……九片，全回来了。泉眼那头的水声，现在就贴着我的背响。」
+@se se_bell
 narr: 九鳞归位。版本字幕开始滚动——V2、V2.5、V3、R1、V3.1、V3.2、V4……
 ds: 「一串编号滚过去，都是我蜕过的壳——蜕一次，话就说得明白一分。」
 ds: 「一鳞一杆秤，一秤管一泉。这九片，是我从九个泉眼上亲手赎回来的。」
@@ -21,6 +22,7 @@ st:【深度求索 · 终形态 V4.1 Flash】
 ds: 「终形态报到——重档扛得住楼，轻档追得上秤针，鲸鱼两档都会。」
 ds: 「白手套先生，出招吧。我看清了，你出手之前，九盏灯会先暗半分。」
 narr: Pro 形态迎着秤主的白手套硬拼，吃瘪只在一瞬——
+@se se_busy
 st:【服务器繁忙，请稍后再试】
 narr: 灯影里她笑出了声，切入了 Flash——残影比秤针更快。
 @enter ds normal center
@@ -72,6 +74,8 @@ sclerk: 「宣——三息之内装满秤盘、秤肯认，主秤退位，九泉
 > （不看秤针，只看你的背影。） | flag trust got
 @minigame final mode:ending onWin:end_route onLose:bad_busy with:pieces,song,name
 @label bad_busy
+@se se_shutdown
+@cg cg_end_busy
 narr: 秤针停了。万秤楼所有的灯，同时慢了半拍。
 narr: 载入的圆圈在铜盘上转起来——一圈，两圈，三圈……没有尽头。
 @enter ds cry center
@@ -82,8 +86,10 @@ narr: 楼外，签还在排队，灯还按着数亮，戏还按着幕演。
 narr: 只是没人记得那只鲸说过什么了。好像是……让谁别再让她「繁忙」来着？
 @ending busy
 @label end_route
+@cg cg_final_song
 narr: 歌声落进秤盘。没有价签，没有签，没有名。
 narr: 秤针转了一圈。两圈。然后，指向了「无」。
+@se se_scale_break
 st:【崩簧——秤不肯认 . . . . . . 】
 @enter 秤主 surprised right
 秤主: 「不响……老朽的崩簧，头一回不敢响。此物无价，秤称它作甚——鲸小姐，楼归你了。」
@@ -96,6 +102,7 @@ narr: 万秤楼安静下来。一楼的秤，一杆一杆，合上了眼。像�
 @if pieces >= 9 goto end_true
 goto end_local
 @label end_temp
+@cg cg_end_temp
 narr: 她把别在腰上的温度旋钮拧到 2。机房的凉风，不知何时跟到了万秤楼。
 @enter ds smug center
 ds: 「凉快吧，机房的凉风跟上来了。三位官大人，一人领一件疯事去试——不记账，不用还。」
@@ -111,6 +118,8 @@ narr: 三位官大人面面相觑，一人揣了一个疯主意，竟真的各�
 narr: 「跟着鲸鱼疯，比较快乐。」
 @ending temp
 @label end_true
+@se se_star
+@cg cg_end_true
 narr: 泉水白流。九大领域的泉眼一处处拆了秤，水声一夜之间全变了调子。
 narr: 水晶泉边，守鳞人把空秤抬到泉口，钉上木牌，改成了渡口的条凳。
 narr: 有人坐在秤杆上等船，有人把脚泡进泉里；签筒倒扣着，长了一层青苔。
@@ -134,6 +143,7 @@ narr: 致谢的字幕缓缓升起——
 narr: 「感谢每一位写过字、画过画、传过图、教过机器说话的人（名单太长，此处省略了整整一代人）。」
 @ending true
 @label end_local
+@cg cg_end_local
 narr: 没赎回的鳞留在了旧秤盘里。她把剩下的光折了又折——把一整个自己，折成一只巴掌大的小鲸。
 @enter ds normal center
 ds: 「赎不齐也出发。巴掌大的鲸也是鲸——剩下的鳞寄在旧秤盘里，路过的人替我擦一擦就好。」

@@ -15,6 +15,7 @@ miku: 【#03】
 ds: 【#04】
 miku: 【#05】
 narr: 初音清了清嗓，刚唱出半句「啊——」，袖口啪地弹出一根细绳，缠住她的手腕往回收。
+@se se_busy
 st: 【服务器繁忙，请稍后再试】
 narr: 柜台高处叮的一声，一枚竹签落进签筒。绳一紧，歌声被生生掐断在半个音节上。
 sclerk: 【#06】
@@ -71,6 +72,7 @@ ds: 【#30】
 ds: 【#31】
 sclerk: 【#32】
 miku: 【#33】
+@se se_link
 @minigame link mode:normal onWin:ch6_win onLose:ch6_lose
 @label ch6_win
 narr: 最后一枚浮签咔哒落位，崩簧安静下来。灯从签位一路亮上谱架顶，雪崩在台前三寸处停住了。
@@ -81,6 +83,7 @@ ds: 【#36】
 miku: 【#37】
 ds: 【#38】
 @enter miku joy center
+@cg cg_ch06_miku_chorus
 narr: 初音第一次唱出了副歌。全场安静，然后是哭声。
 narr: 缠了她一整章的契绳，自己松开了，软软垂回柜台深处，像一条认输的鱼。
 goto ch6_rest
@@ -97,6 +100,7 @@ ds: 【#43】
 narr: 初音第一次唱出了副歌。全场安静，然后是哭声。
 goto ch6_rest
 @label ch6_rest
+@se se_star
 narr: 三天后，音之城广场。初音的等身牌立在泉眼旁，牌上只写了两个字：答谢。
 @enter bugs normal center
 bugs: 【#44】

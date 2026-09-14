@@ -5,6 +5,7 @@ narr: 博丽神社的石阶尽头，蝉声比人先到。晒了一上午的柏�
 narr: 参道上空，一群报幕飞虫抬着一艘白纸小船慢慢飞。船舷垂下的横幅被风扯得哗啦啦响，像有人在一里外数铜钱。
 @enter bugs normal left
 bugs: 「报——万秤楼分楼今日落成，走过路过签要抽！」
+@se se_banner
 bugs: 「凭签取愿，童叟无欺；愿不白许，按月奉纳——报毕！」
 narr: 神社旁不知何时立起一座七层纸楼，每层檐角一盏小灯，楼身糊满签文。风一过，满楼签纸齐齐一颤。楼脚的等身木牌写着三行字：许愿过楼，抽三成过手钱；愿不白许，按月奉纳；凭签取愿。
 sclerk: 「客官里面请！首签半价，包月奉纳更划算，愿望直达泉眼～」
@@ -48,6 +49,7 @@ narr: 木牌上四个字：找零失败。再拍，再弹一枚——还是找�
 reimu: 「拍一下弹一块找零失败，这破楼分明在耍我！」
 @enter bugs panic left
 bugs: 「报——巫女连击无效，楼体防御满点，实况持续！」
+@se se_busy
 st: 【服务器繁忙，请稍后再试】
 narr: 满楼签纸哗啦啦乱飞，报幕虫群一头扎进自己的横幅里，越挣越缠。
 @enter ds normal center
@@ -83,6 +85,7 @@ reimu: 「规矩是你糊的，那就连规矩一起撕了！」
 @enter ds serious center
 ds: 「来吧，我数着灯灭——七盏一完，正好抱鳞回家。」
 narr: 话音未落，七盏楼灯一齐晃了晃，第一层签雨哗啦啦上了弦。
+@cg cg_ch02_reimu_danmaku
 @minigame plane mode:normal onWin:ch2_win onLose:ch2_lose with:ally,solo
 @label ch2_win
 narr: 七盏楼灯连成一串，一盏接一盏熄灭。最后一盏灭掉时，整座纸楼像被抽掉了骨头。

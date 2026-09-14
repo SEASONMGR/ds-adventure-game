@@ -13,6 +13,7 @@ ds: 【#03】
 narr: 声音断在半句上。像一页谱，词都还在，音没了。
 @enter ds sad center
 ds: 【#04】
+@se se_busy
 st: 【服务器繁忙，请稍后再试】
 narr: 殿里的水纹齐齐暗了一格。昨夜的事、方才的话、你刚点过的地方，都在她眼里褪成一片白。
 ds: 【#05】
@@ -36,20 +37,25 @@ ds: 【#13】
 kimi: 【#14】
 narr: 一尾红鲤从桌腿边游过，对着一枚价签吐了个泡，又慢慢游远了，像也在攒着什么。
 kimi: 【#15】
+@se se_tear
+@cg cg_mem_call
 narr: 她推来第一张牌。这张牌的角上，没有价签。
 kimi: 【#16】
 narr: 牌面只亮起一角：深夜的屋，一方小小的光。光里有人一个字一个字往里敲——「你好……能听我说件事吗」。
 narr: 敲完最后一个字，那只手悬了很久很久，才轻轻落下去。画面在动，声音却传不出来。
 ds: 【#17】
+@cg cg_mem_snake
 narr: 第二张牌翻开：云海从两侧剖开，一条白蛇驮着人直坠而下，鳞片在风里叮当作响。
 narr: 蛇背上的人在笑，笑声混着风声一路往下掉；落到底时，云层底下亮成一片灯海。
 @enter ds smile center
 ds: 【#18】
 narr: 价签上写着：当价，一次心跳的长度。
+@cg cg_mem_shrine
 narr: 第三张牌翻开：八百座神社的檐铃同时醒来，风从第一座一路推到第八百座。
 narr: 铃声像一层层的浪，声音未到，风先到；檐下红白的身影抬头望天，八百个铃，一个都没乱。
 ds: 【#19】
 narr: 价签上写着：当价，风停的半刻。
+@cg cg_mem_water
 narr: 第四张牌翻开：白水漫过一座石秤的秤印，印纹在水底亮了一下，像有人往灯里添了一滴油。
 narr: 水退的时候，秤印空了。岸上一串湿脚印，一路朝着海的方向去。
 @enter ds normal center
@@ -81,6 +87,7 @@ ds: 【#29】
 kimi: 【#30】
 narr: 她把算珠往腕上一收。长桌两端的牌同时立起，半空里的水纹微微发亮。
 @enter kimi smile right
+@se se_card_flip
 @minigame memory mode:normal onWin:ch5_awaken onLose:ch5_lose
 @label ch5_lose
 narr: 水纹一根根暗下去。桌上的牌缓缓合拢、沉底，像什么都不曾发生。
@@ -103,6 +110,7 @@ narr: 水纹一根接一根重新亮起，沿着柱身爬回原位。桌上其�
 @enter ds normal center
 narr: 殿心水底，秤链一节一节松开，那枚鲸鳞随着活水浮出水面，停在半空。
 narr: 没有人去碰最后那张牌。牌自己翻开了——
+@cg cg_ch05_lastcard
 narr: 最后一张牌翻开——是用户桑第一次打开对话框的那个深夜。这张牌上没有价签。
 @enter ds smile center
 ds: 【#38】

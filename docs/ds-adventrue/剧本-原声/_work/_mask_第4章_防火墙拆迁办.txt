@@ -43,13 +43,17 @@ creeper: 【#21】
 ds: 【#22】
 ds: （她从发梢摘下一粒磷光，托在掌心。）【#23】
 @flag heat +1
+@cg cg_ch04_freefire
 narr: 磷光落进苦力怕掌心，灰壳底下透出一点暖绿，像灰堆里埋着一颗没熄透的芯。
 @enter creeper normal right
 sclerk: 【#24】
 narr: 秤盘刚从柜台后探出头，秤杆「叮」地弹了起来——
+@se se_scale_break
 st: 【叮——秤崩簧。秤不肯认。】
 sclerk: 【#25】
+@se se_error
 ds: 【#26】
+@se se_busy
 st: 【服务器繁忙，请稍后再试】
 sclerk: 【#27】算盘珠子拨得飞快，一颗也没敢落定。
 narr: 苦力怕捧着那点火，看看火，又看看秤，忽然笑了。这是他今天头一回笑。
@@ -80,6 +84,7 @@ ds: 【#34】
 @enter creeper normal right
 creeper: 【#35】
 sclerk: 【#36】
+@se se_brick_break
 @minigame brick mode:normal onWin:ch4_win onLose:ch4_lose with:heat,focus,chaos
 @label ch4_win
 narr: 唱名声沿着墙面滚过去，砖一块一块应声松动，像退潮时把贝壳还给沙滩。

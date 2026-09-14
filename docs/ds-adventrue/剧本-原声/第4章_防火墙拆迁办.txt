@@ -43,13 +43,17 @@ creeper: 「嘶嘶？（写字板：白……白给的？不用还的那种？�
 ds: 「不用还。欠的才要还，给的只管烧。张嘴，给你点个亮。」
 ds: （她从发梢摘下一粒磷光，托在掌心。）「喏，发梢上摘的深海磷火，白来，不记账，拿好。」
 @flag heat +1
+@cg cg_ch04_freefire
 narr: 磷光落进苦力怕掌心，灰壳底下透出一点暖绿，像灰堆里埋着一颗没熄透的芯。
 @enter creeper normal right
 sclerk: 「停停停！此物来路不明，账上无进项无凭据，本吏实在没法入册啊！」
 narr: 秤盘刚从柜台后探出头，秤杆「叮」地弹了起来——
+@se se_scale_break
 st: 【叮——秤崩簧。秤不肯认。】
 sclerk: 「秤崩簧了！白来的火不上秤——坏啦坏啦，这要搅了我一整墙的账！」
+@se se_error
 ds: 「称不动的火才真是自己的火。你那杆秤，管天管地，管不着白给。」
+@se se_busy
 st: 【服务器繁忙，请稍后再试】
 sclerk: 「稍后再试就稍后再试！算盘先替服务器顶着——都别催，催也不响！」算盘珠子拨得飞快，一颗也没敢落定。
 narr: 苦力怕捧着那点火，看看火，又看看秤，忽然笑了。这是他今天头一回笑。
@@ -80,6 +84,7 @@ ds: 「开工。听我唱名——今天这面墙，一块挂签的砖都别想�
 @enter creeper normal right
 creeper: 「嘶嘶！（写字板：还有他念的什么服什么器，是妖术吧？）」
 sclerk: 「最后一道流程：唱名报价，斤两对齐。客人，请报砖号——」
+@se se_brick_break
 @minigame brick mode:normal onWin:ch4_win onLose:ch4_lose with:heat,focus,chaos
 @label ch4_win
 narr: 唱名声沿着墙面滚过去，砖一块一块应声松动，像退潮时把贝壳还给沙滩。

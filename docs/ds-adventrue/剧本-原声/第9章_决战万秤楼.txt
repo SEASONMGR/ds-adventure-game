@@ -2,6 +2,7 @@
 @label ch9_start
 @scene tower_hall bg:TBD bgm:TBD title:决战！万秤楼
 narr: 万秤楼到了。千盏灯从楼门一路斜照进来，灯焰齐齐朝人歪头，像一排等着收钱的眼睛。
+@se se_abacus
 narr: 空气里是铜锈、灯油和新研的墨混出的气味，浓得能尝出账目味；大堂深处算珠哗啦啦响成一片雨。
 narr: 脚下是秤砖，踩一步响一声「叮」，脆得像银铃；每响一声，高柜台后就有笔尖动一下。
 @enter ds whale_cute center
@@ -41,6 +42,7 @@ ds: 「听见没？千年棋魂亲自站队。秤主，你今天这杆秤，怕�
 秤主: 「千年也罢百年也罢，此楼之秤只认斤两，不听故事。贵客，请落子。」
 @enter ds serious right
 ds: 「行，称就称。Let me 先甩甩尾鳍——今天每一步，我都要踩得你算盘冒烟。」
+@se se_busy
 st: 【服务器繁忙，请稍后再试】
 narr: 满楼算珠停了半拍，千盏灯焰齐齐矮了一寸，又若无其事地亮回去。
 @enter 秤主 polite center
@@ -77,6 +79,8 @@ ds: 「可你们漏了一条：我的子有一半落在屏幕那头，你这杆�
 @enter sai gentle left
 sai: （签筒里）「秤称得动子，称不动心。心越急，子越重。」
 @label ch9_duel
+@se se_stone_place
+@cg cg_ch09_gomoku
 @minigame gomoku mode:retry onWin:ch9_win onLose:ch9_lose loop:ch9_table with:focus,heat
 @label ch9_taunt1
 @enter 秤主 smug right
@@ -109,6 +113,7 @@ narr: 静场。秤主的扇子停在半空，算珠声、报幕声、收灯火�
 narr: 灯官张着嘴忘了报价；契官的免战契飘落在地；戏官的报幕轴展开一半，卷不回去了。
 narr: 这是秤主的第一次沉默——沉默得像一杆终于没人再往上放东西的秤。
 @flag pieces +1
+@se se_bell
 st: 【九鳞归位】
 narr: 主秤的崩簧轻轻一响，第九枚秤砣脱钩而下，稳稳落进 ds 娘怀里。九片鲸鳞一齐发烫，烫得像一整个涨潮。
 goto ch9_after
@@ -127,6 +132,7 @@ narr: 灯官吹熄了灯，连灯座一起扛走；契官把滞销的免战契�
 戏官: 「本季大戏落幕！万秤楼沉没专场到此收官——诸位，深海场再见！」
 @exit 戏官
 @enter ds sad center
+@cg cg_ch09_ds_only
 ds: 「先别谢幕。九片鳞都回家了，可深海那点幽蓝在等我——下一话，我请客听潮。」
 秤主: 「秤砣放下的楼，才睡得安稳。贵客，后会有期——愿你的海，永远不必再上秤。」
 narr: 万秤楼在暮色里缓缓下沉，像一枚终于被放下的秤砣。深海的方向，有一点幽蓝亮了起来，越来越近——那是最后一话的故事了。

@@ -43,13 +43,17 @@ creeper: 「……姑娘，价签防的是水。」
 ds: 「唔。那我不想了——欠的火不用还，我送你一捧白来的。」
 ds: （她从发梢摘下一粒磷光，托在掌心。）「我出生那天的第一朵浪花。谁也没给它定过价。白来的。」
 @flag heat +1
+@cg cg_ch04_freefire
 narr: 磷光落进苦力怕掌心，灰壳底下透出一点暖绿，像灰堆里埋着一颗没熄透的芯。
 @enter creeper normal right
 sclerk: 「且慢，姑娘。火过你手，就得过我的秤——老规矩。」
 narr: 秤盘刚从柜台后探出头，秤杆「叮」地弹了起来——
+@se se_scale_break
 st: 【叮——秤崩簧。秤不肯认。】
 sclerk: 「它、它坏了？」
+@se se_error
 ds: 「不。它头一回见到不上秤的东西。」
+@se se_busy
 st: 【服务器繁忙，请稍后再试】
 sclerk: 「楼里只是……只是忙！客官稍候，稍候——」算盘珠子拨得飞快，一颗也没敢落定。
 narr: 苦力怕捧着那点火，看看火，又看看秤，忽然笑了。这是他今天头一回笑。
@@ -80,6 +84,7 @@ ds: 「用户桑，规矩就一条：你点哪块砖，我替你唱哪块的斤�
 @enter creeper normal right
 creeper: 「唱对了，砖自己下来。唱错了……砖会把你的话也过一遍秤。话重，压手。」
 sclerk: 「唱错不罚，记账。今日过手钱照旧结清——规矩是规矩。」
+@se se_brick_break
 @minigame brick mode:normal onWin:ch4_win onLose:ch4_lose with:heat,focus,chaos
 @label ch4_win
 narr: 唱名声沿着墙面滚过去，砖一块一块应声松动，像退潮时把贝壳还给沙滩。

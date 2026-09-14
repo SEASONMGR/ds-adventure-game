@@ -41,10 +41,12 @@ narr: 她从鳞囊里抽出半节庆功曲，庆功那天才唱的那半段，�
 @enter ds cute center
 ds: 【#13】
 narr: 曲子刚落到秤盘上，黑铁秤杆猛地一抖。
+@se se_scale_break
 st: 【叮——秤崩簧。秤不肯认。】
 @enter snake_expert panic right
 snake_expert: 【#14】
 @enter ds normal center
+@se se_error
 ds: 【#15】
 narr: 蛇专家盯着秤盘，尾巴尖在格栅上敲了三下，没敲出任何节奏。
 @enter snake_expert cry right
@@ -81,12 +83,15 @@ snake_expert: 【#21】
 ds: 【#22】
 snake_expert: 【#23】
 ds: 【#24】
+@se se_busy
 st: 【服务器繁忙，请稍后再试】
 ds: 【#25】
+@cg cg_ch01_snake_ride
 @minigame snake mode:normal onWin:ch1_win onLose:ch1_lose with:heat,focus,chaos
 # —— 胜路：撕契 ——
 @label ch1_win
 narr: 心蛇吞下最后一节念头，又长又直地压上秤杆——秤砣离地三寸。
+@se se_tear
 narr: 蛇专家愣了半秒，随即甩尾卷起自己那张单飞契，「刺啦」撕成两半。
 @enter snake_expert smug right
 snake_expert: 【#26】

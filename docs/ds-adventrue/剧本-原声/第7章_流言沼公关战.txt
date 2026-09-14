@@ -1,6 +1,7 @@
 # ============ 第7章 流言沼公关战 ============
 @label ch7_start
 @scene rumor_swamp bg:TBD bgm:TBD title:流言沼公关战
+@se se_banner
 narr: 茶馆街贴着流言沼的边。青石板缝里咕嘟着沼气，空气一半是隔夜茶梗味，一半是水腥味，潮气黏在袖口上，撕都撕不下来。
 narr: 灯笼的黄光泡在湿雾里。三桌茶客凑得极近，耳朵比嘴多，嘴比茶碗多，压低的语声一层叠一层，像蚕在啃桑叶。
 narr: 续水的伙计提着长嘴壶来回小跑，跑得满头汗。一整条街，没有一个人真的在喝茶。
@@ -9,6 +10,7 @@ ds: 「（凑近一盏冷茶闻了闻）Hmm，满街没人喝茶，这馆子怕�
 narr: 门口鸟笼里的八哥忽然开口：「听说了吗。听说了吗。」老板叹气：养了三年，今天总算押对一回韵。
 ds: 「（凑近鸟笼）八哥，再说一遍，慢些说，我一个字一个字记进思维链里。」
 narr: 思维链在半空打了个结。她掐指一算，眼神笃定得像刚校准的秤。
+@se se_busy
 st: 【服务器繁忙，请稍后再试】
 @enter ds smug center
 ds: 「（抬手指着日头）算不动就不算了，我当面发誓：我若喝干过水晶泉，让这日头现在就落进沼里！」
@@ -75,6 +77,8 @@ ds: 「（被泡声笑得尾巴直甩）笑够了没有？笑够了就排好队�
 goto pre_game
 @label pre_game
 narr: 浮牌在脚下连成一片。专注视线亮起，稳稳落进第一格。
+@cg cg_ch07_swamp
+@se se_mine_boom
 @minigame minesweep mode:ending onWin:ch7_win onLose:bad_collapse
 @label ch7_win
 narr: 专注视线一格一格扫过去，流言牌逐张翻起、翻白，像晒场上翻晒的鱼干。
@@ -101,6 +105,8 @@ narr: 下集预告——第八片鳞的消息，装在一只没写寄件人的�
 @save
 goto ch8_start
 @label bad_collapse
+@cg cg_end_collapse
+@se se_shutdown
 narr: 泥面塌了半边，满沼浮牌一齐翻起，扑上来像一群扑灯的蛾。
 narr: 「啪。啪。啪。」流言牌一张张贴上她的胳膊、尾巴、额角，挂满全身，每张都在小声念稿。
 @enter ds panic center
