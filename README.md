@@ -184,7 +184,7 @@ mvnw.cmd -q exec:java "-Dexec.mainClass=com.studio.parser.ParserSelfTest"
 | 记忆翻牌小游戏 | P1 | **已具备（demo）** | `com.studio.plugin.demo.memory`；演示地图 `docs/demo-maps/memory/` |
 | 推箱子小游戏 | P1 | **已具备** | `com.studio.plugin.demo.sokoban`；3 关 + 撤销 + BFS 穷举验证每关可解；演示地图 `docs/demo-maps/sokoban/` |
 | 五子棋小游戏 | P1 | **已具备** | `com.studio.plugin.demo.gomoku`；15×15 + 威胁打分 AI；演示地图 `docs/demo-maps/gomoku/` |
-| 连连看小游戏 | P1 | 待实现 | 玩法说明见 `docs/ds-adventrue/连连看.md` |
+| 连连看小游戏 | P1 | **已具备** | `com.studio.plugin.demo.link`；8×10 **明牌** + 拐弯 ≤ 2 次路径判定 + 死局自动重排；演示地图 `docs/demo-maps/link/` |
 | 回忆收藏馆 / 结局收集 | P1 | 待实现 | — |
 | 音频（BGM / 音效 / 静音） | P2 | 已具备 | `@plugin(audio)`：多通道（bgm/se）循环与一次性播放、停/暂停/继续/音量；节点 `audio` 属性与 `music` 节点类型已废除 |
 | 系统提示条（toast） | P2 | 已具备 | `type = toast` 节点（由原音乐节点更名）：自带默认样式的提示条，如右上角显示「存档中…」；显隐用现成的 `visible` 槽动作 |
@@ -206,7 +206,7 @@ mvnw.cmd -q exec:java "-Dexec.mainClass=com.studio.parser.ParserSelfTest"
 | 扫雷 | P1 | 已具备（demo 插件，事件 ID `minesweeper`） |
 | 打砖块 | P1 | **已具备**（事件 ID `breakout`，编辑器菜单可生成演示地图） |
 | 记忆翻牌 | P1 | **已具备**（事件 ID `memory`，演示地图 `docs/demo-maps/memory/`） |
-| 连连看 | P1 | 待实现 |
+| 连连看 | P1 | **已具备**（事件 ID `link`，演示地图 `docs/demo-maps/link/`） |
 | 推箱子 | P1 | **已具备**（事件 ID `sokoban`，演示地图 `docs/demo-maps/sokoban/`） |
 | 五子棋 | P1 | **已具备**（事件 ID `gomoku`，威胁打分 AI，演示地图 `docs/demo-maps/gomoku/`） |
 

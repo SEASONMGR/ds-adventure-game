@@ -1,0 +1,81 @@
+# ============================================================
+# 演示地图: 连连看（事件 ID: link）
+# 用法：Player →「打开地图文件夹…」→ 选本目录；或 Studio 里 Ctrl+R 试玩
+# 触发方式（两种都演示）：场景级 event = link（进场景即嵌入）／按钮 action = event
+# ============================================================
+
+[option]
+initialScene = Start
+background = #0b0f1a
+volume = 0.6
+typewriterSpeed = 18
+
+[Start]
+event = link
+
+{
+type = bg
+x = 0
+y = 0
+width = 1280
+height = 720
+style = -fx-background-color: linear-gradient(to bottom, #101322, #1b2136);
+}
+
+{
+type = text
+x = 40
+y = 22
+width = 820
+height = 32
+text = 连连看演示 · 进入本场景即嵌入小游戏（event = link）
+fontSize = 15
+style = -fx-text-fill: #9fb4d8;
+}
+
+{
+type = button
+x = 470
+y = 620
+width = 340
+height = 48
+text = 再玩一局（按钮触发 event）
+action = event
+event = link
+}
+
+[Menu]
+
+{
+type = text
+x = 340
+y = 280
+width = 600
+height = 60
+text = 已返回剧情
+fontSize = 28
+align = center
+style = -fx-text-fill: #ffd76a;
+}
+
+{
+type = button
+x = 470
+y = 380
+width = 340
+height = 52
+text = 再玩一局
+action = event
+event = link
+}
+
+{
+type = button
+x = 470
+y = 452
+width = 340
+height = 52
+text = 回到 Start
+action = target
+target = Start
+}

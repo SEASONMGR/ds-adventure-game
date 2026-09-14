@@ -53,6 +53,9 @@ public class PluginLoader {
         BUILTIN.put("memory", "com.studio.plugin.demo.memory.MemoryPlugin");
         BUILTIN.put("snake", "com.studio.plugin.demo.snake.SnakePlugin");
         BUILTIN.put("plane", "com.studio.plugin.demo.plane.PlanePlugin");
+        BUILTIN.put("link", "com.studio.plugin.demo.link.LinkPlugin");
+        BUILTIN.put("sokoban", "com.studio.plugin.demo.sokoban.SokobanPlugin");
+        BUILTIN.put("gomoku", "com.studio.plugin.demo.gomoku.GomokuPlugin");
     }
 
     private final File pluginDir;      // 插件根目录

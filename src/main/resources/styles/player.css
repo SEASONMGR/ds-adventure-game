@@ -74,6 +74,26 @@
 .mine-title { -fx-text-fill: #ffd76a; -fx-font-size: 17px; -fx-font-weight: bold; }
 .mine-hint { -fx-text-fill: #9aa0c8; -fx-font-size: 12px; }
 .mine-timer { -fx-text-fill: #ffd76a; -fx-font-size: 15px; -fx-font-weight: bold; }
+
+/* ---- 连连看（link）---- */
+.link-root { -fx-background-color: #0f1322; -fx-padding: 18; }
+.link-title { -fx-text-fill: #ffd76a; -fx-font-size: 17px; -fx-font-weight: bold; }
+.link-timer { -fx-text-fill: #c9cbe0; -fx-font-size: 15px; -fx-font-weight: bold; }
+.link-hint { -fx-text-fill: #9aa0c8; -fx-font-size: 12px; }
+.link-board { -fx-background-color: rgba(255,255,255,0.05); -fx-background-radius: 12; }
+.link-tile {
+    -fx-background-color: #2a3050; -fx-text-fill: #eef1ff; -fx-font-size: 22px;
+    -fx-background-radius: 8; -fx-cursor: hand;
+}
+.link-tile:hover { -fx-background-color: #3a4270; }
+.link-tile-sel {
+    -fx-background-color: #6b5a1f; -fx-border-color: #ffd76a; -fx-border-radius: 8; -fx-border-width: 2;
+}
+.link-tile-bad { -fx-border-color: #e06a6a; -fx-border-radius: 8; -fx-border-width: 2; }
+.link-tile-empty { -fx-background-color: transparent; -fx-cursor: default; }
+.link-overlay { -fx-background-color: rgba(6,8,18,0.66); }
+.link-overlay-title { -fx-text-fill: #ffd76a; -fx-font-size: 24px; -fx-font-weight: bold; }
+.link-overlay-desc { -fx-text-fill: #e8e8f0; -fx-font-size: 14px; }
 .mine-cell {
     -fx-background-color: linear-gradient(to bottom, #4a4f74, #34384f);
     -fx-background-radius: 4;

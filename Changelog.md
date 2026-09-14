@@ -1,4 +1,26 @@
 # 更新日志 (Changelog)
+## [v1.17] 新增连连看插件（link）—— 9 个小游戏齐备
+
+### Added
+- `com.studio.plugin.demo.link`：**真正的连连看**（明牌 + 拐弯 ≤ 2 次路径判定 + 允许绕棋盘外一圈 + 死局自动重排）
+  - `LinkConfig`：默认 8×10 / 10 种图标 / 不限时 / 重排上限 5
+  - `LinkGame`：纯规则引擎（零 javafx），`select()` 返回 `SELECTED / DESELECTED / MATCHED / MISMATCH / NO_PATH`
+  - `LinkPlugin`：嵌入视图 + **结果回传**（`PARAM_RESULT_SINK`）+ `onDetach()` 幂等；
+    计分沿用其它小游戏口径「消除数 × 10 + 剩余时间」
+  - 演示地图 `docs/demo-maps/link/`；`plugins/plugins.ini` 与 `PluginLoader.BUILTIN` 注册 `link`
+  - `player.css` 新增 `.link-*` 主题类（先自绘、未引素材）；牌面用**中文单字**（鲸/鳞/秤/灯/泉/梦/风/歌/雨/云）
+    而不是 emoji —— 部分较新 emoji 在有些系统字体里缺字形会渲染成空白方框
+- 测试 111 → **129**（新增 18 项：0/1/2 次拐弯可连、**绕棋盘外圈**可连、被完全围住不可连、
+  图案不同 / 连不通的交互结果、消除计数、清空通关、死局自动重排、重排用尽判负、限时判负）
+
+### Changed
+- `PluginLoader.BUILTIN` 补齐仓库内小游戏（`sokoban` / `gomoku` / `link`）：注册表缺失时也能按 id 解析
+- README 小游戏池与 CONTRIBUTING 事件 ID 表：连连看 → **已具备**
+
+### Notes
+- PR #15（协作者提交的"连连看"）经核实为**记忆翻牌**逻辑：`LinkTile.flipped` + 不配对就翻回 +
+  **完全无路径/拐弯判定**，且与既有 `memory` 插件重复 → 未合并；已在 PR 中说明核实结论并关闭
+
 ## [v1.16] 接入剧情侧演出指令（@cg/@se/@bgm）+ 横幅图片 + UI 全局音
 
 ### Added
