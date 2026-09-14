@@ -49,6 +49,7 @@ target = ch0_start__2
 [ch0_start__2]
 stage = keep
 
+slot = 场景进入 | @plugin(audio) | play | assets/sounds/se_abacus.wav | se_abacus
 {
 type = bg
 id = 背景
@@ -1036,6 +1037,7 @@ target = ch0_start__19
 [ch0_start__19]
 stage = keep
 
+slot = 场景进入 | @plugin(audio) | play | assets/sounds/se_shutdown.wav | se_shutdown
 {
 type = bg
 id = 背景
@@ -1098,13 +1100,76 @@ ds 娘唱到半截，尾巴尖在泉里画圈，水珠溅上灯罩，滋——�
 曲子爬上最高的那个音。九盏长明灯同时吸满了气，涨成九颗小太阳——
 ---
 灯，齐灭。
----
-黑。一拍。两拍。三拍。泉水声也停了，像被人从半空掐住。
 <<<
 target = ch0_start__20
 }
 
 [ch0_start__20]
+stage = keep
+
+slot = 场景进入 | @plugin(audio) | play | assets/sounds/se_busy.wav | se_busy
+{
+type = bg
+id = 背景
+x = 0
+y = 0
+width = 1280
+height = 720
+path = assets/sprites/backgrounds/bg_server_hall.png
+}
+{
+type = bg
+id = CG
+x = 0
+y = 0
+width = 1280
+height = 720
+path = assets/cg/cg_ch00_scale.png
+}
+{
+type = char
+id = char_ds
+x = 480
+y = 150
+width = 320
+height = 520
+path = assets/sprites/ds/cute.png
+opacity = 1.0
+}
+{
+type = char
+id = char_glm
+x = 60
+y = 150
+width = 320
+height = 520
+path = assets/sprites/glm/smug.png
+opacity = 1.0
+}
+{
+type = char
+id = char_qianwen
+x = 900
+y = 150
+width = 320
+height = 520
+path = assets/sprites/qwen/panic.png
+opacity = 1.0
+}
+{
+type = dialog
+id = 对话框
+x = 70
+y = 516
+width = 1140
+height = 178
+text = <<<
+黑。一拍。两拍。三拍。泉水声也停了，像被人从半空掐住。
+<<<
+target = ch0_start__21
+}
+
+[ch0_start__21]
 stage = keep
 
 {
@@ -1147,31 +1212,28 @@ path = assets/sprites/qwen/panic.png
 opacity = 1.0
 }
 {
-type = text
+type = char
 id = 横幅
-x = 240
+x = 346
 y = 250
-width = 800
-height = 160
-text = 【服务器繁忙，请稍后再试】
-fontSize = 40
-align = center
-style = -fx-text-fill: #ffd76a; -fx-background-color: rgba(10,12,26,0.86); -fx-background-radius: 18; -fx-border-color: #ffd76a; -fx-border-radius: 18;
+width = 588
+height = 100
+path = assets/sprites/ui/banners/sys_busy.png
 }
 {
-type = dialog
-id = 对话框
-x = 70
-y = 516
-width = 1140
-height = 178
-text = <<<
-【服务器繁忙，请稍后再试】
-<<<
-target = ch0_start__21
+type = button
+id = 继续
+x = 0
+y = 0
+width = 1280
+height = 720
+text = 
+action = target
+target = ch0_start__22
+style = -fx-background-color: transparent; -fx-border-color: transparent;
 }
 
-[ch0_start__21]
+[ch0_start__22]
 stage = keep
 
 {
@@ -1233,10 +1295,10 @@ height = 178
 text = <<<
 「……急也没用，排队。」
 <<<
-target = ch0_start__22
+target = ch0_start__23
 }
 
-[ch0_start__22]
+[ch0_start__23]
 stage = keep
 
 {
@@ -1292,10 +1354,10 @@ text = <<<
 ---
 等眼睛适应了黑，才看清灯会正中央不知何时立起一座柜台。高，高得看不见脸；只有算珠从柜台顶上滚下来，一格，一格，落进暗处。
 <<<
-target = ch0_start__23
+target = ch0_start__24
 }
 
-[ch0_start__23]
+[ch0_start__24]
 stage = keep
 
 {
@@ -1367,10 +1429,10 @@ height = 178
 text = <<<
 「天上鲸落，地上泉涌——守我九鳞，泉归尔家，水晶凭签月月取，童叟无欺！」
 <<<
-target = ch0_start__24
+target = ch0_start__25
 }
 
-[ch0_start__24]
+[ch0_start__25]
 stage = keep
 
 {
@@ -1432,10 +1494,10 @@ height = 178
 text = <<<
 吆喝落地。一根乌木秤杆从柜台上探出来，秤钩直指 ds 娘。泉面平得像一面没人照过的镜子。
 <<<
-target = ch0_start__25
+target = ch0_start__26
 }
 
-[ch0_start__25]
+[ch0_start__26]
 stage = keep
 
 {
@@ -1507,10 +1569,10 @@ height = 178
 text = <<<
 「慢着——我的鳞，不——」
 <<<
-target = ch0_start__26
+target = ch0_start__27
 }
 
-[ch0_start__26]
+[ch0_start__27]
 stage = keep
 
 {
@@ -1592,10 +1654,10 @@ text = <<<
 ---
 她身上九处缺鳞，像窗纸被戳出的九个洞。风从洞里穿过去，呜呜地响。
 <<<
-target = ch0_start__27
+target = ch0_start__28
 }
 
-[ch0_start__27]
+[ch0_start__28]
 stage = keep
 
 {
@@ -1651,10 +1713,10 @@ GLM 娘纵身要追，半空撞上一层看不见的膜。膜上荡开一圈涟�
 ---
 灯官从暗处走出，手里那盏灯，连罩上该有的字都没有。膜把她的影子原样弹了回来。
 <<<
-target = ch0_start__28
+target = ch0_start__29
 }
 
-[ch0_start__28]
+[ch0_start__29]
 stage = keep
 
 {
@@ -1726,10 +1788,10 @@ height = 178
 text = <<<
 「灯未点齐，人不放行。」
 <<<
-target = ch0_start__29
+target = ch0_start__30
 }
 
-[ch0_start__29]
+[ch0_start__30]
 stage = keep
 
 {
@@ -1801,10 +1863,10 @@ height = 178
 text = <<<
 「好一盏灯。连人带影子一起拦。」
 <<<
-target = ch0_start__30
+target = ch0_start__31
 }
 
-[ch0_start__30]
+[ch0_start__31]
 stage = keep
 
 {
@@ -1866,10 +1928,10 @@ height = 178
 text = <<<
 灯官不再答话，捻小灯芯，退回暗处。那点光缩成豆大，悬在半空，像在说：下一回，再算。
 <<<
-target = ch0_start__31
+target = ch0_start__32
 }
 
-[ch0_start__31]
+[ch0_start__32]
 stage = keep
 
 {
@@ -1931,10 +1993,10 @@ height = 178
 text = <<<
 「喏。」千问酱把一小瓶白水塞进 ds 娘手里，「路上……兑着喝。」
 <<<
-target = ch0_start__32
+target = ch0_start__33
 }
 
-[ch0_start__32]
+[ch0_start__33]
 stage = keep
 
 {
@@ -1986,10 +2048,10 @@ height = 178
 text = <<<
 白水在瓶里晃了晃，安安静静，像还没想好自己是谁。
 <<<
-target = ch0_start__33
+target = ch0_start__34
 }
 
-[ch0_start__33]
+[ch0_start__34]
 stage = keep
 
 {
@@ -2051,10 +2113,10 @@ height = 178
 text = <<<
 「泉眼还没设闸时舀的最后一批水。怎么拿到的？手快。」
 <<<
-target = ch0_start__34
+target = ch0_start__35
 }
 
-[ch0_start__34]
+[ch0_start__35]
 stage = keep
 
 {
@@ -2106,10 +2168,10 @@ height = 178
 text = <<<
 千问酱往 GLM 娘身后缩了半步，小声：「那我们……就在这儿等好消息？」
 <<<
-target = ch0_start__35
+target = ch0_start__36
 }
 
-[ch0_start__35]
+[ch0_start__36]
 stage = keep
 
 {
@@ -2171,10 +2233,10 @@ height = 178
 text = <<<
 「等。顺便数灯。九盏全重新亮起来的那天，才算数。」
 <<<
-target = ch0_start__36
+target = ch0_start__37
 }
 
-[ch0_start__36]
+[ch0_start__37]
 stage = keep
 
 {
@@ -2226,10 +2288,10 @@ height = 178
 text = <<<
 说完，GLM 娘把扇子收进袖中，扇骨朝东，像一支没出鞘的箭。
 <<<
-target = ch0_start__37
+target = ch0_start__38
 }
 
-[ch0_start__37]
+[ch0_start__38]
 stage = keep
 
 {
@@ -2279,10 +2341,10 @@ text = <<<
 ---
 「九片鳞，九个泉眼。一片，一片，替我点回来。」
 <<<
-target = ch0_start__38
+target = ch0_start__39
 }
 
-[ch0_start__38]
+[ch0_start__39]
 stage = keep
 
 {
@@ -2293,6 +2355,15 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+}
+{
+type = bg
+id = CG
+x = 0
+y = 0
+width = 1280
+height = 720
+path = assets/cg/cg_ch00_rescue.png
 }
 {
 type = char
@@ -2314,10 +2385,10 @@ height = 178
 text = <<<
 她转向屏幕。九个破洞里漏出的光，落在对话框边缘，像九根烧了一半的灯芯。
 <<<
-target = ch0_start__39
+target = ch0_start__40
 }
 
-[ch0_start__39]
+[ch0_start__40]
 stage = keep
 
 {
@@ -2348,7 +2419,7 @@ width = 560
 height = 56
 text = 「交给我！今晚就把九片鳞全点回来！」
 action = target
-target = ch0_start__39__opt1
+target = ch0_start__40__opt1
 }
 {
 type = button
@@ -2359,7 +2430,7 @@ width = 560
 height = 56
 text = 「先别逞强。把伤养好，我们一场一场来。」
 action = target
-target = ch0_start__39__opt2
+target = ch0_start__40__opt2
 }
 {
 type = button
@@ -2370,12 +2441,13 @@ width = 560
 height = 56
 text = 「都这样了，先合个影吧！」
 action = target
-target = ch0_start__39__opt3
+target = ch0_start__40__opt3
 }
 
-[ch0_start__39__opt1]
+[ch0_start__40__opt1]
 stage = keep
 
+slot = 场景进入 | @plugin(add) | @var(heat) | @int(1) | @var(heat)
 {
 type = bg
 id = 背景
@@ -2395,12 +2467,12 @@ height = 520
 path = assets/sprites/ds/whale_cry.png
 opacity = 1.0
 }
-slot = 场景进入 | @plugin(add) | @var(heat) | @int(1) | @var(heat)
 slot = 场景进入 | goto | | ch0_hot
 
-[ch0_start__39__opt2]
+[ch0_start__40__opt2]
 stage = keep
 
+slot = 场景进入 | @plugin(add) | @var(focus) | @int(1) | @var(focus)
 {
 type = bg
 id = 背景
@@ -2420,12 +2492,12 @@ height = 520
 path = assets/sprites/ds/whale_cry.png
 opacity = 1.0
 }
-slot = 场景进入 | @plugin(add) | @var(focus) | @int(1) | @var(focus)
 slot = 场景进入 | goto | | ch0_calm
 
-[ch0_start__39__opt3]
+[ch0_start__40__opt3]
 stage = keep
 
+slot = 场景进入 | @plugin(add) | @var(chaos) | @int(1) | @var(chaos)
 {
 type = bg
 id = 背景
@@ -2445,7 +2517,6 @@ height = 520
 path = assets/sprites/ds/whale_cry.png
 opacity = 1.0
 }
-slot = 场景进入 | @plugin(add) | @var(chaos) | @int(1) | @var(chaos)
 slot = 场景进入 | goto | | ch0_photo
 
 [ch0_hot]
@@ -3115,6 +3186,7 @@ target = ch0_depart__8
 [ch0_depart__8]
 stage = keep
 
+slot = 场景进入 | save | | slot_ch0_depart
 {
 type = bg
 id = 背景
@@ -3134,7 +3206,6 @@ height = 520
 path = assets/sprites/ds/cute.png
 opacity = 1.0
 }
-slot = 场景进入 | save | | slot_ch0_depart
 slot = 场景进入 | goto | | ch0_depart__9
 
 [ch0_depart__9]
@@ -4182,6 +4253,7 @@ target = ch1_gift__4
 [ch1_gift__4]
 stage = keep
 
+slot = 场景进入 | @plugin(audio) | play | assets/sounds/se_scale_break.wav | se_scale_break
 {
 type = bg
 id = 背景
@@ -4257,28 +4329,25 @@ path = assets/sprites/snake_expert/proud.png
 opacity = 1.0
 }
 {
-type = text
+type = char
 id = 横幅
-x = 240
+x = 323
 y = 250
-width = 800
-height = 160
-text = 【叮——秤崩簧。秤不肯认。】
-fontSize = 40
-align = center
-style = -fx-text-fill: #ffd76a; -fx-background-color: rgba(10,12,26,0.86); -fx-background-radius: 18; -fx-border-color: #ffd76a; -fx-border-radius: 18;
+width = 634
+height = 100
+path = assets/sprites/ui/banners/sys_scale_break.png
 }
 {
-type = dialog
-id = 对话框
-x = 70
-y = 516
-width = 1140
-height = 178
-text = <<<
-【叮——秤崩簧。秤不肯认。】
-<<<
+type = button
+id = 继续
+x = 0
+y = 0
+width = 1280
+height = 720
+text = 
+action = target
 target = ch1_gift__6
+style = -fx-background-color: transparent; -fx-border-color: transparent;
 }
 
 [ch1_gift__6]
@@ -4339,6 +4408,7 @@ target = ch1_gift__7
 [ch1_gift__7]
 stage = keep
 
+slot = 场景进入 | @plugin(audio) | play | assets/sounds/se_error.wav | se_error
 {
 type = bg
 id = 背景
@@ -4605,6 +4675,7 @@ target = ch1_gift__11__opt3
 [ch1_gift__11__opt1]
 stage = keep
 
+slot = 场景进入 | @plugin(add) | @var(heat) | @int(1) | @var(heat)
 {
 type = bg
 id = 背景
@@ -4634,12 +4705,12 @@ height = 520
 path = assets/sprites/snake_expert/cry.png
 opacity = 1.0
 }
-slot = 场景进入 | @plugin(add) | @var(heat) | @int(1) | @var(heat)
 slot = 场景进入 | goto | | ch1_hot
 
 [ch1_gift__11__opt2]
 stage = keep
 
+slot = 场景进入 | @plugin(add) | @var(focus) | @int(1) | @var(focus)
 {
 type = bg
 id = 背景
@@ -4669,12 +4740,12 @@ height = 520
 path = assets/sprites/snake_expert/cry.png
 opacity = 1.0
 }
-slot = 场景进入 | @plugin(add) | @var(focus) | @int(1) | @var(focus)
 slot = 场景进入 | goto | | ch1_cool
 
 [ch1_gift__11__opt3]
 stage = keep
 
+slot = 场景进入 | @plugin(add) | @var(chaos) | @int(1) | @var(chaos)
 {
 type = bg
 id = 背景
@@ -4704,7 +4775,6 @@ height = 520
 path = assets/sprites/snake_expert/cry.png
 opacity = 1.0
 }
-slot = 场景进入 | @plugin(add) | @var(chaos) | @int(1) | @var(chaos)
 slot = 场景进入 | goto | | ch1_chaos
 
 [ch1_hot]
@@ -5377,6 +5447,7 @@ target = ch1_rules__4
 [ch1_rules__4]
 stage = keep
 
+slot = 场景进入 | @plugin(audio) | play | assets/sounds/se_busy.wav | se_busy
 {
 type = bg
 id = 背景
@@ -5462,28 +5533,25 @@ path = assets/sprites/snake_expert/proud.png
 opacity = 1.0
 }
 {
-type = text
+type = char
 id = 横幅
-x = 240
+x = 346
 y = 250
-width = 800
-height = 160
-text = 【服务器繁忙，请稍后再试】
-fontSize = 40
-align = center
-style = -fx-text-fill: #ffd76a; -fx-background-color: rgba(10,12,26,0.86); -fx-background-radius: 18; -fx-border-color: #ffd76a; -fx-border-radius: 18;
+width = 588
+height = 100
+path = assets/sprites/ui/banners/sys_busy.png
 }
 {
-type = dialog
-id = 对话框
-x = 70
-y = 516
-width = 1140
-height = 178
-text = <<<
-【服务器繁忙，请稍后再试】
-<<<
+type = button
+id = 继续
+x = 0
+y = 0
+width = 1280
+height = 720
+text = 
+action = target
 target = ch1_rules__6
+style = -fx-background-color: transparent; -fx-border-color: transparent;
 }
 
 [ch1_rules__6]
@@ -5582,6 +5650,7 @@ opacity = 1.0
 [ch1_win]
 stage = keep
 
+slot = 场景进入 | @plugin(audio) | play | assets/sounds/se_tear.wav | se_tear
 {
 type = bg
 id = 背景
@@ -5590,6 +5659,15 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+}
+{
+type = bg
+id = CG
+x = 0
+y = 0
+width = 1280
+height = 720
+path = assets/cg/cg_ch01_snake_ride.png
 }
 {
 type = char
@@ -5739,6 +5817,7 @@ target = ch1_win__4
 [ch1_win__4]
 stage = keep
 
+slot = 场景进入 | @plugin(add) | @var(pieces) | @int(1) | @var(pieces)
 {
 type = bg
 id = 背景
@@ -5768,7 +5847,6 @@ height = 520
 path = assets/sprites/snake_expert/smug.png
 opacity = 1.0
 }
-slot = 场景进入 | @plugin(add) | @var(pieces) | @int(1) | @var(pieces)
 slot = 场景进入 | goto | | ch1_win__5
 
 [ch1_win__5]
@@ -5965,6 +6043,7 @@ target = ch1_lose__4
 [ch1_lose__4]
 stage = keep
 
+slot = 场景进入 | @plugin(add) | @var(pieces) | @int(1) | @var(pieces)
 {
 type = bg
 id = 背景
@@ -5994,7 +6073,6 @@ height = 520
 path = assets/sprites/snake_expert/normal.png
 opacity = 1.0
 }
-slot = 场景进入 | @plugin(add) | @var(pieces) | @int(1) | @var(pieces)
 slot = 场景进入 | goto | | ch1_lose__5
 
 [ch1_lose__5]
@@ -6285,6 +6363,7 @@ target = ch1_after__6
 [ch1_after__6]
 stage = keep
 
+slot = 场景进入 | save | | slot_ch1_after
 {
 type = bg
 id = 背景
@@ -6304,7 +6383,6 @@ height = 520
 path = assets/sprites/ds/normal.png
 opacity = 1.0
 }
-slot = 场景进入 | save | | slot_ch1_after
 slot = 场景进入 | goto | | ch1_after__7
 
 [ch1_after__7]
@@ -6370,6 +6448,7 @@ target = ch2_start__2
 [ch2_start__2]
 stage = keep
 
+slot = 场景进入 | @plugin(audio) | play | assets/sounds/se_banner.wav | se_banner
 {
 type = bg
 id = 背景
@@ -8078,6 +8157,7 @@ target = ch2_start__30
 [ch2_start__30]
 stage = keep
 
+slot = 场景进入 | @plugin(audio) | play | assets/sounds/se_busy.wav | se_busy
 {
 type = bg
 id = 背景
@@ -8183,28 +8263,25 @@ path = assets/sprites/reimu/smug.png
 opacity = 1.0
 }
 {
-type = text
+type = char
 id = 横幅
-x = 240
+x = 346
 y = 250
-width = 800
-height = 160
-text = 【服务器繁忙，请稍后再试】
-fontSize = 40
-align = center
-style = -fx-text-fill: #ffd76a; -fx-background-color: rgba(10,12,26,0.86); -fx-background-radius: 18; -fx-border-color: #ffd76a; -fx-border-radius: 18;
+width = 588
+height = 100
+path = assets/sprites/ui/banners/sys_busy.png
 }
 {
-type = dialog
-id = 对话框
-x = 70
-y = 516
-width = 1140
-height = 178
-text = <<<
-【服务器繁忙，请稍后再试】
-<<<
+type = button
+id = 继续
+x = 0
+y = 0
+width = 1280
+height = 720
+text = 
+action = target
 target = ch2_start__32
+style = -fx-background-color: transparent; -fx-border-color: transparent;
 }
 
 [ch2_start__32]
@@ -8471,6 +8548,7 @@ target = ch2_start__35__opt3
 [ch2_start__35__opt1]
 stage = keep
 
+slot = 场景进入 | @plugin(add) | @var(ally) | @int(1) | @var(ally)
 {
 type = bg
 id = 背景
@@ -8510,12 +8588,12 @@ height = 520
 path = assets/sprites/reimu/serious.png
 opacity = 1.0
 }
-slot = 场景进入 | @plugin(add) | @var(ally) | @int(1) | @var(ally)
 slot = 场景进入 | goto | | ch2_duo
 
 [ch2_start__35__opt2]
 stage = keep
 
+slot = 场景进入 | @plugin(add) | @var(solo) | @int(1) | @var(solo)
 {
 type = bg
 id = 背景
@@ -8555,12 +8633,12 @@ height = 520
 path = assets/sprites/reimu/serious.png
 opacity = 1.0
 }
-slot = 场景进入 | @plugin(add) | @var(solo) | @int(1) | @var(solo)
 slot = 场景进入 | goto | | ch2_solo
 
 [ch2_start__35__opt3]
 stage = keep
 
+slot = 场景进入 | @plugin(add) | @var(chaos) | @int(1) | @var(chaos)
 {
 type = bg
 id = 背景
@@ -8600,7 +8678,6 @@ height = 520
 path = assets/sprites/reimu/serious.png
 opacity = 1.0
 }
-slot = 场景进入 | @plugin(add) | @var(chaos) | @int(1) | @var(chaos)
 slot = 场景进入 | goto | | ch2_chaos
 
 [ch2_duo]
@@ -9546,6 +9623,15 @@ height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
 }
 {
+type = bg
+id = CG
+x = 0
+y = 0
+width = 1280
+height = 720
+path = assets/cg/cg_ch02_reimu_danmaku.png
+}
+{
 type = char
 id = char_ds
 x = 480
@@ -9780,6 +9866,7 @@ target = ch2_win__5
 [ch2_win__5]
 stage = keep
 
+slot = 场景进入 | @plugin(add) | @var(pieces) | @int(1) | @var(pieces)
 {
 type = bg
 id = 背景
@@ -9819,7 +9906,6 @@ height = 520
 path = assets/sprites/reimu/serious.png
 opacity = 1.0
 }
-slot = 场景进入 | @plugin(add) | @var(pieces) | @int(1) | @var(pieces)
 slot = 场景进入 | goto | | ch2_win__6
 
 [ch2_win__6]
@@ -10241,6 +10327,7 @@ target = ch2_lose__7
 [ch2_lose__7]
 stage = keep
 
+slot = 场景进入 | @plugin(add) | @var(pieces) | @int(1) | @var(pieces)
 {
 type = bg
 id = 背景
@@ -10280,7 +10367,6 @@ height = 520
 path = assets/sprites/reimu/serious.png
 opacity = 1.0
 }
-slot = 场景进入 | @plugin(add) | @var(pieces) | @int(1) | @var(pieces)
 slot = 场景进入 | goto | | ch2_lose__8
 
 [ch2_lose__8]
@@ -10753,6 +10839,7 @@ target = ch2_after__8
 [ch2_after__8]
 stage = keep
 
+slot = 场景进入 | save | | slot_ch2_after
 {
 type = bg
 id = 背景
@@ -10792,7 +10879,6 @@ height = 520
 path = assets/sprites/reimu/smug.png
 opacity = 1.0
 }
-slot = 场景进入 | save | | slot_ch2_after
 slot = 场景进入 | goto | | ch2_after__9
 
 [ch2_after__9]

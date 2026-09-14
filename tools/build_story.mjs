@@ -116,6 +116,26 @@ function parseScriptFile(file) {
       }
       return push("minigame", { mg });
     }
+    // ---- 演出指令（剧情侧 v1.0 新增，见《素材交接-剧情侧答复》§二）----
+    if (line.startsWith("@cg ")) {
+      const t = line.slice(4).trim().split(/\s+/);
+      const mode = (t[1] || "flash").toLowerCase();
+      return push("cg", { id: t[0], mode: ["flash", "hold", "clear"].includes(mode) ? mode : "flash" });
+    }
+    if (line.startsWith("@se ")) {
+      const t = line.slice(4).trim().split(/\s+/);
+      const se = { id: t[0], vol: "" };
+      for (const a of t.slice(1)) {
+        const i = a.indexOf(":");
+        if (i > 0 && a.slice(0, i) === "vol") se.vol = a.slice(i + 1);
+      }
+      return push("se", se);
+    }
+    if (line.startsWith("@bgm ")) {
+      const t = line.slice(5).trim().split(/\s+/);
+      const mode = (t[1] || "loop").toLowerCase();
+      return push("bgm", { id: t[0], mode: ["loop", "stop", "fade"].includes(mode) ? mode : "loop" });
+    }
     if (line.startsWith("goto ")) return push("goto", { target: line.slice(5).trim() });
     if (line.startsWith("narr:")) return push("dialog", { text: line });
     if (line.startsWith("st:")) return push("banner", { text: line.slice(3).trim() });
@@ -160,6 +180,89 @@ function spritePath(role, expr) {
   return `assets/sprites/${dir}/${expr}.png`;
 }
 
+/** 系统横幅（14 条）文案 → 图片映射；按「独特关键词」匹配，避免标点微调导致失配 */
+const BANNER_RULES = [
+  { key: "小声", file: "sys_busy_soft" },            // 【（小声）请稍后再试……】——放前面，避免被"服务器繁忙"优先命中
+  { key: "服务器繁忙", file: "sys_busy" },
+  { key: "叮——秤崩簧", file: "sys_scale_break" },
+  { key: "崩簧——秤不肯认", file: "sys_scale_break2" },
+  { key: "思考中", file: "sys_thinking" },
+  { key: "觉醒", file: "sys_awaken_r1" },
+  { key: "合鳞礼成", file: "sys_merge" },
+  { key: "九鳞归位", file: "sys_nine" },
+  { key: "旗舰之力", file: "sys_v4pro" },
+  { key: "深度求索", file: "sys_flash" },
+  { key: "无主之物仓", file: "sys_warehouse" }
+];
+/** 章节变体（剧情侧 §五：第 4 章同文案改用 sys_scale_break2，避免视觉重复） */
+const BANNER_CHAPTER_OVERRIDE = { "第4章": { "秤崩簧": "sys_scale_break2" } };
+const BANNER_DIR = path.join(ROOT, "src", "main", "resources", "assets", "sprites", "ui", "banners");
+
+/** 读出 PNG 的宽高（只解析 IHDR，无需图像库） */
+function pngSize(file) {
+  try {
+    const fd = fs.openSync(file, "r");
+    const buf = Buffer.alloc(24);
+    fs.readSync(fd, buf, 0, 24, 0);
+    fs.closeSync(fd);
+    return { w: buf.readUInt32BE(16), h: buf.readUInt32BE(20) };
+  } catch (e) {
+    return null;
+  }
+}
+
+/** 文案 → 横幅文件名；找不到映射返回 null（调用方回退文字横幅） */
+function bannerFile(text, chapterKey) {
+  const chapter = (chapterKey || "").replace(/\.txt$/, "");
+  const overrides = BANNER_CHAPTER_OVERRIDE[chapter];
+  if (overrides) {
+    for (const k of Object.keys(overrides)) {
+      if (String(text).includes(k) && exists(path.join(BANNER_DIR, `${overrides[k]}.png`))) {
+        return overrides[k];
+      }
+    }
+  }
+  for (const r of BANNER_RULES) {
+    if (String(text).includes(r.key) && exists(path.join(BANNER_DIR, `${r.file}.png`))) {
+      return r.file;
+    }
+  }
+  return null;
+}
+
+/** 音效 / BGM 路径：按实际存在的扩展名解析（wav/mp3/ogg/m4a），缺图缺音都不崩 */
+function soundPath(id) {
+  const dir = path.join(ROOT, "src", "main", "resources", "assets", "sounds");
+  for (const ext of ["wav", "mp3", "ogg", "m4a"]) {
+    if (exists(path.join(dir, `${id}.${ext}`))) return `assets/sounds/${id}.${ext}`;
+  }
+  return `assets/sounds/${id}.ogg`;   // BGM 计划格式（美术侧到位后按实际扩展名自动生效）
+}
+
+/** CG 路径：PNG 优先，其次 JPEG（美术侧转 JPEG 后自动生效） */
+function cgPath(id) {
+  const dir = path.join(ROOT, "src", "main", "resources", "assets", "cg");
+  // 美术侧约定 CG 走 JPEG（q88~90）；两种都在时优先 JPEG（PNG 未清理也能跑）
+  if (exists(path.join(dir, `${id}.jpg`))) return `assets/cg/${id}.jpg`;
+  if (exists(path.join(dir, `${id}.png`))) return `assets/cg/${id}.png`;
+  return `assets/cg/${id}.jpg`;
+}
+
+/** @se → 音频插件槽；每个 SE 用独立通道（se_<id>）→ 多路并发互不打断 */
+function seOps(se) {
+  const ch = se.id;   // 每个 SE 独立通道（id 本身已唯一）→ 多路并发互不打断
+  const ops = [];
+  if (se.vol) ops.push(`@plugin(audio) | volume | ${se.vol} | ${ch}`);
+  ops.push(`@plugin(audio) | play | ${soundPath(se.id)} | ${ch}`);
+  return ops;
+}
+
+/** @bgm → 音频插件槽（AudioPlugin 无 fade 动作，fade 先按 loop 处理） */
+function bgmOps(bgm) {
+  if (bgm.mode === "stop") return ["@plugin(audio) | stop | | bgm"];
+  return [`@plugin(audio) | loop | ${soundPath(bgm.id)} | bgm`];
+}
+
 function bgPath(sceneId) {
   // 优先用与场景 id 同名的真实背景（素材到位后自动生效）；
   // 只有该场景图还没出时，才退回 BG_ALIAS 里的临时顶替图
@@ -178,15 +281,19 @@ function bgPath(sceneId) {
 const beats = [];
 const labelFirstBeat = new Map();
 const flags = new Set();
-let stage = { bg: "", chars: new Map() }; // role -> {expr,pos}
+let stage = { bg: "", chars: new Map(), cg: null }; // chars: role -> {expr,pos}；cg: {id,hold}
+let pendingOps = [];                                 // @se / @bgm：挂到下一个拍点（进入即执行）
 
 function sceneName(label, n) { return n === 0 ? label : `${label}__${n + 1}`; }
 
 function newBeat(label, kind, extra = {}) {
+  // 逻辑拍点是「自动推进」的过渡幕，不承载画面；其余拍点才显示 CG
+  const visual = kind === "dialog" || kind === "banner" || kind === "choice" || kind === "tail";
   const b = {
     label,
     kind,
     bg: stage.bg,
+    cg: visual ? stage.cg : null,
     chars: [...stage.chars.entries()].map(([role, v]) => ({ role, ...v })),
     dialog: [],
     ops: [],
@@ -197,7 +304,14 @@ function newBeat(label, kind, extra = {}) {
     banner: null,
     ...extra,
   };
+  // @se / @bgm 等「进入即执行」的槽挂到本拍
+  if (pendingOps.length) {
+    b.ops.push(...pendingOps);
+    pendingOps = [];
+  }
   beats.push(b);
+  // flash = 点一下继续：只在承载它的这一拍显示，下一拍收起；hold = 保持到下一条 @cg/@scene/@ending
+  if (visual && stage.cg && !stage.cg.hold) stage.cg = null;
   return b;
 }
 
@@ -210,6 +324,7 @@ function flushDialog(label) {
 let dialogBuf = [];
 let dialogSpeaker = "";
 let currentLabel = null;
+let currentChapter = "";   // 当前所在的章节文件（横幅章节变体用）
 
 function flush(label) {
   if (!dialogBuf.length) return;
@@ -239,12 +354,28 @@ for (const d of directives) {
     continue;
   }
   if (currentLabel === null) currentLabel = "__start";
+  if (d.file) currentChapter = d.file;
 
   switch (d.kind) {
     case "scene":
       flush(currentLabel);
       stage.bg = d.id;
       stage.title = d.title;
+      stage.cg = null;   // 换场景收起 CG（对应剧情侧约定：hold 到 @scene 为止）
+      break;
+    case "cg":
+      flush(currentLabel);   // CG 与紧随其后的台词同拍显示
+      if (d.mode === "clear") {
+        stage.cg = null;
+      } else {
+        stage.cg = { id: d.id, hold: d.mode === "hold" };
+      }
+      break;
+    case "se":
+      pendingOps.push(...seOps(d));
+      break;
+    case "bgm":
+      pendingOps.push(...bgmOps(d));
       break;
     case "enter":
       flush(currentLabel);
@@ -266,6 +397,7 @@ for (const d of directives) {
       flush(currentLabel);
       const b = newBeat(currentLabel, "banner");
       b.banner = d.text;
+      b.chapter = currentChapter;
       break;
     }
     case "flag": {
@@ -412,6 +544,11 @@ const emitStage = (b, out) => {
     if (b.title) out.push(`# 幕题: ${b.title}`);
     out.push("}");
   }
+  // CG 层：放在背景之后、立绘之前 —— 引擎按节点顺序绘制，天然是「背景之上、立绘之下」
+  if (b.cg) {
+    out.push("{", "type = bg", "id = CG", "x = 0", "y = 0", "width = 1280", "height = 720",
+      `path = ${cgPath(b.cg.id)}`, "}");
+  }
   // 立绘（同角色固定节点 id，换表情只改 path）
   const used = new Map();
   for (const c of b.chars) {
@@ -452,6 +589,8 @@ for (const b of beats) {
     if (b.mg.with) out.push(`mg.with = ${b.mg.with}`);
   }
   out.push("");
+  // 进入即执行的槽（SE / BGM / 逻辑运算）—— 任何拍点都可能有
+  for (const op of b.ops) out.push(`slot = 场景进入 | ${op}`);
   emitStage(b, out);
 
   if (b.kind === "dialog") {
@@ -474,17 +613,35 @@ for (const b of beats) {
     if (b.target) out.push(`target = ${b.target}`);
     out.push("}");
   } else if (b.kind === "banner") {
-    out.push("{", "type = text", "id = 横幅", "x = " + BANNER.x, "y = " + BANNER.y,
-      "width = " + BANNER.w, "height = " + BANNER.h, `text = ${b.banner}`,
-      "fontSize = 40", "align = center",
-      "style = -fx-text-fill: #ffd76a; -fx-background-color: rgba(10,12,26,0.86); -fx-background-radius: 18; -fx-border-color: #ffd76a; -fx-border-radius: 18;", "}");
-    out.push("{", "type = dialog", "id = 对话框", "x = " + DIALOG_BOX.x, "y = " + DIALOG_BOX.y,
-      "width = " + DIALOG_BOX.w, "height = " + DIALOG_BOX.h);
-    out.push("text = <<<");
-    out.push(b.banner);
-    out.push("<<<");
-    if (b.target) out.push(`target = ${b.target}`);
-    out.push("}");
+    const bf = bannerFile(b.banner, b.chapter);
+    const dim = bf ? pngSize(path.join(BANNER_DIR, `${bf}.png`)) : null;
+    if (bf && dim) {
+      // 美术侧交付的系统横幅（14 条，高 100）：按原宽居中，超过画布才等比缩小
+      const w = Math.min(dim.w, 1160);
+      const h = Math.max(1, Math.round((dim.h * w) / dim.w));
+      out.push("{", "type = char", "id = 横幅", `x = ${Math.round((1280 - w) / 2)}`, "y = 250",
+        `width = ${w}`, `height = ${h}`,
+        `path = assets/sprites/ui/banners/${bf}.png`, "}");
+      // 图片横幅本身已含文案 → 用整屏透明按钮承载「点一下继续」，
+      // 不再在底部重复一遍同样的文字（文字回退时才用对话框）
+      out.push("{", "type = button", "id = 继续", "x = 0", "y = 0",
+        "width = 1280", "height = 720", "text = ", "action = target",
+        `target = ${b.target || ""}`,
+        "style = -fx-background-color: transparent; -fx-border-color: transparent;", "}");
+    } else {
+      // 未映射到图片的文案：回退文字横幅 + 对话框（保证演出与可读性都不缺）
+      out.push("{", "type = text", "id = 横幅", "x = " + BANNER.x, "y = " + BANNER.y,
+        "width = " + BANNER.w, "height = " + BANNER.h, `text = ${b.banner}`,
+        "fontSize = 40", "align = center",
+        "style = -fx-text-fill: #ffd76a; -fx-background-color: rgba(10,12,26,0.86); -fx-background-radius: 18; -fx-border-color: #ffd76a; -fx-border-radius: 18;", "}");
+      out.push("{", "type = dialog", "id = 对话框", "x = " + DIALOG_BOX.x, "y = " + DIALOG_BOX.y,
+        "width = " + DIALOG_BOX.w, "height = " + DIALOG_BOX.h);
+      out.push("text = <<<");
+      out.push(b.banner);
+      out.push("<<<");
+      if (b.target) out.push(`target = ${b.target}`);
+      out.push("}");
+    }
   } else if (b.kind === "choice") {
     const n = b.buttons.length;
     const y0 = 430 - Math.floor((n - 1) * 34);
@@ -495,8 +652,7 @@ for (const b of beats) {
         `target = ${b.optionScenes[i]}`, "}");
     });
   } else if (b.kind === "logic" || b.kind === "optlogic") {
-    for (const op of b.ops) out.push(`slot = 场景进入 | ${op}`);
-    if (b.goto) out.push(`slot = 场景进入 | goto | | ${b.goto}`);
+    if (b.goto) out.push(`slot = 场景进入 | goto | | ${b.goto}`);   // 运算槽已在上面输出
   } else if (b.kind === "tail") {
     out.push("{", "type = text", "x = 240", "y = 280", "width = 800", "height = 120",
       "text = 本章待实现 —— 后续章节接入中", "fontSize = 34", "align = center", "}");

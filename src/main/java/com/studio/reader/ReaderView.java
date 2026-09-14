@@ -816,11 +816,36 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
     }
 
     /** 把相对路径解析成地图目录下的文件（也支持绝对路径） */
+    /**
+     * 解析素材路径：<b>地图目录优先 → classpath 回退</b>（与图片一致）。
+     *
+     * <p>classpath 里的音频若打成 jar（{@code jar:file:…}），{@code Media} 无法直接播放，
+     * 因此把该资源释放成临时文件再交给播放器。都找不到时返回地图内路径，由调用方按缺失处理。</p>
+     */
     private File resolveAsset(String rel) {
         if (rel == null || rel.isBlank()) return null;
         File f = new File(rel);
         if (f.isAbsolute()) return f;
-        return mapDir == null ? f : new File(mapDir, rel.replace('\\', '/'));
+        String cp = rel.replace('\\', '/');
+        File inMap = mapDir == null ? f : new File(mapDir, cp);
+        if (inMap.isFile()) return inMap;
+        java.net.URL url = ReaderView.class.getClassLoader().getResource(cp);
+        if (url == null) return inMap;
+        try {
+            if ("file".equalsIgnoreCase(url.getProtocol())) {
+                return new File(url.toURI());
+            }
+            File tmp = File.createTempFile("dsa-asset-", "-" + new File(cp).getName());
+            tmp.deleteOnExit();
+            try (java.io.InputStream in = url.openStream()) {
+                java.nio.file.Files.copy(in, tmp.toPath(),
+                        java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+            }
+            return tmp;
+        } catch (Exception e) {
+            Logs.warn("[Audio] classpath 资源解析失败 " + rel + "：" + e.getMessage());
+            return inMap;
+        }
     }
 
     /** 读节点的运行时属性覆盖（视频控制用） */
@@ -865,8 +890,8 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
         }
         File f = resolveAsset(relPath);
         if (f == null || !f.isFile()) {
-            Logs.warn("[Audio] 找不到音频: " + relPath);
-            toast("找不到音频: " + relPath);
+            // 缺失静默失败（只记日志）：剧本引用的素材可能尚未到位，不该打断剧情
+            Logs.info("[Audio] 音频未就位，跳过: " + relPath + "（通道 " + ch + "）");
             return;
         }
         runOnUiThread(() -> {
@@ -876,8 +901,19 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
                 MediaPlayer p = new MediaPlayer(media);
                 p.setCycleCount(loop ? MediaPlayer.INDEFINITE : 1);
                 p.setVolume(clamp(vol, 0, 1));
-                p.setOnError(() -> Logs.warn("[Audio] 播放失败 " + relPath + "：" + p.getError()));
-                if (!loop) p.setOnEndOfMedia(() -> Logs.info("[Audio] 播放结束: " + relPath));
+                p.setOnError(() -> {
+                    Logs.warn("[Audio] 播放失败 " + relPath + "：" + p.getError());
+                    p.dispose();
+                    audioChannels.remove(ch, p);
+                });
+                if (!loop) {
+                    // 一次性音效（SE）播完即释放 —— SE 用独立通道并发，不释放会累积声部
+                    p.setOnEndOfMedia(() -> {
+                        p.stop();
+                        p.dispose();
+                        audioChannels.remove(ch, p);
+                    });
+                }
                 p.play();
                 audioChannels.put(ch, p);
             } catch (RuntimeException e) {
