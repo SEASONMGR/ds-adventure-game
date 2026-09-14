@@ -26,3 +26,6 @@ logic/*.jar
 .out-*/
 .*test*/
 docs/私人/
+# CG 只入库游戏分辨率 PNG 与 hires JPEG（美术侧 127MB PNG → 25MB JPEG q88~90 / 4:4:4）；
+# hires 的原始 PNG 不入库（体积大且无引用）
+/src/main/resources/assets/cg/hires/*.png

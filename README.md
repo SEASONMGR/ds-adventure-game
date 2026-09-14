@@ -384,7 +384,7 @@ public interface GamePlugin {
 4. **信号 / 槽 + 逻辑层**：「打开信号演示地图（信号/槽+逻辑层）…」生成 `maps/demo_signal_lab`；按钮触发信号 → 槽 `call` → `logic/SignalLabLogic` 改变量与样式；按 `F`/`L` 演示场景级与节点级键盘信号。
 5. **双立绘轮流高亮**：`maps/demo_signal_characters` 是纯地图文件夹（脚本 + 素材 + 自带逻辑），点击推进时说话者高亮（opacity 1.0 / scale 1.08），对话走完按 `target` 自动跳转。
 6. **序章地图 `maps/prologue_404`**（PR #6）：15 幕 / 142 节点，**零图片零音频**（渐变底 + emoji 角色卡）即可玩通，演示三选一分支、汇合幕条件变体、计数比较、动态跳转与菜单插件。
-7. **剧情地图 `maps/story`（试验）**：由 `tools/build_story.mjs` 从 `docs/ds-adventrue/剧本/` 编译生成，覆盖 **序章 + 第1章 + 第2章**（134 场景 / 550 节点），使用真实素材（`assets/sprites/**`）：三选一分支、立绘进出场与换表情、`st:` 横幅、章末自动存档、**第1章贪吃蛇 / 第2章飞机大战的结果回传与胜负分支**；未接素材的立绘/背景（`snake_expert`、`sclerk`、3 张背景）自动降级为占位图。把 `config.ini` 的 `map.folder` 改成 `maps/story` 即可游玩。
+7. **剧情地图 `maps/story`**：由 `tools/build_story.mjs` 从 `docs/ds-adventrue/剧本/` 编译生成，覆盖**全 11 章**（序章 + 第1~9章 + 终章；853 场景 / 7065 节点 / 解析约 0.2 秒），使用真实素材：三选一分支、立绘进出场与换表情、`st:` 图片横幅、章末自动存档、**9 个小游戏的结果回传与胜负分支**，以及演出指令 `@cg`（CG 层）/ `@se`（音效）/ `@bgm` / `@if`（条件跳转）/ `@ending`（结局停住）。小游戏的三种调度模式都已实现：`mode:normal`、`mode:retry`（失败重入 `loop:` 并自增 `retry_count`）、`mode:ending`（失败进 Bad End 段）。把 `config.ini` 的 `map.folder` 改成 `maps/story` 即可游玩。
 
 ---
 
