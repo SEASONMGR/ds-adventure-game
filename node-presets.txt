@@ -1,0 +1,183 @@
+# ============================================================
+# 剧情地图: 未命名地图
+# 由 剧情编辑器(Studio) 于 2026-09-15 09:42 生成
+# 语法: [option] / [场景名] / { 节点属性 } （# 开头为注释）
+# ============================================================
+
+[option]
+background = #0d0f1c
+volume = 0.8
+typewriterSpeed = 14
+
+[对话框·科技蓝]
+{
+type = dialog
+index = 0
+x = 70
+y = 516
+width = 1140
+height = 178
+text = （把这段替换成台词。引擎按独立一行 --- 分段，点击逐段推进。）
+style = -fx-background-color: linear-gradient(to bottom right, #1b2a4c, rgba(22,33,62,0.93)); -fx-background-radius: 7; -fx-border-color: #446eba; -fx-border-width: 1.5; -fx-border-radius: 7; -fx-effect: dropshadow(gaussian, rgba(68,110,186,0.30), 16, 0.22, 0, 0);
+fontSize = 20
+}
+
+[名牌·科技蓝]
+{
+type = name
+index = 0
+x = 90
+y = 462
+width = 340
+height = 44
+text = ds娘
+style = -fx-background-color: linear-gradient(to bottom, #446eb5, #2f5490); -fx-background-radius: 8; -fx-border-color: #8fd0ff; -fx-border-width: 1; -fx-border-radius: 8; -fx-text-fill: #f2f8ff; -fx-alignment: center-left; -fx-padding: 2 16 2 40; -fx-effect: dropshadow(gaussian, rgba(68,110,181,0.45), 10, 0.22, 0, 0);
+fontSize = 22
+align = center
+}
+
+[选项按钮·科技蓝]
+{
+type = button
+index = 0
+x = 360
+y = 400
+width = 560
+height = 56
+text = 选项
+action = target
+fontSize = 18
+align = center
+}
+
+[章节横幅·科技蓝]
+{
+type = text
+index = 0
+x = 240
+y = 250
+width = 800
+height = 160
+text = ◆ 第 1 章 · 思维链大暴走 ◆
+style = -fx-text-fill: #cfe6ff; -fx-background-color: rgba(20,30,56,0.94); -fx-background-radius: 8; -fx-border-color: #446eba; -fx-border-width: 1.5; -fx-border-radius: 8; -fx-effect: dropshadow(gaussian, rgba(68,110,186,0.34), 20, 0.22, 0, 0);
+fontSize = 40
+align = center
+}
+
+[结局标题·冷蓝]
+{
+type = text
+index = 0
+x = 340
+y = 250
+width = 600
+text = —— 真结局 ——
+style = -fx-text-fill: #9fd8ff; -fx-background-color: rgba(22,33,62,0.93); -fx-background-radius: 7; -fx-border-color: #446eba; -fx-border-width: 1.5; -fx-border-radius: 7; -fx-effect: dropshadow(gaussian, rgba(68,110,186,0.30), 18, 0.22, 0, 0);
+fontSize = 40
+align = center
+}
+
+[结局标题·品红（坏结局）]
+{
+type = text
+index = 0
+x = 340
+y = 250
+width = 600
+text = —— Bad End · 人设崩塌 ——
+style = -fx-text-fill: #ff9ebb; -fx-background-color: rgba(22,33,62,0.93); -fx-background-radius: 7; -fx-border-color: #8e3b5c; -fx-border-width: 1.5; -fx-border-radius: 7; -fx-effect: dropshadow(gaussian, rgba(255,92,138,0.26), 18, 0.22, 0, 0);
+fontSize = 40
+align = center
+}
+
+[结局提示·副标题]
+{
+type = text
+index = 0
+x = 390
+y = 360
+width = 500
+height = 40
+text = （本作到此结束 · 感谢游玩）
+style = -fx-text-fill: #9fb0c8;
+fontSize = 18
+align = center
+}
+
+[全屏点击层·透明]
+{
+type = button
+index = 0
+x = 0
+y = 0
+width = 1280
+height = 720
+style = -fx-background-color: transparent; -fx-border-color: transparent;
+action = target
+}
+
+[系统提示·科技蓝]
+{
+type = toast
+index = 0
+x = 936
+y = 24
+text = 提示：已保存
+style = -fx-background-color: rgba(20,30,56,0.94); -fx-background-radius: 8; -fx-border-color: #446eba; -fx-border-width: 1.5; -fx-border-radius: 8; -fx-text-fill: #cfe6ff; -fx-effect: dropshadow(gaussian, rgba(68,110,186,0.30), 14, 0.22, 0, 0);
+fontSize = 15
+}
+
+[名牌菱形图标·青色]
+{
+type = text
+index = 0
+x = 0
+y = 0
+width = 20
+height = 20
+text = ◆
+style = -fx-text-fill: #8fd0ff;
+fontSize = 14
+align = center
+}
+
+[选项尖角·左]
+{
+type = text
+index = 0
+x = 0
+y = 0
+width = 24
+height = 30
+text = ‹
+style = -fx-text-fill: #8fd0ff;
+fontSize = 22
+align = center
+}
+
+[选项尖角·右]
+{
+type = text
+index = 0
+x = 0
+y = 0
+width = 24
+height = 30
+text = ›
+style = -fx-text-fill: #8fd0ff;
+fontSize = 22
+align = center
+}
+
+[结局遮罩·整屏]
+{
+type = text
+index = 0
+x = 0
+y = 0
+width = 1280
+height = 720
+style = -fx-background-color: rgba(6,10,20,0.62);
+fontSize = 1
+}
+

@@ -163,7 +163,8 @@ public final class ScriptWriter {
     /** [option] 的固定输出顺序（先规范键后未知键） */
     private static LinkedHashMap<String, String> orderedOption(GameOption option) {
         LinkedHashMap<String, String> out = new LinkedHashMap<>();
-        String[] order = {GameOption.K_INITIAL, GameOption.K_BG, GameOption.K_VOLUME, GameOption.K_SPEED};
+        String[] order = {GameOption.K_INITIAL, GameOption.K_BG, GameOption.K_VOLUME, GameOption.K_SPEED,
+                GameOption.K_CONSOLE, GameOption.K_CONSOLE_KEY};
         for (String k : order) {
             if (option.values().containsKey(k)) out.put(k, option.values().get(k));
         }
