@@ -127,9 +127,32 @@ const BG_ALIAS = { server_room: "bg_tech_serverroom" };
 
 const POS = { left: { x: 60, y: 150 }, center: { x: 480, y: 150 }, right: { x: 900, y: 150 } };
 const CHAR_W = 320, CHAR_H = 520;
-const DIALOG_BOX = { x: 70, y: 516, w: 1140, h: 178 };
+// 对话框 / 名牌坐标与"UI 皮肤"层：按美术侧《UI与小游戏接线规格》§2.1 的表值
+const DIALOG_BOX = { x: 96, y: 448, w: 1090, h: 190 };   // 引擎文字落在这块可读区里
 const BANNER = { x: 240, y: 250, w: 800, h: 160 };
-const NAME = { x: 90, y: 462, w: 340, h: 44 };
+const NAME = { x: 140, y: 404, w: 260, h: 40 };
+/** UI 皮肤（char 节点，垫在文字之下；美术侧 §2.1 / §2.5） */
+const UI_DIALOG = { x: 64, y: 430, w: 1152, h: 230, path: "assets/sprites/ui/dialog_box.png" };
+const UI_NAMEPLATE = { x: 96, y: 392, w: 300, h: 62, path: "assets/sprites/ui/name_plate.png" };
+const UI_VIGNETTE = { x: 0, y: 0, w: 1280, h: 720, path: "assets/sprites/ui/vignette.png" };
+
+/**
+ * 发 UI 皮肤层（放在 dialog / name 节点之前 → 引擎文字压在图上）。
+ * 这些是 char 节点，会被引擎的 stage=keep 复用逻辑按 id 复用，跨拍不重建。
+ */
+function emitUiSkin(out, withNameplate) {
+  out.push("{", "type = char", "id = ui_vignette", `x = ${UI_VIGNETTE.x}`, `y = ${UI_VIGNETTE.y}`,
+    `width = ${UI_VIGNETTE.w}`, `height = ${UI_VIGNETTE.h}`, `path = ${UI_VIGNETTE.path}`,
+    "opacity = 0.35", "}");
+  out.push("{", "type = char", "id = ui_dialog", `x = ${UI_DIALOG.x}`, `y = ${UI_DIALOG.y}`,
+    `width = ${UI_DIALOG.w}`, `height = ${UI_DIALOG.h}`, `path = ${UI_DIALOG.path}`,
+    "opacity = 1.0", "}");
+  if (withNameplate) {
+    out.push("{", "type = char", "id = ui_nameplate", `x = ${UI_NAMEPLATE.x}`, `y = ${UI_NAMEPLATE.y}`,
+      `width = ${UI_NAMEPLATE.w}`, `height = ${UI_NAMEPLATE.h}`, `path = ${UI_NAMEPLATE.path}`,
+      "opacity = 1.0", "}");
+  }
+}
 
 /** 角色 id → 名牌显示名（剧本里只有 id，这里给玩家看的名字） */
 const DISPLAY_NAME = {
@@ -778,13 +801,18 @@ for (const b of beats) {
   emitStage(b, out);
 
   if (b.kind === "dialog") {
-    if (b.speaker && b.speaker !== "narr") {
+    const hasSpeaker = !!(b.speaker && b.speaker !== "narr");
+    // UI 皮肤（美术侧交付）：暗角 → 对话框皮 → 名牌皮，然后才是引擎的文字节点
+    emitUiSkin(out, hasSpeaker);
+    if (hasSpeaker) {
       out.push("{", "type = name", "id = 名牌", "x = " + NAME.x, "y = " + NAME.y,
         "width = " + NAME.w, "height = " + NAME.h,
-        "text = " + (DISPLAY_NAME[b.speaker] || b.speaker), "fontSize = 22", "}");
+        "text = " + (DISPLAY_NAME[b.speaker] || b.speaker), "fontSize = 22", "align = left",
+        "style = -fx-background-color: transparent;", "}");
     }
     out.push("{", "type = dialog", "id = 对话框", "x = " + DIALOG_BOX.x, "y = " + DIALOG_BOX.y,
-      "width = " + DIALOG_BOX.w, "height = " + DIALOG_BOX.h);
+      "width = " + DIALOG_BOX.w, "height = " + DIALOG_BOX.h,
+      "style = -fx-background-color: transparent;");
     out.push("text = <<<");
     // 每行台词 = 一个独立段落（引擎按独立一行 --- 分段，点击逐段推进）；
     // 若整段堆在一起，引擎会一次性渲染全部行 → 必然溢出对话框。
@@ -814,6 +842,7 @@ for (const b of beats) {
         "style = -fx-background-color: transparent; -fx-border-color: transparent;", "}");
     } else {
       // 未映射到图片的文案：回退文字横幅 + 对话框（保证演出与可读性都不缺）
+      emitUiSkin(out, false);
       out.push("{", "type = text", "id = 横幅", "x = " + BANNER.x, "y = " + BANNER.y,
         "width = " + BANNER.w, "height = " + BANNER.h, `text = ${b.banner}`,
         "fontSize = 40", "align = center",
