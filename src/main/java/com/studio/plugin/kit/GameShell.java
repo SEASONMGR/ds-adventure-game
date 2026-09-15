@@ -223,6 +223,99 @@ public final class GameShell {
     public boolean overlayVisible() { return overlay.isVisible(); }
 
     // =====================================================================
+    // 引擎统一外壳：给"没有自己接外壳"的插件套上底图 + 外框 + 标题行
+    //   （一处改动，9 个小游戏一起受益；插件的 UI 不变，只是被包在里面）
+    // =====================================================================
+
+    /**
+     * 把一个游戏视图包进统一外壳。
+     *
+     * <p>层级顺序（后画的在上）：<b>剧情底图 → 游戏视图 → 共用外框 → 标题 HUD</b>。
+     * 外框是 PNG（中间透明），所以压在游戏视图上只显示边框装饰。</p>
+     *
+     * @param mapDir  地图目录（素材解析用；可为 null，走 classpath）
+     * @param mgId    底图/图标 id（如 snake / gomoku / minesweeper）
+     * @param iconId  图标 id（默认同 mgId；如扫雷底图是 mg_minesweeper 而图标是 icon_game_mine）
+     * @param title   标题（如插件 displayName()）
+     * @param gameView 游戏自己的视图
+     */
+    public static javafx.scene.Parent wrap(java.io.File mapDir, String mgId, String iconId,
+                                           String title, javafx.scene.Parent gameView) {
+        StackPane box = new StackPane();
+        box.setPrefSize(W, H);
+        box.setMinSize(W, H);
+        box.setMaxSize(W, H);
+
+        // ① 底图
+        javafx.scene.image.Image bgImg = load(mapDir, "minigames/mg_" + mgId);
+        if (bgImg != null) {
+            ImageView bg = new ImageView(bgImg);
+            bg.setFitWidth(W);
+            bg.setFitHeight(H);
+            bg.setPreserveRatio(false);
+            box.getChildren().add(bg);
+        }
+
+        // ② 游戏视图（居中；插件自己的尺寸由它决定）
+        if (gameView != null) {
+            StackPane holder = new StackPane(gameView);
+            holder.setAlignment(Pos.CENTER);
+            holder.setPadding(new Insets(72, 0, 18, 0));   // 给标题行留位
+            box.getChildren().add(holder);
+        }
+
+        // ③ 外框（中间透明，只显示边框装饰）
+        javafx.scene.image.Image frameImg = load(mapDir, "shell_frame");
+        if (frameImg != null) {
+            ImageView frame = new ImageView(frameImg);
+            frame.setFitHeight(H - 20);
+            frame.setPreserveRatio(true);
+            frame.setSmooth(true);
+            frame.setMouseTransparent(true);
+            frame.setOpacity(0.9);
+            StackPane fh = new StackPane(frame);
+            fh.setAlignment(Pos.CENTER);
+            fh.setMouseTransparent(true);
+            box.getChildren().add(fh);
+        }
+
+        // ④ 标题 HUD（图标 + 名称）
+        javafx.scene.image.Image iconImg = load(mapDir, "icon_game_" + (iconId == null || iconId.isBlank() ? mgId : iconId));
+        HBox hud = new HBox(10);
+        hud.setAlignment(Pos.CENTER_LEFT);
+        hud.getStyleClass().add("shell-hud");
+        if (iconImg != null) {
+            ImageView icon = new ImageView(iconImg);
+            icon.setFitWidth(32);
+            icon.setPreserveRatio(true);
+            icon.setSmooth(true);
+            hud.getChildren().add(icon);
+        }
+        Label t = new Label(title == null ? "" : title);
+        t.getStyleClass().add("shell-title");
+        hud.getChildren().add(t);
+        hud.setMouseTransparent(true);
+        hud.setMaxWidth(Region.USE_PREF_SIZE);
+        StackPane hh = new StackPane(hud);
+        hh.setAlignment(Pos.TOP_LEFT);
+        hh.setPadding(new Insets(20, 0, 0, 34));
+        hh.setMouseTransparent(true);
+        box.getChildren().add(hh);
+
+        return box;
+    }
+
+    /** 从地图目录或 classpath 取 UI 素材（失败返回 null，调用方静默跳过） */
+    private static javafx.scene.image.Image load(java.io.File mapDir, String name) {
+        try {
+            javafx.scene.image.Image img = FxAssets.loadRooted(mapDir, "assets/sprites/ui/" + name + ".png");
+            return (img == null || img.isError()) ? null : img;
+        } catch (RuntimeException e) {
+            return null;
+        }
+    }
+
+    // =====================================================================
     // 素材加载
     // =====================================================================
 

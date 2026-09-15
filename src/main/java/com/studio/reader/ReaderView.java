@@ -1603,6 +1603,7 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
                     (java.util.function.Consumer<com.studio.plugin.MiniGameResult>) this::onMiniGameResult);
             params.put(GamePlugin.PARAM_FLAGS, miniGameFlags());
             // 逐动作音效通道：插件调 se("se_xxx") → 引擎按 assets/sounds/se_xxx.wav 播放（缺失静默）
+            com.studio.plugin.kit.Se.attach(params);
             params.put(GamePlugin.PARAM_SE,
                     (java.util.function.Consumer<String>) id -> {
                         if (id == null || id.isBlank()) return;
@@ -1627,6 +1628,12 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
         }
     }
 
+    /** 图标 id 与底图 id 不一致的少数情况（美术侧命名） */
+    private static String iconIdOf(String eventId) {
+        if (eventId == null) return "";
+        return "minesweeper".equalsIgnoreCase(eventId) ? "mine" : eventId;
+    }
+
     private boolean pluginMode() {
         return pluginLayer.isVisible();
     }
@@ -1644,10 +1651,13 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
         previousScene = (pluginReturnScene != null && project.hasScene(pluginReturnScene))
                 ? pluginReturnScene : sceneName;
         pluginReturnScene = null;
-        pluginTitle.setText("🎮 " + plugin.displayName() + "（事件: " + eventId + "）");
+        pluginTitle.setText(plugin.displayName());
 
         pluginContent.setCenter(null);
-        pluginContent.setCenter(view);
+        // 统一小游戏外壳：底图 mg_<事件id> + 共用外框 + 图标标题行（插件的 UI 不变）
+        javafx.scene.Parent wrapped = com.studio.plugin.kit.GameShell.wrap(
+                mapDir, eventId, iconIdOf(eventId), plugin.displayName(), view);
+        pluginContent.setCenter(wrapped);
         pluginLayer.setVisible(true);
         pluginLayer.setManaged(true);
 
@@ -1667,6 +1677,7 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
         pluginLayer.setVisible(false);
         pluginLayer.setManaged(false);
         pluginContent.setCenter(null);
+        com.studio.plugin.kit.Se.detach();
         stopAudioChannel("bgm_plugin");   // 小游戏 BGM 收掉
         detachActivePlugin("返回剧情");   // 插件从主舞台移除 → 回调 onDetach
 
