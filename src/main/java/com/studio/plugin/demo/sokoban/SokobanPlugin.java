@@ -1,5 +1,7 @@
 package com.studio.plugin.demo.sokoban;
 
+import com.studio.plugin.kit.Se;
+
 import com.studio.plugin.GamePlugin;
 import com.studio.ui.FxAnim;
 import com.studio.util.Logs;
@@ -360,6 +362,7 @@ public final class SokobanPlugin implements GamePlugin {
 
     private void doMove(int dx, int dy) {
         if (game.move(dx, dy)) {
+            Se.play("se_box_push");
             updateStats();
             render();
         }
@@ -367,6 +370,7 @@ public final class SokobanPlugin implements GamePlugin {
 
     private void doUndo() {
         if (game.undo()) {
+            Se.play("se_hint");
             updateStats();
             render();
         }

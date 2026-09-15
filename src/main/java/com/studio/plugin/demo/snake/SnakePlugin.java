@@ -1,5 +1,7 @@
 package com.studio.plugin.demo.snake;
 
+import com.studio.plugin.kit.Se;
+
 import com.studio.plugin.GamePlugin;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
@@ -321,7 +323,11 @@ public class SnakePlugin implements GamePlugin {
             return;
         }
         if (!game.isOver()) {
+            int seSnakeBefore = game.getScore();
             game.step(dt);
+            if (game.getScore() > seSnakeBefore) {
+                Se.play("se_snake_eat");
+            }
         }
         reportIfFinished();
         render();

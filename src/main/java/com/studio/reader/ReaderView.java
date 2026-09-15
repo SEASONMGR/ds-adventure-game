@@ -1660,6 +1660,7 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
         pluginContent.setCenter(wrapped);
         pluginLayer.setVisible(true);
         pluginLayer.setManaged(true);
+        com.studio.plugin.kit.Se.play("se_start");   // 通用开始音（9 个游戏共用）
 
         // 小游戏 BGM：独立通道（bgm_plugin），离开小游戏即停，不影响剧情 BGM
         String battle = com.studio.util.Bgm.relPath("battle");
@@ -1702,6 +1703,7 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
                 Logs.plugin(activePluginId, "结果回传: " + result);
             }
             boolean win = (result == null) || result.win();
+            com.studio.plugin.kit.Se.play(win ? "se_win" : "se_lose");   // 通用胜负音
 
             // mode:retry —— 失败重入 loop: 标签，并自增 retry_count（引擎侧自增，保证"重试不丢剧情进度"）
             if (!win && "retry".equalsIgnoreCase(mode) && loop != null && !loop.isBlank()) {

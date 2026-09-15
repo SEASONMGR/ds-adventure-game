@@ -1,5 +1,7 @@
 package com.studio.plugin.demo.memory;
 
+import com.studio.plugin.kit.Se;
+
 import com.studio.plugin.GamePlugin;
 import javafx.animation.AnimationTimer;
 import javafx.animation.Interpolator;
@@ -713,6 +715,7 @@ public class MemoryPlugin implements GamePlugin {
             final int index = i;
             card.setOnAction(e -> {
                 game.flip(index);
+            Se.play("se_card_flip");
                 refreshBoard();
             });
             cardButtons[i] = card;

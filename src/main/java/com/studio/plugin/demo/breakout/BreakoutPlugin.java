@@ -1,5 +1,7 @@
 package com.studio.plugin.demo.breakout;
 
+import com.studio.plugin.kit.Se;
+
 import com.studio.plugin.GamePlugin;
 import com.studio.util.Logs;
 import javafx.animation.AnimationTimer;
@@ -344,7 +346,11 @@ public class BreakoutPlugin implements GamePlugin {
                 while (accumulator >= STEP_SECONDS) {
                     if (!paused && !game.isOver()) {
                         game.movePaddle(paddleDirection());
-                        game.tick(STEP_SECONDS);
+                        int seBricks = game.bricksLeft();
+            game.tick(STEP_SECONDS);
+            if (game.bricksLeft() < seBricks) {
+                Se.play("se_brick_break");
+            }
                     }
                     accumulator -= STEP_SECONDS;
                 }

@@ -1,5 +1,7 @@
 package com.studio.plugin.demo.plane;
 
+import com.studio.plugin.kit.Se;
+
 import com.studio.plugin.GamePlugin;
 import com.studio.ui.FxAnim;
 import com.studio.util.Logs;
@@ -564,6 +566,7 @@ public class PlanePlugin implements GamePlugin {
                     startOrRestart();
                 } else {
                     game.shoot();
+                Se.play("se_plane_shoot");
                 }
             }
             event.consume(); // 别让空格等按键冒泡到宿主场景
@@ -667,6 +670,7 @@ public class PlanePlugin implements GamePlugin {
                         game.move(moveDx(), moveDy());
                         if (isFiring()) {
                             game.shoot();
+                Se.play("se_plane_shoot");
                         }
                         game.tick(STEP_SECONDS);
                     }

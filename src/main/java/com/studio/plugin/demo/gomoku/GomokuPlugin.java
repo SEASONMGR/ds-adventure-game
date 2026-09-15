@@ -1,5 +1,7 @@
 package com.studio.plugin.demo.gomoku;
 
+import com.studio.plugin.kit.Se;
+
 import com.studio.plugin.GamePlugin;
 import com.studio.ui.FxAnim;
 import com.studio.util.Logs;
@@ -509,6 +511,7 @@ public final class GomokuPlugin implements GamePlugin {
         int[] move = GomokuAi.chooseMove(game.snapshot(), game.aiColor(), config.getWinLength());
         if (move != null) {
             game.place(move[0], move[1]);
+            Se.play("se_stone_place");
         }
         aiCountdown = config.getAiThinkDelay();
     }
