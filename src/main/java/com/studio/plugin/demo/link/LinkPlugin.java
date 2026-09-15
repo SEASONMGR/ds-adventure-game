@@ -18,6 +18,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.util.Map;
 import java.util.function.Consumer;
 
@@ -44,13 +45,9 @@ public class LinkPlugin implements GamePlugin {
     private final LinkGame game = new LinkGame();
 
     private Button[][] cells;
-    private Label pairsLabel;
-    private Label timeLabel;
-    private Label statusLabel;
-    private StackPane overlay;
-    private Label overlayTitle;
-    private Label overlayDesc;
-    private Button overlayButton;
+    private com.studio.plugin.kit.GameShell shell;
+    private File mapDir;
+    private Map<String, Object> params;
 
     private AnimationTimer loop;
     private long lastNanos;
@@ -76,6 +73,9 @@ public class LinkPlugin implements GamePlugin {
 
     @Override
     public Parent createEmbeddedView(Map<String, Object> params) {
+        this.params = params;
+        Object mf = params == null ? null : params.get(PARAM_MAP_FOLDER);
+        this.mapDir = (mf instanceof File) ? (File) mf : new File(System.getProperty("user.dir"), "maps/story");
         if (params != null && params.get(PARAM_RESULT_SINK) instanceof Consumer) {
             this.resultSink = (Consumer<MiniGameResult>) params.get(PARAM_RESULT_SINK);
         }
@@ -133,17 +133,9 @@ public class LinkPlugin implements GamePlugin {
     // =====================================================================
 
     private Parent buildRoot() {
-        Label title = new Label("🔗 连连看");
-        title.getStyleClass().add("link-title");
-
-        pairsLabel = new Label();
-        pairsLabel.getStyleClass().add("link-title");
-
-        timeLabel = new Label();
-        timeLabel.getStyleClass().add("link-timer");
-
-        statusLabel = new Label("点两张相同图案；拐弯不超过两次即可消除");
-        statusLabel.getStyleClass().add("link-hint");
+        // 统一外壳：剧情底图 mg_link + 共用外框 + 图标顶栏 + 遮罩（素材来自美术侧交付）
+        shell = new com.studio.plugin.kit.GameShell(mapDir, params, "link", "连连看");
+        shell.setStatus("点两张相同图案；拐弯不超过两次即可消除");
 
         Button shuffle = new Button("↻ 重排");
         shuffle.getStyleClass().add("story-btn");
@@ -151,25 +143,22 @@ public class LinkPlugin implements GamePlugin {
         shuffle.setOnAction(e -> {
             if (!started || game.isOver()) return;
             if (game.shuffleRemaining()) {
-                statusLabel.setText("无可消对：已重排（" + game.shufflesUsed() + "/" + config.maxShuffles + "）");
+                shell.se("se_hint");
+                shell.setStatus("无可消对：已重排（" + game.shufflesUsed() + "/" + config.maxShuffles + "）");
             } else {
-                statusLabel.setText("重排次数用尽");
+                shell.setStatus("重排次数用尽");
             }
             refresh();
             checkOver();
         });
-
-        Region spacer = new Region();
-        HBox.setHgrow(spacer, Priority.ALWAYS);
-        HBox header = new HBox(12, title, pairsLabel, timeLabel, spacer, shuffle);
-        header.setAlignment(Pos.CENTER_LEFT);
+        shell.hudRight().getChildren().add(shuffle);
 
         GridPane board = new GridPane();
         board.setHgap(4);
         board.setVgap(4);
         board.getStyleClass().add("link-board");
         board.setPadding(new Insets(10));
-        GridPane.setHgrow(board, Priority.NEVER);
+        board.setAlignment(javafx.geometry.Pos.CENTER);   // 棋盘居中压在底图暗区上
 
         cells = new Button[config.rows][config.cols];
         for (int r = 0; r < config.rows; r++) {
@@ -186,78 +175,34 @@ public class LinkPlugin implements GamePlugin {
                 board.add(b, c, r);
             }
         }
+        shell.boardLayer().getChildren().add(board);
 
-        StackPane boardHost = new StackPane(board);
-        boardHost.setAlignment(Pos.CENTER);
-
-        overlay = new StackPane();
-        overlay.getStyleClass().add("link-overlay");
-        overlay.setVisible(false);
-        overlay.setManaged(false);
-
-        VBox box = new VBox(10);
-        box.setAlignment(Pos.CENTER);
-        box.getStyleClass().add("dialog-panel");
-        box.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
-        overlayTitle = new Label();
-        overlayTitle.getStyleClass().add("link-overlay-title");
-        overlayDesc = new Label();
-        overlayDesc.getStyleClass().add("link-overlay-desc");
-        overlayDesc.setWrapText(true);
-        overlayDesc.setMaxWidth(420);
-        overlayButton = new Button("开始游戏");
-        overlayButton.getStyleClass().add("story-btn");
-        overlayButton.setPrefSize(140, 40);
-        overlayButton.setOnAction(e -> startOrRestart());
-        box.getChildren().addAll(overlayTitle, overlayDesc, overlayButton);
-        overlay.getChildren().add(box);
-
-        StackPane area = new StackPane(boardHost, overlay);
-
-        BorderPane root = new BorderPane();
-        root.getStyleClass().add("link-root");
-        root.setTop(header);
-        BorderPane.setMargin(header, new Insets(0, 0, 10, 0));
-        root.setCenter(area);
-
-        VBox bottom = new VBox(6);
-        bottom.setPadding(new Insets(8, 0, 0, 0));
-        bottom.getChildren().add(statusLabel);
-        if (backCallback != null) {
-            Button back = new Button("← 返回剧情");
-            back.getStyleClass().add("story-btn");
-            back.setPrefSize(140, 36);
-            back.setOnAction(e -> leaveToStory());
-            HBox row = new HBox(back);
-            row.setAlignment(Pos.CENTER_LEFT);
-            bottom.getChildren().add(row);
-        }
-        root.setBottom(bottom);
-
-        // 起手显示开始遮罩
         game.reset(config);
         started = false;
         refresh();
-        showOverlay("🔗 连连看",
-                "在 " + config.rows + "×" + config.cols + " 的盘面上，点选两张相同图案；"
-                        + "只要连线的拐弯不超过两次就能消除。清空盘面即通关。",
-                "开始游戏");
-        return root;
+        shell.showStart("在 " + config.rows + "×" + config.cols + " 的盘面上，点选两张相同图案；\n"
+                + "只要连线的拐弯不超过两次就能消除。清空盘面即通关。", this::startOrRestart);
+        return shell.root();
     }
 
     private void onTileClicked(int r, int c) {
         if (!started || game.isOver()) return;
         LinkGame.Change ch = game.select(r, c);
         switch (ch) {
-            case SELECTED, DESELECTED, MATCHED, MISMATCH -> statusLabel.setText(hintFor(ch));
+            case MATCHED -> {
+                shell.se("se_link");
+                shell.setStatus(hintFor(ch));
+            }
+            case SELECTED, DESELECTED, MISMATCH -> shell.setStatus(hintFor(ch));
             case NO_PATH -> {
-                statusLabel.setText("这两张连不上（拐弯超过两次或被挡住）");
+                shell.se("se_error");
+                shell.setStatus("这两张连不上（拐弯超过两次或被挡住）");
                 flashMismatch();
             }
             default -> { }
         }
         if (ch == LinkGame.Change.MATCHED && game.isOver()) {
-            statusLabel.setText("盘面已清空");
+            shell.setStatus("盘面已清空");
         }
         refresh();
         checkOver();
@@ -308,10 +253,10 @@ public class LinkPlugin implements GamePlugin {
                 }
             }
         }
-        pairsLabel.setText("剩余 " + game.remainingPairs() + " 对");
-        timeLabel.setText(config.timeLimitSec > 0
-                ? String.format("⏱ %02d:%02d", (int) game.remainingSeconds() / 60, (int) game.remainingSeconds() % 60)
-                : "");
+        String timer = config.timeLimitSec > 0
+                ? String.format("　⏱ %02d:%02d", (int) game.remainingSeconds() / 60, (int) game.remainingSeconds() % 60)
+                : "";
+        shell.setCounter("剩余 " + game.remainingPairs() + " 对" + timer);
     }
 
     private void startLoop() {
@@ -354,17 +299,19 @@ public class LinkPlugin implements GamePlugin {
             resultSink.accept(win ? MiniGameResult.win(score) : MiniGameResult.lose(score));
         }
         stopLoop();
-        showOverlay(win ? "🎉 盘面清空，通关！" : "⏳ 本局失败",
-                "消除 " + (cleared / 2) + " 对 · 重排 " + game.shufflesUsed() + " 次 · 得分 " + score,
-                win ? "再来一局" : "重新开始");
+        String desc = "消除 " + (cleared / 2) + " 对 · 重排 " + game.shufflesUsed() + " 次 · 得分 " + score;
+        shell.se(win ? "se_win" : "se_lose");
+        if (win) shell.showWin(desc, this::startOrRestart);
+        else shell.showLose(desc, this::startOrRestart);
     }
 
     private void startOrRestart() {
         game.reset(config);
         reported = false;
         started = true;
-        hideOverlay();
-        statusLabel.setText("点两张相同图案；拐弯不超过两次即可消除");
+        shell.se("se_start");
+        shell.hideOverlay();
+        shell.setStatus("点两张相同图案；拐弯不超过两次即可消除");
         refresh();
         startLoop();
     }
@@ -377,16 +324,4 @@ public class LinkPlugin implements GamePlugin {
         }
     }
 
-    private void showOverlay(String title, String desc, String buttonText) {
-        overlayTitle.setText(title);
-        overlayDesc.setText(desc);
-        overlayButton.setText(buttonText);
-        overlay.setVisible(true);
-        overlay.setManaged(true);
-    }
-
-    private void hideOverlay() {
-        overlay.setVisible(false);
-        overlay.setManaged(false);
-    }
 }

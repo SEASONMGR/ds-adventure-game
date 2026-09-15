@@ -47,6 +47,12 @@ public interface GamePlugin {
      */
     String PARAM_FLAGS = "flags";
 
+    /**
+     * 逐动作音效回调：{@code Consumer<String>}，参数是音效 id（如 {@code se_plane_shoot}）。
+     * 引擎按 {@code assets/sounds/<id>.wav} 播放，缺失静默；插件只管在动作发生时调用。
+     */
+    String PARAM_SE = "se.sink";
+
     /** 场景事件要求定义的标准入口：execute(舞台, 参数) */
     void execute(Stage stage, Map<String, Object> params);
 

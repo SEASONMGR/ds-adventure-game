@@ -1602,6 +1602,13 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
             params.put(GamePlugin.PARAM_RESULT_SINK,
                     (java.util.function.Consumer<com.studio.plugin.MiniGameResult>) this::onMiniGameResult);
             params.put(GamePlugin.PARAM_FLAGS, miniGameFlags());
+            // 逐动作音效通道：插件调 se("se_xxx") → 引擎按 assets/sounds/se_xxx.wav 播放（缺失静默）
+            params.put(GamePlugin.PARAM_SE,
+                    (java.util.function.Consumer<String>) id -> {
+                        if (id == null || id.isBlank()) return;
+                        playAudioChannel("se_" + id, "assets/sounds/" + id + ".wav", false,
+                                clamp(masterVolume() * 0.9, 0, 1));
+                    });
 
             Logs.plugin(eventId, "触发来源: " + source);
             plugin.execute(stage, params);
