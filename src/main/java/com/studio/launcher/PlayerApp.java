@@ -144,6 +144,7 @@ public class PlayerApp extends Application {
 
     /** 进入游戏；{@code slot} 非空时载入该存档（"继续游戏"） */
     private void startGame(String slot) {
+        if (title != null) title.stopMusic();   // 标题 BGM 让位给剧情/小游戏 BGM
         reader = new ReaderView(stage, map, config);
         reader.setMasterVolumeScale(config.getDouble("audio.volume", 1.0));
         reader.setTypewriterSpeed(config.getDouble("typewriter.speed", 14));
@@ -186,7 +187,10 @@ public class PlayerApp extends Application {
                 "确定要退出吗？未存档的进度会丢失。",
                 new String[]{"取消", "退出"},
                 which -> {
-                    if (which == 1) Platform.exit();
+                    if (which == 1) {
+                        com.studio.util.Bgm.stop();
+                        Platform.exit();
+                    }
                     else hideOverlay();
                 });
         showOverlay(panel);

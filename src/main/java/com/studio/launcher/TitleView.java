@@ -73,6 +73,8 @@ public final class TitleView extends Pane {
         this.host = host;
         this.model = MenuModel.scan(mapDir);
         getStyleClass().add("title-root");
+        // 标题画面 BGM（曲库来自美术侧 bgm_map.json；标题曲非无缝循环，这里强制循环）
+        com.studio.util.Bgm.play("title", 0.55, true);
         setPrefSize(W, H);
         setMinSize(W, H);
         setMaxSize(W, H);
@@ -81,6 +83,11 @@ public final class TitleView extends Pane {
 
     /** 当前菜单状态（供测试/宿主查询） */
     public MenuModel model() { return model; }
+
+    /** 离开标题（进入游戏/退出）时停掉标题 BGM */
+    public void stopMusic() {
+        com.studio.util.Bgm.stop();
+    }
 
     // =====================================================================
     // 构建

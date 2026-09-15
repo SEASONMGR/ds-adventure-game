@@ -559,6 +559,13 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
         if (endingReached) {
             Logs.info("[Flow] 抵达结局：" + ending);
             toast("已抵达结局：" + ending);
+            // 结局 BGM：按结局 id 选类别（bad_collapse/busy → bad；true/temp → ending；local → warm）
+            String cat = com.studio.util.Bgm.categoryForEnding(ending);
+            String rel = cat.isEmpty() ? "" : com.studio.util.Bgm.relPath(cat);
+            if (!rel.isEmpty()) {
+                playAudioChannel("bgm", rel, true, clamp(masterVolume() * 0.85, 0, 1));
+                Logs.info("[Bgm] 结局音乐 [" + cat + "] " + rel);
+            }
         }
 
         // ② 进入新场景：发「场景进入」信号（节点已经建好，槽可以立刻改它们的属性；参数带 from=上一幕）
@@ -1636,6 +1643,15 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
         pluginContent.setCenter(view);
         pluginLayer.setVisible(true);
         pluginLayer.setManaged(true);
+
+        // 小游戏 BGM：独立通道（bgm_plugin），离开小游戏即停，不影响剧情 BGM
+        String battle = com.studio.util.Bgm.relPath("battle");
+        if (!battle.isEmpty()) {
+            playAudioChannel("bgm_plugin", battle, true, clamp(masterVolume() * 0.7, 0, 1));
+            Logs.info("[Bgm] 小游戏音乐 [battle] " + battle);
+        } else {
+            Logs.info("[Bgm] 无小游戏音乐可用（battle 类为空）");
+        }
     }
 
     /** 点击【返回】：移除嵌入层，回到进入插件前的场景 */
@@ -1644,6 +1660,7 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
         pluginLayer.setVisible(false);
         pluginLayer.setManaged(false);
         pluginContent.setCenter(null);
+        stopAudioChannel("bgm_plugin");   // 小游戏 BGM 收掉
         detachActivePlugin("返回剧情");   // 插件从主舞台移除 → 回调 onDetach
 
         // —— 小游戏结果路由（脚本 @minigame 的 mg.onWin / mg.onLose）——
