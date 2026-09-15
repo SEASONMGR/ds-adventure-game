@@ -413,7 +413,9 @@ public class EditorPane extends BorderPane implements EditorHub {
             notify("未选中节点");
             return;
         }
-        int i = currentScene.nodes().indexOf(selectedNode);
+        // 用同一性查找：nodes().indexOf(...) 走的是 StoryNode.equals（按内容比较），
+        // 同场景里若有"同类型同 id 同坐标"的节点会命中错的那个
+        int i = currentScene.indexOfIdentity(selectedNode);
         if (i < 0) return;
         int target = i + delta;
         if (target < 0 || target >= currentScene.nodes().size()) {
@@ -1600,7 +1602,12 @@ public class EditorPane extends BorderPane implements EditorHub {
             Ui.warn(stage, "无法预览", "请先打开或新建一张地图。");
             return;
         }
+        // 播放测试时允许打开调试控制台（不看地图里的 console 开关，方便随时调试；
+        // 正式游玩时是否允许由 [option] console 决定）
+        System.setProperty(ReaderView.CONSOLE_FORCE_PROP, "1");
         ReaderView.openPreview(project.rootDir(), config);
+        notify("已打开播放器；按 " + project.option().consoleKey() + " 打开调试控制台");
+        Logs.info("[Console] 播放测试已允许控制台（快捷键 " + project.option().consoleKey() + "）");
     }
 
     // =====================================================================

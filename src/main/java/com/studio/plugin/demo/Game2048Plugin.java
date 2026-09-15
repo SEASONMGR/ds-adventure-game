@@ -125,13 +125,16 @@ public class Game2048Plugin implements GamePlugin {
                 + "-fx-padding: 8;");
 
         // ---- 方向按钮（鼠标可用）----
+        // 两排都要显式 setAlignment(Pos.CENTER)：VBox 会把子 HBox 拉满宽，
+        // 不居中的话这一排会停在最左边（上排 140 宽的大按钮居中 → 看着就是"按钮错位"）
         VBox ctrl = new VBox(4);
         ctrl.setAlignment(Pos.CENTER);
-        ctrl.getChildren().addAll(
-                dirRow("⬆", () -> move(Direction.UP)),
-                new HBox(4, dirButton("⬅", () -> move(Direction.LEFT)),
-                        dirButton("⬇", () -> move(Direction.DOWN)),
-                        dirButton("➡", () -> move(Direction.RIGHT))));
+        HBox upRow = dirRow("⬆", () -> move(Direction.UP));
+        HBox moveRow = new HBox(4, dirButton("⬅", () -> move(Direction.LEFT)),
+                dirButton("⬇", () -> move(Direction.DOWN)),
+                dirButton("➡", () -> move(Direction.RIGHT)));
+        moveRow.setAlignment(Pos.CENTER);
+        ctrl.getChildren().addAll(upRow, moveRow);
 
         VBox body = new VBox(10, header, area, ctrl, statusLabel);
         body.setPadding(new Insets(14));
@@ -181,12 +184,15 @@ public class Game2048Plugin implements GamePlugin {
         return b;
     }
 
+    /** 一整排按钮（固定 140 宽、内容居中，与上排大按钮对齐） */
     private HBox dirRow(String text, Runnable action) {
         Button b = dirButton(text, action);
         b.setPrefSize(140, 40);
         b.setMinSize(140, 40);
         HBox row = new HBox(b);
         row.setAlignment(Pos.CENTER);
+        row.setPrefWidth(140);
+        row.setMinWidth(140);
         return row;
     }
 
