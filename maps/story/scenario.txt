@@ -8440,6 +8440,61 @@ target = ch1_rules__7
 
 [ch1_rules__7]
 stage = keep
+
+{
+type = bg
+id = 背景
+x = 0
+y = 0
+width = 1280
+height = 720
+path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
+}
+{
+type = bg
+id = CG
+x = 0
+y = 0
+width = 1280
+height = 720
+path = assets/cg/cg_ch01_snake_ride.png
+}
+{
+type = char
+id = char_ds
+x = 480
+y = 150
+width = 320
+height = 520
+path = assets/sprites/ds/normal.png
+opacity = 1.0
+}
+{
+type = char
+id = char_snake_expert
+x = 900
+y = 150
+width = 320
+height = 520
+path = assets/sprites/snake_expert/proud.png
+opacity = 1.0
+}
+{
+type = button
+id = 继续
+x = 0
+y = 0
+width = 1280
+height = 720
+text = 
+action = target
+target = ch1_rules__8
+style = -fx-background-color: transparent; -fx-border-color: transparent;
+}
+
+[ch1_rules__8]
+stage = keep
 event = snake
 mg.mode = normal
 mg.onWin = ch1_win
@@ -8492,15 +8547,6 @@ width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
 # 幕题: 思维链大暴走
-}
-{
-type = bg
-id = CG
-x = 0
-y = 0
-width = 1280
-height = 720
-path = assets/cg/cg_ch01_snake_ride.png
 }
 {
 type = char
@@ -14203,6 +14249,71 @@ target = ch2_rules__5
 
 [ch2_rules__5]
 stage = keep
+
+{
+type = bg
+id = 背景
+x = 0
+y = 0
+width = 1280
+height = 720
+path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
+}
+{
+type = bg
+id = CG
+x = 0
+y = 0
+width = 1280
+height = 720
+path = assets/cg/cg_ch02_reimu_danmaku.png
+}
+{
+type = char
+id = char_ds
+x = 480
+y = 150
+width = 320
+height = 520
+path = assets/sprites/ds/serious.png
+opacity = 1.0
+}
+{
+type = char
+id = char_bugs
+x = 60
+y = 150
+width = 320
+height = 520
+path = assets/sprites/bugs/panic.png
+opacity = 1.0
+}
+{
+type = char
+id = char_reimu
+x = 900
+y = 150
+width = 320
+height = 520
+path = assets/sprites/reimu/normal.png
+opacity = 1.0
+}
+{
+type = button
+id = 继续
+x = 0
+y = 0
+width = 1280
+height = 720
+text = 
+action = target
+target = ch2_rules__6
+style = -fx-background-color: transparent; -fx-border-color: transparent;
+}
+
+[ch2_rules__6]
+stage = keep
 event = plane
 mg.mode = normal
 mg.onWin = ch2_win
@@ -14264,15 +14375,6 @@ width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
 # 幕题: 幻想乡弹幕异变
-}
-{
-type = bg
-id = CG
-x = 0
-y = 0
-width = 1280
-height = 720
-path = assets/cg/cg_ch02_reimu_danmaku.png
 }
 {
 type = char
@@ -60519,12 +60621,117 @@ target = pre_game__2
 
 [pre_game__2]
 stage = keep
+
+slot = 场景进入 | @plugin(audio) | play | assets/sounds/se_mine_boom.wav | se_mine_boom
+{
+type = bg
+id = 背景
+x = 0
+y = 0
+width = 1280
+height = 720
+path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
+}
+{
+type = bg
+id = CG
+x = 0
+y = 0
+width = 1280
+height = 720
+path = assets/cg/cg_ch07_swamp.png
+}
+{
+type = char
+id = char_ds
+x = 480
+y = 150
+width = 320
+height = 520
+path = assets/sprites/ds/weary.png
+opacity = 1.0
+}
+{
+type = char
+id = char_reimu
+x = 900
+y = 150
+width = 320
+height = 520
+path = assets/sprites/reimu/smug.png
+opacity = 1.0
+}
+{
+type = char
+id = char_paimon
+x = 780
+y = 150
+width = 320
+height = 520
+path = assets/sprites/paimon/proud.png
+opacity = 1.0
+}
+{
+type = char
+id = char_灯官
+x = 60
+y = 150
+width = 320
+height = 520
+path = assets/sprites/dengguan/delighted.png
+opacity = 1.0
+}
+{
+type = char
+id = char_creeper
+x = 1020
+y = 150
+width = 320
+height = 520
+path = assets/sprites/creeper/happy.png
+opacity = 1.0
+}
+{
+type = char
+id = char_miku
+x = 360
+y = 150
+width = 320
+height = 520
+path = assets/sprites/miku/joy.png
+opacity = 1.0
+}
+{
+type = char
+id = char_amiya
+x = 660
+y = 150
+width = 320
+height = 520
+path = assets/sprites/amiya/worried.png
+opacity = 1.0
+}
+{
+type = button
+id = 继续
+x = 0
+y = 0
+width = 1280
+height = 720
+text = 
+action = target
+target = pre_game__3
+style = -fx-background-color: transparent; -fx-border-color: transparent;
+}
+
+[pre_game__3]
+stage = keep
 event = minesweeper
 mg.mode = ending
 mg.onWin = ch7_win
 mg.onLose = bad_collapse
 
-slot = 场景进入 | @plugin(audio) | play | assets/sounds/se_mine_boom.wav | se_mine_boom
 slot = 场景进入 | @plugin(audio) | loopcat | battle | bgm
 {
 type = bg
@@ -60620,15 +60827,6 @@ width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
 # 幕题: 流言沼公关战
-}
-{
-type = bg
-id = CG
-x = 0
-y = 0
-width = 1280
-height = 720
-path = assets/cg/cg_ch07_swamp.png
 }
 {
 type = char
@@ -79388,6 +79586,112 @@ target = ch9_duel
 
 [ch9_duel]
 stage = keep
+
+slot = 场景进入 | @plugin(audio) | play | assets/sounds/se_stone_place.wav | se_stone_place
+{
+type = bg
+id = 背景
+x = 0
+y = 0
+width = 1280
+height = 720
+path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
+}
+{
+type = bg
+id = CG
+x = 0
+y = 0
+width = 1280
+height = 720
+path = assets/cg/cg_ch09_gomoku.png
+}
+{
+type = char
+id = char_reimu
+x = 900
+y = 150
+width = 320
+height = 520
+path = assets/sprites/reimu/smug.png
+opacity = 1.0
+}
+{
+type = char
+id = char_paimon
+x = 780
+y = 150
+width = 320
+height = 520
+path = assets/sprites/paimon/proud.png
+opacity = 1.0
+}
+{
+type = char
+id = char_creeper
+x = 1020
+y = 150
+width = 320
+height = 520
+path = assets/sprites/creeper/happy.png
+opacity = 1.0
+}
+{
+type = char
+id = char_miku
+x = 480
+y = 150
+width = 320
+height = 520
+path = assets/sprites/miku/joy.png
+opacity = 1.0
+}
+{
+type = char
+id = char_ds
+x = 360
+y = 150
+width = 320
+height = 520
+path = assets/sprites/ds/normal.png
+opacity = 1.0
+}
+{
+type = char
+id = char_sai
+x = 60
+y = 150
+width = 320
+height = 520
+path = assets/sprites/sai/gentle.png
+opacity = 1.0
+}
+{
+type = char
+id = char_秤主
+x = 600
+y = 150
+width = 320
+height = 520
+path = assets/sprites/scale/surprised.png
+opacity = 1.0
+}
+{
+type = button
+id = 继续
+x = 0
+y = 0
+width = 1280
+height = 720
+text = 
+action = target
+target = ch9_duel__2
+style = -fx-background-color: transparent; -fx-border-color: transparent;
+}
+
+[ch9_duel__2]
+stage = keep
 event = gomoku
 mg.mode = retry
 mg.onWin = ch9_win
@@ -79395,7 +79699,6 @@ mg.onLose = ch9_lose
 mg.loop = ch9_table
 mg.with = focus,heat
 
-slot = 场景进入 | @plugin(audio) | play | assets/sounds/se_stone_place.wav | se_stone_place
 slot = 场景进入 | @plugin(audio) | loopcat | battle | bgm
 {
 type = bg
@@ -79491,15 +79794,6 @@ width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
 # 幕题: 万秤楼顶层·秤砖地
-}
-{
-type = bg
-id = CG
-x = 0
-y = 0
-width = 1280
-height = 720
-path = assets/cg/cg_ch09_gomoku.png
 }
 {
 type = char

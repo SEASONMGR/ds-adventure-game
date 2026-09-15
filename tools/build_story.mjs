@@ -416,7 +416,7 @@ function sceneName(label, n) { return n === 0 ? label : `${label}__${n + 1}`; }
 function newBeat(label, kind, extra = {}) {
   // 逻辑拍点是「自动推进」的过渡幕，不承载画面；其余拍点才显示 CG
   const visual = kind === "dialog" || kind === "banner" || kind === "choice"
-    || kind === "tail" || kind === "ending";
+    || kind === "tail" || kind === "ending" || kind === "cgcard";
   const b = {
     label,
     kind,
@@ -573,6 +573,13 @@ for (const d of directives) {
     }
     case "minigame": {
       flush(currentLabel);
+      // @cg 紧跟 @minigame：CG 必须"进小游戏之前"显示。
+      // 小游戏拍不是可视拍点，若不单独出一张 CG 卡拍，CG 会被顺延到小游戏【之后】的拍点上
+      // （例：cg_ch09_gomoku 会掉到输棋重开的 ch9_taunt1）。
+      if (stage.cg) {
+        // cgcard 是可视拍点：newBeat 已把 stage.cg 拷进本拍并清空 stage.cg，这里不要再赋值
+        newBeat(currentLabel, "cgcard");
+      }
       const b = newBeat(currentLabel, "minigame");
       b.mg = d.mg;
       break;
@@ -889,6 +896,12 @@ for (const b of beats) {
     // @if 分支拍点：goto 的目标由前面 select 写进链路变量
     if (b.gotoVar) out.push(`slot = 场景进入 | goto | | ${b.gotoVar}`);
     else if (b.goto) out.push(`slot = 场景进入 | goto | | ${b.goto}`);
+  } else if (b.kind === "cgcard") {
+    // CG 卡拍：CG 层已由 emitStage 发出；整屏透明按钮承接点击（点一下继续 → 小游戏）
+    out.push("{", "type = button", "id = 继续", "x = 0", "y = 0",
+      "width = 1280", "height = 720", "text = ", "action = target",
+      `target = ${b.target || ""}`,
+      "style = -fx-background-color: transparent; -fx-border-color: transparent;", "}");
   } else if (b.kind === "ending") {
     const name = ENDING_NAME[b.endingId] || b.endingId;
     out.push("{", "type = text", "id = 结局卡", "x = 340", "y = 250", "width = 600", "height = 90",
