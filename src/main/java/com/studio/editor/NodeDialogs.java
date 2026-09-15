@@ -1119,15 +1119,75 @@ final class NodeDialogs {
                 + "　存档变量在信号/槽里用 @var(名称) 读写。");
         tip.getStyleClass().add("hint-text");
         tip.setWrapText(true);
-        grid.add(tip, 0, 4, 2, 1);
+
+        // ---------- 控制台（[option] console / consoleKey） ----------
+        javafx.scene.control.CheckBox consoleOn = new javafx.scene.control.CheckBox("允许在播放器中打开控制台");
+        consoleOn.setSelected(option.consoleEnabled());
+        consoleOn.selectedProperty().addListener((o, a, b) -> {
+            option.setConsoleEnabled(b);
+            mark.run();
+        });
+        TextField consoleKey = new TextField(option.consoleKey());
+        consoleKey.setPromptText("按一下要用的键（默认 `）");
+        consoleKey.setPrefWidth(120);
+        consoleKey.setTooltip(new javafx.scene.control.Tooltip(
+                "点进输入框后直接按你想用的键即可（如 ` / ~ / / / F12）；Esc 也能关控制台。"));
+        consoleKey.addEventFilter(javafx.scene.input.KeyEvent.KEY_PRESSED, e -> {
+            String k = describeKey(e);
+            if (k == null) return;
+            option.setConsoleKey(k);
+            consoleKey.setText(option.consoleKey());
+            consoleKey.positionCaret(consoleKey.getText().length());
+            mark.run();
+            e.consume();
+        });
+        HBox consoleBox = new HBox(10, consoleOn, new Label("快捷键"), consoleKey);
+        consoleBox.setAlignment(Pos.CENTER_LEFT);
+        Label consoleTip = new Label("仅当这里勾选（写入 [option] console = true）或在编辑器里"
+                + "「在播放器中测试」时，播放器才允许打开控制台；旧地图没有这两行 → 默认关闭、默认键 `");
+        consoleTip.getStyleClass().add("hint-text");
+        consoleTip.setWrapText(true);
+        // 限制长提示的宽度：否则 GridPane 会按“一行放完”算首选宽度，把右侧值列挤窄，
+        // 结果就是「背景色」那一栏（ColorPicker）显示不全
+        consoleTip.setMaxWidth(620);
+        tip.setMaxWidth(620);
+        VBox consoleSection = new VBox(6, consoleBox, consoleTip);
+
+        // 让 [option] 里始终带上这两个键（旧地图打开一次设置并保存后就会补上，自解释）
+        option.setConsoleEnabled(consoleOn.isSelected());
+        option.setConsoleKey(option.consoleKey());
+
+        grid.add(consoleSection, 0, 4, 2, 1);
+        grid.add(tip, 0, 5, 2, 1);
 
         // ---------- 存档变量（[option] 里的 savevar 列表） ----------
-        grid.add(buildSaveVarsSection(hub, option, dialog, mark, okType), 0, 5, 2, 1);
+        grid.add(buildSaveVarsSection(hub, option, dialog, mark, okType), 0, 6, 2, 1);
 
-        dialog.getDialogPane().setContent(grid);
+        // 内容整体放进可滚动区域：加了控制台一栏之后内容变高，小屏幕上不会再把上面的行挤出可视区
+        javafx.scene.control.ScrollPane scroll = new javafx.scene.control.ScrollPane(grid);
+        scroll.setFitToWidth(true);
+        scroll.setPrefViewportHeight(520);
+        scroll.setStyle("-fx-background-color: transparent; -fx-background: transparent;");
+        dialog.getDialogPane().setContent(scroll);
+        dialog.getDialogPane().setMinWidth(760);
         dialog.getDialogPane().getStylesheets().addAll(
                 Ui.class.getResource("/styles/studio.css").toExternalForm());
+        dialog.setResizable(true);
         dialog.showAndWait();
+    }
+
+    /**
+     * 把一次按键翻译成 {@code [option] consoleKey} 能存的值：
+     * 可打印字符直接用该字符，功能键用 {@code KeyCode} 名。返回 null 表示不该当快捷键（单独的修饰键等）。
+     */
+    private static String describeKey(javafx.scene.input.KeyEvent e) {
+        String text = e.getText();
+        if (text != null && text.length() == 1 && !Character.isISOControl(text.charAt(0))) return text;
+        if (e.getCode() == null) return null;
+        return switch (e.getCode()) {
+            case SHIFT, CONTROL, ALT, META, CAPS, UNDEFINED, WINDOWS, CONTEXT_MENU -> null;
+            default -> e.getCode().name();
+        };
     }
 
     // =====================================================================

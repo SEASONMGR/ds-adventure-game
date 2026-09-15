@@ -88,8 +88,24 @@ public class GameScene {
         node.setIndex(nodes.size() - 1);
     }
 
+    /**
+     * 按<b>同一个对象</b>找节点下标。
+     *
+     * <p>{@link StoryNode#equals(Object)} 是按内容（type + id + x + y）比较的：两个不同场景里
+     * "同类型、同 id、同坐标"的节点会被判定为相等。凡是"选中 / 删除 / 调整层级"这类必须针对
+     * 某一个具体节点的操作，都不能走 {@code List.indexOf}/{@code contains}，要用这里的同一性查找。</p>
+     */
+    public int indexOfIdentity(StoryNode node) {
+        if (node == null) return -1;
+        for (int i = 0; i < nodes.size(); i++) {
+            if (nodes.get(i) == node) return i;
+        }
+        return -1;
+    }
+
     public void removeNode(StoryNode node) {
-        nodes.remove(node);
+        int i = indexOfIdentity(node);
+        if (i >= 0) nodes.remove(i);
         reindex();
     }
 
@@ -100,7 +116,7 @@ public class GameScene {
 
     /** 前移一层（向画面顶层移动） */
     public boolean bringForward(StoryNode node) {
-        int i = nodes.indexOf(node);
+        int i = indexOfIdentity(node);
         if (i < 0 || i >= nodes.size() - 1) return false;
         StoryNode t = nodes.remove(i);
         nodes.add(i + 1, t);
@@ -110,7 +126,7 @@ public class GameScene {
 
     /** 后移一层（向画面底层移动） */
     public boolean sendBackward(StoryNode node) {
-        int i = nodes.indexOf(node);
+        int i = indexOfIdentity(node);
         if (i <= 0) return false;
         StoryNode t = nodes.remove(i);
         nodes.add(i - 1, t);
@@ -120,7 +136,7 @@ public class GameScene {
 
     /** 移动 n 层（正数向上/向顶层，负数向下/向底层） */
     public boolean moveBy(StoryNode node, int delta) {
-        int i = nodes.indexOf(node);
+        int i = indexOfIdentity(node);
         if (i < 0 || delta == 0) return false;
         int target = Math.max(0, Math.min(nodes.size() - 1, i + delta));
         if (target == i) return false;
@@ -132,7 +148,7 @@ public class GameScene {
 
     /** 把节点移动到指定层级下标 */
     public boolean moveTo(StoryNode node, int newIndex) {
-        int i = nodes.indexOf(node);
+        int i = indexOfIdentity(node);
         if (i < 0) return false;
         int target = Math.max(0, Math.min(nodes.size() - 1, newIndex));
         if (target == i) return false;
@@ -159,7 +175,14 @@ public class GameScene {
         reindex();
     }
 
-    public boolean contains(StoryNode node) { return nodes.contains(node); }
+    /**
+     * 这个场景里是否<b>就是</b>这个节点对象。
+     *
+     * <p>注意不能用 {@code nodes.contains(node)}：{@link StoryNode#equals(Object)} 按内容比较，
+     * 别的场景里"同类型同 id 同坐标"的节点会被误判成"在本场景里"，
+     * 于是"在左侧栏点场景 2 的节点"会跳去场景 1 并选中那边的同款节点。</p>
+     */
+    public boolean contains(StoryNode node) { return indexOfIdentity(node) >= 0; }
 
     /**
      * 深拷贝本场景（撤销/恢复的快照用）：节点、场景属性、信号、槽全部复制一份，

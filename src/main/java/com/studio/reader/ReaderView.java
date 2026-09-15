@@ -2,10 +2,13 @@ package com.studio.reader;
 
 import com.studio.flow.AutoSignals;
 import com.studio.flow.Expr;
+import com.studio.flow.FlowContext;
 import com.studio.flow.FlowHost;
 import com.studio.flow.FlowVariables;
 import com.studio.flow.LogicLoader;
+import com.studio.flow.PluginRuntime;
 import com.studio.flow.SignalBus;
+import com.studio.flow.SignalEvent;
 import com.studio.flow.SignalDef;
 import com.studio.model.GameProject;
 import com.studio.model.GameScene;
@@ -55,6 +58,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -64,6 +68,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -92,6 +97,8 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
     public static final double CW = 1280.0, CH = 720.0;
 
     private static final String DEFAULT_TEXT_COLOR = "#f2f3ff";
+    /** UI 主题（科技蓝）里对话框四角「角括号」的颜色：参考图取色 #89D5FF */
+    private static final String DIALOG_BRACKET_COLOR = "#8fd0ff";
     private static final Pattern TEXT_FILL = Pattern.compile("-fx-text-fill\\s*:\\s*([^;]+)");
 
     // ---- 外部依赖 ----
@@ -200,6 +207,8 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
     // ---- 信号/槽 与逻辑层 ----
     private LogicLoader logicLoader;
     private SignalBus signalBus;
+    /** 调试控制台浮层（懒创建；开关与快捷键见 [option] console / consoleKey） */
+    private ConsoleView console;
     private final FlowVariables flowVars = new FlowVariables();
     /** 节点 id → 视图（供槽动作即时重绘） */
     private final Map<String, Node> nodeViews = new LinkedHashMap<>();
@@ -232,6 +241,9 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
     private static void addStyles(Scene scene) {
         var css = ReaderView.class.getResource("/styles/player.css");
         if (css != null) scene.getStylesheets().add(css.toExternalForm());
+        // 调试控制台自己的深色样式（否则 JavaFX 默认控件是浅色的，和游戏界面不搭）
+        var consoleCss = ReaderView.class.getResource("/styles/console.css");
+        if (consoleCss != null) scene.getStylesheets().add(consoleCss.toExternalForm());
     }
 
     private void buildUi() {
@@ -1042,6 +1054,25 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
         applyStyle(panel, base + node.getStyle());
         panel.getStyleClass().add("dialog-panel");
 
+        // UI kit 的对话窗特征：四角「角括号」装饰（只是一层装饰，鼠标穿透不影响点对话推进）
+        // 参考图里角括号紧贴描边内侧（约 3px），所以这里的 margin 很小
+        // 注意 -fx-border-width 只接受 1~4 个值（上 右 下 左），这里必须正好 4 个
+        for (Pos corner : new Pos[]{Pos.TOP_LEFT, Pos.TOP_RIGHT, Pos.BOTTOM_LEFT, Pos.BOTTOM_RIGHT}) {
+            Region bracket = new Region();
+            bracket.setMouseTransparent(true);
+            bracket.setPrefSize(21, 21);
+            bracket.setMinSize(21, 21);
+            bracket.setMaxSize(21, 21);
+            boolean top = corner == Pos.TOP_LEFT || corner == Pos.TOP_RIGHT;
+            boolean left = corner == Pos.TOP_LEFT || corner == Pos.BOTTOM_LEFT;
+            String widths = top ? (left ? "2 0 0 2" : "2 2 0 0") : (left ? "0 0 2 2" : "0 2 2 0");
+            bracket.setStyle("-fx-border-color: " + DIALOG_BRACKET_COLOR + ";"
+                    + "-fx-border-width: " + widths + ";");
+            StackPane.setAlignment(bracket, corner);
+            StackPane.setMargin(bracket, new Insets(3));
+            panel.getChildren().add(bracket);
+        }
+
         TextFlow flow = RichText.flow("", fs, color);
         flow.setMaxWidth(Math.max(40, w - 56));
         flow.setTextAlignment(alignment(node.getAlign()));
@@ -1768,17 +1799,217 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
     // 信号 / 槽 引擎侧（FlowHost 实现）
     // =====================================================================
 
+    // =====================================================================
+    // 控制台（调试浮层）
+    // =====================================================================
+
+    /** 由编辑器「在播放器中测试」设置：{@code -Dstudio.console=1} → 不论地图开关都能开控制台 */
+    public static final String CONSOLE_FORCE_PROP = "studio.console";
+
+    /**
+     * 控制台是否允许打开：地图 {@code [option] console = true}，或由编辑器播放测试强制允许。
+     * <p>旧地图没有这一行 → 默认关闭（向后兼容）。</p>
+     */
+    public boolean consoleAllowed() {
+        String forced = System.getProperty(CONSOLE_FORCE_PROP, "");
+        if ("1".equals(forced) || "true".equalsIgnoreCase(forced)) return true;
+        return project != null && project.option() != null && project.option().consoleEnabled();
+    }
+
+    public boolean consoleVisible() {
+        return console != null && console.isVisible();
+    }
+
+    /** 快捷键处理：开/关控制台；开着时 Esc 也能关 */
+    private void onConsoleKeyPressed(KeyEvent e) {
+        if (consoleVisible()) {
+            if (e.getCode() == KeyCode.ESCAPE || matchesConsoleKey(e)) {
+                hideConsole();
+                e.consume();
+            }
+            return;
+        }
+        if (matchesConsoleKey(e)) {
+            if (consoleAllowed()) {
+                showConsole();
+                e.consume();
+            }
+            // 没启用时不动它：这个键可能被剧情当成按键信号用
+        }
+    }
+
+    /** 打开控制台（未启用时给出提示） */
+    public void showConsole() {
+        if (!consoleAllowed()) {
+            toast("控制台未启用：在地图 [option] 里写 console = true 后重开");
+            return;
+        }
+        if (console == null) {
+            console = new ConsoleView(new ConsoleHost(), project == null ? null : project.option());
+            // 内置一组「引擎」扩展变量：控制台的「扩展变量」按钮一按就有内容，也方便报 bug 时截图
+            ConsoleRegistry.registerEnvProvider("引擎", this::engineEnvVars);
+        }
+        // 兜底：万一节点被从场景图里摘掉过（例如外部代码清理过 mainStack），这里补回去
+        if (console.getParent() == null) mainStack.getChildren().add(console);
+        console.setVisible(true);
+        console.setManaged(true);
+        console.refreshAll();          // 重新打开时刷新场景/变量/存档，避免看到旧数据
+        console.focusInput();
+        Logs.info("[Console] 控制台已打开（快捷键 " + consoleKeyText() + "）");
+    }
+
+    public void hideConsole() {
+        if (console != null) console.close();
+    }
+
+    public void toggleConsole() {
+        if (consoleVisible()) hideConsole(); else showConsole();
+    }
+
+    /** 控制台浮层（没创建过返回 null）—— 供探针/自动化使用 */
+    public ConsoleView consoleView() { return console; }
+
+    /** 当前地图工程（控制台/插件/探针读场景列表与 [option] 用） */
+    public GameProject project() { return project; }
+
+    /** 内置「引擎」扩展变量（控制台 env 指令 / 扩展变量按钮显示这些只读信息） */
+    private Map<String, String> engineEnvVars() {
+        Map<String, String> m = new LinkedHashMap<>();
+        m.put("平台", System.getProperty("os.name", "?") + " " + System.getProperty("os.version", ""));
+        m.put("Java", System.getProperty("java.version", "?"));
+        m.put("地图", project == null ? "-" : project.name());
+        m.put("地图目录", mapDir == null ? "-" : mapDir.getAbsolutePath());
+        m.put("当前场景", scene == null ? "-" : scene.getName());
+        m.put("场景数", project == null ? "0" : String.valueOf(project.scenes().size()));
+        m.put("当前场景节点数", scene == null ? "0" : String.valueOf(scene.nodes().size()));
+        FlowVariables vars = variables();
+        m.put("变量数", vars == null ? "0" : String.valueOf(vars.mapVars().size()));
+        m.put("控制台", consoleAllowed() ? "允许（快捷键 " + consoleKeyText() + "）" : "未启用");
+        return m;
+    }
+
+    private String consoleKeyText() {
+        return project == null || project.option() == null ? "`" : project.option().consoleKey();
+    }
+
+    /**
+     * 按键是否匹配 {@code [option] consoleKey}。
+     * <p>支持三类写法：单字符（{@code `} {@code ~} {@code /} {@code ;} …）、
+     * 键名（{@code F1}…{@code F12} / {@code ESCAPE} / {@code TAB} / {@code BACK_QUOTE} …）、
+     * 以及中文常用称呼（如 {@code 波浪键}）。</p>
+     */
+    public boolean matchesConsoleKey(KeyEvent e) {
+        String spec = consoleKeyText();
+        if (spec == null || spec.isBlank()) spec = "`";
+        spec = spec.trim();
+
+        String text = e.getText();
+        if (spec.length() == 1) {
+            char want = spec.charAt(0);
+            if (text != null && !text.isEmpty() && text.charAt(0) == want) return true;
+            // ` 与 ~ 是同一个物理键（Shift 差异），都认
+            if (want == '`' || want == '~') return e.getCode() == KeyCode.BACK_QUOTE;
+        }
+        String norm = spec.toUpperCase(java.util.Locale.ROOT).replace(' ', '_').replace('-', '_');
+        switch (norm) {
+            case "`", "~", "BACKTICK", "BACK_QUOTE", "TILDE", "波浪键", "反引号" -> {
+                if (e.getCode() == KeyCode.BACK_QUOTE) return true;
+            }
+            case "ESC", "ESCAPE", "退出键" -> {
+                if (e.getCode() == KeyCode.ESCAPE) return true;
+            }
+            default -> { }
+        }
+        try {
+            if (e.getCode() == KeyCode.valueOf(norm)) return true;
+        } catch (IllegalArgumentException ignored) {
+            // 不是键名，忽略
+        }
+        return false;
+    }
+
+    /** 控制台需要的宿主能力（场景列表 / 变量 / 存档 / 插件调用） */
+    private final class ConsoleHost implements ConsoleRegistry.Context {
+
+        @Override public String currentScene() { return scene == null ? null : scene.getName(); }
+
+        @Override public List<String> scenes() {
+            return project == null ? List.of() : new ArrayList<>(project.scenes().keySet());
+        }
+
+        @Override public boolean gotoScene(String name) {
+            if (name == null || project == null || !project.hasScene(name.trim())) return false;
+            runOnUiThread(() -> ReaderView.this.gotoScene(name.trim()));
+            return true;
+        }
+
+        @Override public Map<String, String> variables() {
+            FlowVariables vars = ReaderView.this.variables();
+            return vars == null ? Map.of() : new LinkedHashMap<>(vars.mapVars());
+        }
+
+        @Override public void setVariable(String name, String value) {
+            if (name == null || name.isBlank()) return;
+            FlowVariables vars = ReaderView.this.variables();
+            if (vars == null) return;
+            List<com.studio.model.SaveVarDef> defs = saveVarDefs();
+            if (defs != null && !defs.isEmpty()) vars.setTyped(name, value, defs);
+            else vars.set(name, value);
+        }
+
+        @Override public int refreshAfterVariableChange() {
+            if (Platform.isFxApplicationThread()) return ReaderView.this.refreshExpressionViews();
+            Platform.runLater(ReaderView.this::refreshExpressionViews);
+            return 0;
+        }
+
+        @Override public boolean emitSignal(String name, Map<String, Object> params) {
+            if (!Platform.isFxApplicationThread()) {
+                Platform.runLater(() -> ReaderView.this.emitConsoleSignal(name, params));
+                return true;
+            }
+            return ReaderView.this.emitConsoleSignal(name, params);
+        }
+
+        @Override public List<String> saves() {
+            GameSaveManager m = ReaderView.this.saves();
+            return m == null ? List.of() : new ArrayList<>(m.listSaveFiles());
+        }
+
+        @Override public boolean save(String slot) { return saveSlot(slot); }
+
+        @Override public boolean load(String slot) { return loadSlot(slot); }
+
+        @Override public String invokePlugin(String idOrClass, List<String> args) {
+            PluginRuntime rt = signalBus == null ? null : signalBus.plugins();
+            if (rt == null) return "（插件运行时未就绪）";
+            String[] in = args == null ? new String[0] : args.toArray(new String[0]);
+            SignalEvent ev = SignalEvent.of("控制台", "console", "console",
+                    scene == null ? "" : scene.getName(), new LinkedHashMap<>());
+            String[] out = rt.execute(idOrClass, new FlowContext(ReaderView.this), ev, in);
+            if (out == null) return "（插件没返回结果，或插件不存在：" + idOrClass + "）";
+            return String.join(" | ", out);
+        }
+
+        @Override public void print(String line) {
+            if (console != null) console.println(line);
+        }
+    }
     /** 全局键盘监听：把按键信号按“场景信号定义 + 各节点按键信号定义”分发 */
     private void installGlobalKeyListener() {
         Scene sc = stage.getScene();
         if (sc == null || keyListenerInstalled) return;
         keyListenerInstalled = true;
+        // 控制台快捷键要最先看到按键（注册顺序 = 过滤器执行顺序）
+        sc.addEventFilter(KeyEvent.KEY_PRESSED, this::onConsoleKeyPressed);
         sc.addEventFilter(KeyEvent.KEY_PRESSED, e -> dispatchKey(e, "press"));
         sc.addEventFilter(KeyEvent.KEY_RELEASED, e -> dispatchKey(e, "release"));
     }
 
     private void dispatchKey(KeyEvent e, String phase) {
         if (project == null || scene == null || pluginMode()) return;
+        // 控制台开着时不派发按键信号：否则在控制台输入框里打字会触发剧情按键信号
+        if (consoleVisible()) return;
         String code = e.getCode() == null ? "" : e.getCode().name();
         // ESC：交给宿主弹「继续 / 回到标题 / 退出」菜单（优先于剧本里的键盘信号）
         if ("ESCAPE".equals(code) && "press".equals(phase) && escHandler != null) {
@@ -1871,6 +2102,33 @@ public class ReaderView extends BorderPane implements SavePortal, FlowHost {
             case "videoloop", "videovolume", "videopause" -> { /* 视频控制属性：只影响播放器，模型不存 */ }
             default -> Logs.warn("[Flow] 不支持的属性名: " + prop);
         }
+    }
+
+    /**
+     * 变量改动后重绘当前场景里「文本带 {@code @表达式}」的节点（控制台改完变量立刻能看到效果）。
+     * <p>对话节点不在此列：它有自己的逐字/分段状态，重绘会打断正在展开的台词。</p>
+     * <p>若地图是用<b>槽</b>把变量映射到节点的（如
+     * {@code slot = 点灯 | set | 亮灯11_1 | visible | value=@var(灯1亮)}），还要用控制台的 {@code emit 点灯} 跑一遍槽。</p>
+     */
+    public int refreshExpressionViews() {
+        if (scene == null) return 0;
+        int n = 0;
+        for (StoryNode node : new ArrayList<>(scene.nodes())) {
+            String text = node.getText();
+            if (text == null || text.indexOf('@') < 0) continue;
+            if (node.getType() == NodeType.DIALOG) continue;
+            refreshNodeView(node);
+            n++;
+        }
+        return n;
+    }
+
+    /** 控制台用：往当前场景发一个信号，跑地图自己定义/订阅的槽 */
+    public boolean emitConsoleSignal(String name, Map<String, Object> params) {
+        if (signalBus == null || name == null || name.isBlank()) return false;
+        LinkedHashMap<String, Object> p = params == null ? new LinkedHashMap<>() : new LinkedHashMap<>(params);
+        signalBus.emitFromScene(name.trim(), p);
+        return true;
     }
 
     /** 即时重绘某节点（槽/逻辑层改属性后立即生效） */

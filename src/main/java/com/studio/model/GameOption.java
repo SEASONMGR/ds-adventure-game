@@ -20,6 +20,13 @@ public class GameOption {
     public static final String K_VOLUME  = "volume";       // 全局音量 0..1
     public static final String K_SPEED   = "typewriterSpeed"; // 打字机速度(ms/字)
     public static final String K_SAVEVAR = "savevar";      // 存档变量声明（可重复行）
+    public static final String K_CONSOLE = "console";      // 是否允许打开控制台（true/false）
+    public static final String K_CONSOLE_KEY = "consoleKey"; // 打开控制台的快捷键（默认 `）
+
+    /** 控制台默认值：旧地图没有这两行时按这里取（向后兼容） */
+    public static final boolean CONSOLE_DEFAULT = false;
+    public static final String CONSOLE_KEY_DEFAULT = "`";
+
 
     /** 中文/英文别名 → 规范键 */
     public static final Map<String, String> KEY_ALIAS = new LinkedHashMap<>();
@@ -31,6 +38,11 @@ public class GameOption {
         KEY_ALIAS.put("typewriterSpeed", K_SPEED); KEY_ALIAS.put("打字速度", K_SPEED);
         KEY_ALIAS.put("savevar", K_SAVEVAR); KEY_ALIAS.put("存档变量", K_SAVEVAR);
         KEY_ALIAS.put("变量", K_SAVEVAR); KEY_ALIAS.put("变量列表", K_SAVEVAR);
+        KEY_ALIAS.put("console", K_CONSOLE); KEY_ALIAS.put("控制台", K_CONSOLE);
+        KEY_ALIAS.put("允许控制台", K_CONSOLE); KEY_ALIAS.put("控制台开关", K_CONSOLE);
+        KEY_ALIAS.put("consoleKey", K_CONSOLE_KEY); KEY_ALIAS.put("控制台按键", K_CONSOLE_KEY);
+        KEY_ALIAS.put("控制台快捷键", K_CONSOLE_KEY); KEY_ALIAS.put("控制台热键", K_CONSOLE_KEY);
+
     }
 
     /** 有序属性容器（默认给出合理初值） */
@@ -109,6 +121,30 @@ public class GameOption {
 
     public double typewriterSpeed() { return StoryNode.parseDoubleSafe(values.getOrDefault(K_SPEED, "14"), 14); }
     public void setTypewriterSpeed(double ms) { values.put(K_SPEED, StoryNode.trimDouble(ms)); }
+
+    /**
+     * 是否允许在播放器里打开控制台。
+     * <p>旧地图没有 {@code console} 这一行 → 返回 {@link #CONSOLE_DEFAULT}（关闭），保证向后兼容；
+     * 编辑器「地图全局设置」里改这个开关，写盘时会新增这一行。</p>
+     */
+    public boolean consoleEnabled() {
+        return StoryNode.parseBoolSafe(values.get(K_CONSOLE), CONSOLE_DEFAULT);
+    }
+
+    public void setConsoleEnabled(boolean on) { values.put(K_CONSOLE, on ? "true" : "false"); }
+
+    /** 打开控制台的快捷键（单个字符如 {@code `} / {@code ~} / {@code /}，或 F1~F12 / ESCAPE / TAB 这类键名） */
+    public String consoleKey() {
+        String s = values.get(K_CONSOLE_KEY);
+        return s == null || s.isBlank() ? CONSOLE_KEY_DEFAULT : s.trim();
+    }
+
+    public void setConsoleKey(String key) {
+        values.put(K_CONSOLE_KEY, key == null || key.isBlank() ? CONSOLE_KEY_DEFAULT : key.trim());
+    }
+
+
+
 
     private static double clamp(double v, double lo, double hi) {
         return Math.max(lo, Math.min(hi, v));

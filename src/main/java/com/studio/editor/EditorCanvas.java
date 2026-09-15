@@ -75,7 +75,10 @@ public class EditorCanvas extends StackPane {
     private boolean sceneFiltersOn = false;
 
     // ---- 节点视图缓存 ----
-    private final Map<StoryNode, Pane> wrapperMap = new HashMap<>();
+    // 必须用 IdentityHashMap：StoryNode.equals 是按内容（type + id + x + y）比较的，
+    // 普通 HashMap 会把"别的场景里同类型、同 id、同坐标"的节点当成同一个键 ——
+    // 结果就是"在左侧栏点场景 2 的节点，画布上高亮的却是场景 1 的同款节点"。
+    private final Map<StoryNode, Pane> wrapperMap = new java.util.IdentityHashMap<>();
 
     // ---- 缩放与平移（视窗）----
     private double zoom = 0.9;
