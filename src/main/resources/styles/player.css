@@ -95,7 +95,7 @@
 .link-overlay-title { -fx-text-fill: #ffd76a; -fx-font-size: 24px; -fx-font-weight: bold; }
 .link-overlay-desc { -fx-text-fill: #e8e8f0; -fx-font-size: 14px; }
 .mine-cell {
-    -fx-background-color: linear-gradient(to bottom, #4a4f74, #34384f);
+    -fx-background-color: linear-gradient(to bottom, #26304d, #1a2138);
     -fx-background-radius: 4;
     -fx-font-weight: bold;
     -fx-font-size: 14px;
@@ -103,10 +103,10 @@
     -fx-cursor: hand;
     -fx-background-insets: 1;
 }
-.mine-cell:hover { -fx-background-color: #5a608c; }
+.mine-cell:hover { -fx-background-color: #31406a; }
 .mine-cell:pressed { -fx-background-color: #242740; }
 .mine-cell.revealed { -fx-background-color: #23263a; -fx-text-fill: #c9cbe0; -fx-cursor: default; }
-.mine-cell.mine-hit { -fx-background-color: #a33; -fx-text-fill: #fff; }
+.mine-cell.mine-hit { -fx-background-color: #ff8a5c; -fx-text-fill: #1a1020; }
 .mine-cell.flag { -fx-background-color: #40341c; -fx-text-fill: #ffcf5c; }
 .mine-overlay {
     -fx-background-color: rgba(8, 9, 16, 0.86);

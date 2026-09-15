@@ -53,7 +53,7 @@ public class SnakePlugin implements GamePlugin {
     private static final Color C_SNAKE_HEAD = Color.web("#7ee787");
     private static final Color C_SNAKE_BODY = Color.web("#3fb950");
     private static final Color C_SNAKE_EDGE = Color.web("#1f6f2e");
-    private static final Color C_FOOD = Color.web("#ff6b6b");
+    private static final Color C_FOOD = Color.web("#e06c75");
     private static final Color C_OBSTACLE = Color.web("#4a5070");
     private static final String C_TEXT = "#e8eef7";
     private static final String C_DIM = "#9aa0c8";

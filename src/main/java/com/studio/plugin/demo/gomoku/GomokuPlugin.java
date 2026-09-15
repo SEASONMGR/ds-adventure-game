@@ -58,9 +58,9 @@ public final class GomokuPlugin implements GamePlugin {
 
     // ---------- 配色：对齐剧情读取器（resources/styles/player.css）----------
     // 深蓝黑底 + 金色强调 #ffd76a + 白描边，和剧情界面同一套色，嵌进去不生分。
-    private static final Color FIELD_TOP = Color.web("#0a0c16");
-    private static final Color FIELD_BOTTOM = Color.web("#05060d");
-    private static final Color BOARD_BG = Color.web("#4a5375");
+    private static final Color FIELD_TOP = Color.web("#0d1020");
+    private static final Color FIELD_BOTTOM = Color.web("#0a0f1c");
+    private static final Color BOARD_BG = Color.web("#1a2033");
     private static final Color BOARD_STROKE = Color.web("#ffffff", 0.20);
     private static final Color GRID_COLOR = Color.web("#ffffff", 0.32);
     private static final Color STAR_COLOR = Color.web("#ffd76a", 0.90);
