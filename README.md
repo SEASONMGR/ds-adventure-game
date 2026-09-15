@@ -28,7 +28,7 @@
 - 首次双击会自动编译（约 1 分钟，需要 JDK 17+）；之后秒开。
 - 打包产物为整个 `dist\ds-adventure\` 文件夹（约 400 MB，内含裁剪运行环境 + 素材），**可以直接压缩发给别人**。
 - `.bat` 内容刻意保持**纯 ASCII**：cmd.exe 解析含非 ASCII 字节的批处理会串行（中文提示改由 `tools\launcher-hints-zh.txt` 以 UTF-8 打印）。
-- **免安装试玩版**：[Releases](https://github.com/liceses/ds-adventure-game/releases) —— Windows x64，解压后双击 `ds-adventure.exe`，目标机器**无需 JDK**（当前 `v0.4.0-demo`：**全 11 章** + 9 个小游戏 + CG/音效/横幅演出；`@cg` / `@se` / `@if` / `@ending` / `mode:retry`）
+- **免安装试玩版**：[Releases](https://github.com/liceses/ds-adventure-game/releases) —— Windows x64，解压后双击 `ds-adventure.exe`，目标机器**无需 JDK**（当前 `v0.5.0-demo`：**全 11 章** + 9 个小游戏 + **UI 皮肤**（对话框/名牌/暗角/选项/章节卡）+ **22 张 CG** + **36 首 BGM**）
 - 想改默认加载的地图：编辑 `config.ini` 的 `map.folder`；命令行方式见 [§9](#九开发者上手)。
 
 ---
