@@ -300,7 +300,8 @@ public class LinkPlugin implements GamePlugin {
         }
         stopLoop();
         String desc = "消除 " + (cleared / 2) + " 对 · 重排 " + game.shufflesUsed() + " 次 · 得分 " + score;
-        shell.se(win ? "se_win" : "se_lose");
+        // 零重排通关视为"满评价"（美术侧 §5.3 的 se_perfect）
+        shell.se(win ? (game.shufflesUsed() == 0 ? "se_perfect" : "se_win") : "se_lose");
         if (win) shell.showWin(desc, this::startOrRestart);
         else shell.showLose(desc, this::startOrRestart);
     }

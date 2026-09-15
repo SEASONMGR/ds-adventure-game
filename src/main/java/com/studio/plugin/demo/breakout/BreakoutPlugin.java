@@ -303,6 +303,7 @@ public class BreakoutPlugin implements GamePlugin {
             return;
         }
         paused = !paused;
+        Se.play(paused ? "se_pause" : "se_resume");
         if (!paused) {
             lastNanos = System.nanoTime(); // 避免恢复后一次性补上暂停期间的时间
             accumulator = 0;
