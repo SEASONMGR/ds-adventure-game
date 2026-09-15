@@ -1,0 +1,396 @@
+{
+  "title": {
+    "cn": "标题画面",
+    "files": [
+      {
+        "file": "bgm_title_01.mp3",
+        "title": "試聴",
+        "source": "甘茶の音楽工房",
+        "role": "选",
+        "loop": false,
+        "kb": 1629,
+        "page": "https://amachamusic.chagasi.com/genre_newage.html"
+      }
+    ]
+  },
+  "daily": {
+    "cn": "日常/温情",
+    "files": [
+      {
+        "file": "bgm_daily_01.mp3",
+        "title": "アコースティック52",
+        "source": "魔王魂",
+        "role": "选",
+        "loop": false,
+        "kb": 2264,
+        "page": "https://maou.audio/bgm_アコースティック52/"
+      },
+      {
+        "file": "bgm_daily_02.mp3",
+        "title": "アコースティック51ループファイル",
+        "source": "魔王魂",
+        "role": "选",
+        "loop": true,
+        "kb": 3172,
+        "page": "https://maou.audio/bgm_アコースティック51ループファイル/"
+      },
+      {
+        "file": "bgm_daily_03.mp3",
+        "title": "アコースティック45ループファイル",
+        "source": "魔王魂",
+        "role": "备选",
+        "loop": true,
+        "kb": 1808,
+        "page": "https://maou.audio/bgm_アコースティック45ループファイル/"
+      },
+      {
+        "file": "bgm_daily_04.mp3",
+        "title": "アコースティック42ループファイル",
+        "source": "魔王魂",
+        "role": "备选",
+        "loop": true,
+        "kb": 1454,
+        "page": "https://maou.audio/bgm_アコースティック42ループファイル/"
+      }
+    ]
+  },
+  "explore": {
+    "cn": "探索/数据世界",
+    "files": [
+      {
+        "file": "bgm_explore_01.mp3",
+        "title": "ファンタジー14",
+        "source": "魔王魂",
+        "role": "选",
+        "loop": false,
+        "kb": 2030,
+        "page": "https://maou.audio/bgm_ファンタジー14/"
+      },
+      {
+        "file": "bgm_explore_02.mp3",
+        "title": "ファンタジー13",
+        "source": "魔王魂",
+        "role": "选",
+        "loop": false,
+        "kb": 2772,
+        "page": "https://maou.audio/bgm_ファンタジー13/"
+      },
+      {
+        "file": "bgm_explore_03.mp3",
+        "title": "サイバー40ループファイル",
+        "source": "魔王魂",
+        "role": "选",
+        "loop": true,
+        "kb": 2325,
+        "page": "https://maou.audio/bgm_サイバー40ループファイル/"
+      },
+      {
+        "file": "bgm_explore_04.mp3",
+        "title": "サイバー38ループファイル",
+        "source": "魔王魂",
+        "role": "选",
+        "loop": true,
+        "kb": 1873,
+        "page": "https://maou.audio/bgm_サイバー38ループファイル/"
+      },
+      {
+        "file": "bgm_explore_05.mp3",
+        "title": "サイバー36",
+        "source": "魔王魂",
+        "role": "选",
+        "loop": false,
+        "kb": 3153,
+        "page": "https://maou.audio/bgm_サイバー36/"
+      }
+    ]
+  },
+  "tension": {
+    "cn": "秤逼近/紧张",
+    "files": [
+      {
+        "file": "bgm_tension_01.mp3",
+        "title": "試聴",
+        "source": "甘茶の音楽工房",
+        "role": "选",
+        "loop": false,
+        "kb": 1961,
+        "page": "https://amachamusic.chagasi.com/genre_minimal.html"
+      }
+    ]
+  },
+  "tower": {
+    "cn": "万秤楼/和风",
+    "files": [
+      {
+        "file": "bgm_tower_01.mp3",
+        "title": "民族29",
+        "source": "魔王魂",
+        "role": "选",
+        "loop": false,
+        "kb": 2040,
+        "page": "https://maou.audio/bgm_民族29/"
+      },
+      {
+        "file": "bgm_tower_02.mp3",
+        "title": "民族25ループファイル",
+        "source": "魔王魂",
+        "role": "选",
+        "loop": true,
+        "kb": 2196,
+        "page": "https://maou.audio/bgm_民族25ループファイル/"
+      },
+      {
+        "file": "bgm_tower_03.mp3",
+        "title": "民族25",
+        "source": "魔王魂",
+        "role": "备选",
+        "loop": false,
+        "kb": 2884,
+        "page": "https://maou.audio/bgm_民族25/"
+      },
+      {
+        "file": "bgm_tower_04.mp3",
+        "title": "民族24",
+        "source": "魔王魂",
+        "role": "备选",
+        "loop": false,
+        "kb": 1212,
+        "page": "https://maou.audio/bgm_民族24/"
+      }
+    ]
+  },
+  "battle": {
+    "cn": "战斗/小游戏",
+    "files": [
+      {
+        "file": "bgm_battle_01.mp3",
+        "title": "8bit29ループファイル",
+        "source": "魔王魂",
+        "role": "选",
+        "loop": true,
+        "kb": 632,
+        "page": "https://maou.audio/bgm_8bit29ループファイル/"
+      },
+      {
+        "file": "bgm_battle_02.mp3",
+        "title": "8bit28",
+        "source": "魔王魂",
+        "role": "选",
+        "loop": false,
+        "kb": 1186,
+        "page": "https://maou.audio/bgm_8bit28/"
+      },
+      {
+        "file": "bgm_battle_03.mp3",
+        "title": "8bit27",
+        "source": "魔王魂",
+        "role": "选",
+        "loop": false,
+        "kb": 926,
+        "page": "https://maou.audio/bgm_8bit27/"
+      },
+      {
+        "file": "bgm_battle_04.mp3",
+        "title": "8bit26",
+        "source": "魔王魂",
+        "role": "选",
+        "loop": false,
+        "kb": 6051,
+        "page": "https://maou.audio/bgm_8bit26/"
+      },
+      {
+        "file": "bgm_battle_05.mp3",
+        "title": "8bit29",
+        "source": "魔王魂",
+        "role": "备选",
+        "loop": false,
+        "kb": 844,
+        "page": "https://maou.audio/bgm_8bit29/"
+      }
+    ]
+  },
+  "memory": {
+    "cn": "ds娘内心/回忆",
+    "files": [
+      {
+        "file": "bgm_memory_01.mp3",
+        "title": "試聴",
+        "source": "甘茶の音楽工房",
+        "role": "选",
+        "loop": false,
+        "kb": 2463,
+        "page": "https://amachamusic.chagasi.com/genre_musicbox.html"
+      }
+    ]
+  },
+  "warm": {
+    "cn": "温情/告别",
+    "files": [
+      {
+        "file": "bgm_warm_01.mp3",
+        "title": "ピアノ40",
+        "source": "魔王魂",
+        "role": "选",
+        "loop": false,
+        "kb": 2511,
+        "page": "https://maou.audio/bgm_ピアノ40/"
+      }
+    ]
+  },
+  "ending": {
+    "cn": "结局/宏大",
+    "files": [
+      {
+        "file": "bgm_ending_01.mp3",
+        "title": "オーケストラ23ループファイル",
+        "source": "魔王魂",
+        "role": "选",
+        "loop": true,
+        "kb": 1304,
+        "page": "https://maou.audio/bgm_オーケストラ23ループファイル/"
+      }
+    ]
+  },
+  "bad": {
+    "cn": "BadEnd/空寂",
+    "files": [
+      {
+        "file": "bgm_bad_01.mp3",
+        "title": "試聴",
+        "source": "甘茶の音楽工房",
+        "role": "选",
+        "loop": false,
+        "kb": 2005,
+        "page": "https://amachamusic.chagasi.com/genre_ambient.html"
+      }
+    ]
+  },
+  "scale": {
+    "cn": "秤主主题",
+    "files": [
+      {
+        "file": "bgm_scale_01.mp3",
+        "title": "民族08ループファイル",
+        "source": "魔王魂",
+        "role": "自动补",
+        "loop": true,
+        "kb": 1761,
+        "page": "https://maou.audio/bgm_民族08ループファイル/"
+      },
+      {
+        "file": "bgm_scale_02.mp3",
+        "title": "民族30ループファイル",
+        "source": "魔王魂",
+        "role": "自动补",
+        "loop": true,
+        "kb": 1721,
+        "page": "https://maou.audio/bgm_民族30ループファイル/"
+      },
+      {
+        "file": "bgm_scale_03.mp3",
+        "title": "オーケストラ23ループファイル",
+        "source": "魔王魂",
+        "role": "自动补",
+        "loop": true,
+        "kb": 1304,
+        "page": "https://maou.audio/bgm_オーケストラ23ループファイル/"
+      }
+    ]
+  },
+  "funny": {
+    "cn": "三司搞笑",
+    "files": [
+      {
+        "file": "bgm_funny_01.mp3",
+        "title": "8bit06ループファイル",
+        "source": "魔王魂",
+        "role": "自动补",
+        "loop": true,
+        "kb": 1802,
+        "page": "https://maou.audio/bgm_8bit06ループファイル/"
+      },
+      {
+        "file": "bgm_funny_02.mp3",
+        "title": "8bit07ループファイル",
+        "source": "魔王魂",
+        "role": "自动补",
+        "loop": true,
+        "kb": 1804,
+        "page": "https://maou.audio/bgm_8bit07ループファイル/"
+      },
+      {
+        "file": "bgm_funny_03.mp3",
+        "title": "ネオロック66ループファイル",
+        "source": "魔王魂",
+        "role": "自动补",
+        "loop": true,
+        "kb": 1810,
+        "page": "https://maou.audio/bgm_ネオロック66ループファイル/"
+      }
+    ]
+  },
+  "local": {
+    "cn": "本地部署",
+    "files": [
+      {
+        "file": "bgm_local_01.mp3",
+        "title": "ピアノ25ループファイル",
+        "source": "魔王魂",
+        "role": "自动补",
+        "loop": true,
+        "kb": 1004,
+        "page": "https://maou.audio/bgm_ピアノ25ループファイル/"
+      },
+      {
+        "file": "bgm_local_02.mp3",
+        "title": "アコースティック22ループファイル",
+        "source": "魔王魂",
+        "role": "自动补",
+        "loop": true,
+        "kb": 1721,
+        "page": "https://maou.audio/bgm_アコースティック22ループファイル/"
+      },
+      {
+        "file": "bgm_local_03.mp3",
+        "title": "アコースティック45ループファイル",
+        "source": "魔王魂",
+        "role": "自动补",
+        "loop": true,
+        "kb": 1808,
+        "page": "https://maou.audio/bgm_アコースティック45ループファイル/"
+      }
+    ]
+  },
+  "celebration": {
+    "cn": "庆功曲(母题)",
+    "files": [
+      {
+        "file": "bgm_celebration_01.mp3",
+        "title": "オーケストラ23ループファイル",
+        "source": "魔王魂",
+        "role": "自动补",
+        "loop": true,
+        "kb": 1304,
+        "page": "https://maou.audio/bgm_オーケストラ23ループファイル/"
+      },
+      {
+        "file": "bgm_celebration_02.mp3",
+        "title": "オーケストラ16ループファイル",
+        "source": "魔王魂",
+        "role": "自动补",
+        "loop": true,
+        "kb": 3558,
+        "page": "https://maou.audio/bgm_オーケストラ16ループファイル/"
+      },
+      {
+        "file": "bgm_celebration_03.mp3",
+        "title": "試聴",
+        "source": "甘茶の音楽工房",
+        "role": "自动补",
+        "loop": false,
+        "kb": 1629,
+        "page": "https://amachamusic.chagasi.com/genre_newage.html"
+      }
+    ]
+  }
+}
