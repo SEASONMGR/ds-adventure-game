@@ -1,4 +1,40 @@
 # 更新日志 (Changelog)
+## [v1.20] BGM 接入（曲库 + 自动分配）与三处非剧本场合接线
+
+### Added
+- 美术侧交付 **36 首 / 14 类 BGM（MP3，70.3 MB）+ bgm_map.json** 全量入库；README 补「音乐素材来源（致谢）」
+  （魔王魂 30 首 / 甘茶の音楽工房 6 首，逐曲授权页指向 bgm_map.json）
+- `tools/build_bgm_index.mjs`：把 bgm_map.json 压成扁平索引 `bgm_index.txt`（类别|文件|role|loop|来源），
+  避免为一张表引入 JSON 依赖；`--check` 可校验索引是否过期
+- `com.studio.util.Bgm`：读索引、`pick()` 优先 role=选 且**同类随机取曲**、独立播放器、
+  `resolveFile()` 支持工作目录直读与 jar 内资源释放临时文件（Media 不能播 jar:）、
+  `categoryForEnding()` 结局 id → 类别
+- `AudioPlugin` 新增动作 **`loopcat` / `playcat`**（按 BGM 类别播放，运行时随机取曲）
+
+### 接线（三处用途明确、无需剧情侧输入）
+- **标题画面** → `[title]`（该曲非无缝循环，强制循环）；进入游戏/退出即停
+- **小游戏** → `[battle]`，独立通道 `bgm_plugin`，收起即停、不影响剧情 BGM
+- **结局** → 按 `@ending` id：`bad_collapse`/`busy`→`[bad]`、`true`/`temp`→`[ending]`、`local`→`[warm]`
+
+### 剧情内 BGM 自动分配（程序侧按类别语义；剧情侧写 @bgm / 场景 bgm: 即覆盖）
+- 章节默认：序章 explore / 第1章 daily / 第2章 explore / 第3章 tower / 第4章 tension / 第5章 memory /
+  第6章 funny / 第7章 tension / 第8章 local / 第9章 tower / 终章 ending
+- 关键词覆盖：chaos·taunt→funny、mem→memory、scale→scale、win·gift·wancheng·wanzheng→celebration、
+  bad·collapse→bad、end_→ending、local→local、top·tower→tower；小游戏拍→battle；结局拍→按结局 id
+- **只在类别变化时发槽**（避免每幕重启音乐）；剧本 `@bgm stop` 亦支持
+
+### Verified
+- 全篇 11 章重编译：**59 处类别切换**，覆盖 12 个类别（battle×10 / celebration×10 / funny×10 /
+  tower×7 / tension×6 / explore×4 / daily×3 / bad×2 / ending×2 / local×2 / memory×2 / warm×1）；解析 0 警告
+- 运行时（进 `ch0_start`）：`[Audio] 循环 BGM 类别[explore] → bgm_explore_02.mp3`；
+  二次进同一场景随机变 `bgm_explore_04` —— 验证了「每次游玩随机取曲」
+- `mvnw clean test` → 147/147
+
+### Known gaps
+- 剧本里 `@bgm` 仍是 0 处、场景头是 `bgm:TBD`：当前靠程序侧自动分配，剧情侧可随时覆盖
+- `scale`（秤主主题）类别暂无场景命中（需要剧情侧指定哪几幕用）
+- 美术侧引用的 `UI与小游戏接线规格.md` 未交付（其 §3 提到「改配色 / 加载贴图」两条路线）
+
 ## [v1.19] 主菜单 + 标题画面（F16）
 
 ### Added
