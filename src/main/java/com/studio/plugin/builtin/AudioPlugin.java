@@ -65,7 +65,8 @@ public class AudioPlugin implements SlotPlugin {
 
     @Override
     public String usage() {
-        return "@plugin(audio) | loop|play|stop|pause|resume|volume|stopall | 路径或数值 | 通道名";
+        return "@plugin(audio) | loop|play|loopcat|playcat|stop|pause|resume|volume|stopall"
+                + " | 路径或 BGM 类别或数值 | 通道名";
     }
 
     // =====================================================================
@@ -92,6 +93,21 @@ public class AudioPlugin implements SlotPlugin {
                     host.playAudio(ch, a1, true, master);
                     LAST.put(ch, a1);
                     Logs.info("[Audio] 循环播放 " + a1 + " → 通道 " + ch);
+                }
+                // 按 BGM 类别播放（曲库来自美术侧 bgm_map.json，同类多首随机取一首）
+                case "loopcat", "playcat", "循环类别", "播放类别" -> {
+                    String cat = a1;
+                    String ch = a2.isBlank() ? "bgm" : a2;
+                    String rel = com.studio.util.Bgm.relPath(cat);
+                    if (rel.isEmpty()) {
+                        Logs.warn("[Audio] BGM 类别不可用（曲库为空或类别不存在）: " + cat);
+                    } else {
+                        boolean lp = action.startsWith("loop") || action.startsWith("循环");
+                        host.playAudio(ch, rel, lp, master);
+                        LAST.put(ch, rel);
+                        Logs.info("[Audio] " + (lp ? "循环" : "播放") + " BGM 类别[" + cat + "] → " + rel
+                                + "（通道 " + ch + "）");
+                    }
                 }
                 case "play", "播放" -> {
                     String ch = a2.isBlank() ? "se" : a2;

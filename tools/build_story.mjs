@@ -58,6 +58,62 @@ const FLOW_VAR = "__flow_next";
 /** 谓词映射：@if 的运算符 → Expr 谓词函数 */
 const PRED = { ">=": "ge", ">": "gt", "<=": "le", "<": "lt", "==": "eq", "!=": "ne" };
 
+// =====================================================================
+// BGM 分配（程序侧按"类别语义"自动分配；剧情侧在剧本里写 @bgm / 场景 bgm: 即覆盖）
+// 类别与曲库来自美术侧 assets/sounds/bgm/bgm_map.json（同类多首由引擎运行时随机取）
+// =====================================================================
+const BGM_MAP_FILE = path.join(ROOT, "src", "main", "resources", "assets", "sounds", "bgm", "bgm_map.json");
+let BGM_CATS = new Set();
+try {
+  BGM_CATS = new Set(Object.keys(JSON.parse(fs.readFileSync(BGM_MAP_FILE, "utf8"))));
+} catch (e) {
+  console.warn("⚠ 读不到 bgm_map.json（" + e.message + "），BGM 分配跳过");
+}
+/** 章节 → 默认类别 */
+const CHAPTER_BGM = {
+  "序章": "explore", "第1章": "daily", "第2章": "explore", "第3章": "tower", "第4章": "tension",
+  "第5章": "memory", "第6章": "funny", "第7章": "tension", "第8章": "local", "第9章": "tower",
+  "终章": "ending",
+};
+/** 场景/标签关键词 → 类别（自上而下先命中先赢） */
+const BGM_RULES = [
+  { key: "chaos", cat: "funny" }, { key: "taunt", cat: "funny" },
+  { key: "mem", cat: "memory" }, { key: "scale", cat: "scale" },
+  { key: "wanzheng", cat: "celebration" }, { key: "wancheng", cat: "celebration" },
+  { key: "gift", cat: "celebration" }, { key: "win", cat: "celebration" },
+  { key: "collapse", cat: "bad" }, { key: "bad", cat: "bad" },
+  { key: "end_", cat: "ending" }, { key: "local", cat: "local" },
+  { key: "top", cat: "tower" }, { key: "tower", cat: "tower" },
+];
+/** 结局 id → 类别（与引擎 Bgm.categoryForEnding 一致） */
+const ENDING_BGM = { true: "ending", temp: "ending", local: "warm", busy: "bad", bad_collapse: "bad" };
+
+/** 某一拍应有的 BGM 类别（"" = 不变；"__stop" = 停） */
+function bgmCategoryOf(b) {
+  if (b.bgmStop) return "__stop";
+  if (b.bgmExplicit) return b.bgmExplicit;
+  if (b.kind === "minigame") return BGM_CATS.has("battle") ? "battle" : "";
+  if (b.kind === "ending") return ENDING_BGM[b.endingId] || "";
+  const key = ((b.scene || "") + " " + (b.label || "")).toLowerCase();
+  for (const r of BGM_RULES) {
+    if (key.includes(r.key) && BGM_CATS.has(r.cat)) return r.cat;
+  }
+  // 章节判定：优先用文件名前缀（第1章_…）；文件名为空时退回标签前缀（ch0_ / ch1_ / finale_ / wancheng）
+  const file = b.chapter || "";
+  let chapter = "";
+  for (const k of Object.keys(CHAPTER_BGM)) {
+    if (file.startsWith(k) && k.length > chapter.length) chapter = k;
+  }
+  if (!chapter) {
+    const l = (b.label || "").toLowerCase();
+    const m = l.match(/^ch([0-9])/);
+    if (m) chapter = m[1] === "0" ? "序章" : "第" + m[1] + "章";
+    else if (l.includes("finale") || l.includes("wancheng")) chapter = "终章";
+  }
+  const cat = CHAPTER_BGM[chapter];
+  return cat && BGM_CATS.has(cat) ? cat : "";
+}
+
 /** 编译期问题收集（缺失目标 / 未知游戏 / 未知结局），最后统一报告 */
 const problems = { missingTargets: new Set(), unknownGames: new Set(), unknownEndings: new Set() };
 const SPRITES = path.join(ROOT, "src", "main", "resources", "assets", "sprites");
@@ -305,10 +361,10 @@ function seOps(se) {
   return ops;
 }
 
-/** @bgm → 音频插件槽（AudioPlugin 无 fade 动作，fade 先按 loop 处理） */
+/** @bgm（类别语义）→ 音频插件槽：按类别运行时随机取曲（fade 先按 loop 处理） */
 function bgmOps(bgm) {
   if (bgm.mode === "stop") return ["@plugin(audio) | stop | | bgm"];
-  return [`@plugin(audio) | loop | ${soundPath(bgm.id)} | bgm`];
+  return [`@plugin(audio) | loopcat | ${bgm.id} | bgm`];
 }
 
 function bgPath(sceneId) {
@@ -353,7 +409,13 @@ function newBeat(label, kind, extra = {}) {
     banner: null,
     ...extra,
   };
-  // @se / @bgm 等「进入即执行」的槽挂到本拍
+  // 剧本显式 @bgm 的锁挂到本拍
+  if (pendingBgmLock) {
+    if (pendingBgmLock.stop) b.bgmStop = true;
+    else b.bgmExplicit = pendingBgmLock.cat;
+    pendingBgmLock = null;
+  }
+  // @se 等「进入即执行」的槽挂到本拍
   if (pendingOps.length) {
     b.ops.push(...pendingOps);
     pendingOps = [];
@@ -374,6 +436,7 @@ let dialogBuf = [];
 let dialogSpeaker = "";
 let currentLabel = null;
 let currentChapter = "";   // 当前所在的章节文件（横幅章节变体用）
+let pendingBgmLock = null; // 剧本显式 @bgm 的类别/停止：挂到下一拍
 
 function flush(label) {
   if (!dialogBuf.length) return;
@@ -424,7 +487,8 @@ for (const d of directives) {
       pendingOps.push(...seOps(d));
       break;
     case "bgm":
-      pendingOps.push(...bgmOps(d));
+      // 显式 @bgm：锁到"下一拍"（由 newBeat 消费）
+      pendingBgmLock = d.mode === "stop" ? { stop: true } : { cat: d.id };
       break;
     case "enter":
       flush(currentLabel);
@@ -593,6 +657,34 @@ for (let i = 0; i < beats.length; i++) {
     if (b.kind === "tail") b.target = null;
   }
 }
+
+// ---- BGM 统一分配：只在"类别变化"时给该拍加一条槽（避免每幕重启音乐）----
+(function assignBgm() {
+  if (!BGM_CATS.size) return;
+  let ch = "";
+  for (const b of beats) {
+    if (b.chapter) ch = b.chapter;
+    else b.chapter = ch;
+  }
+  let cur = "";
+  let assigned = 0;
+  for (const b of beats) {
+    const want = bgmCategoryOf(b);
+    if (want === "__stop") {
+      if (cur) {
+        b.ops.push("@plugin(audio) | stop | | bgm");
+        cur = "";
+      }
+      continue;
+    }
+    if (!want || want === cur) continue;
+    b.ops.push(`@plugin(audio) | loopcat | ${want} | bgm`);
+    cur = want;
+    assigned++;
+  }
+  problems.bgmAssigned = assigned;
+  problems.bgmLast = cur;
+})();
 
 // =====================================================================
 // 4) 生成 scenario.txt
@@ -813,6 +905,9 @@ fs.mkdirSync(path.dirname(OUT_FILE), { recursive: true });
 fs.writeFileSync(OUT_FILE, text, "utf8");
 console.log(`已生成 ${path.relative(ROOT, OUT_FILE)} | ${summary}`);
 console.log(`  label ${labelScene.size} 个 | 输出 ${text.split("\n").length} 行`);
+if (problems.bgmAssigned !== undefined) {
+  console.log(`  BGM 分配 ${problems.bgmAssigned} 处（当前类别 ${problems.bgmLast || "-"}）`);
+}
 if (problems.unknownGames.size) {
   console.warn("⚠ 以下 @minigame 尚无插件实现（编译通过，运行时会提示缺插件）："
     + [...problems.unknownGames].sort().join("、"));
