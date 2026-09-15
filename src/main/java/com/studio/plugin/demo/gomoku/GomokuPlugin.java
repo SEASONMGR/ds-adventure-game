@@ -198,6 +198,7 @@ public final class GomokuPlugin implements GamePlugin {
     public Parent createEmbeddedView(Map<String, Object> params) {
         readParams(params);
         game.reset(config);
+        Se.play("se_stone_place");
         aiCountdown = config.getAiThinkDelay();
         buildUi();
         startLoop();

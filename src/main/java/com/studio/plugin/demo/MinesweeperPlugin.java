@@ -1,5 +1,7 @@
 package com.studio.plugin.demo;
 
+import com.studio.plugin.kit.Se;
+
 import com.studio.plugin.GamePlugin;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -179,8 +181,12 @@ public class MinesweeperPlugin implements GamePlugin {
                     if (over) return;
                     if (e.getButton() == MouseButton.SECONDARY) {
                         e.consume();
-                        if (!revealed[rr][cc]) toggleFlag(rr, cc);
+                        if (!revealed[rr][cc]) {
+                            toggleFlag(rr, cc);
+                            Se.play("se_mine_flag");
+                        }
                     } else if (e.getButton() == MouseButton.PRIMARY && !flagged[rr][cc]) {
+                        Se.play("se_mine_open");
                         open(rr, cc);
                     }
                 });

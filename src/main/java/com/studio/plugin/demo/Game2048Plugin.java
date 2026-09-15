@@ -1,5 +1,7 @@
 package com.studio.plugin.demo;
 
+import com.studio.plugin.kit.Se;
+
 import com.studio.plugin.GamePlugin;
 import javafx.animation.PauseTransition;
 import javafx.geometry.Insets;
@@ -149,7 +151,11 @@ public class Game2048Plugin implements GamePlugin {
             };
             if (d != null) {
                 e.consume();
+                long se2048Before = score;
                 move(d);
+                if (score > se2048Before) {
+                    Se.play("se_block_merge");
+                }
             } else if (e.getCode() == KeyCode.R) {
                 restartGame();
             }
