@@ -1788,6 +1788,7 @@ height = 520
 path = assets/sprites/qwen/panic.png
 opacity = 1.0
 }
+slot = 场景进入 | @plugin(audio) | play | assets/sounds/se_banner.wav | se_banner
 {
 type = char
 id = 横幅
@@ -6370,6 +6371,7 @@ height = 520
 path = assets/sprites/snake_expert/proud.png
 opacity = 1.0
 }
+slot = 场景进入 | @plugin(audio) | play | assets/sounds/se_banner.wav | se_banner
 {
 type = char
 id = 横幅
@@ -8066,6 +8068,7 @@ height = 520
 path = assets/sprites/snake_expert/proud.png
 opacity = 1.0
 }
+slot = 场景进入 | @plugin(audio) | play | assets/sounds/se_banner.wav | se_banner
 {
 type = char
 id = 横幅
@@ -12066,6 +12069,7 @@ height = 520
 path = assets/sprites/reimu/smug.png
 opacity = 1.0
 }
+slot = 场景进入 | @plugin(audio) | play | assets/sounds/se_banner.wav | se_banner
 {
 type = char
 id = 横幅
@@ -16816,6 +16820,7 @@ height = 520
 path = assets/sprites/paimon/panic.png
 opacity = 1.0
 }
+slot = 场景进入 | @plugin(audio) | play | assets/sounds/se_banner.wav | se_banner
 {
 type = char
 id = 横幅
@@ -23324,6 +23329,7 @@ height = 520
 path = assets/sprites/dengguan/delighted.png
 opacity = 1.0
 }
+slot = 场景进入 | @plugin(audio) | play | assets/sounds/se_banner.wav | se_banner
 {
 type = char
 id = 横幅
@@ -28295,6 +28301,7 @@ height = 520
 path = assets/sprites/creeper/normal.png
 opacity = 1.0
 }
+slot = 场景进入 | @plugin(audio) | play | assets/sounds/se_banner.wav | se_banner
 {
 type = char
 id = 横幅
@@ -28647,6 +28654,7 @@ height = 520
 path = assets/sprites/creeper/normal.png
 opacity = 1.0
 }
+slot = 场景进入 | @plugin(audio) | play | assets/sounds/se_banner.wav | se_banner
 {
 type = char
 id = 横幅
@@ -34577,6 +34585,7 @@ height = 520
 path = assets/sprites/creeper/happy.png
 opacity = 1.0
 }
+slot = 场景进入 | @plugin(audio) | play | assets/sounds/se_banner.wav | se_banner
 {
 type = char
 id = 横幅
@@ -42016,6 +42025,7 @@ height = 520
 path = assets/sprites/kimi/gentle.png
 opacity = 1.0
 }
+slot = 场景进入 | @plugin(audio) | play | assets/sounds/se_banner.wav | se_banner
 {
 type = char
 id = 横幅
@@ -42470,6 +42480,7 @@ height = 520
 path = assets/sprites/creeper/happy.png
 opacity = 1.0
 }
+slot = 场景进入 | @plugin(audio) | play | assets/sounds/se_banner.wav | se_banner
 {
 type = char
 id = 横幅
@@ -44403,6 +44414,7 @@ height = 520
 path = assets/sprites/miku/normal.png
 opacity = 1.0
 }
+slot = 场景进入 | @plugin(audio) | play | assets/sounds/se_banner.wav | se_banner
 {
 type = char
 id = 横幅
@@ -47159,6 +47171,7 @@ height = 520
 path = assets/sprites/miku/cry.png
 opacity = 1.0
 }
+slot = 场景进入 | @plugin(audio) | play | assets/sounds/se_banner.wav | se_banner
 {
 type = char
 id = 横幅
@@ -54365,6 +54378,7 @@ height = 520
 path = assets/sprites/miku/joy.png
 opacity = 1.0
 }
+slot = 场景进入 | @plugin(audio) | play | assets/sounds/se_banner.wav | se_banner
 {
 type = char
 id = 横幅
@@ -66572,6 +66586,7 @@ height = 520
 path = assets/sprites/gelili/moved.png
 opacity = 1.0
 }
+slot = 场景进入 | @plugin(audio) | play | assets/sounds/se_banner.wav | se_banner
 {
 type = char
 id = 横幅
@@ -69248,6 +69263,7 @@ height = 520
 path = assets/sprites/gelili/proud.png
 opacity = 1.0
 }
+slot = 场景进入 | @plugin(audio) | play | assets/sounds/se_banner.wav | se_banner
 {
 type = char
 id = 横幅
@@ -69458,6 +69474,7 @@ height = 520
 path = assets/sprites/gelili/proud.png
 opacity = 1.0
 }
+slot = 场景进入 | @plugin(audio) | play | assets/sounds/se_banner.wav | se_banner
 {
 type = char
 id = 横幅
@@ -75615,6 +75632,7 @@ height = 520
 path = assets/sprites/scale/smug.png
 opacity = 1.0
 }
+slot = 场景进入 | @plugin(audio) | play | assets/sounds/se_banner.wav | se_banner
 {
 type = char
 id = 横幅
@@ -80529,6 +80547,7 @@ height = 520
 path = assets/sprites/scale/surprised.png
 opacity = 1.0
 }
+slot = 场景进入 | @plugin(audio) | play | assets/sounds/se_banner.wav | se_banner
 {
 type = char
 id = 横幅
@@ -83044,6 +83063,7 @@ height = 520
 path = assets/sprites/scale/defeated.png
 opacity = 1.0
 }
+slot = 场景进入 | @plugin(audio) | play | assets/sounds/se_banner.wav | se_banner
 {
 type = char
 id = 横幅
@@ -83405,6 +83425,7 @@ height = 520
 path = assets/sprites/scale/defeated.png
 opacity = 1.0
 }
+slot = 场景进入 | @plugin(audio) | play | assets/sounds/se_banner.wav | se_banner
 {
 type = char
 id = 横幅
@@ -88594,6 +88615,7 @@ height = 520
 path = assets/sprites/sclerk/silhouette.png
 opacity = 1.0
 }
+slot = 场景进入 | @plugin(audio) | play | assets/sounds/se_banner.wav | se_banner
 {
 type = char
 id = 横幅
@@ -89223,6 +89245,7 @@ height = 520
 path = assets/sprites/sclerk/silhouette.png
 opacity = 1.0
 }
+slot = 场景进入 | @plugin(audio) | play | assets/sounds/se_banner.wav | se_banner
 {
 type = char
 id = 横幅

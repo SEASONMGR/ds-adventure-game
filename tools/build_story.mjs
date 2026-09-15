@@ -825,6 +825,8 @@ for (const b of beats) {
     if (b.target) out.push(`target = ${b.target}`);
     out.push("}");
   } else if (b.kind === "banner") {
+    // 横幅弹出音（美术侧 §5.1 全局 UI 音之一）：任意 st: 横幅都带一声
+    out.push("slot = 场景进入 | @plugin(audio) | play | assets/sounds/se_banner.wav | se_banner");
     const bf = bannerFile(b.banner, b.chapter);
     const dim = bf ? pngSize(path.join(BANNER_DIR, `${bf}.png`)) : null;
     if (bf && dim) {
