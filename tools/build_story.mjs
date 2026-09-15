@@ -421,6 +421,7 @@ function newBeat(label, kind, extra = {}) {
     label,
     kind,
     bg: stage.bg,
+    title: stage.title,
     cg: visual ? stage.cg : null,
     chars: [...stage.chars.entries()].map(([role, v]) => ({ role, ...v })),
     dialog: [],
@@ -739,6 +740,7 @@ function stripSpeaker(text) {
   return String(text).replace(/^[A-Za-z0-9_\u4e00-\u9fa5]+:\s*/, "");
 }
 
+let lastEmittedTitle = null;   // 幕题只在"变化时"发一次章节卡（否则每拍都弹）
 const emitStage = (b, out) => {
   // 背景
   if (b.bg) {
@@ -747,6 +749,17 @@ const emitStage = (b, out) => {
       `path = ${bgPath(b.bg)}`);
     if (b.title) out.push(`# 幕题: ${b.title}`);
     out.push("}");
+  }
+  // 章节标题卡（美术侧 §2.5）：场景带 title 时，在上方叠一张 chapter_banner + 幕题文字
+  if (b.title && b.title !== lastEmittedTitle) {
+    lastEmittedTitle = b.title;
+    const bw = 720, bh = 120;
+    out.push("{", "type = char", "id = ui_chapter_banner", `x = ${Math.round((1280 - bw) / 2)}`, "y = 64",
+      `width = ${bw}`, `height = ${bh}`,
+      "path = assets/sprites/ui/chapter_banner.png", "opacity = 0.96", "}");
+    out.push("{", "type = text", "id = 幕题", `x = ${Math.round((1280 - bw) / 2)}`, "y = 104",
+      `width = ${bw}`, "height = 44", `text = ${b.title}`, "fontSize = 26", "align = center",
+      "style = -fx-text-fill: #ffd76a;", "}");
   }
   // CG 层：放在背景之后、立绘之前 —— 引擎按节点顺序绘制，天然是「背景之上、立绘之下」
   if (b.cg) {
@@ -841,7 +854,8 @@ for (const b of beats) {
       out.push("{", "type = button", "id = 继续", "x = 0", "y = 0",
         "width = 1280", "height = 720", "text = ", "action = target",
         `target = ${b.target || ""}`,
-        "style = -fx-background-color: transparent; -fx-border-color: transparent;", "}");
+        "style = -fx-background-color: transparent; -fx-border-color: transparent;"
+          + " -fx-text-fill: #ffe9b0; -fx-font-size: 17px;", "}");
     } else {
       // 未映射到图片的文案：回退文字横幅 + 对话框（保证演出与可读性都不缺）
       emitUiSkin(out, false);
@@ -862,9 +876,14 @@ for (const b of beats) {
     const y0 = 430 - Math.floor((n - 1) * 34);
     b.buttons.forEach((opt, i) => {
       const y = y0 + i * 68;
+      // 选项按钮皮（美术侧 §2.3）：先垫一张 choice_button_normal，再放透明按钮接管点击
+      out.push("{", "type = char", `id = ui_choice_${i + 1}`, "x = 360", `y = ${y}`,
+        "width = 560", "height = 56",
+        "path = assets/sprites/ui/choice_button_normal.png", "opacity = 1.0", "}");
       out.push("{", "type = button", `id = 选项${i + 1}`, `x = 360`, `y = ${y}`,
         "width = 560", "height = 56", `text = ${opt.text}`, "action = target",
-        `target = ${b.optionScenes[i]}`, "}");
+        `target = ${b.optionScenes[i]}`,
+        "style = -fx-background-color: transparent; -fx-border-color: transparent;", "}");
     });
   } else if (b.kind === "logic" || b.kind === "optlogic") {
     // @if 分支拍点：goto 的目标由前面 select 写进链路变量

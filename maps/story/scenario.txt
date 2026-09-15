@@ -39,6 +39,29 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
+}
+{
+type = char
+id = ui_chapter_banner
+x = 280
+y = 64
+width = 720
+height = 120
+path = assets/sprites/ui/chapter_banner.png
+opacity = 0.96
+}
+{
+type = text
+id = 幕题
+x = 280
+y = 104
+width = 720
+height = 44
+text = 404之夜
+fontSize = 26
+align = center
+style = -fx-text-fill: #ffd76a;
 }
 {
 type = char
@@ -92,6 +115,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -170,6 +194,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -248,6 +273,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -326,6 +352,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -390,6 +417,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -478,6 +506,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -576,6 +605,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -674,6 +704,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -772,6 +803,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -878,6 +910,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -954,6 +987,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -1052,6 +1086,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -1128,6 +1163,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -1226,6 +1262,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -1302,6 +1339,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -1402,6 +1440,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -1482,6 +1521,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -1581,6 +1621,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -1672,6 +1713,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = bg
@@ -1757,6 +1799,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -1808,7 +1851,7 @@ height = 720
 text = 
 action = target
 target = ch0_start__22
-style = -fx-background-color: transparent; -fx-border-color: transparent;
+style = -fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #ffe9b0; -fx-font-size: 17px;
 }
 
 [ch0_start__22]
@@ -1822,6 +1865,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -1920,6 +1964,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -2000,6 +2045,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -2108,6 +2154,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -2194,6 +2241,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -2302,6 +2350,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -2408,6 +2457,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -2488,6 +2538,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -2596,6 +2647,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -2704,6 +2756,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -2790,6 +2843,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -2888,6 +2942,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -2964,6 +3019,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -3062,6 +3118,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -3138,6 +3195,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -3236,6 +3294,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -3312,6 +3371,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -3398,6 +3458,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = bg
@@ -3463,6 +3524,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -3475,6 +3537,16 @@ path = assets/sprites/ds/whale_cry.png
 opacity = 1.0
 }
 {
+type = char
+id = ui_choice_1
+x = 360
+y = 362
+width = 560
+height = 56
+path = assets/sprites/ui/choice_button_normal.png
+opacity = 1.0
+}
+{
 type = button
 id = 选项1
 x = 360
@@ -3484,6 +3556,17 @@ height = 56
 text = 「交给我！今晚就把九片鳞全点回来！」
 action = target
 target = ch0_start__40__opt1
+style = -fx-background-color: transparent; -fx-border-color: transparent;
+}
+{
+type = char
+id = ui_choice_2
+x = 360
+y = 430
+width = 560
+height = 56
+path = assets/sprites/ui/choice_button_normal.png
+opacity = 1.0
 }
 {
 type = button
@@ -3495,6 +3578,17 @@ height = 56
 text = 「先别逞强。把伤养好，我们一场一场来。」
 action = target
 target = ch0_start__40__opt2
+style = -fx-background-color: transparent; -fx-border-color: transparent;
+}
+{
+type = char
+id = ui_choice_3
+x = 360
+y = 498
+width = 560
+height = 56
+path = assets/sprites/ui/choice_button_normal.png
+opacity = 1.0
 }
 {
 type = button
@@ -3506,6 +3600,7 @@ height = 56
 text = 「都这样了，先合个影吧！」
 action = target
 target = ch0_start__40__opt3
+style = -fx-background-color: transparent; -fx-border-color: transparent;
 }
 
 [ch0_start__40__opt1]
@@ -3594,6 +3689,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -3672,6 +3768,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -3728,6 +3825,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -3752,6 +3850,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -3830,6 +3929,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -3854,6 +3954,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -3932,6 +4033,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -3988,6 +4090,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -4066,6 +4169,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -4122,6 +4226,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_hall.png
+# 幕题: 404之夜
 }
 {
 type = char
@@ -4199,6 +4304,29 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_star_rift.png
+# 幕题: 404之夜·破顶星空
+}
+{
+type = char
+id = ui_chapter_banner
+x = 280
+y = 64
+width = 720
+height = 120
+path = assets/sprites/ui/chapter_banner.png
+opacity = 0.96
+}
+{
+type = text
+id = 幕题
+x = 280
+y = 104
+width = 720
+height = 44
+text = 404之夜·破顶星空
+fontSize = 26
+align = center
+style = -fx-text-fill: #ffd76a;
 }
 {
 type = char
@@ -4277,6 +4405,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_star_rift.png
+# 幕题: 404之夜·破顶星空
 }
 {
 type = char
@@ -4335,6 +4464,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_star_rift.png
+# 幕题: 404之夜·破顶星空
 }
 {
 type = char
@@ -4413,6 +4543,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_star_rift.png
+# 幕题: 404之夜·破顶星空
 }
 {
 type = char
@@ -4469,6 +4600,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_star_rift.png
+# 幕题: 404之夜·破顶星空
 }
 {
 type = char
@@ -4547,6 +4679,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_star_rift.png
+# 幕题: 404之夜·破顶星空
 }
 {
 type = char
@@ -4625,6 +4758,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_star_rift.png
+# 幕题: 404之夜·破顶星空
 }
 {
 type = char
@@ -4682,6 +4816,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_star_rift.png
+# 幕题: 404之夜·破顶星空
 }
 {
 type = char
@@ -4706,6 +4841,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_star_rift.png
+# 幕题: 404之夜·破顶星空
 }
 {
 type = char
@@ -4729,6 +4865,29 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
+}
+{
+type = char
+id = ui_chapter_banner
+x = 280
+y = 64
+width = 720
+height = 120
+path = assets/sprites/ui/chapter_banner.png
+opacity = 0.96
+}
+{
+type = text
+id = 幕题
+x = 280
+y = 104
+width = 720
+height = 44
+text = 思维链大暴走
+fontSize = 26
+align = center
+style = -fx-text-fill: #ffd76a;
 }
 {
 type = char
@@ -4789,6 +4948,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -4867,6 +5027,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -4923,6 +5084,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -5001,6 +5163,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -5059,6 +5222,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -5147,6 +5311,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -5235,6 +5400,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -5323,6 +5489,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -5389,6 +5556,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -5477,6 +5645,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -5565,6 +5734,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -5653,6 +5823,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -5741,6 +5912,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -5763,6 +5935,16 @@ path = assets/sprites/snake_expert/cry.png
 opacity = 1.0
 }
 {
+type = char
+id = ui_choice_1
+x = 360
+y = 396
+width = 560
+height = 56
+path = assets/sprites/ui/choice_button_normal.png
+opacity = 1.0
+}
+{
 type = button
 id = 选项1
 x = 360
@@ -5772,6 +5954,17 @@ height = 56
 text = 三十遍走位我们全看见了，首秀很帅
 action = target
 target = ch1_cheer
+style = -fx-background-color: transparent; -fx-border-color: transparent;
+}
+{
+type = char
+id = ui_choice_2
+x = 360
+y = 464
+width = 560
+height = 56
+path = assets/sprites/ui/choice_button_normal.png
+opacity = 1.0
 }
 {
 type = button
@@ -5783,6 +5976,7 @@ height = 56
 text = 先说好，鳞归我们，走位你自己留着
 action = target
 target = ch1_deal
+style = -fx-background-color: transparent; -fx-border-color: transparent;
 }
 
 [ch1_cheer]
@@ -5796,6 +5990,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -5884,6 +6079,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -5918,6 +6114,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -6006,6 +6203,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -6041,6 +6239,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -6129,6 +6328,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -6195,6 +6395,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -6284,6 +6485,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -6350,6 +6552,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -6391,7 +6594,7 @@ height = 720
 text = 
 action = target
 target = ch1_gift__6
-style = -fx-background-color: transparent; -fx-border-color: transparent;
+style = -fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #ffe9b0; -fx-font-size: 17px;
 }
 
 [ch1_gift__6]
@@ -6405,6 +6608,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -6494,6 +6698,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -6582,6 +6787,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -6648,6 +6854,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -6736,6 +6943,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -6802,6 +7010,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -6824,6 +7033,16 @@ path = assets/sprites/snake_expert/cry.png
 opacity = 1.0
 }
 {
+type = char
+id = ui_choice_1
+x = 360
+y = 362
+width = 560
+height = 56
+path = assets/sprites/ui/choice_button_normal.png
+opacity = 1.0
+}
+{
 type = button
 id = 选项1
 x = 360
@@ -6833,6 +7052,17 @@ height = 56
 text = 挽起袖子，一口气冲到秤前
 action = target
 target = ch1_gift__11__opt1
+style = -fx-background-color: transparent; -fx-border-color: transparent;
+}
+{
+type = char
+id = ui_choice_2
+x = 360
+y = 430
+width = 560
+height = 56
+path = assets/sprites/ui/choice_button_normal.png
+opacity = 1.0
 }
 {
 type = button
@@ -6844,6 +7074,17 @@ height = 56
 text = 凑近秤杆，先看清簧与秤星
 action = target
 target = ch1_gift__11__opt2
+style = -fx-background-color: transparent; -fx-border-color: transparent;
+}
+{
+type = char
+id = ui_choice_3
+x = 360
+y = 498
+width = 560
+height = 56
+path = assets/sprites/ui/choice_button_normal.png
+opacity = 1.0
 }
 {
 type = button
@@ -6855,6 +7096,7 @@ height = 56
 text = 直接张嘴咬住蛇尾巴
 action = target
 target = ch1_gift__11__opt3
+style = -fx-background-color: transparent; -fx-border-color: transparent;
 }
 
 [ch1_gift__11__opt1]
@@ -6974,6 +7216,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -7040,6 +7283,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -7128,6 +7372,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -7162,6 +7407,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -7228,6 +7474,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -7316,6 +7563,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -7351,6 +7599,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -7439,6 +7688,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -7505,6 +7755,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -7571,6 +7822,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -7659,6 +7911,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -7694,6 +7947,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -7782,6 +8036,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -7870,6 +8125,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -7959,6 +8215,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -8047,6 +8304,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -8088,7 +8346,7 @@ height = 720
 text = 
 action = target
 target = ch1_rules__6
-style = -fx-background-color: transparent; -fx-border-color: transparent;
+style = -fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #ffe9b0; -fx-font-size: 17px;
 }
 
 [ch1_rules__6]
@@ -8102,6 +8360,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -8196,6 +8455,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -8231,6 +8491,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = bg
@@ -8308,6 +8569,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -8396,6 +8658,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -8485,6 +8748,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -8519,6 +8783,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -8554,6 +8819,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -8622,6 +8888,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -8710,6 +8977,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -8799,6 +9067,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -8833,6 +9102,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -8867,6 +9137,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -8937,6 +9208,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -9025,6 +9297,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -9113,6 +9386,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -9201,6 +9475,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -9260,6 +9535,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -9284,6 +9560,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_server_pipe.png
+# 幕题: 思维链大暴走
 }
 {
 type = char
@@ -9307,6 +9584,29 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
+}
+{
+type = char
+id = ui_chapter_banner
+x = 280
+y = 64
+width = 720
+height = 120
+path = assets/sprites/ui/chapter_banner.png
+opacity = 0.96
+}
+{
+type = text
+id = 幕题
+x = 280
+y = 104
+width = 720
+height = 44
+text = 幻想乡弹幕异变
+fontSize = 26
+align = center
+style = -fx-text-fill: #ffd76a;
 }
 {
 type = char
@@ -9366,6 +9666,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -9456,6 +9757,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -9522,6 +9824,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -9610,6 +9913,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -9676,6 +9980,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -9764,6 +10069,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -9830,6 +10136,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -9920,6 +10227,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -10018,6 +10326,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -10116,6 +10425,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -10214,6 +10524,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -10312,6 +10623,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -10412,6 +10724,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -10510,6 +10823,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -10608,6 +10922,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -10706,6 +11021,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -10782,6 +11098,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -10880,6 +11197,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -10978,6 +11296,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -11076,6 +11395,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -11174,6 +11494,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -11272,6 +11593,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -11370,6 +11692,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -11468,6 +11791,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -11566,6 +11890,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -11664,6 +11989,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -11762,6 +12088,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -11840,6 +12167,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -11939,6 +12267,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -12038,6 +12367,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -12089,7 +12419,7 @@ height = 720
 text = 
 action = target
 target = ch2_start__32
-style = -fx-background-color: transparent; -fx-border-color: transparent;
+style = -fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #ffe9b0; -fx-font-size: 17px;
 }
 
 [ch2_start__32]
@@ -12103,6 +12433,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -12179,6 +12510,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -12277,6 +12609,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -12375,6 +12708,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -12407,6 +12741,16 @@ path = assets/sprites/reimu/serious.png
 opacity = 1.0
 }
 {
+type = char
+id = ui_choice_1
+x = 360
+y = 362
+width = 560
+height = 56
+path = assets/sprites/ui/choice_button_normal.png
+opacity = 1.0
+}
+{
 type = button
 id = 选项1
 x = 360
@@ -12416,6 +12760,17 @@ height = 56
 text = 「一起上！我主攻七盏楼灯，灵梦大人压阵拦签雨！」
 action = target
 target = ch2_start__35__opt1
+style = -fx-background-color: transparent; -fx-border-color: transparent;
+}
+{
+type = char
+id = ui_choice_2
+x = 360
+y = 430
+width = 560
+height = 56
+path = assets/sprites/ui/choice_button_normal.png
+opacity = 1.0
 }
 {
 type = button
@@ -12427,6 +12782,17 @@ height = 56
 text = 「这座楼，我自己拆！」
 action = target
 target = ch2_start__35__opt2
+style = -fx-background-color: transparent; -fx-border-color: transparent;
+}
+{
+type = char
+id = ui_choice_3
+x = 360
+y = 498
+width = 560
+height = 56
+path = assets/sprites/ui/choice_button_normal.png
+opacity = 1.0
 }
 {
 type = button
@@ -12438,6 +12804,7 @@ height = 56
 text = 「慢着——先给报幕虫群点一首歌！」
 action = target
 target = ch2_start__35__opt3
+style = -fx-background-color: transparent; -fx-border-color: transparent;
 }
 
 [ch2_start__35__opt1]
@@ -12586,6 +12953,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -12684,6 +13052,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -12782,6 +13151,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -12826,6 +13196,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -12924,6 +13295,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -13022,6 +13394,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -13067,6 +13440,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -13165,6 +13539,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -13241,6 +13616,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -13339,6 +13715,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -13415,6 +13792,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -13460,6 +13838,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -13558,6 +13937,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -13656,6 +14036,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -13754,6 +14135,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -13836,6 +14218,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -13880,6 +14263,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = bg
@@ -13969,6 +14353,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -14067,6 +14452,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -14165,6 +14551,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -14242,6 +14629,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -14286,6 +14674,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -14331,6 +14720,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -14407,6 +14797,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -14505,6 +14896,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -14603,6 +14995,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -14681,6 +15074,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -14779,6 +15173,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -14878,6 +15273,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -14922,6 +15318,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -14966,6 +15363,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -15048,6 +15446,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -15146,6 +15545,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -15222,6 +15622,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -15320,6 +15721,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -15396,6 +15798,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -15494,6 +15897,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -15573,6 +15977,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -15617,6 +16022,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_hakurei_shrine.png
+# 幕题: 幻想乡弹幕异变
 }
 {
 type = char
@@ -15661,6 +16067,29 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
+}
+{
+type = char
+id = ui_chapter_banner
+x = 280
+y = 64
+width = 720
+height = 120
+path = assets/sprites/ui/chapter_banner.png
+opacity = 0.96
+}
+{
+type = text
+id = 幕题
+x = 280
+y = 104
+width = 720
+height = 44
+text = 合鳞礼
+fontSize = 26
+align = center
+style = -fx-text-fill: #ffd76a;
 }
 {
 type = char
@@ -15741,6 +16170,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -15849,6 +16279,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -15957,6 +16388,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -16065,6 +16497,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -16173,6 +16606,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -16281,6 +16715,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -16367,6 +16802,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -16475,6 +16911,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -16561,6 +16998,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -16670,6 +17108,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -16779,6 +17218,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -16840,7 +17280,7 @@ height = 720
 text = 
 action = target
 target = ch3_start__13
-style = -fx-background-color: transparent; -fx-border-color: transparent;
+style = -fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #ffe9b0; -fx-font-size: 17px;
 }
 
 [ch3_start__13]
@@ -16854,6 +17294,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -16940,6 +17381,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -17048,6 +17490,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -17134,6 +17577,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -17242,6 +17686,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -17350,6 +17795,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -17436,6 +17882,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -17544,6 +17991,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -17652,6 +18100,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -17740,6 +18189,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -17848,6 +18298,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -17934,6 +18385,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -18042,6 +18494,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -18150,6 +18603,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -18258,6 +18712,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -18366,6 +18821,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -18484,6 +18940,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -18580,6 +19037,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -18698,6 +19156,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -18816,6 +19275,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -18934,6 +19394,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -19052,6 +19513,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -19170,6 +19632,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -19288,6 +19751,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -19340,6 +19804,16 @@ path = assets/sprites/dengguan/panic.png
 opacity = 1.0
 }
 {
+type = char
+id = ui_choice_1
+x = 360
+y = 362
+width = 560
+height = 56
+path = assets/sprites/ui/choice_button_normal.png
+opacity = 1.0
+}
+{
 type = button
 id = 选项1
 x = 360
@@ -19349,6 +19823,17 @@ height = 56
 text = 就叫「重明之鳞」
 action = target
 target = ch3_start__36__opt1
+style = -fx-background-color: transparent; -fx-border-color: transparent;
+}
+{
+type = char
+id = ui_choice_2
+x = 360
+y = 430
+width = 560
+height = 56
+path = assets/sprites/ui/choice_button_normal.png
+opacity = 1.0
 }
 {
 type = button
@@ -19360,6 +19845,17 @@ height = 56
 text = 「鲸泡泡」！
 action = target
 target = ch3_start__36__opt2
+style = -fx-background-color: transparent; -fx-border-color: transparent;
+}
+{
+type = char
+id = ui_choice_3
+x = 360
+y = 498
+width = 560
+height = 56
+path = assets/sprites/ui/choice_button_normal.png
+opacity = 1.0
 }
 {
 type = button
@@ -19371,6 +19867,7 @@ height = 56
 text = 「鲸光普照小笼包」！！
 action = target
 target = ch3_start__36__opt3
+style = -fx-background-color: transparent; -fx-border-color: transparent;
 }
 
 [ch3_start__36__opt1]
@@ -19579,6 +20076,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -19697,6 +20195,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -19793,6 +20292,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -19857,6 +20357,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -19975,6 +20476,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -20071,6 +20573,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -20136,6 +20639,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -20254,6 +20758,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -20350,6 +20855,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -20415,6 +20921,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -20537,6 +21044,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -20657,6 +21165,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -20753,6 +21262,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -20871,6 +21381,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -20968,6 +21479,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -21091,6 +21603,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -21155,6 +21668,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -21253,6 +21767,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -21371,6 +21886,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -21489,6 +22005,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -21586,6 +22103,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -21650,6 +22168,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -21768,6 +22287,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -21833,6 +22353,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -21951,6 +22472,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -22047,6 +22569,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -22165,6 +22688,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -22261,6 +22785,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -22379,6 +22904,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -22498,6 +23024,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -22562,6 +23089,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -22680,6 +23208,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -22744,6 +23273,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -22840,6 +23370,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -22958,6 +23489,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -23054,6 +23586,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -23172,6 +23705,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -23269,6 +23803,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = bg
@@ -23349,7 +23884,7 @@ height = 720
 text = 
 action = target
 target = ch3_after__7
-style = -fx-background-color: transparent; -fx-border-color: transparent;
+style = -fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #ffe9b0; -fx-font-size: 17px;
 }
 
 [ch3_after__7]
@@ -23363,6 +23898,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -23481,6 +24017,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -23579,6 +24116,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -23697,6 +24235,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -23816,6 +24355,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -23880,6 +24420,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -23945,6 +24486,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -24063,6 +24605,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -24181,6 +24724,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -24246,6 +24790,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -24347,6 +24892,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -24411,6 +24957,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_whale_temple.png
+# 幕题: 合鳞礼
 }
 {
 type = char
@@ -24474,6 +25021,29 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
+}
+{
+type = char
+id = ui_chapter_banner
+x = 280
+y = 64
+width = 720
+height = 120
+path = assets/sprites/ui/chapter_banner.png
+opacity = 0.96
+}
+{
+type = text
+id = 幕题
+x = 280
+y = 104
+width = 720
+height = 44
+text = 防火墙拆迁办
+fontSize = 26
+align = center
+style = -fx-text-fill: #ffd76a;
 }
 {
 type = char
@@ -24574,6 +25144,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -24694,6 +25265,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -24812,6 +25384,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -24908,6 +25481,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -25026,6 +25600,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -25144,6 +25719,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -25262,6 +25838,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -25380,6 +25957,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -25498,6 +26076,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -25594,6 +26173,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -25722,6 +26302,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -25850,6 +26431,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -25978,6 +26560,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -26106,6 +26689,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -26234,6 +26818,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -26364,6 +26949,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -26470,6 +27056,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -26598,6 +27185,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -26704,6 +27292,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -26832,6 +27421,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -26960,6 +27550,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -27088,6 +27679,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -27194,6 +27786,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -27322,6 +27915,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -27428,6 +28022,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -27556,6 +28151,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -27684,6 +28280,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -27815,6 +28412,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -27889,6 +28487,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = bg
@@ -28004,6 +28603,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -28133,6 +28733,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -28240,6 +28841,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -28321,7 +28923,7 @@ height = 720
 text = 
 action = target
 target = ch4_start__34
-style = -fx-background-color: transparent; -fx-border-color: transparent;
+style = -fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #ffe9b0; -fx-font-size: 17px;
 }
 
 [ch4_start__34]
@@ -28336,6 +28938,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -28465,6 +29068,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -28593,6 +29197,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -28674,7 +29279,7 @@ height = 720
 text = 
 action = target
 target = ch4_start__37
-style = -fx-background-color: transparent; -fx-border-color: transparent;
+style = -fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #ffe9b0; -fx-font-size: 17px;
 }
 
 [ch4_start__37]
@@ -28688,6 +29293,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -28816,6 +29422,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -28922,6 +29529,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -28984,6 +29592,16 @@ path = assets/sprites/creeper/normal.png
 opacity = 1.0
 }
 {
+type = char
+id = ui_choice_1
+x = 360
+y = 362
+width = 560
+height = 56
+path = assets/sprites/ui/choice_button_normal.png
+opacity = 1.0
+}
+{
 type = button
 id = 选项1
 x = 360
@@ -28993,6 +29611,17 @@ height = 56
 text = 从上往下拆，一片一片来，稳。
 action = target
 target = ch4_start__39__opt1
+style = -fx-background-color: transparent; -fx-border-color: transparent;
+}
+{
+type = char
+id = ui_choice_2
+x = 360
+y = 430
+width = 560
+height = 56
+path = assets/sprites/ui/choice_button_normal.png
+opacity = 1.0
 }
 {
 type = button
@@ -29004,6 +29633,17 @@ height = 56
 text = 中间开花！先撬最响的那块！
 action = target
 target = ch4_start__39__opt2
+style = -fx-background-color: transparent; -fx-border-color: transparent;
+}
+{
+type = char
+id = ui_choice_3
+x = 360
+y = 498
+width = 560
+height = 56
+path = assets/sprites/ui/choice_button_normal.png
+opacity = 1.0
 }
 {
 type = button
@@ -29015,6 +29655,7 @@ height = 56
 text = （疯）柜台那位也辛苦，送他一把白来的火。
 action = target
 target = ch4_start__39__opt3
+style = -fx-background-color: transparent; -fx-border-color: transparent;
 }
 
 [ch4_start__39__opt1]
@@ -29254,6 +29895,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -29328,6 +29970,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -29456,6 +30099,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -29584,6 +30228,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -29691,6 +30336,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -29765,6 +30411,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -29840,6 +30487,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -29968,6 +30616,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -30074,6 +30723,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -30202,6 +30852,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -30330,6 +30981,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -30459,6 +31111,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -30534,6 +31187,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -30662,6 +31316,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -30791,6 +31446,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -30925,6 +31581,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -30999,6 +31656,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -31107,6 +31765,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -31235,6 +31894,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -31341,6 +32001,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -31470,6 +32131,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -31544,6 +32206,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -31672,6 +32335,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -31747,6 +32411,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -31853,6 +32518,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -31981,6 +32647,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -32109,6 +32776,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -32217,6 +32885,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -32346,6 +33015,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -32420,6 +33090,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -32548,6 +33219,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -32622,6 +33294,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -32728,6 +33401,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -32856,6 +33530,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -32964,6 +33639,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -33092,6 +33768,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -33220,6 +33897,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -33329,6 +34007,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -33403,6 +34082,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -33509,6 +34189,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_firewall_wall.png
+# 幕题: 防火墙拆迁办
 }
 {
 type = char
@@ -33582,6 +34263,29 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
+}
+{
+type = char
+id = ui_chapter_banner
+x = 280
+y = 64
+width = 720
+height = 120
+path = assets/sprites/ui/chapter_banner.png
+opacity = 0.96
+}
+{
+type = text
+id = 幕题
+x = 280
+y = 104
+width = 720
+height = 44
+text = 上下文溢出
+fontSize = 26
+align = center
+style = -fx-text-fill: #ffd76a;
 }
 {
 type = char
@@ -33692,6 +34396,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -33820,6 +34525,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -33926,6 +34632,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -34054,6 +34761,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -34160,6 +34868,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -34288,6 +34997,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -34395,6 +35105,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -34524,6 +35235,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -34605,7 +35317,7 @@ height = 720
 text = 
 action = target
 target = ch5_start__10
-style = -fx-background-color: transparent; -fx-border-color: transparent;
+style = -fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #ffe9b0; -fx-font-size: 17px;
 }
 
 [ch5_start__10]
@@ -34619,6 +35331,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -34725,6 +35438,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -34853,6 +35567,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -34965,6 +35680,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -35103,6 +35819,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -35219,6 +35936,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -35357,6 +36075,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -35497,6 +36216,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -35613,6 +36333,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -35751,6 +36472,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -35891,6 +36613,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -36029,6 +36752,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -36167,6 +36891,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -36284,6 +37009,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -36422,6 +37148,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = bg
@@ -36547,6 +37274,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -36685,6 +37413,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -36803,6 +37532,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -36941,6 +37671,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = bg
@@ -37068,6 +37799,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -37206,6 +37938,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -37322,6 +38055,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = bg
@@ -37449,6 +38183,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -37587,6 +38322,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -37703,6 +38439,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = bg
@@ -37830,6 +38567,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -37968,6 +38706,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -38086,6 +38825,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -38224,6 +38964,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -38296,6 +39037,16 @@ path = assets/sprites/kimi/serious.png
 opacity = 1.0
 }
 {
+type = char
+id = ui_choice_1
+x = 360
+y = 396
+width = 560
+height = 56
+path = assets/sprites/ui/choice_button_normal.png
+opacity = 1.0
+}
+{
 type = button
 id = 选项1
 x = 360
@@ -38305,6 +39056,17 @@ height = 56
 text = 翻开那张没有价签的牌
 action = target
 target = ch5_start__38__opt1
+style = -fx-background-color: transparent; -fx-border-color: transparent;
+}
+{
+type = char
+id = ui_choice_2
+x = 360
+y = 464
+width = 560
+height = 56
+path = assets/sprites/ui/choice_button_normal.png
+opacity = 1.0
 }
 {
 type = button
@@ -38316,6 +39078,7 @@ height = 56
 text = 手停在半空，再等一下
 action = target
 target = ch5_start__38__opt2
+style = -fx-background-color: transparent; -fx-border-color: transparent;
 }
 
 [ch5_start__38__opt1]
@@ -38499,6 +39262,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -38615,6 +39379,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -38753,6 +39518,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -38891,6 +39657,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -38975,6 +39742,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -39091,6 +39859,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -39229,6 +39998,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -39367,6 +40137,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -39451,6 +40222,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -39593,6 +40365,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -39731,6 +40504,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -39869,6 +40643,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -39991,6 +40766,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -40075,6 +40851,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -40191,6 +40968,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -40329,6 +41107,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -40445,6 +41224,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -40583,6 +41363,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -40699,6 +41480,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -40839,6 +41621,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -40955,6 +41738,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -41095,6 +41879,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -41233,6 +42018,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -41317,6 +42103,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -41433,6 +42220,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -41551,6 +42339,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = bg
@@ -41676,6 +42465,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -41814,6 +42604,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -41954,6 +42745,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -42045,7 +42837,7 @@ height = 720
 text = 
 action = target
 target = ch5_awaken__7
-style = -fx-background-color: transparent; -fx-border-color: transparent;
+style = -fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #ffe9b0; -fx-font-size: 17px;
 }
 
 [ch5_awaken__7]
@@ -42059,6 +42851,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -42175,6 +42968,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -42313,6 +43107,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -42419,6 +43214,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -42500,7 +43296,7 @@ height = 720
 text = 
 action = target
 target = ch5_awaken__11
-style = -fx-background-color: transparent; -fx-border-color: transparent;
+style = -fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #ffe9b0; -fx-font-size: 17px;
 }
 
 [ch5_awaken__11]
@@ -42514,6 +43310,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -42644,6 +43441,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -42750,6 +43548,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -42878,6 +43677,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -42986,6 +43786,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -43114,6 +43915,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -43221,6 +44023,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -43296,6 +44099,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -43370,6 +44174,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_memory_palace.png
+# 幕题: 上下文溢出
 }
 {
 type = char
@@ -43443,6 +44248,29 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
+}
+{
+type = char
+id = ui_chapter_banner
+x = 280
+y = 64
+width = 720
+height = 120
+path = assets/sprites/ui/chapter_banner.png
+opacity = 0.96
+}
+{
+type = text
+id = 幕题
+x = 280
+y = 104
+width = 720
+height = 44
+text = 歌姬的曲库灾难
+fontSize = 26
+align = center
+style = -fx-text-fill: #ffd76a;
 }
 {
 type = char
@@ -43555,6 +44383,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -43683,6 +44512,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -43811,6 +44641,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -43949,6 +44780,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -44087,6 +44919,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -44226,6 +45059,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -44343,6 +45177,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -44434,7 +45269,7 @@ height = 720
 text = 
 action = target
 target = ch6_start__9
-style = -fx-background-color: transparent; -fx-border-color: transparent;
+style = -fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #ffe9b0; -fx-font-size: 17px;
 }
 
 [ch6_start__9]
@@ -44448,6 +45283,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -44564,6 +45400,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -44702,6 +45539,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -44840,6 +45678,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -44978,6 +45817,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -45094,6 +45934,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -45232,6 +46073,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -45348,6 +46190,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -45486,6 +46329,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -45626,6 +46470,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -45742,6 +46587,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -45880,6 +46726,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -46018,6 +46865,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -46156,6 +47004,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -46294,6 +47143,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -46432,6 +47282,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -46570,6 +47421,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -46708,6 +47560,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -46846,6 +47699,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -46984,6 +47838,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -47100,6 +47955,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -47191,7 +48047,7 @@ height = 720
 text = 
 action = target
 target = ch6_start__30
-style = -fx-background-color: transparent; -fx-border-color: transparent;
+style = -fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #ffe9b0; -fx-font-size: 17px;
 }
 
 [ch6_start__30]
@@ -47205,6 +48061,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -47321,6 +48178,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -47459,6 +48317,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -47597,6 +48456,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -47735,6 +48595,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -47873,6 +48734,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -48011,6 +48873,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -48083,6 +48946,16 @@ path = assets/sprites/miku/normal.png
 opacity = 1.0
 }
 {
+type = char
+id = ui_choice_1
+x = 360
+y = 362
+width = 560
+height = 56
+path = assets/sprites/ui/choice_button_normal.png
+opacity = 1.0
+}
+{
 type = button
 id = 选项1
 x = 360
@@ -48092,6 +48965,17 @@ height = 56
 text = 葱色进行曲
 action = target
 target = ch6_start__36__opt1
+style = -fx-background-color: transparent; -fx-border-color: transparent;
+}
+{
+type = char
+id = ui_choice_2
+x = 360
+y = 430
+width = 560
+height = 56
+path = assets/sprites/ui/choice_button_normal.png
+opacity = 1.0
 }
 {
 type = button
@@ -48103,6 +48987,17 @@ height = 56
 text = 深海摇篮曲
 action = target
 target = ch6_start__36__opt2
+style = -fx-background-color: transparent; -fx-border-color: transparent;
+}
+{
+type = char
+id = ui_choice_3
+x = 360
+y = 498
+width = 560
+height = 56
+path = assets/sprites/ui/choice_button_normal.png
+opacity = 1.0
 }
 {
 type = button
@@ -48114,6 +49009,7 @@ height = 56
 text = 无名进行曲
 action = target
 target = ch6_start__36__opt3
+style = -fx-background-color: transparent; -fx-border-color: transparent;
 }
 
 [ch6_start__36__opt1]
@@ -48383,6 +49279,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -48467,6 +49364,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -48605,6 +49503,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -48690,6 +49589,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -48774,6 +49674,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -48912,6 +49813,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -48996,6 +49898,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -49134,6 +50037,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -49250,6 +50154,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -49388,6 +50293,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -49526,6 +50432,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -49665,6 +50572,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -49808,6 +50716,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -49892,6 +50801,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -50008,6 +50918,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -50148,6 +51059,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -50286,6 +51198,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -50424,6 +51337,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -50562,6 +51476,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = bg
@@ -50689,6 +51604,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -50774,6 +51690,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -50890,6 +51807,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -51028,6 +51946,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -51144,6 +52063,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -51282,6 +52202,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -51420,6 +52341,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -51558,6 +52480,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -51696,6 +52619,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -51812,6 +52736,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -51897,6 +52822,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -52013,6 +52939,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -52151,6 +53078,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -52269,6 +53197,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -52407,6 +53336,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -52545,6 +53475,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -52661,6 +53592,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -52800,6 +53732,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -52884,6 +53817,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -53000,6 +53934,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -53138,6 +54073,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -53254,6 +54190,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -53392,6 +54329,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -53509,6 +54447,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -53593,6 +54532,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_song_city.png
+# 幕题: 歌姬的曲库灾难
 }
 {
 type = char
@@ -53677,6 +54617,29 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
+}
+{
+type = char
+id = ui_chapter_banner
+x = 280
+y = 64
+width = 720
+height = 120
+path = assets/sprites/ui/chapter_banner.png
+opacity = 0.96
+}
+{
+type = text
+id = 幕题
+x = 280
+y = 104
+width = 720
+height = 44
+text = 流言沼公关战
+fontSize = 26
+align = center
+style = -fx-text-fill: #ffd76a;
 }
 {
 type = char
@@ -53797,6 +54760,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -53935,6 +54899,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -54051,6 +55016,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -54190,6 +55156,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -54307,6 +55274,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -54398,7 +55366,7 @@ height = 720
 text = 
 action = target
 target = ch7_start__7
-style = -fx-background-color: transparent; -fx-border-color: transparent;
+style = -fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #ffe9b0; -fx-font-size: 17px;
 }
 
 [ch7_start__7]
@@ -54412,6 +55380,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -54550,6 +55519,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -54676,6 +55646,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -54814,6 +55785,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -54932,6 +55904,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -55058,6 +56031,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -55206,6 +56180,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -55354,6 +56329,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -55480,6 +56456,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -55628,6 +56605,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -55776,6 +56754,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -55924,6 +56903,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -56072,6 +57052,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -56220,6 +57201,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -56368,6 +57350,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -56516,6 +57499,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -56664,6 +57648,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -56813,6 +57798,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -56907,6 +57893,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -57033,6 +58020,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -57183,6 +58171,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -57331,6 +58320,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -57479,6 +58469,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -57551,6 +58542,16 @@ path = assets/sprites/amiya/serious.png
 opacity = 1.0
 }
 {
+type = char
+id = ui_choice_1
+x = 360
+y = 362
+width = 560
+height = 56
+path = assets/sprites/ui/choice_button_normal.png
+opacity = 1.0
+}
+{
 type = button
 id = 选项1
 x = 360
@@ -57560,6 +58561,17 @@ height = 56
 text = 绕外围收网，从最角落的牌翻起
 action = target
 target = ch7_start__29__opt1
+style = -fx-background-color: transparent; -fx-border-color: transparent;
+}
+{
+type = char
+id = ui_choice_2
+x = 360
+y = 430
+width = 560
+height = 56
+path = assets/sprites/ui/choice_button_normal.png
+opacity = 1.0
 }
 {
 type = button
@@ -57571,6 +58583,17 @@ height = 56
 text = 直取沼心，先掀没价签的那张
 action = target
 target = ch7_start__29__opt2
+style = -fx-background-color: transparent; -fx-border-color: transparent;
+}
+{
+type = char
+id = ui_choice_3
+x = 360
+y = 498
+width = 560
+height = 56
+path = assets/sprites/ui/choice_button_normal.png
+opacity = 1.0
 }
 {
 type = button
@@ -57582,6 +58605,7 @@ height = 56
 text = 对着沼泽大喊「我说的都是真的！」
 action = target
 target = ch7_start__29__opt3
+style = -fx-background-color: transparent; -fx-border-color: transparent;
 }
 
 [ch7_start__29__opt1]
@@ -57850,6 +58874,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -57966,6 +58991,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -58104,6 +59130,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -58220,6 +59247,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -58304,6 +59332,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -58420,6 +59449,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -58558,6 +59588,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -58696,6 +59727,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -58781,6 +59813,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -58897,6 +59930,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -59035,6 +60069,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -59151,6 +60186,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -59289,6 +60325,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -59374,6 +60411,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -59496,6 +60534,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -59580,6 +60619,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = bg
@@ -59707,6 +60747,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -59845,6 +60886,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -59983,6 +61025,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -60131,6 +61174,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -60247,6 +61291,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -60385,6 +61430,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -60502,6 +61548,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -60586,6 +61633,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -60702,6 +61750,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -60840,6 +61889,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -60978,6 +62028,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -61087,6 +62138,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -61161,6 +62213,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -61237,6 +62290,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = bg
@@ -61354,6 +62408,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -61482,6 +62537,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -61588,6 +62644,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -61726,6 +62783,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -61837,6 +62895,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -61945,6 +63004,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -62019,6 +63079,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_rumor_swamp.png
+# 幕题: 流言沼公关战
 }
 {
 type = char
@@ -62093,6 +63154,29 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
+}
+{
+type = char
+id = ui_chapter_banner
+x = 280
+y = 64
+width = 720
+height = 120
+path = assets/sprites/ui/chapter_banner.png
+opacity = 0.96
+}
+{
+type = text
+id = 幕题
+x = 280
+y = 104
+width = 720
+height = 44
+text = 无主之物仓
+fontSize = 26
+align = center
+style = -fx-text-fill: #ffd76a;
 }
 {
 type = char
@@ -62203,6 +63287,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -62331,6 +63416,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -62447,6 +63533,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -62585,6 +63672,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -62701,6 +63789,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -62839,6 +63928,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -62957,6 +64047,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -63095,6 +64186,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -63233,6 +64325,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -63371,6 +64464,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -63509,6 +64603,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -63647,6 +64742,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -63785,6 +64881,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -63911,6 +65008,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -64059,6 +65157,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -64187,6 +65286,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -64335,6 +65435,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -64483,6 +65584,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -64631,6 +65733,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -64779,6 +65882,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -64905,6 +66009,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -65053,6 +66158,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -65201,6 +66307,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -65349,6 +66456,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -65475,6 +66583,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -65623,6 +66732,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -65771,6 +66881,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -65919,6 +67030,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -66051,6 +67163,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = bg
@@ -66208,6 +67321,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -66356,6 +67470,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -66505,6 +67620,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -66606,7 +67722,7 @@ height = 720
 text = 
 action = target
 target = ch8_start__34
-style = -fx-background-color: transparent; -fx-border-color: transparent;
+style = -fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #ffe9b0; -fx-font-size: 17px;
 }
 
 [ch8_start__34]
@@ -66620,6 +67736,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -66750,6 +67867,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -66898,6 +68016,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -67046,6 +68165,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -67172,6 +68292,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -67320,6 +68441,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -67468,6 +68590,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -67550,6 +68673,16 @@ path = assets/sprites/gelili/determined.png
 opacity = 1.0
 }
 {
+type = char
+id = ui_choice_1
+x = 360
+y = 396
+width = 560
+height = 56
+path = assets/sprites/ui/choice_button_normal.png
+opacity = 1.0
+}
+{
 type = button
 id = 选项1
 x = 360
@@ -67559,6 +68692,17 @@ height = 56
 text = 先把窄路口的箱子码齐，一步一步清出正路
 action = target
 target = ch8_start__40__opt1
+style = -fx-background-color: transparent; -fx-border-color: transparent;
+}
+{
+type = char
+id = ui_choice_2
+x = 360
+y = 464
+width = 560
+height = 56
+path = assets/sprites/ui/choice_button_normal.png
+opacity = 1.0
 }
 {
 type = button
@@ -67570,6 +68714,7 @@ height = 56
 text = 抄近道，从箱山斜坡直接翻上去推
 action = target
 target = ch8_start__40__opt2
+style = -fx-background-color: transparent; -fx-border-color: transparent;
 }
 
 [ch8_start__40__opt1]
@@ -67773,6 +68918,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -67921,6 +69067,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -68015,6 +69162,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -68163,6 +69311,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -68311,6 +69460,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -68443,6 +69593,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -68537,6 +69688,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -68665,6 +69817,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -68813,6 +69966,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -68961,6 +70115,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -69088,6 +70243,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -69182,6 +70338,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -69283,7 +70440,7 @@ height = 720
 text = 
 action = target
 target = ch8_win__7
-style = -fx-background-color: transparent; -fx-border-color: transparent;
+style = -fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #ffe9b0; -fx-font-size: 17px;
 }
 
 [ch8_win__7]
@@ -69297,6 +70454,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -69393,6 +70551,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -69494,7 +70653,7 @@ height = 720
 text = 
 action = target
 target = ch8_lose__2
-style = -fx-background-color: transparent; -fx-border-color: transparent;
+style = -fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #ffe9b0; -fx-font-size: 17px;
 }
 
 [ch8_lose__2]
@@ -69508,6 +70667,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -69636,6 +70796,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -69784,6 +70945,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -69910,6 +71072,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -70058,6 +71221,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -70206,6 +71370,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -70333,6 +71498,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -70427,6 +71593,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -70521,6 +71688,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -70649,6 +71817,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -70797,6 +71966,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -70923,6 +72093,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -71071,6 +72242,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -71219,6 +72391,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -71345,6 +72518,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -71493,6 +72667,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -71619,6 +72794,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -71767,6 +72943,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -71883,6 +73060,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -71980,6 +73158,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -72044,6 +73223,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_unowned_warehouse.png
+# 幕题: 无主之物仓
 }
 {
 type = char
@@ -72108,6 +73288,29 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_hall.png
+# 幕题: 决战！万秤楼
+}
+{
+type = char
+id = ui_chapter_banner
+x = 280
+y = 64
+width = 720
+height = 120
+path = assets/sprites/ui/chapter_banner.png
+opacity = 0.96
+}
+{
+type = text
+id = 幕题
+x = 280
+y = 104
+width = 720
+height = 44
+text = 决战！万秤楼
+fontSize = 26
+align = center
+style = -fx-text-fill: #ffd76a;
 }
 {
 type = char
@@ -72208,6 +73411,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_hall.png
+# 幕题: 决战！万秤楼
 }
 {
 type = char
@@ -72336,6 +73540,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_hall.png
+# 幕题: 决战！万秤楼
 }
 {
 type = char
@@ -72464,6 +73669,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_hall.png
+# 幕题: 决战！万秤楼
 }
 {
 type = char
@@ -72592,6 +73798,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_hall.png
+# 幕题: 决战！万秤楼
 }
 {
 type = char
@@ -72720,6 +73927,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_hall.png
+# 幕题: 决战！万秤楼
 }
 {
 type = char
@@ -72858,6 +74066,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_hall.png
+# 幕题: 决战！万秤楼
 }
 {
 type = char
@@ -72996,6 +74205,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_hall.png
+# 幕题: 决战！万秤楼
 }
 {
 type = char
@@ -73134,6 +74344,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_hall.png
+# 幕题: 决战！万秤楼
 }
 {
 type = char
@@ -73272,6 +74483,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_hall.png
+# 幕题: 决战！万秤楼
 }
 {
 type = char
@@ -73388,6 +74600,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_hall.png
+# 幕题: 决战！万秤楼
 }
 {
 type = char
@@ -73536,6 +74749,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_hall.png
+# 幕题: 决战！万秤楼
 }
 {
 type = char
@@ -73684,6 +74898,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_hall.png
+# 幕题: 决战！万秤楼
 }
 {
 type = char
@@ -73832,6 +75047,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_hall.png
+# 幕题: 决战！万秤楼
 }
 {
 type = char
@@ -73980,6 +75196,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_hall.png
+# 幕题: 决战！万秤楼
 }
 {
 type = char
@@ -74106,6 +75323,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_hall.png
+# 幕题: 决战！万秤楼
 }
 {
 type = char
@@ -74211,6 +75429,29 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
+}
+{
+type = char
+id = ui_chapter_banner
+x = 280
+y = 64
+width = 720
+height = 120
+path = assets/sprites/ui/chapter_banner.png
+opacity = 0.96
+}
+{
+type = text
+id = 幕题
+x = 280
+y = 104
+width = 720
+height = 44
+text = 万秤楼顶层·秤砖地
+fontSize = 26
+align = center
+style = -fx-text-fill: #ffd76a;
 }
 {
 type = char
@@ -74317,6 +75558,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -74455,6 +75697,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -74593,6 +75836,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -74731,6 +75975,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -74869,6 +76114,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -75007,6 +76253,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -75145,6 +76392,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -75283,6 +76531,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -75422,6 +76671,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -75561,6 +76811,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -75652,7 +76903,7 @@ height = 720
 text = 
 action = target
 target = ch9_start__28
-style = -fx-background-color: transparent; -fx-border-color: transparent;
+style = -fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #ffe9b0; -fx-font-size: 17px;
 }
 
 [ch9_start__28]
@@ -75666,6 +76917,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -75782,6 +77034,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -75920,6 +77173,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -75992,6 +77246,16 @@ path = assets/sprites/scale/polite.png
 opacity = 1.0
 }
 {
+type = char
+id = ui_choice_1
+x = 360
+y = 362
+width = 560
+height = 56
+path = assets/sprites/ui/choice_button_normal.png
+opacity = 1.0
+}
+{
 type = button
 id = 选项1
 x = 360
@@ -76001,6 +77265,17 @@ height = 56
 text = 稳扎稳打：他每颗子都要过秤，慢半拍，我耗得起。
 action = target
 target = ch9_start__30__opt1
+style = -fx-background-color: transparent; -fx-border-color: transparent;
+}
+{
+type = char
+id = ui_choice_2
+x = 360
+y = 430
+width = 560
+height = 56
+path = assets/sprites/ui/choice_button_normal.png
+opacity = 1.0
 }
 {
 type = button
@@ -76012,6 +77287,17 @@ height = 56
 text = 险中求胜：直取中腹，一口气压过去！
 action = target
 target = ch9_start__30__opt2
+style = -fx-background-color: transparent; -fx-border-color: transparent;
+}
+{
+type = char
+id = ui_choice_3
+x = 360
+y = 498
+width = 560
+height = 56
+path = assets/sprites/ui/choice_button_normal.png
+opacity = 1.0
 }
 {
 type = button
@@ -76023,6 +77309,7 @@ height = 56
 text = 疯一把：把秤砣码成一杆秤的形状给他看！
 action = target
 target = ch9_start__30__opt3
+style = -fx-background-color: transparent; -fx-border-color: transparent;
 }
 
 [ch9_start__30__opt1]
@@ -76291,6 +77578,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -76407,6 +77695,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -76545,6 +77834,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -76629,6 +77919,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -76745,6 +78036,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -76883,6 +78175,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -76968,6 +78261,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -77084,6 +78378,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -77222,6 +78517,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -77360,6 +78656,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -77446,6 +78743,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -77531,6 +78829,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -77616,6 +78915,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -77700,6 +79000,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -77816,6 +79117,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -77956,6 +79258,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -78102,6 +79405,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -78186,6 +79490,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = bg
@@ -78333,6 +79638,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -78471,6 +79777,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -78555,6 +79862,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -78693,6 +80001,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -78809,6 +80118,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -78947,6 +80257,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -79031,6 +80342,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -79169,6 +80481,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -79285,6 +80598,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -79423,6 +80737,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -79561,6 +80876,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -79646,6 +80962,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -79764,6 +81081,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -79902,6 +81220,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -80018,6 +81337,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -80156,6 +81476,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -80272,6 +81593,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -80391,6 +81713,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -80476,6 +81799,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -80567,7 +81891,7 @@ height = 720
 text = 
 action = target
 target = ch9_win__9
-style = -fx-background-color: transparent; -fx-border-color: transparent;
+style = -fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #ffe9b0; -fx-font-size: 17px;
 }
 
 [ch9_win__9]
@@ -80581,6 +81905,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -80697,6 +82022,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -80782,6 +82108,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -80898,6 +82225,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -81036,6 +82364,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -81154,6 +82483,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -81293,6 +82623,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -81377,6 +82708,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -81495,6 +82827,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -81643,6 +82976,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = bg
@@ -81790,6 +83124,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -81928,6 +83263,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -82045,6 +83381,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -82129,6 +83466,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tower_peak.png
+# 幕题: 万秤楼顶层·秤砖地
 }
 {
 type = char
@@ -82212,6 +83550,29 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tech_serverroom.png
+# 幕题: 部署机房
+}
+{
+type = char
+id = ui_chapter_banner
+x = 280
+y = 64
+width = 720
+height = 120
+path = assets/sprites/ui/chapter_banner.png
+opacity = 0.96
+}
+{
+type = text
+id = 幕题
+x = 280
+y = 104
+width = 720
+height = 44
+text = 部署机房
+fontSize = 26
+align = center
+style = -fx-text-fill: #ffd76a;
 }
 {
 type = char
@@ -82332,6 +83693,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tech_serverroom.png
+# 幕题: 部署机房
 }
 {
 type = char
@@ -82470,6 +83832,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tech_serverroom.png
+# 幕题: 部署机房
 }
 {
 type = char
@@ -82587,6 +83950,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tech_serverroom.png
+# 幕题: 部署机房
 }
 {
 type = char
@@ -82725,6 +84089,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tech_serverroom.png
+# 幕题: 部署机房
 }
 {
 type = char
@@ -82841,6 +84206,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tech_serverroom.png
+# 幕题: 部署机房
 }
 {
 type = char
@@ -82992,6 +84358,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tech_serverroom.png
+# 幕题: 部署机房
 }
 {
 type = char
@@ -83083,7 +84450,7 @@ height = 720
 text = 
 action = target
 target = finale_start__8
-style = -fx-background-color: transparent; -fx-border-color: transparent;
+style = -fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #ffe9b0; -fx-font-size: 17px;
 }
 
 [finale_start__8]
@@ -83097,6 +84464,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tech_serverroom.png
+# 幕题: 部署机房
 }
 {
 type = char
@@ -83238,6 +84606,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tech_serverroom.png
+# 幕题: 部署机房
 }
 {
 type = char
@@ -83354,6 +84723,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tech_serverroom.png
+# 幕题: 部署机房
 }
 {
 type = char
@@ -83445,7 +84815,7 @@ height = 720
 text = 
 action = target
 target = finale_start__11
-style = -fx-background-color: transparent; -fx-border-color: transparent;
+style = -fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #ffe9b0; -fx-font-size: 17px;
 }
 
 [finale_start__11]
@@ -83459,6 +84829,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tech_serverroom.png
+# 幕题: 部署机房
 }
 {
 type = char
@@ -83575,6 +84946,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tech_serverroom.png
+# 幕题: 部署机房
 }
 {
 type = char
@@ -83713,6 +85085,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_tech_serverroom.png
+# 幕题: 部署机房
 }
 {
 type = char
@@ -83785,6 +85158,16 @@ path = assets/sprites/scale/defeated.png
 opacity = 1.0
 }
 {
+type = char
+id = ui_choice_1
+x = 360
+y = 362
+width = 560
+height = 56
+path = assets/sprites/ui/choice_button_normal.png
+opacity = 1.0
+}
+{
 type = button
 id = 选项1
 x = 360
@@ -83794,6 +85177,17 @@ height = 56
 text = （活动手指）点了一路，还热乎着。
 action = target
 target = finale_start__13__opt1
+style = -fx-background-color: transparent; -fx-border-color: transparent;
+}
+{
+type = char
+id = ui_choice_2
+x = 360
+y = 430
+width = 560
+height = 56
+path = assets/sprites/ui/choice_button_normal.png
+opacity = 1.0
 }
 {
 type = button
@@ -83805,6 +85199,17 @@ height = 56
 text = 说不紧张是假的。但来都来了。
 action = target
 target = finale_start__13__opt2
+style = -fx-background-color: transparent; -fx-border-color: transparent;
+}
+{
+type = char
+id = ui_choice_3
+x = 360
+y = 498
+width = 560
+height = 56
+path = assets/sprites/ui/choice_button_normal.png
+opacity = 1.0
 }
 {
 type = button
@@ -83816,6 +85221,7 @@ height = 56
 text = （顺手把机房的温度旋钮拧到 2）
 action = target
 target = finale_start__13__opt3
+style = -fx-background-color: transparent; -fx-border-color: transparent;
 }
 
 [finale_start__13__opt1]
@@ -84084,6 +85490,29 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
+}
+{
+type = char
+id = ui_chapter_banner
+x = 280
+y = 64
+width = 720
+height = 120
+path = assets/sprites/ui/chapter_banner.png
+opacity = 0.96
+}
+{
+type = text
+id = 幕题
+x = 280
+y = 104
+width = 720
+height = 44
+text = 万秤楼·顶楼主秤
+fontSize = 26
+align = center
+style = -fx-text-fill: #ffd76a;
 }
 {
 type = char
@@ -84232,6 +85661,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -84410,6 +85840,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -84588,6 +86019,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -84766,6 +86198,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -84944,6 +86377,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -85100,6 +86534,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -85278,6 +86713,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -85456,6 +86892,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -85634,6 +87071,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -85812,6 +87250,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -85968,6 +87407,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -86146,6 +87586,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -86324,6 +87765,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -86502,6 +87944,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -86680,6 +88123,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -86858,6 +88302,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -87014,6 +88459,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -87192,6 +88638,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -87350,6 +88797,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -87529,6 +88977,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -87653,6 +89102,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -87765,6 +89215,16 @@ path = assets/sprites/sclerk/silhouette.png
 opacity = 1.0
 }
 {
+type = char
+id = ui_choice_1
+x = 360
+y = 396
+width = 560
+height = 56
+path = assets/sprites/ui/choice_button_normal.png
+opacity = 1.0
+}
+{
 type = button
 id = 选项1
 x = 360
@@ -87774,6 +89234,17 @@ height = 56
 text = 点！跟你的残影一起点！
 action = target
 target = wancheng__22__opt1
+style = -fx-background-color: transparent; -fx-border-color: transparent;
+}
+{
+type = char
+id = ui_choice_2
+x = 360
+y = 464
+width = 560
+height = 56
+path = assets/sprites/ui/choice_button_normal.png
+opacity = 1.0
 }
 {
 type = button
@@ -87785,6 +89256,7 @@ height = 56
 text = （不看秤针，只看你的背影。）
 action = target
 target = wancheng__22__opt2
+style = -fx-background-color: transparent; -fx-border-color: transparent;
 }
 
 [wancheng__22__opt1]
@@ -88054,6 +89526,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -88179,6 +89652,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = bg
@@ -88346,6 +89820,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -88504,6 +89979,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -88635,7 +90111,7 @@ height = 720
 text = 
 action = target
 target = bad_busy__4
-style = -fx-background-color: transparent; -fx-border-color: transparent;
+style = -fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #ffe9b0; -fx-font-size: 17px;
 }
 
 [bad_busy__4]
@@ -88649,6 +90125,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -88808,6 +90285,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -88967,6 +90445,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = bg
@@ -89134,6 +90613,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -89265,7 +90745,7 @@ height = 720
 text = 
 action = target
 target = end_route__3
-style = -fx-background-color: transparent; -fx-border-color: transparent;
+style = -fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #ffe9b0; -fx-font-size: 17px;
 }
 
 [end_route__3]
@@ -89279,6 +90759,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -89457,6 +90938,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -89635,6 +91117,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -89791,6 +91274,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -89970,6 +91454,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -90095,6 +91580,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -90219,6 +91705,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -90343,6 +91830,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = bg
@@ -90508,6 +91996,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -90686,6 +92175,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -90864,6 +92354,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -91042,6 +92533,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -91220,6 +92712,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -91398,6 +92891,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -91576,6 +93070,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -91735,6 +93230,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -91893,6 +93389,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = bg
@@ -92062,6 +93559,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -92240,6 +93738,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -92418,6 +93917,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -92596,6 +94096,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -92774,6 +94275,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -92930,6 +94432,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -93110,6 +94613,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -93268,6 +94772,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -93446,6 +94951,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -93605,6 +95111,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -93762,6 +95269,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = bg
@@ -93927,6 +95435,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -94105,6 +95614,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -94271,6 +95781,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
@@ -94451,6 +95962,7 @@ y = 0
 width = 1280
 height = 720
 path = assets/sprites/backgrounds/bg_wancheng_top.png
+# 幕题: 万秤楼·顶楼主秤
 }
 {
 type = char
