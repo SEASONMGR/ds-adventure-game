@@ -209,7 +209,7 @@ public final class SokobanPlugin implements GamePlugin {
         root.setTop(buildHeader());
         root.setCenter(new StackPane(canvas, buildOverlay()));
         // 画布比窗口窄时，四周用剧情底色兜住，避免露出浅色背景
-        root.setStyle("-fx-background-color: " + toHex(FIELD_BOTTOM) + ";");
+        root.setStyle("-fx-background-color: rgba(10,12,22,0.50);");;
         root.setFocusTraversable(true);
         bindInput();
         updateStats();

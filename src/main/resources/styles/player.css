@@ -16,7 +16,7 @@
     -fx-background-radius: 12;
     -fx-border-color: rgba(255, 255, 255, 0.30);
     -fx-border-radius: 12;
-    -fx-text-fill: #f2f3ff;
+    -fx-text-fill: #ffe9b0;
     -fx-font-size: 15px;
     -fx-font-weight: bold;
     -fx-padding: 6 14 6 14;
@@ -70,7 +70,7 @@
 .back-btn:hover { -fx-background-color: #565a8c; }
 
 /* ---------- 扫雷 Demo 样式 ---------- */
-.mine-root { -fx-background-color: #101322; -fx-padding: 18; }
+.mine-root { -fx-background-color: rgba(13,16,32,0.55); -fx-padding: 18; }
 .mine-title { -fx-text-fill: #ffd76a; -fx-font-size: 17px; -fx-font-weight: bold; }
 .mine-hint { -fx-text-fill: #9aa0c8; -fx-font-size: 12px; }
 .mine-timer { -fx-text-fill: #ffd76a; -fx-font-size: 15px; -fx-font-weight: bold; }

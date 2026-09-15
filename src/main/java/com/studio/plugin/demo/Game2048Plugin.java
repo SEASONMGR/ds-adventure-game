@@ -138,7 +138,7 @@ public class Game2048Plugin implements GamePlugin {
 
         BorderPane rootPane = new BorderPane(body);
         rootPane.getStyleClass().add("mine-root");
-        rootPane.setStyle("-fx-background-color: #101322;");
+        rootPane.setStyle("-fx-background-color: rgba(13,16,32,0.55);");;
 
         // 键盘输入（方向键 + WASD）
         rootPane.addEventFilter(KeyEvent.KEY_PRESSED, e -> {

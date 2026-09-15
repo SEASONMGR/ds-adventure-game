@@ -189,7 +189,7 @@ public class SnakePlugin implements GamePlugin {
         root.setBottom(bottom);
         root.setFocusTraversable(true);
         root.setPrefSize(boardW + 24, boardH + 108);
-        root.setStyle("-fx-background-color: #0d1020;");
+        root.setStyle("-fx-background-color: rgba(13,16,32,0.45);");;
 
         // 键盘：转向 / 重开
         root.setOnKeyPressed(event -> handleKey(event.getCode()));
