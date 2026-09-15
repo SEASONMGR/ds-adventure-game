@@ -1,0 +1,17 @@
+
+文件                     行数 选项数 小游戏 存档点 鳞回收 缺失跳转 黑名单命中
+----                     ---- ------ ------ ------ ------ -------- ----------
+第1章_思维链大暴走.txt    122      5      1   True   True          
+第2章_幻想乡弹幕异变.txt  126      3      1   True   True          
+第3章_合鳞礼.txt          130      3      1   True   True          
+第4章_防火墙拆迁办.txt    119      3      1   True   True          
+第5章_上下文溢出.txt      129      2      1   True   True          
+第6章_歌姬的曲库灾难.txt  118      3      1   True   True          
+第7章_流言沼公关战.txt    117      3      1   True   True          
+第8章_无主之物仓.txt      120      2      1   True   True          
+第9章_决战万秤楼.txt      134      3      1   True   True          
+序章_404之夜.txt          137      3      0   True  False          
+终章_深度求索.txt         148      5      1   True  False          
+
+全局标签数: 87
+

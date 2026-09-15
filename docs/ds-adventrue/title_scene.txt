@@ -1,0 +1,137 @@
+# 标题场景节点片段（可直接粘进 scenario.txt）
+
+> 用法：把下面的 `[title]` 段粘进任意地图的 `scenario.txt`，并在 `[option]` 里把
+> `initialScene = title`，即可作为标题画面。
+> 节点字段与已编译剧本一致（`bg` / `char` / `button` / `text` 四种，见 `maps/story/scenario.txt`）。
+
+## 已归档的标题资源
+
+| 资源 | 路径 | 尺寸 |
+|---|---|---|
+| 标题背景（你选的 tb-a2：万秤楼顶·日出云海） | `assets/sprites/ui/title_bg.png` | 960×540 |
+| 同上高清版 | `assets/sprites/ui/hires/title_bg.png` | 1472×828 |
+| 标题美术字 A（金 · 秤纹章）**推荐** | `assets/sprites/ui/title_logo_a.png` | 828×420 |
+| 标题美术字 B（青蓝 · 鲸尾纹章） | `assets/sprites/ui/title_logo_b.png` | 828×420 |
+| 标题美术字 C（古金 · 铜铃纹章） | `assets/sprites/ui/title_logo_c.png` | 828×420 |
+
+> 背景 A2 是金色日出，**配美术字 A（金）最统—**；美术字 B/C 作为备选保留。
+> 三个 logo 都是**透明底 PNG**，直接叠在背景上即可。
+
+---
+
+## 节点片段
+
+```
+[title]
+stage = overwrite
+
+{
+type = bg
+id = 背景
+x = 0
+y = 0
+width = 1280
+height = 720
+path = assets/sprites/ui/title_bg.png
+}
+
+{
+type = char
+id = 标题字
+x = 226
+y = 80
+width = 828
+height = 420
+path = assets/sprites/ui/title_logo_a.png
+opacity = 1.0
+}
+
+{
+type = button
+id = 开始
+x = 490
+y = 430
+width = 300
+height = 54
+text = 开始游戏
+action = target
+target = ch0_start
+style = primary
+index = 0
+signal =
+slot =
+}
+
+{
+type = button
+id = 继续
+x = 490
+y = 496
+width = 300
+height = 54
+text = 继续游戏
+action = load
+style = normal
+index = 1
+signal =
+slot =
+}
+
+{
+type = button
+id = 设置
+x = 490
+y = 562
+width = 300
+height = 54
+text = 设置
+action = speed
+style = normal
+index = 2
+signal =
+slot =
+}
+
+{
+type = button
+id = 退出
+x = 490
+y = 628
+width = 300
+height = 54
+text = 退出
+action =
+style = normal
+index = 3
+signal =
+slot =
+}
+
+{
+type = text
+id = 版本
+x = 1010
+y = 676
+width = 250
+height = 30
+text = ver 0.1 · 素材版
+style = small
+fontSize = 13
+align = right
+visible = true
+index = 0
+}
+```
+
+---
+
+## 需要你/引擎侧确认的两点
+
+1. **`action` 取值**：已编译剧本里出现过 `target` / `skip` / `save` / `load` / `speed`（另有 22 个空值）。
+   上面「开始=target / 继续=load / 设置=speed」都用了既有取值；
+   但 **「退出」没有对应的 action**（剧本里没有先例）—— 需要引擎侧补一个 `quit` 之类的取值，或先留空。
+2. **`style` 取值**：我按语义写了 `primary` / `normal` / `small`，需与 `styles/player.css` 里的
+   实际按钮样式类名对齐（请以 CSS 里的选择器为准）。
+
+> 背景坐标说明：游戏画布是 1280×720，标题背景资源是 960×540，靠 `width/height` 拉满即可；
+> 若追求像素级清晰，可改用 `hires/title_bg.png`（1472×828）并把 width/height 写成 1280/720。
